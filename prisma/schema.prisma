@@ -12,29 +12,13 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
 model User {
   id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   firstname String
   lastname  String
   createdAt DateTime @default(now())
   clerkId   String   @unique
-  image     String?
-  stripeId  String?
-  
-  profile    Profile[]
-  group      Group[]
-  membership Members[]
-  posts      Post[]
-  likes      Like[]
-  comments   Comment[]
-  message    Message[]
-}
-model Profile {
-  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  profilename  String
-  createdAt DateTime @default(now())
-  User            User           @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId          String         @db.Uuid
   image     String?
   stripeId  String?
 
@@ -45,6 +29,7 @@ model Profile {
   comments   Comment[]
   message    Message[]
 }
+
 model Subscription {
   id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   createdAt DateTime @default(now())
@@ -71,7 +56,6 @@ model Group {
   createdAt       DateTime       @default(now())
   User            User           @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId          String         @db.Uuid
-  userProfile     Profile[]
   courses         Course[]
   affiliate       Affiliate?
   domain          String?
@@ -85,7 +69,6 @@ model Members {
   Group     Group?   @relation(fields: [groupId], references: [id])
   groupId   String?  @db.Uuid
   createdAt DateTime @default(now())
-  senderProfile Profile[]
 
   @@index([userId, groupId])
 }
@@ -103,7 +86,6 @@ model Post {
   comments    Comment[]
   channel     Channel   @relation(fields: [channelId], references: [id], onDelete: Cascade)
   channelId   String    @db.Uuid
-  posterProfile Profile[]
 }
 
 model Like {
@@ -113,7 +95,6 @@ model Like {
   postId    String   @db.Uuid
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId    String   @db.Uuid
-  senderProfile Profile[]
 }
 
 model Comment {
@@ -129,7 +110,6 @@ model Comment {
   reply     Comment[] @relation(name: "CommentToComment")
   Comment   Comment?  @relation(name: "CommentToComment", fields: [commentId], references: [id])
   commentId String?   @db.Uuid
-  senderProfile Profile[]
 }
 
 model Channel {
@@ -191,7 +171,6 @@ model Message {
   sender     User?    @relation(fields: [senderid], references: [id], onDelete: Cascade)
   senderid   String?  @db.Uuid
   recieverId String?  @db.Uuid
-  senderProfile Profile[]
 }
 
 enum GROUP_PRIVACY {

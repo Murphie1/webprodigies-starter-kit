@@ -52,7 +52,7 @@ const Menu = ({ orientation }: MenuProps) => {
                                 onClick: () => onSetSection(menuItem.path),
                             })}
                             className={cn(
-                                "rounded-xl flex flex-col items-center gap-1 py-1 px-2", // Use flex-col for the icon and label
+                                "rounded-xl flex flex-col items-center gap-1 py-1 px-4", // Use flex-col for the icon and label
                                 section === menuItem.path
                                     ? "bg-themeGray border-[#27272A]"
                                     : "",

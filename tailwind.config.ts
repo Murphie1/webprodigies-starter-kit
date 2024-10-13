@@ -22,6 +22,9 @@ const config = {
                 "radial-gradient(circle at 50% 40%, white, black)",
         },
         extend: {
+            fontFamily: {
+                sans: ["var(--font-inter)"],
+            },
             colors: {
                 themeBlack: "#09090B",
                 themeGray: "#27272A",

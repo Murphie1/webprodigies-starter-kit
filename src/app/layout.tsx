@@ -3,16 +3,16 @@ import { ReactQueryProvider } from "@/react-query/provider"
 import { ReduxProvider } from "@/redux/provider"
 import { ClerkProvider } from "@clerk/nextjs"
 import type { Metadata } from "next"
-import { Plus_Jakarta_Sans, Inter, IBM_Plex_Serif } from "next/font/google"
+import { IBM_Plex_Serif, Inter, Plus_Jakarta_Sans } from "next/font/google"
 import { Toaster } from "sonner"
 import "./globals.css"
 
 const jakarta = Plus_Jakarta_Sans({ subsets: ["latin"] })
-const inter = Inter({ subsets: ["latin"], variable: '--font-inter' });
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
 const ibmPlexSerif = IBM_Plex_Serif({
-  subsets: ['latin'],
-  weight: ['400', '700'],
-  variable: '--font-ibm-plex-serif'
+    subsets: ["latin"],
+    weight: ["400", "700"],
+    variable: "--font-ibm-plex-serif",
 })
 
 export const metadata: Metadata = {
@@ -28,7 +28,7 @@ export default function RootLayout({
     return (
         <ClerkProvider>
             <html lang="en">
-                <body className={`${inter.variable} ${ibmPlexSerif.variable} ${jakarta.variable} bg-black`}>
+                <body className={`${inter.variable} bg-black`}>
                     <ThemeProvider
                         attribute="class"
                         defaultTheme="dark"
