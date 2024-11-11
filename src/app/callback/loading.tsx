@@ -18,7 +18,7 @@ const DiscoverLoading = () => {
                         fill="currentFill"
                     />
                 </svg>
-                <span className="sr-only">Loading...</span>
+                <span className="sr-only">Authenticating...</span>
             </div>
         </div>
     )

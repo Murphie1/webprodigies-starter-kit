@@ -8,6 +8,7 @@ const nextConfig = {
                 hostname: "ucarecdn.com",
             },
         ],
+        domains: ["uploadthing.com"],
     },
 }
 

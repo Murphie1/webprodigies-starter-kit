@@ -1,4 +1,4 @@
-import { Calculator, Dictionary, Notes } from "@/icons"
+import { Calculator, Dictionary, Notes, Library } from "@/icons"
 
 import {
     AffiliateDuoToneBlack,
@@ -61,7 +61,7 @@ export const ORGANIZATION_MENU: MenuProps[] = [
 export const GROUP_PAGE_MENU: MenuProps[] = [
     {
         id: 0,
-        label: "Categories",
+        label: "Groupspaces",
         icon: <Home />,
         path: "/organizations/groupspaces",
         section: true,
@@ -70,20 +70,20 @@ export const GROUP_PAGE_MENU: MenuProps[] = [
         id: 1,
         label: "Courses",
         icon: <Courses />,
-        path: "/organizations/courses",
+        path: "organizations/${groupid}/courses",
         section: true,
     },
     {
         id: 2,
         label: "Events",
         icon: <Buisness />,
-        path: "/organizations/events",
+        path: "/organizations/${groupid}/events",
     },
     {
         id: 3,
         label: "Members",
         icon: <PersonalDevelopment />,
-        path: "/organizations/members",
+        path: "/organizations/${groupid}/members",
     },
     {
         id: 4,
@@ -95,7 +95,13 @@ export const GROUP_PAGE_MENU: MenuProps[] = [
         id: 5,
         label: "Chat",
         icon: <Chat />,
-        path: "/organizations/chat",
+        path: "organizations/${groupid}/messages",
+    },
+    {
+        id: 5,
+        label: "Library",
+        icon: <Library />,
+        path: "/organizations/${groupid}/library",
     },
 ]
 
@@ -110,7 +116,7 @@ export const SIDEBAR_SETTINGS_MENU: MenuProps[] = [
         id: 1,
         label: "Subscriptions",
         icon: <CreditCard />,
-        path: "subscriptions",
+        path: "/organizations/[groupid]/settings/subscriptions/stripe",
     },
     {
         id: 2,

@@ -1,13 +1,13 @@
 import { onAuthenticatedUser } from "@/actions/auth"
 import { onGetUserGroups } from "@/actions/groups"
 
+import Ellipsises from "@/components/global/ellipsises"
 import GlassSheet from "@/components/global/glass-sheet"
 import { UserWidget } from "@/components/global/user-widget"
 import { Button } from "@/components/ui/button"
 import { CheckBadge, Logout } from "@/icons"
 import { MenuIcon } from "lucide-react"
 import Link from "next/link"
-import { Ellipsises } from "@/components/global/ellipsises"
 import { GroupDropDown } from "./group-dropdown"
 
 export const Navbar = async () => {

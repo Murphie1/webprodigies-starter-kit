@@ -165,14 +165,14 @@ export const onActivateSubscription = async (id: string) => {
                                 id,
                             },
                             data: {
-                                active: true,
+                                active: false,
                             },
                         })
 
                         if (activateNew) {
                             return {
                                 status: 200,
-                                message: "New plan activated",
+                                message: "New plan deactivated",
                             }
                         }
                     }

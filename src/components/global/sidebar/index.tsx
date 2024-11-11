@@ -1,5 +1,6 @@
 "use client"
 import { Button } from "@/components/ui/button"
+import { usePathname } from "next/navigation"
 import { useGroupChatOnline } from "@/hooks/groups"
 import { useSideBar } from "@/hooks/navigation"
 import { CarotSort } from "@/icons"
@@ -9,6 +10,7 @@ import Link from "next/link"
 import { v4 } from "uuid"
 import { DropDown } from "../drop-down"
 import SideBarMenu from "./menu"
+import { NavigationSideBar } from "@/components/navigation/navigation-sidebar"
 
 type Props = {
     groupid: string
@@ -57,9 +59,19 @@ export interface IGroups {
 }
 
 const SideBar = ({ groupid, userid, mobile }: Props) => {
+    const pathname = usePathname()
+    const currentPage = pathname.split("/").pop()
     const { groupInfo, groups, mutate, variables, isPending, channels } =
         useSideBar(groupid)
     console.log(groups.groups)
+
+    if (pathname.includes("groupspaces")) {
+        return (
+            <div className="hidden md:flex h-full w-[72px] z-30 flex-col fixed inset-y-0">
+                <NavigationSideBar />
+            </div>
+        )
+    }
 
     useGroupChatOnline(userid)
 

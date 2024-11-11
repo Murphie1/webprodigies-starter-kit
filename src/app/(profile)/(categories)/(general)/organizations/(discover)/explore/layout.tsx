@@ -14,11 +14,14 @@ const ExploreLayout = async ({ children }: { children: React.ReactNode }) => {
         <div className="flex-1 flex flex-col">
             <div className="flex flex-col items-center mt-36 px-10">
                 <GradientText
-                    className="text-[50px] font-semibold leading-none"
+                    className="text-[50px] font-semibold leading-none md:hidden"
                     element="H2"
                 >
-                   Explore Organizations
+                    Explore
                 </GradientText>
+                <h2 className="hidden md:text-4xl font-bold text-themeTextWhite">
+                    Explore
+                </h2>
                 <p className="text-themeTextGray leading-none pt-2">
                     or{" "}
                     <Link

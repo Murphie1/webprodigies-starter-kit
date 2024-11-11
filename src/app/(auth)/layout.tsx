@@ -2,6 +2,7 @@ import { onAuthenticatedUser } from "@/actions/auth"
 import BackdropGradient from "@/components/global/backdrop-gradient"
 import GlassCard from "@/components/global/glass-card"
 import { redirect } from "next/navigation"
+import { ModeToggle } from "@/components/mode-toggle"
 
 type Props = {
     children: React.ReactNode
@@ -15,7 +16,8 @@ const AuthLayout = async ({ children }: Props) => {
     return (
         <div className="container h-screen flex justify-center items-center">
             <div className="flex flex-col w-full items-center py-24">
-                <h2 className="text-4xl font-bold text-themeTextWhite">
+                <h2 className="text-4xl font-bold text-black dark:text-themeTextWhite">
+                    <ModeToggle />
                     YouLearn
                 </h2>
                 <BackdropGradient

@@ -26,8 +26,43 @@ model User {
   membership Members[]
   posts      Post[]
   likes      Like[]
+  profile    Profile[]
+  kidsProfile    KidsProfile[]
   comments   Comment[]
   message    Message[]
+  groupSpace Groupspace[]
+  gsMember  GSMember[]
+  session   Session[]
+}
+
+model Profile {
+  id String @id @default(uuid())
+  clerkId  String @unique
+  user  User?           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId  String?        @db.Uuid
+  name String
+  imageUrl String @db.Text
+
+
+  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+  
+@@index([userId, clerkId])
+}
+
+model KidsProfile {
+   id String @id @default(uuid())
+  clerkId  String @unique
+  user  User?           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId  String?        @db.Uuid
+  name String
+  imageUrl String @db.Text
+
+
+  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+  
+@@index([userId, clerkId])
 }
 
 model Subscription {
@@ -49,7 +84,9 @@ model Group {
   jsonDescription String?
   htmlDescription String?
   icon            String?
+  groupFree       Boolean  @default(false)
   member          Members[]
+  groupSpaces     Groupspace[]
   channel         Channel[]
   privacy         GROUP_PRIVACY  @default(PRIVATE)
   active          Boolean        @default(false)
@@ -60,6 +97,25 @@ model Group {
   affiliate       Affiliate?
   domain          String?
   subscription    Subscription[]
+}
+
+model Groupspace {
+  id String @id @default(uuid())
+  name            String      @unique
+  createdAt       DateTime    @default(now())
+  User            User?        @relation(fields: [userId], references: [id], onDelete: Cascade)
+ userId          String?         @db.Uuid
+ clerkId          String      
+ joinCode         String?
+ inviteCode       String   @db.Text
+ imageUrl         String   @db.Text
+ Group            Group?   @relation(fields: [groupId], references: [id], onDelete: Cascade)
+ groupId          String?  @db.Uuid
+ updatedAt        DateTime @updatedAt
+ gsMember         GSMember[]
+ session   Session[]
+
+ @@index([userId, clerkId, groupId])
 }
 
 model Members {
@@ -172,8 +228,51 @@ model Message {
   senderid   String?  @db.Uuid
   recieverId String?  @db.Uuid
 }
+enum GSMemberRole {
+  ADMIN
+  MODERATOR
+  STUDENT
+  GUEST
+}
+
+model GSMember {
+ id   String @id @default(uuid())
+ role GSMemberRole @default(STUDENT)
+ user User?      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId  String?         @db.Uuid
+ clerkId   String 
+ groupSpace Groupspace   @relation(fields: [groupSpaceId], references: [id], onDelete: Cascade)
+ groupSpaceId String
+ updatedAt DateTime @updatedAt
+ createdAt DateTime @default(now())
+
+ @@index([userId, clerkId, groupSpaceId])
+}
 
 enum GROUP_PRIVACY {
   PUBLIC
   PRIVATE
+}
+
+enum SessionType {
+  TEXT
+  AUDIO
+  VIDEO
+  STREAM
+}
+
+model Session {
+  id String @id @default(uuid())
+  name String
+  type SessionType @default(TEXT)
+  user User?      @relation(fields: [userId], references: [id], onDelete: Cascade)
+   userId   String?         @db.Uuid
+  clerkId   String
+  groupSpace Groupspace   @relation(fields: [groupSpaceId], references: [id], onDelete: Cascade)
+  groupSpaceId String
+
+  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+
+   @@index([userId, clerkId, groupSpaceId])
 }

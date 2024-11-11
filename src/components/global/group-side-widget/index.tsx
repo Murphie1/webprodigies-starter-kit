@@ -1,5 +1,5 @@
 "use client"
-import { JoinButton } from "@/app/(profile)/(categories)/(general)/organizations/about/_components/join-button"
+import { JoinButton } from "@/app/(profile)/(categories)/(general)/organizations/(discover)/about/_components/join-button"
 import { Card } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
 import { useGroupInfo } from "@/hooks/groups"

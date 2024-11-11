@@ -39,7 +39,7 @@ export const GroupListSlider = ({
                 <SwiperSlide key={item.id} className="content-width-slide ">
                     {!register ? (
                         route ? (
-                            <Link href={`/explore/${item.path}`}>
+                            <Link href={`/organizations/explore/${item.path}`}>
                                 <GroupListItem {...item} selected={selected} />
                             </Link>
                         ) : (

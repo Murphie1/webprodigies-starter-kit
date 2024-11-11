@@ -3,7 +3,12 @@ import { ReactQueryProvider } from "@/react-query/provider"
 import { ReduxProvider } from "@/redux/provider"
 import { ClerkProvider } from "@clerk/nextjs"
 import type { Metadata } from "next"
-import { IBM_Plex_Serif, Inter, Plus_Jakarta_Sans } from "next/font/google"
+import {
+    IBM_Plex_Serif,
+    Inter,
+    Plus_Jakarta_Sans,
+    Open_Sans,
+} from "next/font/google"
 import { Toaster } from "sonner"
 import "./globals.css"
 
@@ -28,11 +33,12 @@ export default function RootLayout({
     return (
         <ClerkProvider>
             <html lang="en">
-                <body className={`${inter.variable} bg-black`}>
+                <body className={`${inter.className} bg-white dark:bg-black`}>
                     <ThemeProvider
                         attribute="class"
                         defaultTheme="dark"
-                        disableTransitionOnChange
+                        enableSystem={true}
+                        storageKey="ylthemes"
                     >
                         <ReduxProvider>
                             <ReactQueryProvider>{children}</ReactQueryProvider>

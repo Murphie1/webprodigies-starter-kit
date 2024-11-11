@@ -22,10 +22,13 @@ const CreateGroupLayout = ({ children }: Props) => {
                         </h5>
                         <GradientText
                             element="H2"
-                            className="text-4xl font-semibold py-1"
+                            className="text-4xl font-semibold py-1 md:hidden"
                         >
                             Create Your Organization
                         </GradientText>
+                        <h2 className="hidden md:text-4xl font-bold text-themeTextWhite">
+                            Create Your Organization
+                        </h2>
                         <p className="text-themeTextGray">
                             Free, All features. Unlimited everything. Additional
                             fees apply.
