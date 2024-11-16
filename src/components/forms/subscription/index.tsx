@@ -1,6 +1,6 @@
 "use client"
 
-import { SubscriptionCard } from "@/app/organizations/[groupid]/settings/subscriptions/stripe/_components/card"
+import { SubscriptionCard } from "@/app/(profile)/(categories)/(general)/organizations/[groupid]/settings/subscriptions/stripe/_components/card"
 import { FormGenerator } from "@/components/global/form-generator"
 import { GlassModal } from "@/components/global/glass-modal"
 import { Loader } from "@/components/global/loader"

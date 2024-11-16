@@ -65,6 +65,8 @@ const SideBar = ({ groupid, userid, mobile }: Props) => {
         useSideBar(groupid)
     console.log(groups.groups)
 
+    useGroupChatOnline(userid)
+
     if (pathname.includes("groupspaces")) {
         return (
             <div className="hidden md:flex h-full w-[72px] z-30 flex-col fixed inset-y-0">
@@ -73,14 +75,12 @@ const SideBar = ({ groupid, userid, mobile }: Props) => {
         )
     }
 
-    useGroupChatOnline(userid)
-
     return (
         <div
             className={cn(
                 "h-screen flex-col gap-y-10 sm:px-5",
                 !mobile
-                    ? "hidden bg-black md:w-[300px] fixed md:flex"
+                    ? "hidden bg-white md:w-[300px] fixed md:flex dark:bg-black"
                     : "w-full flex",
             )}
         >
@@ -88,7 +88,7 @@ const SideBar = ({ groupid, userid, mobile }: Props) => {
                 <DropDown
                     title="Organizations"
                     trigger={
-                        <div className="w-full flex items-center justify-between text-themeTextGray md:border-[1px] border-themeGray p-3 rounded-xl">
+                        <div className="w-full flex items-center justify-between text-black md:border-[1px] border-black p-3 rounded-xl dark:text-themeTextGray dark:border-themeGray">
                             <div className="flex gap-x-3 items-center">
                                 <img
                                     src={`https://ucarecdn.com/${groupInfo.group?.icon as string}/`}
@@ -114,7 +114,7 @@ const SideBar = ({ groupid, userid, mobile }: Props) => {
                             >
                                 <Button
                                     variant="ghost"
-                                    className="flex gap-2 w-full justify-start hover:bg-themeGray items-center"
+                                    className="flex gap-2 w-full justify-start hover:bg-black hover:text-white items-center dark:hover:bg-themeGray dark:hover:text-themeTextBlack"
                                 >
                                     <Group />
                                     {item.name}
@@ -126,12 +126,14 @@ const SideBar = ({ groupid, userid, mobile }: Props) => {
 
             <div className="flex flex-col gap-y-5">
                 <div className="flex justify-between items-center">
-                    <p className="text-xs text-[#F7ECE9]">CHANNELS</p>
+                    <p className="text-xs text-black dark:text-[#F7ECE9]">
+                        CHANNELS
+                    </p>
                     {userid === groupInfo.group?.userId && (
                         <Plus
                             size={16}
                             className={cn(
-                                "text-themeTextGray cursor-pointer",
+                                "text-black cursor-pointer dark:text-themeTextGray",
                                 isPending && "opacity-70",
                             )}
                             {...(!isPending && {

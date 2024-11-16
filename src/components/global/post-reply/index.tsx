@@ -37,7 +37,7 @@ export const PostReply = ({
             )}
             <form
                 onSubmit={onCreateReply}
-                className="flex items-center border-2 bg-transparent py-2 px-3 mt-5 border-themeGray rounded-xl overflow-hidden"
+                className="flex items-center border-2 bg-transparent py-2 px-3 mt-5 border-gray rounded-xl overflow-hidden dark:border-themeGray"
             >
                 <Input
                     {...register("comment")}
@@ -45,7 +45,7 @@ export const PostReply = ({
                     placeholder="Add a comment..."
                 />
                 <Button variant="ghost" className="p-0 hover:bg-transparent">
-                    <Send className="text-themeGray" />
+                    <Send className="text-black dark:text-themeGray" />
                 </Button>
             </form>
         </div>

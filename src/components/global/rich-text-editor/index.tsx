@@ -73,7 +73,7 @@ const BlockTextEditor = ({
                         className={cn(
                             inline
                                 ? onEdit && "mb-5"
-                                : "border-[1px] rounded-xl px-10 py-5 text-base border-themeGray bg-themeBlack w-full",
+                                : "border-[1px] rounded-xl px-10 py-5 text-base border-gray bg-white w-full dark:border-themeGray dark:bg-themeBlack",
                         )}
                         initialContent={content}
                         editorProps={{
@@ -83,7 +83,7 @@ const BlockTextEditor = ({
                                     handleCommandNavigation(event),
                             },
                             attributes: {
-                                class: `prose prose-lg dark:prose-invert focus:outline-none max-w-full [&_h1]:text-4xl [&_h2]:text-3xl [&_h3]:text-2xl text-themeTextGray`,
+                                class: `prose prose-lg dark:prose-invert focus:outline-none max-w-full [&_h1]:text-4xl [&_h2]:text-3xl [&_h3]:text-2xl text-gray`,
                             },
                         }}
                         extensions={[
@@ -146,7 +146,7 @@ const BlockTextEditor = ({
                                 tippyOptions={{
                                     placement: "top",
                                 }}
-                                className="flex w-fit max-w-[90vw] overflow-hidden rounded border border-muted bg-themeBlack text-themeTextGray shadow-xl"
+                                className="flex w-fit max-w-[90vw] overflow-hidden rounded border border-muted bg-white text-black shadow-xl dark:bg-themeBlack dark:text-themeTextGray"
                             >
                                 <NodeSelector
                                     open={openNode}

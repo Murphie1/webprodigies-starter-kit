@@ -25,7 +25,9 @@ export const Slider = ({ children, overlay, label, ...rest }: SliderProps) => {
                 </>
             )}
             {label && (
-                <Label className="pl-7 mb-3 text-themeTextGray">{label}</Label>
+                <Label className="pl-7 mb-3 text-black dark:text-themeTextGray">
+                    {label}
+                </Label>
             )}
             <Swiper
                 modules={[Navigation, Pagination, Autoplay, FreeMode]}

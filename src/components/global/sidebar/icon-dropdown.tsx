@@ -42,7 +42,7 @@ const IconDropDown = ({
                                 key={icons.id}
                                 className={cn(
                                     currentIcon === icons.icon
-                                        ? "bg-themeGray"
+                                        ? "bg-gray dark:bg-themeGray"
                                         : "",
                                     "p-2 rounded-lg",
                                 )}

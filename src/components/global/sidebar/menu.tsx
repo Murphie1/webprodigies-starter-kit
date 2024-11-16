@@ -61,11 +61,12 @@ const SideBarMenu = ({
                         userId === groupUserId && (
                             <Link
                                 className={cn(
-                                    "flex gap-x-2 items-center font-semibold rounded-xl text-themeTextGray hover:bg-themeGray p-2",
+                                    "flex gap-x-2 items-center font-semibold rounded-xl text-black hover:bg-themeGray p-2 dark:text-themeTextGray",
                                     currentPage === "settings"
-                                        ? !item.path && "text-white"
+                                        ? !item.path &&
+                                              "text-black dark:text-white"
                                         : currentPage === item.path &&
-                                              "text-white",
+                                              "text-black dark:text-white",
                                 )}
                                 href={`/organizations/${groupid}/settings/${item.path}`}
                                 key={item.id}
@@ -77,10 +78,11 @@ const SideBarMenu = ({
                     ) : (
                         <Link
                             className={cn(
-                                "flex gap-x-2 items-center font-semibold rounded-xl text-themeTextGray hover:bg-themeGray p-2",
+                                "flex gap-x-2 items-center font-semibold rounded-xl text-black hover:bg-themeGray p-2 dark:text-themeTextGray",
                                 currentPage === "settings"
-                                    ? !item.path && "text-white"
-                                    : currentPage === item.path && "text-white",
+                                    ? !item.path && "text-black dark:text-white"
+                                    : currentPage === item.path &&
+                                          "text-black dark:text-white",
                             )}
                             href={`/organizations/${groupid}/settings/${item.path}`}
                             key={item.id}
@@ -105,10 +107,10 @@ const SideBarMenu = ({
                                     id="channel-link"
                                     key={channel.id}
                                     className={cn(
-                                        "flex justify-between hover:bg-themeGray p-2 group rounded-lg items-center",
+                                        "flex justify-between hover:bg-black hover:text-white p-2 group rounded-lg items-center dark:hover:bg-themeGray",
                                         channel.id === current &&
                                             edit &&
-                                            "bg-themeGray",
+                                            "bg-gray dark:bg-themeGray",
                                     )}
                                     href={`/organizations/${channel.groupId}/channel/${channel.id}`}
                                     {...(channel.name !== "general" &&
@@ -149,8 +151,8 @@ const SideBarMenu = ({
                                                 className={cn(
                                                     "text-lg capitalize",
                                                     currentPage === channel.id
-                                                        ? "text-white"
-                                                        : "text-themeTextGray",
+                                                        ? "text-black dark:text-white"
+                                                        : "text-gray-800 text-themeTextGray",
                                                 )}
                                             >
                                                 {isPending &&
@@ -168,7 +170,7 @@ const SideBarMenu = ({
                                                 onClick={() =>
                                                     onChannelDetele(channel.id)
                                                 }
-                                                className="group-hover:inline hidden content-end text-themeTextGray hover:text-gray-400"
+                                                className="group-hover:inline hidden content-end text-black hover:text-gray-400 dark:text-themeTextGray"
                                                 size={16}
                                             />
                                         )}

@@ -1,13 +1,9 @@
 // pages/GsPage.js
 
-import React from 'react';
+import React from "react"
 
 const GsPage = () => {
-  return (
-      <div>
-            groupspaces
-                </div>
-                  );
-                  };
+    return <div>groupspaces</div>
+}
 
-                  export default GsPage;
+export default GsPage

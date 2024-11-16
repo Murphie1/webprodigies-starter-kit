@@ -80,8 +80,8 @@ export const InitialModal = () => {
                         Create your Groupspace
                     </DialogTitle>
                     <DialogDescription className="text-center text-zinc-500">
-                        Add a name and an image. You're free to change this at
-                        anytime.
+                        Add a name and an image. You&apos;re free to change this
+                        at anytime.
                     </DialogDescription>
                 </DialogHeader>
                 <Form {...form}>

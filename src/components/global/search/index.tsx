@@ -33,7 +33,7 @@ const Search = ({
                     "bg-clip-padding backdrop--blur__safari backdrop-filter backdrop-blur-2xl bg-opacity-20",
             )}
         >
-            <SearchIcon className={cn(iconStyle || "text-themeTextGray")} />
+            <SearchIcon className={cn(iconStyle || "text-gray-500")} />
             <Input
                 onChange={onSearchQuery}
                 value={query}
