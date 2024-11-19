@@ -16,7 +16,8 @@ datasource db {
 model User {
   id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   firstname String
-  lastname  String
+  lastname  String?
+  email     String?
   createdAt DateTime @default(now())
   clerkId   String   @unique
   image     String?
@@ -27,7 +28,6 @@ model User {
   posts      Post[]
   likes      Like[]
   profile    Profile[]
-  kidsProfile    KidsProfile[]
   comments   Comment[]
   message    Message[]
   groupSpace Groupspace[]
@@ -39,24 +39,11 @@ model Profile {
   id String @id @default(uuid())
   clerkId  String @unique
   user  User?           @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId  String?        @db.Uuid
+  userId  String      @db.Uuid
   name String
+  email String
   imageUrl String @db.Text
-
-
-  updatedAt DateTime @updatedAt
-  createdAt DateTime @default(now())
-  
-@@index([userId, clerkId])
-}
-
-model KidsProfile {
-   id String @id @default(uuid())
-  clerkId  String @unique
-  user  User?           @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId  String?        @db.Uuid
-  name String
-  imageUrl String @db.Text
+  type ProfileType @default(KIDS)
 
 
   updatedAt DateTime @updatedAt
@@ -104,7 +91,7 @@ model Groupspace {
   name            String      @unique
   createdAt       DateTime    @default(now())
   User            User?        @relation(fields: [userId], references: [id], onDelete: Cascade)
- userId          String?         @db.Uuid
+ userId          String       @db.Uuid
  clerkId          String      
  joinCode         String?
  inviteCode       String   @db.Text
@@ -259,6 +246,11 @@ enum SessionType {
   AUDIO
   VIDEO
   STREAM
+}
+
+enum ProfileType {
+KIDS
+GENERAL
 }
 
 model Session {
