@@ -1,14 +1,21 @@
-import { InitialProfile } from "@/lib/initial-profile";
-import { client } from "@/lib/prisma";
-import { InitialUser } from "@/lib/initial-user";
-import { currentUser } from "@clerk/nextjs/server";
-import { redirect } from "next/navigation";
+import { ProfileComp } from "./_components/profile-comp";
+import { ProfileBottom } from "./_components/profile-bottom";
+import { ProfileTop } from "/_components/profile-top";
 
-const ProfilePage = async () => {
-    const profile = await InitialProfile();
-    const localUser = await InitialUser();
 
-    return <div className="justify-end pt-5 pr-5">Create a Kids Profile</div>;
+
+const Home = () => {
+
+  return <div className="relative flex flex-col h-auto min-h-screen justify-center">
+  <ProfileTop />
+      <div className="overflow-x-auto whitespace-nowrap">
+  <ProfileComp />
+      </div>
+  <ProfileBottom />
+  </div>;
+
 };
 
-export default ProfilePage;
+
+
+export default Home;
