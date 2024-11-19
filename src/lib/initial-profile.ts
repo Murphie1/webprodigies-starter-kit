@@ -1,4 +1,4 @@
-import {ProfileCard } from "@/components/user-profile-card"
+import { ProfileCard } from "@/components/user-profile-card"
 import { CreateProfile} from "@/components/modals/create-profile"
 import { client } from "@/lib/prisma"
 import { redirect } from "next/navigation"
