@@ -1,6 +1,8 @@
 import { client } from "@/lib/prisma"
 import { redirect } from "next/navigation"
 import { currentUser } from "@clerk/nextjs/server"
+import { ProfileCard } from "@/components/user-profile-card"
+import { Separator } from "@/components/ui/separator"
 
 export const InitialUser = async () => {
     const clerk = await currentUser()
@@ -15,7 +17,29 @@ export const InitialUser = async () => {
     })
 
     if (localUser) {
-        return localUser // Return the existing user
+        return (
+            <div className="flex flex-col md:grid grid-col-2">
+            <h2>
+            User Account
+            </h2>
+            <ProfileCard
+                name={user.firstname}
+                imageUrl={user.image} || null
+                type="User Account"
+                email={user.email} || null
+             />  
+                    <div>
+                    <Separator 
+                    className="md:hidden"
+                        />
+                        <Separator
+                    className="hidden md:flex"
+                    />
+                      <h5>
+                    OR
+                        </h5>
+                    </div>
+                    </div>  // Return the existing user
     }
 
     const newUser = await client.user.create({
@@ -27,6 +51,27 @@ export const InitialUser = async () => {
            email: clerk.emailAddresses[0]?.emailAddress || null, // add by me to the user model
         },
     })
-
-    return newUser
-}
+    return (
+            <div className="flex flex-col md:grid grid-col-2">
+            <h2>
+            User Account
+            </h2>
+            <ProfileCard
+                name={user.firstname}
+                imageUrl={user.image} || null
+                type="User Account"
+                email={user.email} || null
+             />  
+                    <div>
+                    <Separator 
+                    className="md:hidden"
+                        />
+                        <Separator
+                    className="hidden md:flex"
+                    />
+                      <h5>
+                    OR
+                        </h5>
+                    </div>
+                    </div> 
+                    )
