@@ -12,7 +12,7 @@ import Image from "next/image"
 import { useRouter } from "next/navigation"
 
 interface UserProfileCardProps {
-    imageUrl: string
+    imageUrl: string | null
     name: string
     type: string | null
     email: string | null
