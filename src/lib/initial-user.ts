@@ -36,6 +36,6 @@ export const InitialUser = async () => {
     name: newUser.firstname,
     email: newUser.email,
     imageUrl: newUser.image,
-    id: newUser.id
+    id: newUser.id,
 }
             }
