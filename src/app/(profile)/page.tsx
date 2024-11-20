@@ -1,6 +1,6 @@
 import ProfileComp from "./_components/profile-comp";
 import UserComp from "./_components/user-comp";
-import ProfileBottom from "./_components/profile-bottom";
+import { ProfileBottom } from "./_components/profile-bottom";
 import ProfileTop from "./_components/profile-top";
 
 
