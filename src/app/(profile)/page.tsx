@@ -9,7 +9,7 @@ const Home = () => {
 
   return <div className="relative flex flex-col h-auto min-h-screen justify-center">
   <ProfileTop />
-    <Usercomp />
+    <UserComp />
       <div className="overflow-x-auto whitespace-nowrap">
   <ProfileComp />
       </div>
