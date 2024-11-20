@@ -25,7 +25,7 @@ export const InitialUser = async () => {
             }
     const newUser = await client.user.create({
         data: {
-            clerkId: clerk.id // Use clerkId when creating a new user
+            clerkId: clerk.id, // Use clerkId when creating a new user
             firstname: `${clerk.firstName}`,
             lastname: `${clerk.lastName}` || null,
            image: clerk.imageUrl || null,
