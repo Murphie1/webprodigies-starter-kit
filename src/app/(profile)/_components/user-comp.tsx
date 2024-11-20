@@ -1,4 +1,4 @@
-import { InitialUser } from "@/lib/initial-user";
+import { InitialUser } from "@/lib/initial-user"
 import { ProfileCard } from "@/components/user-profile-card"
 
 const UserComp = async () => {
