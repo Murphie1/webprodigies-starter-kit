@@ -4,7 +4,7 @@ import { currentUser } from "@clerk/nextjs/server"
 import { ProfileCard } from "@/components/user-profile-card"
 import { Separator } from "@/components/ui/separator"
 
-export const InitialUser = async () => {
+export const initialUser = async () => {
     const clerk = await currentUser()
 
     if (!clerk) {
@@ -29,7 +29,7 @@ export const InitialUser = async () => {
             firstname: `${clerk.firstName}`,
             lastname: `${clerk.lastName}` || null,
            image: clerk.imageUrl || null,
-           email: clerk.emailAddresses?[0]?.emailAddress || null, // add by me to the user model
+           email: clerk.emailAddresses[0]?.emailAddress || null, // add by me to the user model
         },
     })
     return {
