@@ -294,7 +294,7 @@ export const onSearchGroups = async (
         if (mode === "POSTS") {
             const fetchedPosts = await client.post.findMany({
                 where: {
-                    name: {
+                    content: {
                         contains: query,
                         mode: "insensitive",
                     },
