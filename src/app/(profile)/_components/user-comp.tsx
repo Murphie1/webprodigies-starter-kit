@@ -3,7 +3,8 @@ import { ProfileCard } from "@/components/user-profile-card"
 
 const UserComp = async () => {
     const localUser = await InitialUser();
-    return 
+    if (localUser) {
+    return (
 <div className="flex flex-col md:grid grid-col-2">
                 <h2>User Account</h2>
                 <ProfileCard
@@ -19,6 +20,8 @@ const UserComp = async () => {
                 </div>
             </div>
         )
-};
+}
+    return null
+}
 
 export default UserComp
