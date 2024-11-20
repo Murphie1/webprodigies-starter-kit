@@ -1,9 +1,9 @@
-import { InitialUser } from "@/lib/initial-user"
+import { initialUser } from "@/lib/initial-user"
 import { ProfileCard } from "@/components/user-profile-card"
 import { Separator } from "@/components/ui/separator"
 
 const UserComp = async () => {
-    const localUser = await InitialUser();
+    const localUser = await initialUser();
     if (localUser) {
     return (
 <div className="flex flex-col md:grid grid-col-2">
