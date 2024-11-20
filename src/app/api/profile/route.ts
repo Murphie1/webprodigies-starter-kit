@@ -1,7 +1,6 @@
 import { onAuthenticatedUser } from "@/actions/auth"
 import { client } from "@/lib/prisma"
 import { currentUser } from "@clerk/nextjs/server"
-import 
 import { redirect } from "next/navigation"
 import { NextResponse } from "next/server"
 import { v4 as uuidv4 } from "uuid"
