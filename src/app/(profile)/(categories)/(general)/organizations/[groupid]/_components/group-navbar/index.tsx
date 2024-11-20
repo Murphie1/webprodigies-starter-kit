@@ -19,7 +19,7 @@ const Menu = ({ orientation }: MenuProps) => {
                     <CardContent className="p-0 flex gap-2">
                         {GROUPLE_CONSTANTS.groupPageMenu.map((menuItem) => (
                             <Link
-                                href={menuItem.path}
+                                href=/{menuItem.path}
                                 onClick={() => onSetSection(menuItem.path)}
                                 className={cn(
                                     "rounded-xl flex gap-2 py-2 px-4 items-center",
@@ -42,7 +42,7 @@ const Menu = ({ orientation }: MenuProps) => {
                 <div className="flex items-center justify-center mt-3">
                     {GROUPLE_CONSTANTS.groupPageMenu.map((menuItem) => (
                         <Link
-                            href={menuItem.path}
+                            href=/{menuItem.path}
                             onClick={() => onSetSection(menuItem.path)}
                             className={cn(
                                 "rounded-xl flex gap-2 py-2 px-4 items-center",
