@@ -17,20 +17,14 @@ export const InitialProfile = async () => {
     })
 
     if (profile) {
-        return (
-             <div className="flex overflow-x-auto whitespace-nowrap w-full">
-                <h2>Continue with another Profile </h2>
-                <ProfileCard
-                    name={profile.name}
-                    imageUrl={profile.imageUrl || null}
-                    type={profile.type || null}
-                    email={profile.email || null}
-                />
-            </div>                  
-            ) // Return the existing profile
+        return {
+                    name: profile.name,
+                    imageUrl: profile.imageUrl,
+                    type: profile.type,
+                    email: profile.email,
+                    id: profile.id,            
+    } //return the existing profile
     }
 
-    return (
-        <CreateProfile />
-        )
+    return null
 }
