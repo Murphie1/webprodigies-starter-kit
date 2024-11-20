@@ -1,5 +1,6 @@
 import { InitialUser } from "@/lib/initial-user"
 import { ProfileCard } from "@/components/user-profile-card"
+import { Separator } from "@/components/ui/separator"
 
 const UserComp = async () => {
     const localUser = await InitialUser();
