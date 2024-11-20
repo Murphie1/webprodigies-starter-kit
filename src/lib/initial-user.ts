@@ -16,22 +16,12 @@ export const InitialUser = async () => {
         },
     })
     if (localUser) {
-        return (
-            <div className="flex flex-col md:grid grid-col-2">
-                <h2>User Account</h2>
-                <ProfileCard
-                    name={localUser.firstname}
-                    imageUrl={localUser.image || null}
-                    type="User Account"
-                    email={localUser.email || null}
-                />
-                <div>
-                    <Separator className="md:hidden" />
-                    <Separator className="hidden md:flex" />
-                    <h5>OR</h5>
-                </div>
-            </div>
-        )
+        return {
+            name: localUser.firstname,
+            email: localUser.email,
+            imageUrl: localUser.image,
+            id: localUser.id,
+        }
             }
     const newUser = await client.user.create({
         data: {
@@ -42,28 +32,10 @@ export const InitialUser = async () => {
            email: clerk.emailAddresses?[0]?.emailAddress || null, // add by me to the user model
         },
     })
-    return (
-            <div className="flex flex-col md:grid grid-col-2">
-            <h2>
-            User Account
-            </h2>
-            <ProfileCard
-                name={newUser.firstname}
-                imageUrl={newUser.image || null}
-                type="User Account"
-                email={newUser.email || null}
-             />  
-                    <div>
-                    <Separator 
-                    className="md:hidden"
-                        />
-                        <Separator
-                    className="hidden md:flex"
-                    />
-                      <h5>
-                    OR
-                        </h5>
-                    </div>
-                    </div> 
-                    )
+    return {
+    name: newUser.firstname,
+    email: newUser.email,
+    imageUrl: newUser.image,
+    id: newUser.id
+}
             }
