@@ -9,7 +9,7 @@ type AppleAuthButtonProps = {
     method: "signup" | "signin"
 }
 
-export const AppleAuthButton = ({ method }: GoogleAuthButtonProps) => {
+export const AppleAuthButton = ({ method }: AppleAuthButtonProps) => {
     const { signUpWith, signInWith } = useAppleAuth()
     return (
         <Button
