@@ -6,7 +6,8 @@ import { usePathname } from "next/navigation"
 import { UserWidget } from "@/components/global/user-widget"
 import { Button } from "@/components/ui/button"
 import { CirclePlus } from "@/icons"
-import { currentUser } from "@clerk/nextjs/server"
+import { onAuthenticatedUser } from "@/actions/auth"
+//import { currentUser } from "@clerk/nextjs/server"
 import { Menu, ToggleLeft } from "lucide-react"
 import Link from "next/link"
 import {
@@ -25,7 +26,7 @@ type NavbarProps = {
 }
 
 export const Navbar = async ({ groupid, userid }: NavbarProps) => {
-    const user = await currentUser()
+    const user = await onAuthenticatedUser()//currentUser()
     const pathname = usePathname()
     const currentPage = pathname.split("/").pop()
 
@@ -54,7 +55,8 @@ export const Navbar = async ({ groupid, userid }: NavbarProps) => {
             </Link>
             <UserWidget
                 userid={userid}
-                image={user?.imageUrl!}
+                image={user?.image!}
+                //image={user?.imageUrl!}
                 groupid={groupid}
             />
             <ToggleLeft />
