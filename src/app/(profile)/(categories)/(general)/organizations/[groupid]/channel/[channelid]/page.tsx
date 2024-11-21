@@ -40,7 +40,9 @@ const GroupChannelPage = async ({ params }: Props) => {
                     <LeaderBoardCard light />
                 </div>
                 <div className="lg:col-span-2 flex flex-col gap-y-5 py-5">
-                    <Bar />
+                    <Bar 
+                        groupId={params.groupid}
+                        />
                     <CreateNewPost
                         userImage={user?.imageUrl!}
                         channelid={params.channelid}
