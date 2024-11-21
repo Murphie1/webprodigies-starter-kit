@@ -19,7 +19,7 @@ export type MenuProps = {
     id: number
     label: string
     icon: JSX.Element
-    path: string | JSX.Element
+    path: string 
     section?: boolean
     integration?: boolean
 }
@@ -28,7 +28,7 @@ export type GroupMenuProps = {
     id: number
     label: string
     icon: JSX.Element
-    path: string | JSX.Element
+    path: string 
 }
 export const ORGANIZATION_MENU: MenuProps[] = [
     {
@@ -63,27 +63,27 @@ export const GROUP_PAGE_MENU: MenuProps[] = [
         id: 0,
         label: "Groupspaces",
         icon: <Home />,
-        path: "/organizations/groupspaces",
+        path: "/organizations/`${group.id}`/groupspaces",
         section: true,
     },
     {
         id: 1,
         label: "Courses",
         icon: <Courses />,
-        path: "organizations/${groupid}/courses",
+        path: "/organizations/`${group.id}`/courses",
         section: true,
     },
     {
         id: 2,
         label: "Events",
         icon: <Buisness />,
-        path: "/organizations/${groupid}/events",
+        path: "/organizations/`${group.id}`/events",
     },
     {
         id: 3,
         label: "Members",
         icon: <PersonalDevelopment />,
-        path: "/organizations/${groupid}/members",
+        path: "/organizations/`${group.id}`/members",
     },
     {
         id: 4,
@@ -95,13 +95,13 @@ export const GROUP_PAGE_MENU: MenuProps[] = [
         id: 5,
         label: "Chat",
         icon: <Chat />,
-        path: "organizations/${groupid}/messages",
+        path: "/organizations/`${group.id}`/messages",
     },
     {
         id: 5,
         label: "Library",
         icon: <Library />,
-        path: "/organizations/${groupid}/library",
+        path: "/organizations/`${group.id}`/library",
     },
 ]
 
@@ -116,7 +116,7 @@ export const SIDEBAR_SETTINGS_MENU: MenuProps[] = [
         id: 1,
         label: "Subscriptions",
         icon: <CreditCard />,
-        path: "/organizations/[groupid]/settings/subscriptions/stripe",
+        path: "subscriptions/stripe",
     },
     {
         id: 2,
