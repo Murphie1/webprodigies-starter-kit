@@ -3,7 +3,7 @@ import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
 
 
 type BarProps = {
-    groupId
+    groupId: string
     }
 
 
