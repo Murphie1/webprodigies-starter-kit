@@ -39,12 +39,12 @@ export const ProfileCard = ({
                 onClick={onClick}
             >
                 <CardHeader className="space-x-2 relative">
-                  {imageUrl ? <Image
+                  {imageUrl ? ( <Image
                         fill
                         src={imageUrl}
                         alt={`${name}'s Profile Image`}
                         className="h-[80px] w-[80px] rounded-full"
-                    />
+                    /> ) : ( <h2>No Image</h2> )
                   }
                     <CardTitle>
                         <p>{name}</p>
