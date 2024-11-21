@@ -12,7 +12,7 @@ import Image from "next/image"
 import { useRouter } from "next/navigation"
 
 interface UserProfileCardProps {
-    imageUrl: string | StaticImport
+    imageUrl: string 
     name: string
     type: string | null
     email: string | null
@@ -39,12 +39,13 @@ export const ProfileCard = ({
                 onClick={onClick}
             >
                 <CardHeader className="space-x-2 relative">
-                    <Image
+                  {imageUrl ? <Image
                         fill
                         src={imageUrl}
                         alt={`${name}'s Profile Image`}
                         className="h-[80px] w-[80px] rounded-full"
                     />
+                  }
                     <CardTitle>
                         <p>{name}</p>
                     </CardTitle>
