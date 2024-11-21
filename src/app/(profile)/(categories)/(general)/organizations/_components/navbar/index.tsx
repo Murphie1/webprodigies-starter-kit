@@ -1,12 +1,12 @@
 import GlassSheet from "@/components/global/glass-sheet"
 import Search from "@/components/global/search"
 import SideBar from "@/components/global/sidebar"
-import Ellipsises from "@/components/global/ellipsises"
+import { usePathname } from "next/navigation"
 import { UserWidget } from "@/components/global/user-widget"
 import { Button } from "@/components/ui/button"
 import { CirclePlus } from "@/icons"
 import { currentUser } from "@clerk/nextjs/server"
-import { Menu } from "lucide-react"
+import { Menu, ToggleLeft } from "lucide-react"
 import Link from "next/link"
 import {
     DropdownMenu,
@@ -25,6 +25,13 @@ type NavbarProps = {
 
 export const Navbar = async ({ groupid, userid }: NavbarProps) => {
     const user = await currentUser()
+    const pathname = usePathname()
+    const currentPage = pathname.split("/").pop()
+
+    if (pathname.includes("groupspaces")) {
+        return null
+    }
+    
     return (
         <div className="bg-[#1A1A1D] py-2 px-3 md:px-7 md:py-5 flex gap-5 justify-between md:justify-end items-center">
             <GlassSheet trigger={<Menu className="md:hidden cursor-pointer" />}>
@@ -35,7 +42,6 @@ export const Navbar = async ({ groupid, userid }: NavbarProps) => {
                 className="rounded-full border-themeGray bg-black !opacity-100 px-3"
                 placeholder="Search..."
             />
-            <Ellipsises />
             <Link href={`/organizations/create`} className="hidden md:inline">
                 <Button
                     variant="outline"
@@ -50,6 +56,7 @@ export const Navbar = async ({ groupid, userid }: NavbarProps) => {
                 image={user?.imageUrl!}
                 groupid={groupid}
             />
+            <ToggleLeft />
         </div>
     )
 }
