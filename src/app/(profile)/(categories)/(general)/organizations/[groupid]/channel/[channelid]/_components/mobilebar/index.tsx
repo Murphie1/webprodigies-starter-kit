@@ -13,8 +13,8 @@ const Bar = ({
     return (
         <div className="relative overflow-x-auto whitespace-nowrap">
             <ScrollArea className="whitespace-nowrap rounded-md border">
-                <Menu orientation="mobile" />
-                <ScrollBar orientation="horizontal" groupid={groupId} />
+                <Menu orientation="mobile" groupid={groupId} />
+                <ScrollBar orientation="horizontal" />
             </ScrollArea>
         </div>
     )
