@@ -7,7 +7,7 @@ import { X } from "lucide-react"
 interface FileUploadProps {
     onChange: (url?: string) => void
     value: string
-    endpoint: "messageFile" | "groupspaceImage"
+    endpoint: "messageFile" | "groupspaceImage" | "profileImage"
 }
 
 export const FileUpload = ({ onChange, value, endpoint }: FileUploadProps) => {
