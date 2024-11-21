@@ -10,7 +10,7 @@ const UserComp = async () => {
                 <h2>User Account</h2>
                 <ProfileCard
                     name={localUser.name}
-                    imageUrl={localUser.imageUrl || null}
+                    imageUrl={localUser.imageUrl}
                     type="User Account"
                     email={localUser.email || null}
                 />
