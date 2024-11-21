@@ -11,7 +11,7 @@ const ProfileComp = async () => {
                 <h2>Continue with another Profile</h2>
                 <ProfileCard
                     name={profile.name}
-                    imageUrl={profile.imageUrl || null}
+                    imageUrl={profile.imageUrl}
                     type={profile.type || null}
                     email={profile.email || null}
                 />
