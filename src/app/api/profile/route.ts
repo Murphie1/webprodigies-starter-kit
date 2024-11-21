@@ -23,7 +23,7 @@ export async function POST(req: Request) {
                 clerkId: clerk.id,
                 name,
                 imageUrl,
-                email: user.emailAddresses[0]?.emailAddress,
+                email: clerk.emailAddresses[0]?.emailAddress,
                 userId: user.id,
             },
         })
