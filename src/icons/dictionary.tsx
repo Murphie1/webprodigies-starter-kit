@@ -10,7 +10,7 @@ export const Dictionary = () => {
             stroke-width="2"
             stroke-linecap="round"
             stroke-linejoin="round"
-            class="lucide lucide-book-type"
+            className="lucide lucide-book-type"
         >
             <path d="M10 13h4" />
             <path d="M12 6v7" />
