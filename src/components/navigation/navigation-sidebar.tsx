@@ -1,15 +1,39 @@
 import { ModeToggle } from "@/components/mode-toggle"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Separator } from "@/components/ui/separator"
-import { currentGroup } from "@/lib/current-group"
+import {
+    //onGetAllGroupMembers,
+  //  onGetGroupChannels,
+   // onGetGroupInfo,
+    //onGetGroupSubscriptions,
+    //onGetUserGroups,
+//} from "@/actions/groups"
 import { client } from "@/lib/prisma"
 import { UserButton } from "@clerk/nextjs"
 import { redirect } from "next/navigation"
 import { NavigationAction } from "./navigation-action"
 import { NavigationItem } from "./navigation-item"
+//import {
+   // HydrationBoundary,
+    //QueryClient,
+    //dehydrate,
+//} from "@tanstack/react-query"
 
-export const NavigationSideBar = async () => {
-    const group = await currentGroup()
+type NavSideProps = {
+    groupId: string
+}
+
+export const NavigationSideBar = async ({
+                                       groupId 
+                                        }: NavSideProps
+                                       ) => {
+    //const query = new QueryClient()
+
+   // group info
+   // await query.prefetchQuery({
+        //queryKey: ["group-info"],
+        //queryFn: () => onGetGroupInfo(params.groupid),
+   // })
 
     if (!group) {
         return redirect("/organizations/create")
@@ -18,7 +42,7 @@ export const NavigationSideBar = async () => {
     const groupspaces = await client.groupspace.findMany({
         where: {
             Group: {
-                id: group.id,
+                id: {groupId},
             },
         },
     })
