@@ -10,7 +10,7 @@ export const IDuotoneBlack = () => {
             stroke-width="1.25"
             stroke-linecap="round"
             stroke-linejoin="round"
-            class="lucide lucide-info"
+            className="lucide lucide-info"
         >
             <circle cx="12" cy="12" r="10" />
             <path d="M12 16v-4" />
