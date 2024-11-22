@@ -35,14 +35,9 @@ export const NavigationSideBar = async ({
         //queryFn: () => onGetGroupInfo(params.groupid),
    // })
 
-    if (!group) {
-        return redirect("/organizations/create")
-    }
-
     const groupspaces = await client.groupspace.findMany({
         where: {
-            Group: {
-                id: {groupId},
+            groupId: {groupId},
             },
         },
     })
