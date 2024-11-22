@@ -3,18 +3,23 @@ import { ProfileCard } from "@/components/user-profile-card";
 import { CreateProfile } from "@/components/modals/create-profile";
 
 const ProfileComp = async () => {
-    const profile = await InitialProfile();
+    const profiles = await InitialProfile();
 
-    if (profile) {
+    if (profiles && profiles.length > 0) {
         return (
-            <div className="flex overflow-x-auto whitespace-nowrap w-full">
+            <div className="flex flex-col w-full">
                 <h2>Continue with another Profile</h2>
-                <ProfileCard
-                    name={profile.name}
-                    imageUrl={profile.imageUrl}
-                    type={profile.type || null}
-                    email={profile.email || null}
-                />
+                <div className="flex overflow-x-auto whitespace-nowrap w-full">
+                    {profiles.map((profile) => (
+                        <ProfileCard
+                            key={profile.id}
+                            name={profile.name}
+                            imageUrl={profile.imageUrl}
+                            type={profile.type || null}
+                            email={profile.email || null}
+                        />
+                    ))}
+                </div>
             </div>
         );
     }
