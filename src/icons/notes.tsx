@@ -10,7 +10,7 @@ export const Notes = () => {
             stroke-width="2"
             stroke-linecap="round"
             stroke-linejoin="round"
-            class="lucide lucide-notebook-pen"
+            className="lucide lucide-notebook-pen"
         >
             <path d="M13.4 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7.4" />
             <path d="M2 6h4" />
