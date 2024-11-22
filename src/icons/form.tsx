@@ -10,7 +10,7 @@ export const Forms = () => {
             stroke-width="2"
             stroke-linecap="round"
             stroke-linejoin="round"
-            class="lucide lucide-clipboard-pen"
+            className="lucide lucide-clipboard-pen"
         >
             <rect width="8" height="4" x="8" y="2" rx="1" />
             <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-5.5" />
