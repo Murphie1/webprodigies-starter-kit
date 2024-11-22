@@ -2,7 +2,7 @@
 import GlassSheet from "@/components/global/glass-sheet"
 import Search from "@/components/global/search"
 import SideBar from "@/components/global/sidebar"
-import { usePathname } from "next/navigation"
+//import { usePathname } from "next/navigation"
 import { UserWidget } from "@/components/global/user-widget"
 import { Button } from "@/components/ui/button"
 import { CirclePlus } from "@/icons"
@@ -27,11 +27,11 @@ type NavbarProps = {
 
 export const Navbar = async ({ groupid, userid }: NavbarProps) => {
     const user = await onAuthenticatedUser()//currentUser()
-    const pathname = usePathname()
-    const currentPage = pathname.split("/").pop()
+   // const pathname = usePathname()
+   // const currentPage = pathname.split("/").pop()
 
-    if (pathname.includes("groupspaces")) {
-        return null
+   // if (pathname.includes("groupspaces")) {
+      //  return null
     }
     
     return (
