@@ -10,7 +10,7 @@ export const CreditCard = () => {
             stroke-width="1.25"
             stroke-linecap="round"
             stroke-linejoin="round"
-            class="lucide lucide-credit-card"
+            className="lucide lucide-credit-card"
         >
             <rect width="20" height="14" x="2" y="5" rx="2" />
             <line x1="2" x2="22" y1="10" y2="10" />
