@@ -10,7 +10,7 @@ export const Meeting = () => {
             stroke-width="2"
             stroke-linecap="round"
             stroke-linejoin="round"
-            class="lucide lucide-projector"
+            className="lucide lucide-projector"
         >
             <path d="M5 7 3 5" />
             <path d="M9 6V3" />
