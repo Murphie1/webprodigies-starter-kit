@@ -70,7 +70,9 @@ const SideBar = ({ groupid, userid, mobile }: Props) => {
     if (pathname.includes("groupspaces")) {
         return (
             <div className="hidden md:flex h-full w-[72px] z-30 flex-col fixed inset-y-0">
-                <NavigationSideBar />
+                <NavigationSideBar 
+                    groupId={groupid}
+                    />
             </div>
         )
     }
