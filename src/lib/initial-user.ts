@@ -35,7 +35,7 @@ export const initialUser = async () => {
     return {
     name: newUser.firstname,
     email: newUser.email,
-    imageUrl: newUser.image,
+    image: newUser.image,
     id: newUser.id,
 }
             }
