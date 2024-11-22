@@ -10,7 +10,7 @@ export const CirclePlus = () => {
             stroke-width="2"
             stroke-linecap="round"
             stroke-linejoin="round"
-            class="lucide lucide-circle-plus"
+            className="lucide lucide-circle-plus"
         >
             <circle cx="12" cy="12" r="10" />
             <path d="M8 12h8" />
