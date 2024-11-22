@@ -28,14 +28,14 @@ export const initialUser = async () => {
             clerkId: clerk.id, // Use clerkId when creating a new user
             firstname: `${clerk.firstName}`,
             lastname: `${clerk.lastName}` || null,
-           image: clerk.imageUrl || null,
+           image: clerk.imageUrl || "@/app/favicon.ico",
            email: clerk.emailAddresses[0]?.emailAddress || null, // add by me to the user model
         },
     })
     return {
     name: newUser.firstname,
     email: newUser.email,
-    image: newUser.image,
+    imageUrl: newUser.image,
     id: newUser.id,
 }
             }
