@@ -10,7 +10,7 @@ export const Library = () => {
             stroke-width="2"
             stroke-linecap="round"
             stroke-linejoin="round"
-            class="lucide lucide-library-big"
+            className="lucide lucide-library-big"
         >
             <rect width="8" height="18" x="3" y="3" rx="1" />
             <path d="M7 3v18" />
