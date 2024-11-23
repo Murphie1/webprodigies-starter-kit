@@ -67,15 +67,15 @@ const SideBar = ({ groupid, userid, mobile }: Props) => {
 
     useGroupChatOnline(userid)
 
-   // if (pathname.includes("groupspaces")) {
-       // return (
-         //   <div className="hidden md:flex h-full w-[72px] z-30 flex-col fixed inset-y-0">
-            //    <NavigationSideBar 
-                   // groupId={groupid}
-                  //  />
-          //  </div>
-     //   )
-  //  }
+    if (pathname.includes("groupspaces")) {
+        return (
+           <div className="hidden md:flex h-full w-[72px] z-30 flex-col fixed inset-y-0">
+                <NavigationSideBar 
+                    groupId={groupid}
+                    />
+            </div>
+        )
+   }
 
     return (
         <div
