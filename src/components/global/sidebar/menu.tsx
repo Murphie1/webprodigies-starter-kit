@@ -28,7 +28,6 @@ type Props = {
     groupUserId: string
     userId: string
 }
-
 const SideBarMenu = ({
     channels,
     groupUserId,
@@ -37,8 +36,8 @@ const SideBarMenu = ({
     optimisticChannel,
     userId,
 }: Props) => {
-    const pathname = usePathname()
-    const currentPage = pathname.split("/").pop()
+    const pathname = usePathname();
+    const currentPage = pathname.split("/").pop();
 
     const {
         channel: current,
@@ -53,8 +52,18 @@ const SideBarMenu = ({
         icon,
         onChannelDetele,
         deleteVariables,
-    } = useChannelInfo()
+    } = useChannelInfo();
 
+    // Render specific sidebar for "groupspaces"
+    if (pathname.includes("groupspaces")) {
+        return (
+            <div className="hidden md:flex h-full w-[72px] z-30 flex-col fixed inset-y-0">
+                <NavigationSideBar groupId={groupid} />
+            </div>
+        );
+    }
+
+    // Render settings menu for "settings"
     if (pathname.includes("settings")) {
         return (
             <div className="flex flex-col">
@@ -66,9 +75,9 @@ const SideBarMenu = ({
                                     "flex gap-x-2 items-center font-semibold rounded-xl text-black hover:bg-themeGray p-2 dark:text-themeTextGray",
                                     currentPage === "settings"
                                         ? !item.path &&
-                                              "text-black dark:text-white"
+                                          "text-black dark:text-white"
                                         : currentPage === item.path &&
-                                              "text-black dark:text-white",
+                                          "text-black dark:text-white",
                                 )}
                                 href={`/organizations/${groupid}/settings/${item.path}`}
                                 key={item.id}
@@ -82,9 +91,10 @@ const SideBarMenu = ({
                             className={cn(
                                 "flex gap-x-2 items-center font-semibold rounded-xl text-black hover:bg-themeGray p-2 dark:text-themeTextGray",
                                 currentPage === "settings"
-                                    ? !item.path && "text-black dark:text-white"
+                                    ? !item.path &&
+                                      "text-black dark:text-white"
                                     : currentPage === item.path &&
-                                          "text-black dark:text-white",
+                                      "text-black dark:text-white",
                             )}
                             href={`/organizations/${groupid}/settings/${item.path}`}
                             key={item.id}
@@ -95,9 +105,10 @@ const SideBarMenu = ({
                     ),
                 )}
             </div>
-        )
+        );
     }
 
+    // Render default sidebar for channels
     return (
         <div className="flex flex-col">
             {channels && channels.length > 0 ? (
@@ -184,7 +195,9 @@ const SideBarMenu = ({
                 <></>
             )}
         </div>
-    )
-}
+    );
+};
 
-export default SideBarMenu
+export default SideBarMenu;
+                                
+                                                    
