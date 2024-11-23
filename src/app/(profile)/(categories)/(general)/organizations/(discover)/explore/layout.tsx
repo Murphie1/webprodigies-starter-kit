@@ -12,7 +12,7 @@ const ExploreLayout = async ({ children }: { children: React.ReactNode }) => {
     const user = await onAuthenticatedUser()
     return (
         <div className="flex-1 flex flex-col">
-            <div className="flex flex-col items-center mt-36 px-10">
+            <div className="flex flex-col items-center mt-36 px-3">
                 <GradientText
                     className="text-[50px] font-semibold leading-none md:hidden"
                     element="H2"
