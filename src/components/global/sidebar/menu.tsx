@@ -9,7 +9,6 @@ import { usePathname } from "next/navigation"
 import { IChannels } from "."
 import { IconRenderer } from "../icon-renderer"
 import IconDropDown from "./icon-dropdown"
-import { NavigationSideBar } from "@/components/navigation/navigation-sidebar"
 
 
 type Props = {
@@ -57,9 +56,7 @@ const SideBarMenu = ({
     // Render specific sidebar for "groupspaces"
     if (pathname.includes("groupspaces")) {
         return (
-            <div className="hidden md:flex h-full w-[72px] z-30 flex-col fixed inset-y-0">
-                <NavigationSideBar groupId={groupid} />
-            </div>
+            <div className="hidden md:flex h-full w-[3px]" />
         );
     }
 
