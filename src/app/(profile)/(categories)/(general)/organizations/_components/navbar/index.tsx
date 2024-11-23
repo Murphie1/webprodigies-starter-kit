@@ -1,4 +1,4 @@
-"use client"
+//"use client"
 import GlassSheet from "@/components/global/glass-sheet"
 import Search from "@/components/global/search"
 import SideBar from "@/components/global/sidebar"
@@ -10,14 +10,6 @@ import { onAuthenticatedUser } from "@/actions/auth"
 //import { currentUser } from "@clerk/nextjs/server"
 import { Menu, ToggleLeft } from "lucide-react"
 import Link from "next/link"
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuSeparator,
-    DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
 
 type NavbarProps = {
@@ -32,7 +24,7 @@ export const Navbar = async ({ groupid, userid }: NavbarProps) => {
 
    // if (pathname.includes("groupspaces")) {
       //  return null
-    }
+   // }
     
     return (
         <div className="bg-[#1A1A1D] py-2 px-3 md:px-7 md:py-5 flex gap-5 justify-between md:justify-end items-center">
