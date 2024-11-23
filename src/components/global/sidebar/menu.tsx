@@ -9,6 +9,8 @@ import { usePathname } from "next/navigation"
 import { IChannels } from "."
 import { IconRenderer } from "../icon-renderer"
 import IconDropDown from "./icon-dropdown"
+import { NavigationSideBar } from "@/components/navigation/navigation-sidebar"
+
 
 type Props = {
     channels: IChannels[]
