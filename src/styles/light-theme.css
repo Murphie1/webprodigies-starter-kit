@@ -836,7 +836,7 @@ i.redo {
 
 i.bold {
 
-  background-image: url(/vercel.svg);
+  background-image: url(/assets/icons/type-bold.svg);
 
 }
 
@@ -844,7 +844,7 @@ i.bold {
 
 i.italic {
 
-  background-image: url(/vercel.svg);
+  background-image: url(/assets/icons/type-italic.svg);
 
 }
 
@@ -852,7 +852,7 @@ i.italic {
 
 i.underline {
 
-  background-image: url(/vercel.svg);
+  background-image: url(/assets/icons/type-underline.svg);
 
 }
 
@@ -860,7 +860,7 @@ i.underline {
 
 i.strikethrough {
 
-  background-image: url(/vercel.svg);
+  background-image: url(/assets/icons/type-strikethrough.svg);
 
 }
 
@@ -868,7 +868,7 @@ i.strikethrough {
 
 i.left-align {
 
-  background-image: url(/vercel.svg);
+  background-image: url(/assets/icons/text-left.svg);
 
 }
 
@@ -876,7 +876,7 @@ i.left-align {
 
 i.center-align {
 
-  background-image: url(/vercel.svg);
+  background-image: url(/assets/icons/text-center.svg);
 
 }
 
@@ -884,7 +884,7 @@ i.center-align {
 
 i.right-align {
 
-  background-image: url(/vercel.svg);
+  background-image: url(/assets/icons/text-right.svg);
 
 }
 
@@ -892,7 +892,7 @@ i.right-align {
 
 i.justify-align {
 
-  background-image: url(/vercel.svg);
+  background-image: url(/assets/icons/justify.svg);
 
 }
 
@@ -900,7 +900,7 @@ i.justify-align {
 
 i.h1 {
 
-  background-image: url(/vercel.svg);
+  background-image: url(/assets/icons/h1.svg);
 
 }
 
@@ -908,7 +908,7 @@ i.h1 {
 
 i.h2 {
 
-  background-image: url(/vercel.svg);
+  background-image: url(/assets/icons/h2.svg);
 
 }
 
@@ -916,6 +916,6 @@ i.h2 {
 
 i.h3 {
 
-  background-image: url(/vercel.svg);
+  background-image: url(/assets/icons/h3.svg);
 
-}
+  }
