@@ -1,13 +1,5 @@
 "use client"
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
 
@@ -31,33 +23,42 @@ export const ProfileCard = ({
     }
 
     return (
-        <div className="relative">
-            <Card
+        <div className="relative rounded-lg">
+            <div
                 role="button"
                 tabIndex={0}
-                className="bg-white border-black w-[350px] h-[350px] hover:border-bold hover:outline hover:w-[380px] hover:h-[380px] transition-all duration-200 dark:bg-black dark:border-white"
+                className="bg-white space-y-1 flex justify border-black rounded-lg w-[150px] h-[150px] hover:border-bold hover:outline hover:w-[180px] hover:h-[180px] transition-all duration-200 dark:bg-black dark:border-white"
                 onClick={onClick}
             >
-                <CardHeader className="space-x-2 relative">
+              <div>
+                {imageUrl ? ( <Image
+                        fill
+                        src={imageUrl}
+                        alt={`${name}'s Profile Image`}
+                        className="h-[100px] w-full rounded-lg"
+                    /> ) : ( <h2>No Image</h2> )
+                }
+              </div>
+                <div className="space-x-2 h-[50px] w-full relative">
                   {imageUrl ? ( <Image
                         fill
                         src={imageUrl}
                         alt={`${name}'s Profile Image`}
-                        className="h-[80px] w-[80px] rounded-full"
+                        className="h-[60px] w-[60px] rounded-full"
                     /> ) : ( <h2>No Image</h2> )
                   }
-                    <CardTitle>
-                        <p>{name}</p>
-                    </CardTitle>
-                </CardHeader>
-                <CardContent>
+                    <div>
+                        <h2>{name}</h2>
+                    </div>
+                </div>
+                <div>
                     {type && <h3>{type}</h3>}
                     {email && <h3>{email}</h3>}
-                </CardContent>
-                <CardFooter>
+                </div>
+                <h5>
                     Click to continue
-                </CardFooter>
-            </Card>
+                </h5>
+            </div>
         </div>
     )
 }
