@@ -7,9 +7,9 @@ import { onAuthenticatedUser } from "@/actions/auth";
 
 const Document = async ({ params: { id } }: SearchParamProps) => {
   const clerkUser = await currentUser();
-  if(!clerkUser) redirect('/sign-in')
+  if(!clerkUser) redirect('/sign-in');
   const user = await onAuthenticatedUser();
-  if(!user) redirect(/'sign-in)
+  if(!user) redirect('/sign-in');
 
   const room = await getDocument({
     roomId: id,
