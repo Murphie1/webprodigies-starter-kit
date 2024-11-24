@@ -7,7 +7,7 @@ import ProfileTop from "./_components/profile-top";
 
 const Home = () => {
 
-  return <div className="flex flex-col items-center h-auto min-h-screen justify-center">
+  return <div className="flex flex-col items-center space-y-5 h-auto min-h-screen justify-center">
   <ProfileTop />
     <UserComp />
       <div className="overflow-x-auto whitespace-nowrap">
