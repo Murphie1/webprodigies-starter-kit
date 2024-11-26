@@ -5,7 +5,7 @@ import Link from 'next/link'
 const Header = ({ children, className }: HeaderProps) => {
   return (
     <div className={cn("header", className)}>
-      <Link href='/notes' className="md:flex-1">
+      <Link href='/notes/collabs' className="md:flex-1">
         <Image 
           src="/assets/icons/logo.svg"
           alt="Logo with name"
