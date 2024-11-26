@@ -47,7 +47,7 @@ const Notifications = () => {
                 key={notification.id}
                 inboxNotification={notification}
                 className="bg-dark-200 text-white"
-                href={`/notes/document/${notification.roomId}`}
+                href={`/notes/collabs/document/${notification.roomId}`}
                 showActions={false}
                 kinds={{
                   thread: (props) => (
