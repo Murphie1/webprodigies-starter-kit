@@ -12,7 +12,7 @@ const AddDocumentBtn = ({ userId, email }: AddDocumentBtnProps) => {
     try {
       const room = await createDocument({ userId, email });
 
-      if(room) router.push(`/notes/document/${room.id}`);
+      if(room) router.push(`/notes/collabs/document/${room.id}`);
     } catch (error) {
       console.log(error)
     }
