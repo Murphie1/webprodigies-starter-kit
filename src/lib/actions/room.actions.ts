@@ -26,7 +26,7 @@ export const createDocument = async ({ userId, email }: CreateDocumentParams) =>
       defaultAccesses: []
     });
     
-    revalidatePath('/notes');
+    revalidatePath('/notes/collabs');
 
     return parseStringify(room);
   } catch (error) {
@@ -58,7 +58,7 @@ export const updateDocument = async (roomId: string, title: string) => {
       }
     })
 
-    revalidatePath(`/notes/document/${roomId}`);
+    revalidatePath(`/notes/collabs/document/${roomId}`);
 
     return parseStringify(updatedRoom);
   } catch (error) {
@@ -104,7 +104,7 @@ export const updateDocumentAccess = async ({ roomId, email, userType, updatedBy 
       })
     }
 
-    revalidatePath(`/notes/document/${roomId}`);
+    revalidatePath(`/notes/collabs/document/${roomId}`);
     return parseStringify(room);
   } catch (error) {
     console.log(`Error happened while updating a room access: ${error}`);
@@ -135,8 +135,8 @@ export const removeCollaborator = async ({ roomId, email }: {roomId: string, ema
 export const deleteDocument = async (roomId: string) => {
   try {
     await liveblocks.deleteRoom(roomId);
-    revalidatePath('/notes');
-    redirect('/notes');
+    revalidatePath('/notes/collabs');
+    redirect('/notes/collabs');
   } catch (error) {
     console.log(`Error happened while deleting a room: ${error}`);
   }
