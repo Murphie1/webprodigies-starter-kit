@@ -6,7 +6,7 @@ const config = {
         "./pages/**/*.{ts,tsx}",
         "./components/**/*.{ts,tsx}",
         "./app/**/*.{ts,tsx}",
-        "./src/**/*.{ts,tsx}",
+        "./src/**/*.{ts,tsx,css}",
     ],
     prefix: "",
     theme: {
@@ -18,10 +18,10 @@ const config = {
                 xs: '360px',
             },
         },
-        backgroundImage: {
-            "radial-gradient":
-                "radial-gradient(circle at 50% 40%, white, black)",
-        },
+       // backgroundImage: {
+            //"radial-gradient":
+            //    "radial-gradient(circle at 50% 40%, white, black)",
+       // },
         extend: {
             fontFamily: {
                 sans: ["var(--font-inter)"],
@@ -98,10 +98,13 @@ const config = {
                     to: { height: "0" },
                 },
             },
-            backgroundImage: {
-        doc: 'url(/assets/images/doc.png)',
-        modal: 'url(/assets/images/modal.png)',
-      },
+           // extend: {
+  backgroundImage: {
+    "radial-gradient": "radial-gradient(circle at 50% 40%, white, black)",
+    doc: 'url(/assets/images/doc.png)',
+    modal: 'url(/assets/images/modal.png)',
+  },
+//}
             animation: {
                 "accordion-down": "accordion-down 0.2s ease-out",
                 "accordion-up": "accordion-up 0.2s ease-out",
