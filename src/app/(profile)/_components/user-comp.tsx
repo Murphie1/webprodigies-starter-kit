@@ -6,7 +6,7 @@ const UserComp = async () => {
     const localUser = await initialUser();
     if (localUser) {
     return (
-<div className="flex flex-col md:grid grid-col-2">
+<div className="flex flex-col space-y-3 md:space-x-3 md:grid grid-col-2">
                 <h2>User Account</h2>
                 <ProfileCard
                     name={localUser.name}
