@@ -1,64 +1,86 @@
-"use client"
+"use client";
 
-import Image from "next/image"
-import { useRouter } from "next/navigation"
+import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 interface UserProfileCardProps {
-    imageUrl: string 
-    name: string
-    type: string | null
-    email: string | null
+  imageUrl: string;
+  avatarUrl: string;
+  name: string;
+  type: string | null;
+  email: string | null;
 }
 
 export const ProfileCard = ({
-    imageUrl,
-    name,
-    type,
-    email
+  imageUrl,
+  avatarUrl,
+  name,
+  type,
+  email,
 }: UserProfileCardProps) => {
-    const router = useRouter()
+  const router = useRouter();
 
-    const onClick = () => {
-        router.push("/home")
-    }
+  const onClick = () => {
+    router.push("/home");
+  };
 
-    return (
-        <div className="relative rounded-lg">
-            <div
-                role="button"
-                tabIndex={0}
-                className="bg-white space-y-1 flex justify border-black rounded-lg w-[150px] h-[150px] hover:border-bold hover:outline hover:w-[180px] hover:h-[180px] transition-all duration-200 dark:bg-black dark:border-white"
-                onClick={onClick}
-            >
-              <div>
-                {imageUrl ? ( <Image
-                        fill
-                        src={imageUrl}
-                        alt={`${name}'s Profile Image`}
-                        className="h-[100px] w-full rounded-lg"
-                    /> ) : ( <h2>No Image</h2> )
-                }
-              </div>
-                <div className="space-x-2 h-[50px] w-full relative">
-                  {imageUrl ? ( <Image
-                        fill
-                        src={imageUrl}
-                        alt={`${name}'s Profile Image`}
-                        className="h-[60px] w-[60px] rounded-full"
-                    /> ) : ( <h2>No Image</h2> )
-                  }
-                    <div>
-                        <h2>{name}</h2>
-                    </div>
-                </div>
-                <div>
-                    {type && <h3>{type}</h3>}
-                    {email && <h3>{email}</h3>}
-                </div>
-                <h5>
-                    Click to continue
-                </h5>
-            </div>
+  return (
+    <div
+      role="button"
+      tabIndex={0}
+      className="relative rounded-lg bg-white dark:bg-gray-800 shadow-md w-[320px] hover:shadow-lg transition-shadow duration-200"
+      onClick={onClick}
+    >
+      {/* Video Thumbnail */}
+      <div className="relative w-full h-[180px]">
+        {imageUrl ? (
+          <Image
+            fill
+            src={imageUrl}
+            alt="Video Thumbnail"
+            className="rounded-t-lg object-cover"
+          />
+        ) : (
+          <div className="w-full h-full bg-gray-300 flex items-center justify-center rounded-t-lg dark:bg-gray-700">
+            <p className="text-gray-500">No Image</p>
+          </div>
+        )}
+      </div>
+
+      {/* Card Content */}
+      <div className="p-4 flex space-x-4">
+        {/* Avatar */}
+        <div className="flex-shrink-0">
+          {avatarUrl ? (
+            <Image
+              src={avatarUrl}
+              alt="Avatar"
+              width={48}
+              height={48}
+              className="rounded-full object-cover"
+            />
+          ) : (
+            <div className="w-12 h-12 bg-gray-300 rounded-full dark:bg-gray-700" />
+          )}
         </div>
-    )
-}
+
+        {/* Info */}
+        <div className="flex-1">
+          <h2 className="text-sm font-medium text-gray-900 dark:text-gray-100 truncate">
+            {name}
+          </h2>
+          {type && (
+            <p className="text-xs text-gray-600 dark:text-gray-400 truncate">
+              {type}
+            </p>
+          )}
+          {email && (
+            <p className="text-xs text-gray-500 dark:text-gray-500 truncate">
+              {email}
+            </p>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
