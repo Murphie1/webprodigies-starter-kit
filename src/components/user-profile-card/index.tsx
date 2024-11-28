@@ -51,7 +51,7 @@ export const ProfileCard = ({
       <div className="p-4 flex space-x-4">
         {/* Avatar */}
         <div className="flex-shrink-0">
-          {avatarUrl ? (
+          {imageUrl ? (
             <Image
               src={imageUrl}
               alt="Avatar"
