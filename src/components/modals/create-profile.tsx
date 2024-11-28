@@ -72,7 +72,9 @@ export const CreateProfile = () => {
     return (
         <Dialog>
             <DialogTrigger>
+                <div className="bg-transparent w-[150px] h-[150px] items-center border border-black dark:border-white">
                 <CirclePlus />
+                    </div>
             </DialogTrigger>
             <DialogContent className="bg-white text-black p-0 overflow-hidden">
                 <DialogHeader className="pt-8 px-6">
