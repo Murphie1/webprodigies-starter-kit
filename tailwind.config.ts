@@ -15,7 +15,7 @@ const config = {
             padding: "2rem",
             screens: {
                 "2xl": "1400px",
-                xs: '360px',
+                //xs: '360px',
             },
         },
        // backgroundImage: {
