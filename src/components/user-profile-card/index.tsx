@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 
 interface UserProfileCardProps {
   imageUrl: string;
-  avatarUrl: string;
+  //avatarUrl: string;
   name: string;
   type: string | null;
   email: string | null;
@@ -13,7 +13,7 @@ interface UserProfileCardProps {
 
 export const ProfileCard = ({
   imageUrl,
-  avatarUrl,
+ // avatarUrl,
   name,
   type,
   email,
@@ -53,7 +53,7 @@ export const ProfileCard = ({
         <div className="flex-shrink-0">
           {avatarUrl ? (
             <Image
-              src={avatarUrl}
+              src={imageUrl}
               alt="Avatar"
               width={48}
               height={48}
