@@ -25,7 +25,7 @@ label: "Languages",
 href: "/languages",
 },
 {
-key: 4
+key: 4,
 icon: Heart,
 label: "Practice and Prep Resources",
 href: "/prep",
@@ -83,7 +83,7 @@ label: "Languages",
 href: "/languages",
 },
 {
-key: 4
+key: 4,
 icon: Heart,
 label: "Practice and Prep Resources",
 href: "/prep",
