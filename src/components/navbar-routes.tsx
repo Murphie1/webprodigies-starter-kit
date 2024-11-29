@@ -2,7 +2,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import Link from "next/Link";
+import Link from "next/link";
 import { UserButton } from "@clerk/nextjs";
 import { LogOut } from "lucide-react";
 import { ModeToggle } from "./mode-toggle";
