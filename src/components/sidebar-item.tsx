@@ -14,8 +14,7 @@ export const SidebarItem = ({
 icon: Icon,
 label,
 href,
-}: SidebarItemProps)
-=> {
+}: SidebarItemProps) => {
 const pathname = usePathname();
 const router = useRouter();
 
