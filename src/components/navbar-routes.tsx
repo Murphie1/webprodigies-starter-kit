@@ -1,4 +1,6 @@
 //navbar-routes
+"use client";
+
 import { usePathname } from "next/navigation";
 import Link from "next/Link";
 import { UserButton } from "@clerk/nextjs";
