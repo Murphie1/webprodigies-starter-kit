@@ -27,3 +27,5 @@ Exit
 afterSignOutUrl="/sign-in"
 />
 </div>
+)
+}
