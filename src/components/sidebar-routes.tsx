@@ -110,7 +110,7 @@ const teacherRoutes = [
 ];
 
 export const SidebarRoutes = () => {
-  //const role = "guest"; // Change this to "teacher" for teacher routes
+  // const role = "guest"; // Change this to "teacher" for teacher routes
   const routes = guestRoutes;// role === "teacher" ? teacherRoutes : guestRoutes;
 
   return (
