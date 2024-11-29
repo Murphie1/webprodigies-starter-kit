@@ -110,8 +110,8 @@ const teacherRoutes = [
 ];
 
 export const SidebarRoutes = () => {
-  const role = "guest"; // Change this to "teacher" for teacher routes
-  const routes = role === "teacher" ? teacherRoutes : guestRoutes;
+  //const role = "guest"; // Change this to "teacher" for teacher routes
+  const routes = guestRoutes;// role === "teacher" ? teacherRoutes : guestRoutes;
 
   return (
     <div className="flex flex-col w-full">
