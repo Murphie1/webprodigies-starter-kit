@@ -17,17 +17,17 @@ const CourseList = ({ groupid }: Props) => {
 
     return data.courses?.map((course) => (
         <Link href={`/group/${groupid}/courses/${course.id}`} key={course.id}>
-            <Card className="bg-transparent border-themeGray h-full rounded-xl overflow-hidden">
+            <Card className="bg-transparent border-black dark:border-themeGray h-full rounded-xl overflow-hidden">
                 <img
                     src={`https://ucarecdn.com/${course.thumbnail}/`}
                     alt="cover"
                     className="h-4/6 w-full opacity-60"
                 />
                 <div className="h-2/6 flex flex-col justify-center pl-5">
-                    <h2 className="text-lg text-white font-semibold">
+                    <h2 className="text-lg text-black dark:text-white font-semibold">
                         {course.name}
                     </h2>
-                    <p className="text-sm text-themeTextGray">
+                    <p className="text-sm text-gray dark:text-themeTextGray">
                         {truncateString(course.description)}
                     </p>
                 </div>
