@@ -12,7 +12,7 @@ const Bar = ({
     }: BarProps) => {
     return (
         <div className="relative overflow-x-auto whitespace-nowrap">
-            <ScrollArea className="whitespace-nowrap rounded-md border">
+            <ScrollArea className="whitespace-nowrap rounded-md border items-center justify-center">
                 <Menu orientation="mobile" groupid={groupId} />
                 <ScrollBar orientation="horizontal" />
             </ScrollArea>
