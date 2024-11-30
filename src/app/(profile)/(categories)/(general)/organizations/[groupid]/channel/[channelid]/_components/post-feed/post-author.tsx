@@ -14,12 +14,12 @@ export const PostAuthor = ({ image, username, channel }: PostAuthorProps) => {
                 <AvatarFallback>U</AvatarFallback>
             </Avatar>
             <div className="flex flex-col">
-                <p className="text-themeTextGray text-sm capitalize">
+                <p className="text-black dark:text-themeTextGray text-sm capitalize">
                     {username}
                 </p>
-                <p className="text-sm captialize text-themeTextGray">
+                <p className="text-sm captialize text-black dark:text-themeTextGray">
                     Posted in{" "}
-                    <span className="font-bold capitalize text-themeTextWhite">
+                    <span className="font-bold capitalize text-black dark:text-themeTextWhite">
                         {channel}
                     </span>
                 </p>
