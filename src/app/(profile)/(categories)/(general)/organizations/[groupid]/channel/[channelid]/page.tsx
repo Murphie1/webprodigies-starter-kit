@@ -13,7 +13,7 @@ import {
 import Bar from "@/app/(profile)/(categories)/(general)/organizations/[groupid]/channel/[channelid]/_components/mobilebar"
 import CreateNewPost from "./_components/create-post"
 import { PostFeed } from "./_components/post-feed"
-import { NavBar } from "@/app/(profile)/(categories)/(general)/organizations/_components/navbar"
+import { Navbar } from "@/app/(profile)/(categories)/(general)/organizations/_components/navbar"
 type Props = {
     params: { channelid: string; groupid: string }
 }
