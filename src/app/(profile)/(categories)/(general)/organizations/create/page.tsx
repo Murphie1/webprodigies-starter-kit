@@ -23,7 +23,7 @@ const GroupCreatePage = async ({
                     Payment Method: Stripe
                 </h5>
                 <Link href="/stripe.com">
-                <p className="text-sky-400 leading-tight">
+                <p className="text-black hover:text-sky-400 text-sm leading-tight dark:text-themeWhite">
                     Or pay on Stripe's checkout website for Maximum Security
                 </p>
                     </Link>
