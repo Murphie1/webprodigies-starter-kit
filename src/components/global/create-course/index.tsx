@@ -36,7 +36,7 @@ const CourseCreate = ({ groupid }: Props) => {
                 description="Add a new form for your community"
                 trigger={
                     <span>
-                        <Card className="bg-[#101011] border-themeGray hover:bg-themeBlack transition duration-100 cursor-pointer border-dashed aspect-square rounded-xl">
+                        <Card className="bg-white dark:bg-[#101011] border-black dark:border-themeGray hover:bg-sky-100 dark:hover:bg-themeBlack transition duration-100 cursor-pointer border-dashed aspect-square rounded-xl">
                             <CardContent className="opacity-20 flex gap-x-2 p-0 justify-center items-center h-full">
                                 <BadgePlus />
                                 <p>Create Course</p>
@@ -81,9 +81,9 @@ const CourseCreate = ({ groupid }: Props) => {
                                 <Card
                                     className={cn(
                                         onPrivacy === "open"
-                                            ? "bg-themeBlack"
+                                            ? "bg-white dark:bg-themeBlack"
                                             : " bg-transparent",
-                                        "py-5 flex justify-center border-themeGray font-bold text-themeTextGray cursor-pointer",
+                                        "py-5 flex justify-center border-black dark:border-themeGray font-bold text-black dark:text-themeTextGray cursor-pointer",
                                     )}
                                 >
                                     Open
@@ -102,9 +102,9 @@ const CourseCreate = ({ groupid }: Props) => {
                                 <Card
                                     className={cn(
                                         onPrivacy === "level-unlock"
-                                            ? "bg-themeBlack"
+                                            ? "bg-white dark:bg-themeBlack"
                                             : " bg-transparent",
-                                        "py-5 flex justify-center border-themeGray font-bold text-themeTextGray cursor-pointer",
+                                        "py-5 flex justify-center border-black dark:border-themeGray font-bold text-black dark:text-themeTextGray cursor-pointer",
                                     )}
                                 >
                                     Level Unlock
@@ -123,9 +123,9 @@ const CourseCreate = ({ groupid }: Props) => {
                                 <Card
                                     className={cn(
                                         onPrivacy === "private"
-                                            ? "bg-themeBlack"
+                                            ? "bg-white dark:bg-themeBlack"
                                             : "bg-transparent",
-                                        "py-5 flex justify-center border-themeGray font-bold text-themeTextGray cursor-pointer",
+                                        "py-5 flex justify-center border-black dark:border-themeGray font-bold text-black dark:text-themeTextGray cursor-pointer",
                                     )}
                                 >
                                     Private
@@ -152,7 +152,7 @@ const CourseCreate = ({ groupid }: Props) => {
                                 className="hidden"
                                 {...register("image")}
                             />
-                            <Card className="bg-transparent text-themeTextGray flex justify-center items-center border-themeGray hover:bg-themeBlack transition duration-100 cursor-pointer border-dashed aspect-video rounded-xl">
+                            <Card className="bg-transparent text-black dark:text-themeTextGray flex justify-center items-center border-black dark:border-themeGray hover:bg-sky-50 dark:hover:bg-themeBlack transition duration-100 cursor-pointer border-dashed aspect-video rounded-xl">
                                 Upload Image
                             </Card>
                         </span>
@@ -170,13 +170,13 @@ const CourseCreate = ({ groupid }: Props) => {
                         <Switch
                             id="publish-mode"
                             onCheckedChange={(e) => setValue("published", e)}
-                            className="data-[state=checked]:bg-themeTextGray data-[state=unchecked]:bg-themeGray"
+                            className="data-[state=checked]:bg-white dark:bg-themeTextGray data-[state=unchecked]:bg-gray-50 dark:bg-themeGray"
                         />
                         <Label htmlFor="publish-mode">Publish Course</Label>
                     </div>
                     <Button
                         type="submit"
-                        className="w-full bg-transparent border-themeGray"
+                        className="w-full bg-transparent border-black dark:border-themeGray"
                         variant="outline"
                     >
                         Create
