@@ -31,7 +31,7 @@ const IntegrationTrigger = ({
             logo={logo}
             description={descrioption}
             trigger={
-                <Card className="px-3 py-2 cursor-pointer flex gap-2 bg-themeBlack border-themeGray">
+                <Card className="px-3 py-2 cursor-pointer flex gap-2 bg-white dark:bg-themeBlack border-black dark:border-themeGray">
                     <CloudIcon />
                     {connections[name] ? "connected" : "connect"}
                 </Card>
@@ -54,7 +54,7 @@ const IntegrationTrigger = ({
                 <div className="flex justify-between mt-10">
                     <Button
                         variant="outline"
-                        className="bg-themeBlack border-themeDarkGray"
+                        className="bg-white dark:bg-themeBlack border-gray-300 dark:border-themeDarkGray"
                     >
                         Learn more
                     </Button>
