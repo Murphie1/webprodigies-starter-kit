@@ -22,9 +22,11 @@ const GroupCreatePage = async ({
                 <h5 className="font-bold text-base text-black dark:text-themeTextWhite">
                     Payment Method: Stripe
                 </h5>
+                <Link href="/stripe.com">
                 <p className="text-sky-400 leading-tight">
-                    Or try any of these payment options based on your location:
+                    Or pay on Stripe's checkout website for Maximum Security
                 </p>
+                    </Link>
                 {affiliate.status === 200 && (
                     <div className="w-full mt-5 flex justify-center items-center gap-x-2 italic text-themeTextGray text-sm">
                         You were referred by
