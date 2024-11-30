@@ -19,7 +19,7 @@ const IntegrationsPage = async ({
             {INTEGRATION_LIST_ITEMS.map((item) => (
                 <Card
                     key={item.id}
-                    className="bg-themeBlack border-themeDarkGray"
+                    className="bg-white border-black dark:bg-themeBlack dark:border-themeDarkGray"
                 >
                     <CardContent className="flex flex-col p-5 gap-2">
                         <div className="flex w-full justify-between items-start gap-x-20">
