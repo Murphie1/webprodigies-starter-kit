@@ -30,7 +30,7 @@ const CreateGroupLayout = ({ children }: Props) => {
                         <h2 className="text-4xl font-bold text-black dark:text-themeTextWhite">
                             Create Your Organization
                         </h2>
-                        <p className="text-black dark:text-themeTextGray">
+                        <p className="text-black dark:text-themeTextGray text-xs">
                             Create an organization to get started. You can choose between creating a free organization or subscribe, all depenion your needs. To see more and understand which best fits you check here →
                         </p>
                         <Info />
