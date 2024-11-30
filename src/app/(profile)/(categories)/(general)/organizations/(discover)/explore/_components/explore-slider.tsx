@@ -28,8 +28,8 @@ const ExploreSlider = ({ label, query, text }: Props) => {
         onLoadSlider && (
             <div className="flex flex-col mt-16">
                 <div className="flex flex-col px-[40px] lg:px-[150px]">
-                    <h2 className="text-2xl font-bold text-white">{label}</h2>
-                    <p className="text-sm text-themeTextGray">{text}</p>
+                    <h2 className="text-2xl font-bold text-black dark:text-white">{label}</h2>
+                    <p className="text-sm text-gray dark:text-themeTextGray">{text}</p>
                 </div>
                 <Slider
                     freeMode
