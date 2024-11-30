@@ -1,24 +1,20 @@
 import { Card } from "@/components/ui/card"
 import { cn } from "@/lib/utils"
+import { GroupChatMenu } from "@/app/(profile)/(categories)/(general)/organizations/[groupid]/messages/_components/chat-menu"
 
 type LeaderBoardCardProps = {
-    light?: boolean
+    groupId: string
 }
 
-export const LeaderBoardCard = ({ light }: LeaderBoardCardProps) => {
+export const LeaderBoardCard = ({ groupId }: LeaderBoardCardProps) => {
     return (
-        <Card
-            className={cn(
-                "border-themeGray lg:sticky lg:top-0 mt-10 lg:mt-0 rounded-xl p-5 overflow-hidden",
-                light ? "border-themeGray bg-[#1A1A1D]" : "bg-themeBlack",
-            )}
-        >
-            <h2 className="text-themeTextWhite text-xl font-bold">
-                leaderboard (30-days)
-            </h2>
-            <p className="text-themeTextGray text-sm">
-                See who performed the best this month.
+        <Card className="bg-transparent border-black dark:border-themeGray lg:sticky lg:top-0 mt-10 lg:mt-0 rounded-xl p-5 overflow-hidden">
+            <div className="overflow-y-auto">
+            <p className="text-black dark:text-themeTextGray text-sm">
+                Group Members
             </p>
+                <GroupChatMenu groupid={groupId} />
+                </div>
         </Card>
     )
 }
