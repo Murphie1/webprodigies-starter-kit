@@ -13,7 +13,7 @@ import {
 import Bar from "@/app/(profile)/(categories)/(general)/organizations/[groupid]/channel/[channelid]/_components/mobilebar"
 import CreateNewPost from "./_components/create-post"
 import { PostFeed } from "./_components/post-feed"
-
+import { NavBar } from "@/app/(profile)/(categories)/(general)/organizations/_components/navbar"
 type Props = {
     params: { channelid: string; groupid: string }
 }
@@ -35,6 +35,8 @@ const GroupChannelPage = async ({ params }: Props) => {
 
     return (
         <HydrationBoundary state={dehydrate(client)}>
+            <div className="flex flex-col space-y-3">
+                <Navbar groupid={params.groupid} userid={authUser.id} />
             <div className="grid lg:grid-cols-4 grid-cols-1 w-full flex-1 h-0 gap-x-5 px-5 s">
                 <div className="col-span-1 lg:inline relative hidden py-5">
                     <LeaderBoardCard light />
@@ -58,6 +60,7 @@ const GroupChannelPage = async ({ params }: Props) => {
                     <GroupSideWidget light />
                 </div>
             </div>
+                </div>
         </HydrationBoundary>
     )
 }
