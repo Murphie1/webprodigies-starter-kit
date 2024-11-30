@@ -13,18 +13,13 @@ import {
     dehydrate,
 } from "@tanstack/react-query"
 import { redirect } from "next/navigation"
-import { Searchs } from "@/icons"
-import { Navbar } from "../_components/navbar"
+//import { Navbar } from "../_components/navbar"
 import MobileNav from "../_components/mobile-nav"
 import { ChevronsRight } from "lucide-react"
 import {
-    Menubar,
-    MenubarContent,
-    MenubarItem,
-    MenubarMenu,
-    MenubarSeparator,
-    MenubarShortcut,
-    MenubarTrigger,
+    Sheet,
+    SheetContent,
+    SheetTrigger,
 } from "@/components/ui/menubar"
 
 type Props = {
@@ -78,19 +73,16 @@ const GroupLayout = async ({ children, params }: Props) => {
                     <Navbar groupid={params.groupid} userid={user.id} />
                     {children}
                     <div className="fixed pl-1 bottom-10 pb-10 md:hidden">
-                        <Menubar>
-                            <MenubarMenu>
-                                <MenubarTrigger>
-                                    <p className="pr-1">Tab</p>
+                        <Sheet>
+                                <SheetTrigger>
+                                    <div className="h-[60px] w-[60px] rounded-full bg-white dark:bg-black">
                                     <ChevronsRight />
-                                </MenubarTrigger>
-                                <MenubarContent>
-                                    <MenubarItem>
+                                        </div>
+                                </SheetTrigger>
+                                <SheetContent className="h-auto w-full">
                                         <MobileNav groupid={params.groupid} />
-                                    </MenubarItem>
-                                </MenubarContent>
-                            </MenubarMenu>
-                        </Menubar>
+                                </SheetContent>
+                        </Sheet>
                     </div>
                 </div>
             </div>
