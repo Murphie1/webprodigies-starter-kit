@@ -10,6 +10,7 @@ import {
     QueryClient,
     dehydrate,
 } from "@tanstack/react-query"
+import { redirect } from "next/navigation"
 import Bar from "@/app/(profile)/(categories)/(general)/organizations/[groupid]/channel/[channelid]/_components/mobilebar"
 import CreateNewPost from "./_components/create-post"
 import { PostFeed } from "./_components/post-feed"
