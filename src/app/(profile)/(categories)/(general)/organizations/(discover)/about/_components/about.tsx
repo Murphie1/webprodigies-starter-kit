@@ -111,7 +111,7 @@ const AboutGroup = ({ groupid, userid }: Props) => {
                     />
                     {onEditDescription && (
                         <Button
-                            className="self-end bg-themeBlack border-themeGray px-10"
+                            className="self-end bg-white dark:bg-themeBlack border-black dark:border-themeGray px-10"
                             variant={"outline"}
                             disabled={isPending}
                             type="submit"
