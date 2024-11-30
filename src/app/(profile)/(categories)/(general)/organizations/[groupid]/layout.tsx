@@ -73,13 +73,13 @@ const GroupLayout = async ({ children, params }: Props) => {
         {/*  <Navbar groupid={params.groupid} userid={user.id} /> */}
                     {children}
                     <div className="fixed pl-1 bottom-10 pb-10 md:hidden">
-                        <Sheet>
+                        <Sheet className="bottom-10 position-bottom fixed h-50px w-full">
                                 <SheetTrigger>
                                     <div className="h-[30px] w-[30px] rounded-full bg-white dark:bg-black items-center justify-center">
                                     <ChevronsRight />
                                         </div>
                                 </SheetTrigger>
-                                <SheetContent className="h-[30px] w-full">
+                                <SheetContent className="h-[50px] w-full position-bottom">
                                         <MobileNav groupid={params.groupid} />
                                 </SheetContent>
                         </Sheet>
