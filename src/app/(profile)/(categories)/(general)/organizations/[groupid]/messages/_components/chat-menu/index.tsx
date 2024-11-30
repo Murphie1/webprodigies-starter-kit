@@ -23,7 +23,7 @@ export const GroupChatMenu = ({ groupid }: GroupChatMenuProps) => {
                     <Link
                         href={`${pathname}/${member.id}`}
                         key={member.id}
-                        className="flex gap-x-2 items-center p-5 hover:bg-themeGray"
+                        className="flex gap-x-2 items-center p-5 hover:bg-sky-100 dark:hover:bg-themeGray"
                     >
                         <div className="relative">
                             {members.map(
@@ -47,7 +47,7 @@ export const GroupChatMenu = ({ groupid }: GroupChatMenuProps) => {
                         </div>
                         <div className="flex flex-col">
                             <h3>{`${member.User?.firstname} ${member.User?.lastname}`}</h3>
-                            <p className="text-sm text-themeTextGray">
+                            <p className="text-sm text-black dark:text-themeTextGray">
                                 No active chat found...
                             </p>
                         </div>
