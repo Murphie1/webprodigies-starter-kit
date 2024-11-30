@@ -1,5 +1,6 @@
+// sidebar routes
 import { SidebarItem } from "./sidebar-item";
-import { Heart, Circle, CreditCard, BookOpen, Briefcase } from "lucide-react";
+import { Heart, Circle, CreditCard } from "lucide-react";
 
 const guestRoutes = [
   {
@@ -10,13 +11,13 @@ const guestRoutes = [
   },
   {
     key: 2,
-    icon: Circle,
+    icon: Heart,
     label: "Personalized Learning",
     href: "/hakima",
   },
   {
     key: 3,
-    icon: BookOpen,
+    icon: Heart,
     label: "Languages",
     href: "/languages",
   },
@@ -28,14 +29,14 @@ const guestRoutes = [
   },
   {
     key: 5,
-    icon: Briefcase,
+    icon: Heart,
     label: "Vision and Cognitive Learning",
     href: "/cognition",
   },
   {
     key: 6,
-    icon: Circle,
-    label: "XR & 3D Learning",
+    icon: Heart,
+    label: "XR & 3D learning",
     href: "/xr",
   },
   {
@@ -46,7 +47,7 @@ const guestRoutes = [
   },
   {
     key: 8,
-    icon: Briefcase,
+    icon: Heart,
     label: "Institutions and Organizations",
     href: "/organizations",
   },
@@ -61,7 +62,7 @@ const guestRoutes = [
 const teacherRoutes = [
   {
     key: 10,
-    icon: Heart,
+    icon: Heart, // Assuming 'courses' is undefined; replaced with Heart for consistency.
     label: "Courses",
     href: "/home",
   },
@@ -73,7 +74,7 @@ const teacherRoutes = [
   },
   {
     key: 12,
-    icon: BookOpen,
+    icon: Heart,
     label: "Languages",
     href: "/languages",
   },
@@ -85,7 +86,7 @@ const teacherRoutes = [
   },
   {
     key: 14,
-    icon: Circle,
+    icon: Heart,
     label: "Lectures",
     href: "/lectures",
   },
@@ -103,15 +104,14 @@ const teacherRoutes = [
   },
   {
     key: 17,
-    icon: Briefcase,
+    icon: Heart,
     label: "Institutions and Organizations",
     href: "/organizations",
   },
 ];
 
 export const SidebarRoutes = () => {
-  // const role = "guest"; // Change this to "teacher" for teacher routes
-  const routes = guestRoutes;// role === "teacher" ? teacherRoutes : guestRoutes;
+  const routes = guestRoutes;
 
   return (
     <div className="flex flex-col w-full">
