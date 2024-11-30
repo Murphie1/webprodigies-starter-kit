@@ -12,7 +12,7 @@ const HuddlesLayout = async ({ children, params }: HuddlesLayoutProps) => {
         <div className="grid grid-cols-1 lg:grid-cols-6 flex-1 h-0">
             <div className="lg:col-span-4 flex flex-col">
                 <div className="flex justify-between items-center p-5 lg:hidden">
-                    <p className="font-medium text-themeTextWhite">
+                    <p className="font-medium text-gray-300 dark:text-themeTextWhite">
                         No chat selected
                     </p>
                     <GlassSheet trigger={<Menu />}>
@@ -21,7 +21,7 @@ const HuddlesLayout = async ({ children, params }: HuddlesLayoutProps) => {
                 </div>
                 {children}
             </div>
-            <div className="hidden lg:inline lg:col-span-2 bg-themeBlack rounded-tl-3xl overflow-auto">
+            <div className="hidden lg:inline lg:col-span-2 bg-white dark:bg-themeBlack rounded-tl-3xl overflow-auto">
                 <GroupChatMenu groupid={params.groupid} />
             </div>
         </div>
