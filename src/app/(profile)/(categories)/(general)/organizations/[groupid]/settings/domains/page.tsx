@@ -21,34 +21,34 @@ const DomainConfigPage = async ({ params }: Props) => {
     return (
         <HydrationBoundary state={dehydrate(client)}>
             <div className="flex flex-col items-start p-5 gap-y-5">
-                <Card className="border-themeGray bg-[#1A1A1D] p-5">
+                <Card className="border-black bg-white dark:border-themeGray dark:bg-[#1A1A1D] p-5">
                     <CardTitle className="text-3xl">Domain Config</CardTitle>
-                    <CardDescription className="text-themeTextGray">
+                    <CardDescription className="text-black dark:text-themeTextGray">
                         Create and share an invitations link for your members{" "}
                     </CardDescription>
                     <CustomDomainForm groupid={params.groupid} />
                 </Card>
-                <Card className="border-themeGray bg-[#1A1A1D] p-5">
+                <Card className="border-black bg-white dark:border-themeGray dark:bg-[#1A1A1D] p-5">
                     <CardTitle className="text-3xl">Manual Config</CardTitle>
-                    <CardDescription className="text-themeTextGray">
+                    <CardDescription>
                         Setup your domain manually{" "}
                     </CardDescription>
                     <div className="flex gap-x-5 mt-8">
                         <Label className="flex flex-col gap-y-3">
                             Record
-                            <span className="bg-themeDarkGray p-3 rounded-lg text-xs text-themeTextGray">
+                            <span className="bg-gray-50 dark:bg-themeDarkGray p-3 rounded-lg text-xs text-black dark:text-themeTextGray">
                                 A
                             </span>
                         </Label>
                         <Label className="flex flex-col gap-y-3">
                             Host
-                            <span className="bg-themeDarkGray p-3 rounded-lg text-xs text-themeTextGray">
+                            <span className="bg-gray-50 dark:bg-themeDarkGray p-3 rounded-lg text-xs text-black dark:text-themeTextGray">
                                 @
                             </span>
                         </Label>
                         <Label className="flex flex-col gap-y-3">
                             Required Value
-                            <span className="bg-themeDarkGray p-3 rounded-lg text-xs text-themeTextGray">
+                            <span className="bg-gray-50 dark:bg-themeDarkGray p-3 rounded-lg text-xs text-black dark:text-themeTextGray">
                                 76.76.21.21
                             </span>
                         </Label>
