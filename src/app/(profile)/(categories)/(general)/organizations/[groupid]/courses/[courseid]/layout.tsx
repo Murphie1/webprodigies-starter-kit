@@ -26,7 +26,7 @@ const CourseLayout = async ({ params, children }: CourseLayoutProps) => {
     return (
         <HydrationBoundary state={dehydrate(client)}>
             <div className="grid grid-cols-1 h-full lg:grid-cols-4 overflow-hidden">
-                <div className="bg-themeBlack p-5 overflow-y-auto">
+                <div className="bg-white dark:bg-themeBlack p-5 overflow-y-auto">
                     <CreateCourseModule
                         courseId={params.courseid}
                         groupid={params.groupid}
@@ -36,7 +36,7 @@ const CourseLayout = async ({ params, children }: CourseLayoutProps) => {
                         courseId={params.courseid}
                     />
                 </div>
-                <div className="lg:col-span-3 max-h-full h-full pb-10 overflow-y-auto bg-[#101011]/90">
+                <div className="lg:col-span-3 max-h-full h-full pb-10 overflow-y-auto bg-white dark:bg-[#101011]/90">
                     {children}
                 </div>
             </div>
