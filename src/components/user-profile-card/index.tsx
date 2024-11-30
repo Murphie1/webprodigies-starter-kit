@@ -28,11 +28,11 @@ export const ProfileCard = ({
     <div
       role="button"
       tabIndex={0}
-      className="relative rounded-lg bg-white dark:bg-gray-800 shadow-md w-[320px] hover:shadow-lg transition-shadow duration-200"
+      className="relative rounded-lg bg-white dark:bg-gray-800 shadow-md w-[260px] hover:shadow-lg transition-shadow duration-200"
       onClick={onClick}
     >
       {/* Video Thumbnail */}
-      <div className="relative w-full h-[180px]">
+      <div className="relative w-full h-[140px]">
         {imageUrl ? (
           <Image
             fill
