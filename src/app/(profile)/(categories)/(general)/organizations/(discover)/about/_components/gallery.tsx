@@ -84,7 +84,7 @@ const MediaGallery = ({
                     title="Add media to VSL"
                     description="Paste a link to a youtube or a loom video."
                     trigger={
-                        <Card className="border-dashed border-themeGray hover:bg-themeBlack bg-transparent cursor-pointer">
+                        <Card className="border-dashed border-black dark:border-themeGray dark:hover:bg-themeBlack bg-transparent cursor-pointer">
                             <CardContent className="flex justify-center items-center py-10 px-16">
                                 <BadgePlus />
                             </CardContent>
