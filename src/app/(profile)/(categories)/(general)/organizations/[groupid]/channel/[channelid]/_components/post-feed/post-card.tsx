@@ -37,7 +37,7 @@ export const PostCard = ({
 }: PostCardProps) => {
     const pathname = usePathname()
     return (
-        <Card className="border-themeGray bg-[#1A1A1D] first-letter:rounded-2xl overflow-hidden">
+        <Card className="border-black dark:border-themeGray bg-sky-50 dark:bg-[#1A1A1D] first-letter:rounded-2xl overflow-hidden">
             <CardContent className="p-3 flex flex-col gap-y-6 items-start">
                 <PostAuthor
                     image={userimage}
@@ -51,7 +51,7 @@ export const PostCard = ({
                     </div>
                 </Link>
             </CardContent>
-            <Separator orientation="horizontal" className="bg-themeGray mt-3" />
+            <Separator orientation="horizontal" className="bg-white dark:bg-themeGray mt-3" />
             <Interactions
                 id={postid}
                 userid={userid}
