@@ -22,7 +22,9 @@ const GroupChannelPage = async ({ params }: Props) => {
     const client = new QueryClient()
     const user = await currentUser()
     const authUser = await onAuthenticatedUser()
+    if (!authUser.id) redirect("/sign-in")
 
+    
     await client.prefetchQuery({
         queryKey: ["channel-info"],
         queryFn: () => onGetChannelInfo(params.channelid),
