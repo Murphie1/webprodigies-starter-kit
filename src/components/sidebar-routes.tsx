@@ -1,4 +1,7 @@
 // sidebar routes
+"use client";
+
+import { usePathname } from "next/navigation";
 import { SidebarItem } from "./sidebar-item";
 import { Heart, Circle, CreditCard } from "lucide-react";
 
@@ -64,31 +67,31 @@ const teacherRoutes = [
     key: 10,
     icon: Heart, // Assuming 'courses' is undefined; replaced with Heart for consistency.
     label: "Courses",
-    href: "/home",
+    href: "/teacher/courses",
   },
   {
     key: 11,
     icon: Circle,
-    label: "Personalized Learning",
-    href: "/hakima",
+    label: "Podcasts",
+    href: "/teacher/podcasts",
   },
   {
     key: 12,
     icon: Heart,
-    label: "Languages",
-    href: "/languages",
+    label: "Language Mentoring",
+    href: "/teacher/languages",
   },
   {
     key: 13,
     icon: Heart,
-    label: "Practice and Prep Resources",
-    href: "/prep",
+    label: "Learners",
+    href: "/teacher/learners",
   },
   {
     key: 14,
     icon: Heart,
-    label: "Lectures",
-    href: "/lectures",
+    label: "Profile",
+    href: "/teacher/profile",
   },
   {
     key: 15,
@@ -111,7 +114,12 @@ const teacherRoutes = [
 ];
 
 export const SidebarRoutes = () => {
-  const routes = guestRoutes;
+  const pathname = usePathname();
+
+  const isTeacherPage = pathname?.includes("/teacher");
+ 
+  
+  const routes = isTeacherPage ? teacherRoutes: guestRoutes;
 
   return (
     <div className="flex flex-col w-full">
