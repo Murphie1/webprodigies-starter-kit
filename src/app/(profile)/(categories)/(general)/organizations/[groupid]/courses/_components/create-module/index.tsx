@@ -28,7 +28,7 @@ export const CreateCourseModule = ({
             <div className="flex justify-end">
                 <PlusCircle
                     onClick={onCreateModule}
-                    className="text-themeGray cursor-pointer hover:text-themeTextGray/60"
+                    className="text-black dark:text-themeGray cursor-pointer hover:text-themeBlack dark:hover:text-themeTextGray/60"
                 />
             </div>
             {variables && isPending && (
@@ -38,7 +38,7 @@ export const CreateCourseModule = ({
                 >
                     <Button
                         variant="outline"
-                        className="bg-transparent border-themeGray text-themeTextGray mt-2"
+                        className="bg-transparent border-black dark:border-themeGray text-black dark:text-themeTextGray mt-2"
                     >
                         <Plus />
                     </Button>
