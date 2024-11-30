@@ -49,7 +49,7 @@ const CourseModuleList = ({ courseId, groupid }: Props) => {
                         editable={
                             <Input
                                 ref={inputRef}
-                                className="bg-themeBlack border-themeGray"
+                                className="bg-white dark:bg-themeBlack border-black dark:border-themeGray"
                             />
                         }
                         onEdit={() => onEditModule(module.id)}
@@ -135,7 +135,7 @@ const CourseModuleList = ({ courseId, groupid }: Props) => {
                                             })
                                         }
                                         variant="outline"
-                                        className="bg-transparent border-themeGray text-themeTextGray mt-2"
+                                        className="bg-transparent border-black dark:border-themeGray text-black dark:text-themeTextGray mt-2"
                                     >
                                         <Plus />
                                     </Button>
