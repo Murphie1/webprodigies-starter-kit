@@ -4,6 +4,7 @@ import CreateGroup from "@/components/forms/create-group"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { User } from "lucide-react"
 import { redirect } from "next/navigation"
+import Link from "next/link"
 
 const GroupCreatePage = async ({
     searchParams,
