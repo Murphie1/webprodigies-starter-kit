@@ -24,7 +24,7 @@ const MemberChatPage = async ({ params }: { params: { chatid: string } }) => {
     return (
         <HydrationBoundary state={dehydrate(query)}>
             <div className="h-full flex flex-col p-5">
-                <div className="bg-themeBlack rounded-2xl p-5">
+                <div className="bg-white dark:bg-themeBlack rounded-2xl p-5">
                     <div className="flex gap-x-2">
                         <Avatar className="w-20 h-20">
                             <AvatarImage
