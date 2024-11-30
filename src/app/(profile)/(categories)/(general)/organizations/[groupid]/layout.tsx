@@ -70,7 +70,7 @@ const GroupLayout = async ({ children, params }: Props) => {
             <div className="flex h-screen md:pt-5">
                 <SideBar groupid={params.groupid} userid={user.id} />
                 <div className="md:ml-[300px] flex flex-col flex-1 bg-[#101011] md:rounded-tl-xl overflow-y-auto border-l-[1px] border-t-[1px] border-[#28282D]">
-                    <Navbar groupid={params.groupid} userid={user.id} />
+        {/*  <Navbar groupid={params.groupid} userid={user.id} /> */}
                     {children}
                     <div className="fixed pl-1 bottom-10 pb-10 md:hidden">
                         <Sheet>
