@@ -12,7 +12,7 @@ const MobileNav = async ({ groupid }: Props) => {
     const user = await currentUser()
 
     return (
-        <div className="bg-[#1A1A1D] space-x-7 w-auto overflow-x-auto whitespace-nowrap py-3 px-11 fixed bottom-5 z-50 md:hidden justify-between items-center flex">
+        <div className="bg-white dark:bg-[#1A1A1D] space-x-7 w-auto overflow-x-auto whitespace-nowrap py-3 px-11 fixed bottom-5 z-50 md:hidden justify-between items-center flex">
             <Link href={`/organizations/${groupid}/groupspaces`}>
                 <LayoutGrid />
             </Link>
