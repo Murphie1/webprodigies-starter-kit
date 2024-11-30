@@ -20,7 +20,7 @@ import {
     Sheet,
     SheetContent,
     SheetTrigger,
-} from "@/components/ui/menubar"
+} from "@/components/ui/sheet"
 
 type Props = {
     children: React.ReactNode
