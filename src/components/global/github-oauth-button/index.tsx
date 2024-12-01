@@ -20,7 +20,7 @@ export const GitHubAuthButton = ({ method }: GitHubAuthButtonProps) => {
                 : {
                       onClick: () => signUpWith("oauth_github"),
                   })}
-            className="w-auto rounded-2xl flex gap-3 bg-themeBlack border-themeGray"
+            className="w-auto rounded-2xl flex gap-3 bg-white dark:bg-themeBlack border-black dark:border-themeGray"
             variant="outline"
         >
             <Loader loading={false}>
