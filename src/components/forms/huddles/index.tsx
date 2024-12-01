@@ -15,7 +15,7 @@ export const HuddlesForm = ({ recieverid }: HuddlesFormProps) => {
         <div>
             <form
                 onSubmit={onSendNewMessage}
-                className="bg-themeBlack flex p-3 rounded-2xl mb-16 md:mb-0"
+                className="bg-white dark:bg-themeBlack flex p-3 rounded-2xl mb-16 md:mb-0"
             >
                 <div className="flex gap-x-2 flex-1 items-center">
                     <Mic />
@@ -30,7 +30,7 @@ export const HuddlesForm = ({ recieverid }: HuddlesFormProps) => {
                     className="p-0 hover:bg-transparent"
                     type="submit"
                 >
-                    <Send className="text-themeGray hover:text-themeTextGray" />
+                    <Send className="text-black dark:text-themeGray dark:hover:text-themeTextGray" />
                 </Button>
             </form>
         </div>
