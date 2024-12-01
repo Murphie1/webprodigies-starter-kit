@@ -21,14 +21,14 @@ export const JoinGroupPaymentForm = ({
                     style: {
                         base: {
                             fontSize: "16px",
-                            color: "#B4B0AE",
+                            color: "#F2F2F2",
                             "::placeholder": {
-                                color: "#B4B0AE",
+                                color: "#F2F2F2",
                             },
                         },
                     },
                 }}
-                className="bg-themeBlack border-[1px] border-themeGray outline-none rounded-lg p-3"
+                className="bg-white dark:bg-themeBlack border-[1px] border-black dark:border-themeGray outline-none rounded-lg p-3"
             />
             <Button onClick={onPayToJoin}>
                 <Loader loading={isPending}>Pay Now</Loader>
