@@ -26,7 +26,7 @@ export const PostContent = ({ channelid }: PostContentProps) => {
     return (
         <form className="flex flex-col gap-y-5 w-full" onSubmit={onCreatePost}>
             <Input
-                placeholder="Type here"
+                placeholder="Enter your title here and your post below"
                 className="bg-transparent outline-none border-none text-xl p-0"
                 {...register("title")}
             />
@@ -44,7 +44,7 @@ export const PostContent = ({ channelid }: PostContentProps) => {
                 htmlContent={onHtmlDescription}
                 setHtmlContent={setOnHtmlDescription}
             />
-            <Button className="self-end rounded-2xl bg-themeTextGray flex gap-x-2">
+            <Button className="self-end rounded-2xl bg-black text-white dark:bg-white dark:text-black flex gap-x-2">
                 <Upload />
                 Create
             </Button>
