@@ -15,7 +15,7 @@ export const HtmlParser = ({ html }: HtmlParserProps) => {
     }, [])
 
     return (
-        <div className="[&_h1]:text-4xl [&_h2]:text-3xl [&_blockqoute]:italic [&_iframe]:aspect-video [&_h3]:text-2xl text-themeTextGray flex flex-col gap-y-3">
+        <div className="[&_h1]:text-4xl [&_h2]:text-3xl [&_blockqoute]:italic [&_iframe]:aspect-video [&_h3]:text-2xl text-black dark:text-themeTextGray flex flex-col gap-y-3">
             {mounted && parse(html)}
         </div>
     )
