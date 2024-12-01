@@ -45,7 +45,7 @@ export const GroupDropDown = ({ groups, members }: GroupDropDownProps) => {
             trigger={
                 <Button
                     variant="ghost"
-                    className="rounded-2xl hover:bg-themeGray font-medium flex gap-2"
+                    className="rounded-2xl hover:bg-sky dark:hover:bg-themeGray font-medium flex gap-2"
                 >
                     Syncro.
                     <CarotSort />
@@ -61,7 +61,7 @@ export const GroupDropDown = ({ groups, members }: GroupDropDownProps) => {
                     >
                         <Button
                             variant="ghost"
-                            className="flex gap-2 w-full justify-start hover:bg-themeGray items-center"
+                            className="flex gap-2 w-full justify-start hover:bg-sky dark:hover:bg-themeGray items-center"
                         >
                             <Group />
                             {item.name}
@@ -78,7 +78,7 @@ export const GroupDropDown = ({ groups, members }: GroupDropDownProps) => {
                     >
                         <Button
                             variant="ghost"
-                            className="flex gap-2 w-full justify-start hover:bg-themeGray items-center"
+                            className="flex gap-2 w-full justify-start hover:bg-sky dark:hover:bg-themeGray items-center"
                         >
                             <Group />
                             {member.Group?.name}
