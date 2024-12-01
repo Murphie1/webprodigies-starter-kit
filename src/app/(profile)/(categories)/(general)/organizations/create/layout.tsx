@@ -21,16 +21,16 @@ const CreateGroupLayout = ({ children }: Props) => {
                         <h5 className="text-2xl font-bold text-black dark:text-themeTextWhite">
                             Welcome.
                         </h5>
-                        {/*<GradientText
+                        <GradientText
                             element="H2"
-                            className="text-4xl font-semibold py-1 md:hidden"
+                            className="hidden dark:text-4xl font-semibold py-3"
                         >
                             Create Your Organization
-                        </GradientText>*/}
-                        <h2 className="text-4xl font-bold text-black dark:text-themeTextWhite">
+                        </GradientText>
+                        <h2 className="text-4xl font-bold text-black dark:hidden">
                             Create Your Organization
                         </h2>
-                        <p className="text-black dark:text-themeTextGray text-xs">
+                        <p className="pt-1 text-black dark:text-themeTextGray text-xs">
                             Create an organization to get started. You can choose between creating a free organization or subscribe, all depenion your needs. To see more and understand which best fits you check here →
                         </p>
                         <Info />
