@@ -40,13 +40,13 @@ const Collaborator = ({ roomId, creatorId, collaborator, email, user }: Collabor
           className="size-9 rounded-full"
         />
         <div>
-          <p className="line-clamp-1 text-sm font-semibold leading-4 text-white">
+          <p className="line-clamp-1 text-sm font-semibold leading-4 text-black dark:text-white">
             {collaborator.name}
             <span className="text-10-regular pl-2 text-blue-100">
               {loading && 'updating...'}
             </span>
           </p>
-          <p className="text-sm font-light text-blue-100">
+          <p className="text-sm font-light text-blue-500 dark:text-blue-100">
             {collaborator.email}
           </p>
         </div>
