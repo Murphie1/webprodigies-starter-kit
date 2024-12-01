@@ -20,7 +20,7 @@ export const AppleAuthButton = ({ method }: AppleAuthButtonProps) => {
                 : {
                       onClick: () => signUpWith("oauth_apple"),
                   })}
-            className="w-full rounded-2xl flex gap-3 bg-themeBlack border-themeGray"
+            className="w-full rounded-2xl flex gap-3 bg-white dark:bg-themeBlack border-black dadk:border-themeGray"
             variant="outline"
         >
             <Loader loading={false}>
