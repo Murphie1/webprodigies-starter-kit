@@ -23,7 +23,7 @@ export const GroupSubscriptionForm = ({
             <GlassModal
                 trigger={
                     <span>
-                        <Card className="flex rounded-xl text-themeGray gap-x-2 items-center cursor-pointer justify-center aspect-video border-dashed bg-themeBlack border-themeGray">
+                        <Card className="flex rounded-xl text-black dark:text-themeGray gap-x-2 items-center cursor-pointer justify-center aspect-video border-dashed bg-white dark:bg-themeBlack border-black dark:border-themeGray">
                             <Tag />
                             <p>Add a price</p>
                         </Card>
