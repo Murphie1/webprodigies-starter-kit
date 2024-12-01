@@ -9,7 +9,7 @@ const HomeLayout = ({ children }: Props) => {
   return (
     <div className="h-full">
       {/* Navbar */}
-       <div className="h-[60px] md:pl-56 fixed inset-y-0 w-full z-50">
+       <div className="h-[50px] md:h-[75px] md:pl-56 fixed inset-y-0 w-full z-50">
         <NavBar />
       </div> 
 
@@ -19,7 +19,7 @@ const HomeLayout = ({ children }: Props) => {
       </div> 
 
       {/* Main Content */}
-      <main className="h-full md:pl-56 pt-[70px]">{children}</main>
+      <main className="h-full md:pl-56 pt-[50px] md:pt-[75px]">{children}</main>
     </div>
   );
 };
