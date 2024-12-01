@@ -12,7 +12,7 @@ return (
 <BookOpen />
   YouLearn
 </div>
-  <div className="grid grid-cols-2 pb-2">
+  <div className="grid grid-cols-2 pb-2 px-2">
     <Link href="/"><Button className="rounded-md">
       Profiles
     </Button>
