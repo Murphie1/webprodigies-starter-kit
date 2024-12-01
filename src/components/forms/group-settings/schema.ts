@@ -12,8 +12,8 @@ export const GroupSettingsSchema = z
             .or(z.literal("").transform(() => undefined)),
         description: z
             .string()
-            .min(100, {
-                message: "description must have atleast 100 characters",
+            .min(10, {
+                message: "description must have atleast 10 characters",
             })
             .optional()
             .or(z.literal("").transform(() => undefined)),
