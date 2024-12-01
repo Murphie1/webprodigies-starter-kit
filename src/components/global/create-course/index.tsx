@@ -170,7 +170,7 @@ const CourseCreate = ({ groupid }: Props) => {
                         <Switch
                             id="publish-mode"
                             onCheckedChange={(e) => setValue("published", e)}
-                            className="data-[state=checked]:bg-white dark:bg-themeTextGray data-[state=unchecked]:bg-gray-50 dark:bg-themeGray"
+                            className="data-[state=checked]:bg-white dark:bg-themeTextGray data-[state=unchecked]:bg-sky-500 dark:bg-sky-100"
                         />
                         <Label htmlFor="publish-mode">Publish Course</Label>
                     </div>
@@ -181,7 +181,7 @@ const CourseCreate = ({ groupid }: Props) => {
                     >
                         Create
                     </Button>
-                    <DialogClose asChild>
+                    {/* <DialogClose asChild>
                         <Button
                             type="button"
                             ref={buttonRef}
@@ -189,7 +189,7 @@ const CourseCreate = ({ groupid }: Props) => {
                         >
                             close modal
                         </Button>
-                    </DialogClose>
+                    </DialogClose>*/}
                 </form>
             </GlassModal>
         )
