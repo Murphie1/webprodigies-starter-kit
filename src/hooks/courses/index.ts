@@ -59,7 +59,7 @@ export const useCreateCourse = (groupid: string) => {
         mutationFn: async (data: {
             id: string
             name: string
-            image: FileList
+            image?: FileList
             description: string
             createdAt: Date
             privacy: string
