@@ -48,7 +48,7 @@ const GroupSettingsForm = ({ groupId }: Props) => {
                     />
                     <Label
                         htmlFor="thumbnail-upload"
-                        className="border-2 border-themeGray bg-themeGray/50 px-5 py-3 rounded-lg hover:bg-themeBlack cursor-pointer"
+                        className="border-2 border-black dark:border-themeGray bg-white dark:bg-themeGray/50 px-5 py-3 rounded-lg dark:hover:bg-themeBlack cursor-pointer"
                     >
                         <Input
                             type="file"
@@ -72,7 +72,7 @@ const GroupSettingsForm = ({ groupId }: Props) => {
                         alt="icon"
                     />
                     <Label
-                        className="border-2 border-themeGray bg-themeGray/50 px-5 py-3 rounded-lg cursor-pointer hover:bg-themeBlack"
+                        className="border-2 border-black dark:border-themeGray bg-white dark:bg-themeGray/50 px-5 py-3 rounded-lg cursor-pointer dark:hover:bg-themeBlack"
                         htmlFor="icon-upload"
                     >
                         <Input
