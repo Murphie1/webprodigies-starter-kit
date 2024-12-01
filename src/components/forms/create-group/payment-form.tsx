@@ -78,11 +78,11 @@ const PaymentForm = ({ affiliate, userId, stripeId }: Props) => {
                                 },
                             },
                         }}
-                        className="bg-themeBlack border-[1px] border-themeGray outline-none rounded-lg p-3"
+                        className="bg-white dark:bg-themeBlack border-[1px] border-black dark:bg-themeGray outline-none rounded-lg p-3"
                     />
                 </div>
                 <div className="px-7 flex flex-col gap-5">
-                    <p className="text-sm text-themeTextGray">
+                    <p className="text-sm text-gray-500 dark:text-themeTextGray">
                         Cancel anytime with just 1-click. By creating, you
                         accept our terms.
                     </p>
@@ -95,7 +95,7 @@ const PaymentForm = ({ affiliate, userId, stripeId }: Props) => {
                     <Button
                         variant="outline"
                         type="submit"
-                        className="bg-themeBlack border-themeGray rounded-xl"
+                        className="bg-white dark:bg-themeBlack border-black dark:border-themeGray rounded-xl"
                     >
                         <Loader loading={isPending}>Get Started</Loader>
                     </Button>
