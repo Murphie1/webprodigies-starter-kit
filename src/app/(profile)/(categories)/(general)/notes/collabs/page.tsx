@@ -41,7 +41,7 @@ const Collabs = async () => {
             {roomDocuments.data.map(({ id, metadata, createdAt }: any) => (
               <li key={id} className="document-list-item">
                 <Link href={`/notes/collabs/document/${id}`} className="flex flex-1 items-center gap-4">
-                  <div className="hidden rounded-md bg-dark-500 p-2 sm:block">
+                  <div className="hidden rounded-md bg-white dark:bg-dark-500 p-2 sm:block">
                     <Image 
                       src="/assets/icons/doc.svg"
                       alt="file"
@@ -51,7 +51,7 @@ const Collabs = async () => {
                   </div>
                   <div className="space-y-1">
                     <p className="line-clamp-1 text-lg">{metadata.title}</p>
-                    <p className="text-sm font-light text-blue-100">Created about {dateConverter(createdAt)}</p>
+                    <p className="text-sm font-light text-gray-500 dark:text-blue-100">Created about {dateConverter(createdAt)}</p>
                   </div>
                 </Link>
                 <DeleteModal roomId={id} />
