@@ -13,7 +13,7 @@ export const Navbar = async () => {
     const groups = await onGetUserGroups(user.id!)
 
     return (
-        <div className="flex px-5 py-3 items-center bg-themeBlack border-b-[1px] border-themeDarkGray fixed z-50 w-full bg-clip-padding backdrop--blur__safari backdrop-filter backdrop-blur-2xl bg-opacity-60">
+        <div className="flex px-5 py-3 items-center bg-white dark:bg-themeBlack border-b-[1px] border-black dark:border-themeDarkGray fixed z-50 w-full bg-clip-padding backdrop--blur__safari backdrop-filter backdrop-blur-2xl bg-opacity-60">
             <div className="hidden lg:inline">
                 {user.status === 200 ? (
                     <GroupDropDown members={groups.members} groups={groups} />
@@ -41,7 +41,7 @@ export const Navbar = async () => {
                 >
                     <Button
                         variant="outline"
-                        className="bg-themeBlack rounded-2xl flex gap-2 border-themeGray hover:bg-themeGray"
+                        className="bg-white dark:bg-themeBlack rounded-2xl flex gap-2 border-themeGray hover:bg-sky dark:hover:bg-themeGray"
                     >
                         <CheckBadge />
                         Create Group
@@ -53,7 +53,7 @@ export const Navbar = async () => {
                     <Link href="/sign-in">
                         <Button
                             variant="outline"
-                            className="bg-themeBlack rounded-2xl flex gap-2 border-themeGray hover:bg-themeGray"
+                            className="bg-white dark:bg-themeBlack rounded-2xl flex gap-2 border-themeGray dark:hover:bg-themeGray"
                         >
                             <Logout />
                             Login
