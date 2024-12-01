@@ -12,14 +12,14 @@ return (
 <BookOpen />
   YouLearn
 </div>
-  <div className="grid grid-cols-2">
-    <Link href="/"><Button variant="ghost">
+  <div className="grid grid-cols-2 pb-2">
+    <Link href="/"><Button className="rounded-md">
       Profiles
     </Button>
       </Link>
     <Link href="/teacher">
-    <Button>
-      Tutor
+    <Button className="rounded-md">
+      Teacher Mode
     </Button>
     </Link>
   </div>
