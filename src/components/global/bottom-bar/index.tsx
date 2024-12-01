@@ -11,7 +11,7 @@ const BottomBar = () => {
         <div className="bg-white space-x-7 h-auto w-screen overflow-x-auto whitespace-nowrap py-3 px-11 fixed bottom-0 z-50 justify-between items-center flex dark:bg-[#1A1A1D]">
             <Link href={`/home`}>
                 <Telescope />
-                <p className="text-bold text-white dark:text-white">Home</p>
+                <p className="text-bold text-black dark:text-white">Home</p>
             </Link>
             <Link href={`/updates`}>
                 <Lightbulb />
