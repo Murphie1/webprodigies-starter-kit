@@ -42,7 +42,7 @@ const CreateGroupLayout = ({ children }: Props) => {
                                         key={placeholder.id}
                                     >
                                         {placeholder.icon}
-                                        <p className="text-themeTextGray">
+                                        <p className="text-black dark:text-themeTextGray">
                                             {placeholder.label}
                                         </p>
                                     </div>
