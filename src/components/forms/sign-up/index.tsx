@@ -50,13 +50,13 @@ const SignUpForm = (props: Props) => {
             )}
 
             {verifying ? (
-                <Button type="submit" className="rounded-2xl">
+                <Button type="submit" className="rounded-2xl bg-indigo dark:bg-themeWhite text-black">
                     <Loader loading={creating}>Sign Up with Email</Loader>
                 </Button>
             ) : (
                 <Button
                     type="button"
-                    className="rounded-2xl"
+                    className="rounded-2xl bg-indigo dark:bg-themeWhite text-black"
                     onClick={() =>
                         onGenerateCode(
                             getValues("email"),
