@@ -6,7 +6,7 @@ export const NoResult = () => {
     return (
         <div className="lg:col-span-3 md:col-span-2 flex flex-col items-center gap-y-16 sm:px-2">
             <Link
-                href="/explore"
+                href="/organizations/explore"
                 className="flex gap-3 text-black dark:text-themeTextGray"
             >
                 <RefreshCcw />
