@@ -28,7 +28,7 @@ const MediaGalleryForm = ({ groupid }: Props) => {
             />
             <Label className="" htmlFor="media-gallery">
                 <p>or Upload an Image</p>
-                <span className="border-[1px] border-dashed flex flex-col justify-center items-center py-10 my-2 hover:bg-themeGray/50 cursor-pointer border-themeGray bg-themeBlack rounded-lg gap-y-2">
+                <span className="border-[1px] border-dashed flex flex-col justify-center items-center py-10 my-2 dark:hover:bg-themeGray/50 cursor-pointer border-black dark:border-themeGray bg-white dark:bg-themeBlack rounded-lg gap-y-2">
                     <Input
                         type="file"
                         className="hidden"
