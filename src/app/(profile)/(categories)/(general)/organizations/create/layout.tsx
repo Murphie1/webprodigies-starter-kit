@@ -21,13 +21,13 @@ const CreateGroupLayout = ({ children }: Props) => {
                         <h5 className="text-2xl font-bold text-black dark:text-themeTextWhite">
                             Welcome.
                         </h5>
-                        <GradientText
+                        {/*<GradientText
                             element="H2"
-                            className="hidden dark:text-4xl font-semibold py-3"
+                            className="dark:text-4xl font-semibold py-3"
                         >
                             Create Your Organization
-                        </GradientText>
-                        <h2 className="text-4xl font-bold text-black dark:hidden">
+                        </GradientText>*/}
+                        <h2 className="text-4xl font-bold text-black dark:text-themeTextGray">
                             Create Your Organization
                         </h2>
                         <p className="pt-1 text-black dark:text-themeTextGray text-xs">
