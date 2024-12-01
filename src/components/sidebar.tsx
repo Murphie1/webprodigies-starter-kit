@@ -1,14 +1,28 @@
 //SideBar
 
-import { Logo } from "./logo";
+import { BookOpen } from "lucide-react";
 import { SidebarRoutes } from "./sidebar-routes";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export const SideBar = () => {
 return (
 <div className="h-full border-r flex flex-col overflow-y-auto bg-white shadow-sm dark:bg-black">
 <div className="p-6">
-<Logo />
+<BookOpen />
+  YouLearn
 </div>
+  <div className="grid grid-cols-2">
+    <Link href="/"><Button variant="ghost">
+      Profiles
+    </Button>
+      </Link>
+    <Link href="/teacher">
+    <Button>
+      Tutor
+    </Button>
+    </Link>
+  </div>
 <div className="flex flex-col w-full">
 <SidebarRoutes/>
 </div>
