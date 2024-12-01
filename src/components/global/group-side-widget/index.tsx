@@ -17,7 +17,7 @@ const GroupSideWidget = ({ groupid, light, userid }: Props) => {
     return (
         <Card
             className={cn(
-                "border-themeGray max-w-xs lg:sticky lg:top-0 mt-10 lg:mt-0 rounded-xl overflow-hidden",
+                "border-black dark:border-themeGray max-w-xs lg:sticky lg:top-0 mt-10 lg:mt-0 rounded-xl overflow-hidden",
                 light ? "border-themeGray bg-[#1A1A1D]" : "bg-themeBlack",
             )}
         >
@@ -28,11 +28,11 @@ const GroupSideWidget = ({ groupid, light, userid }: Props) => {
             />
             <div className="flex flex-col p-5 gap-y-2">
                 <h2 className="font-bold text-lg">{group.name}</h2>
-                <p className="text-sm text-themeTextGray">
+                <p className="text-sm text-black dark:text-themeTextGray">
                     {group.description && truncateString(group.description)}
                 </p>
             </div>
-            <Separator orientation="horizontal" className="bg-themeGray" />
+            <Separator orientation="horizontal" className="bg-black dark:bg-themeGray" />
             {groupid && (
                 <JoinButton
                     groupid={groupid}
