@@ -32,7 +32,7 @@ export const CustomDomainForm = ({ groupid }: CustomDomainFormProps) => {
                     placeholder={data?.domain ? data.domain : "e.g example.com"}
                 />
                 <Button
-                    className="bg-themeBlack border-themeGray"
+                    className="bg-white dark:bg-themeBlack border-black dark:border-themeGray"
                     variant="outline"
                 >
                     <Loader loading={isPending}>Add A Domain</Loader>
@@ -40,8 +40,8 @@ export const CustomDomainForm = ({ groupid }: CustomDomainFormProps) => {
             </form>
             <div
                 className={cn(
-                    "flex gap-x-5 bg-themeBlack p-4 rounded-xl text-sm items-center",
-                    data?.status.misconfigured ? "text-red-500" : "text-white",
+                    "flex gap-x-5 bg-white dark:bg-themeBlack p-4 rounded-xl text-sm items-center",
+                    data?.status.misconfigured ? "text-red-500" : "text-black dark:text-white",
                 )}
             >
                 {data?.status.misconfigured ? (
