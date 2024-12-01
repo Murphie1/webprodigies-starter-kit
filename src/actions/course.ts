@@ -33,13 +33,17 @@ export const onGetGroupCourses = async (groupid: string) => {
 export const onCreateGroupCourse = async (
     groupid: string,
     name: string,
-    image: string,
+    image: string | undefined,
     description: string,
     courseid: string,
     privacy: string,
     published: boolean,
 ) => {
     try {
+        // Set a default image URL if no image is provided
+        const defaultImageUrl = "https://via.placeholder.com/150"
+        const thumbnail = image || defaultImageUrl
+
         const course = await client.group.update({
             where: {
                 id: groupid,
@@ -49,7 +53,7 @@ export const onCreateGroupCourse = async (
                     create: {
                         id: courseid,
                         name,
-                        thumbnail: image,
+                        thumbnail,
                         description,
                         privacy,
                         published,
@@ -59,14 +63,15 @@ export const onCreateGroupCourse = async (
         })
 
         if (course) {
-            return { status: 200, message: "Course successfully created" }
+            return { status: 200, message: "Course successfully created" };
         }
 
-        return { status: 404, message: "Group not found" }
+        return { status: 404, message: "Group not found" };
     } catch (error) {
-        return { status: 400, message: "Oops! something went wrong" }
+        return { status: 400, message: "Oops! something went wrong" };
     }
 }
+
 export const onGetCourseModules = async (courseId: string) => {
     try {
         const modules = await client.module.findMany({
