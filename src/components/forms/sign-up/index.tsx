@@ -50,7 +50,7 @@ const SignUpForm = (props: Props) => {
             )}
 
             {verifying ? (
-                <Button type="submit" className="rounded-2xl bg-indigo dark:bg-themeWhite text-black">
+                <Button type="submit" className="rounded-2xl">
                     <Loader loading={creating}>Sign Up with Email</Loader>
                 </Button>
             ) : (
