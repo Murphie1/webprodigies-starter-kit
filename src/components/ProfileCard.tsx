@@ -3,7 +3,7 @@ import Image from "next/image"
 import { useEffect, useState } from "react"
 
 import { useAudio } from "@/providers/AudioProvider"
-import { PodcastProps, ProfileCardProps } from "@/types"
+import { PodcastProps, ProfileCardProps } from "@/type"
 
 import LoaderSpinner from "./LoaderSpinner"
 import { Button } from "./ui/button"
