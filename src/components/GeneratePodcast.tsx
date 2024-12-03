@@ -1,4 +1,4 @@
-import { GeneratePodcastProps } from "@/types"
+import { GeneratePodcastProps } from "@/type"
 import React, { useState } from "react"
 import { Label } from "./ui/label"
 import { Textarea } from "./ui/textarea"
