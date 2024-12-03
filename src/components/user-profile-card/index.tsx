@@ -66,16 +66,16 @@ export const ProfileCard = ({
 
                 {/* Info */}
                 <div className="flex-1">
-                    <h2 className="text-sm font-medium text-gray-900 dark:text-gray-100 truncate">
+                    <h2 className="text-sm font-medium text-gray-900 dark:text-gray-100 line-clamp-1 truncate">
                         {name}
                     </h2>
                     {type && (
-                        <p className="text-xs text-gray-600 dark:text-gray-400 truncate">
+                        <p className="text-xs text-gray-600 dark:text-gray-400 line-clamp-1 truncate">
                             {type}
                         </p>
                     )}
                     {email && (
-                        <p className="text-xs text-gray-500 dark:text-gray-500 truncate">
+                        <p className="text-xs text-gray-500 dark:text-gray-500 line-clamp-1 truncate">
                             {email}
                         </p>
                     )}
