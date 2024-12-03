@@ -6,7 +6,7 @@ import { useState } from "react"
 
 import { api } from "@/convex/_generated/api"
 import { useAudio } from "@/providers/AudioProvider"
-import { PodcastDetailPlayerProps } from "@/types"
+import { PodcastDetailPlayerProps } from "@/type"
 
 import LoaderSpinner from "./LoaderSpinner"
 import { Button } from "./ui/button"
@@ -76,7 +76,7 @@ const PodcastDetailPlayer = ({
                         <figure
                             className="flex cursor-pointer items-center gap-2"
                             onClick={() => {
-                                router.push(`/profile/${authorId}`)
+                                router.push(`/podcast/podcaster/${authorId}`)
                             }}
                         >
                             <Image
