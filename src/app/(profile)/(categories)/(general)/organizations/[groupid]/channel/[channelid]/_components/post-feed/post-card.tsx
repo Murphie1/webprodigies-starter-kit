@@ -51,7 +51,10 @@ export const PostCard = ({
                     </div>
                 </Link>
             </CardContent>
-            <Separator orientation="horizontal" className="bg-black dark:bg-themeGray mt-3" />
+            <Separator
+                orientation="horizontal"
+                className="bg-black dark:bg-themeGray mt-3"
+            />
             <Interactions
                 id={postid}
                 userid={userid}

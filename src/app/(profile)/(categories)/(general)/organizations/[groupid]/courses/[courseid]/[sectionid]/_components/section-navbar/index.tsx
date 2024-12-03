@@ -15,7 +15,9 @@ const SectionNavBar = ({ sectionid }: Props) => {
     return (
         <div className="flex justify-between p-5 overflow-y-auto items-center">
             <div>
-                <p className="text-black dark:text-themeTextGray">Course Title</p>
+                <p className="text-black dark:text-themeTextGray">
+                    Course Title
+                </p>
                 <h2 className="text-3xl text-black dark:text-themeTextWhite font-bold">
                     {data.section?.name}
                 </h2>

@@ -32,7 +32,10 @@ const GroupSideWidget = ({ groupid, light, userid }: Props) => {
                     {group.description && truncateString(group.description)}
                 </p>
             </div>
-            <Separator orientation="horizontal" className="bg-black dark:bg-themeGray" />
+            <Separator
+                orientation="horizontal"
+                className="bg-black dark:bg-themeGray"
+            />
             {groupid && (
                 <JoinButton
                     groupid={groupid}

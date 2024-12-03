@@ -19,7 +19,7 @@ export type MenuProps = {
     id: number
     label: string
     icon: JSX.Element
-    path: string 
+    path: string
     section?: boolean
     integration?: boolean
 }
@@ -28,7 +28,7 @@ export type GroupMenuProps = {
     id: number
     label: string
     icon: JSX.Element
-    path: string 
+    path: string
 }
 export const ORGANIZATION_MENU: MenuProps[] = [
     {
@@ -86,10 +86,10 @@ export const GROUP_PAGE_MENU: MenuProps[] = [
         path: "members",
     },
     //{
-       // id: 4,
-       // label: "About",
-       // icon: <Document />,
-       // path: "/organizations/about",
+    // id: 4,
+    // label: "About",
+    // icon: <Document />,
+    // path: "/organizations/about",
     //},
     {
         id: 4,

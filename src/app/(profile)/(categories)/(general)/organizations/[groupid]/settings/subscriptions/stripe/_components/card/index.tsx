@@ -23,7 +23,9 @@ export const SubscriptionCard = ({
             className={cn(
                 "bg-white dark:bg-themeBlack cursor-pointer text-black dark:text-white flex flex-col gap-y-3 justify-center aspect-video items-center",
                 optimisitc ? "opacity-60" : "",
-                active ? "border-sky-200 dark:border-purple-800 border-2" : "border-none",
+                active
+                    ? "border-sky-200 dark:border-purple-800 border-2"
+                    : "border-none",
             )}
         >
             <h3 className="text-2xl">${price}/month</h3>

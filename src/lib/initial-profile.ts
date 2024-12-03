@@ -29,4 +29,4 @@ export const InitialProfile = async () => {
 
     // If no profiles are found, return null
     return null
-    }
+}

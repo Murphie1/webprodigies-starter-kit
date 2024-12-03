@@ -18,53 +18,53 @@ const config = {
                 //xs: '360px',
             },
         },
-       // backgroundImage: {
-            //"radial-gradient":
-            //    "radial-gradient(circle at 50% 40%, white, black)",
-       // },
+        // backgroundImage: {
+        //"radial-gradient":
+        //    "radial-gradient(circle at 50% 40%, white, black)",
+        // },
         extend: {
             fontFamily: {
                 sans: ["var(--font-inter)"],
             },
             colors: {
                 white: {
-          1: "#FFFFFF",
-          2: "rgba(255, 255, 255, 0.72)",
-          3: "rgba(255, 255, 255, 0.4)",
-          4: "rgba(255, 255, 255, 0.64)",
-          5: "rgba(255, 255, 255, 0.80)",
-        },
-        black: {
-          1: "#15171C",
-          2: "#222429",
-          3: "#101114",
-          4: "#252525",
-          5: "#2E3036",
-          6: "#24272C",
-        },
-        orange: {
-          1: "#F97535",
-        },
-        gray: {
-          1: "#71788B",
-        },
+                    1: "#FFFFFF",
+                    2: "rgba(255, 255, 255, 0.72)",
+                    3: "rgba(255, 255, 255, 0.4)",
+                    4: "rgba(255, 255, 255, 0.64)",
+                    5: "rgba(255, 255, 255, 0.80)",
+                },
+                black: {
+                    1: "#15171C",
+                    2: "#222429",
+                    3: "#101114",
+                    4: "#252525",
+                    5: "#2E3036",
+                    6: "#24272C",
+                },
+                orange: {
+                    1: "#F97535",
+                },
+                gray: {
+                    1: "#71788B",
+                },
                 blue: {
-          100: '#B4C6EE',
-          400: '#417BFF',
-          500: '#3371FF',
-        },
-        red: {
-          400: '#DD4F56',
-          500: '#DC4349',
-        },
+                    100: "#B4C6EE",
+                    400: "#417BFF",
+                    500: "#3371FF",
+                },
+                red: {
+                    400: "#DD4F56",
+                    500: "#DC4349",
+                },
                 dark: {
-          100: '#09111F',
-          200: '#0B1527',
-          300: '#0F1C34',
-          350: '#12213B',
-          400: '#27344D',
-          500: '#2E3D5B',
-        },
+                    100: "#09111F",
+                    200: "#0B1527",
+                    300: "#0F1C34",
+                    350: "#12213B",
+                    400: "#27344D",
+                    500: "#2E3D5B",
+                },
                 themeBlack: "#09090B",
                 themeGray: "#27272A",
                 themeDarkGray: "#27272A",
@@ -119,15 +119,16 @@ const config = {
                     to: { height: "0" },
                 },
             },
-           // extend: {
-  backgroundImage: {
-        "nav-focus":
-          "linear-gradient(270deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.00) 100%)",
-    "radial-gradient": "radial-gradient(circle at 50% 40%, white, black)",
-    doc: 'url(/assets/images/doc.png)',
-    modal: 'url(/assets/images/modal.png)',
-  },
-//}
+            // extend: {
+            backgroundImage: {
+                "nav-focus":
+                    "linear-gradient(270deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.00) 100%)",
+                "radial-gradient":
+                    "radial-gradient(circle at 50% 40%, white, black)",
+                doc: "url(/assets/images/doc.png)",
+                modal: "url(/assets/images/modal.png)",
+            },
+            //}
             animation: {
                 "accordion-down": "accordion-down 0.2s ease-out",
                 "accordion-up": "accordion-up 0.2s ease-out",

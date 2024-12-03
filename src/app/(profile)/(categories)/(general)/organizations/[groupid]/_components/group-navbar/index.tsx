@@ -11,10 +11,7 @@ type MenuProps = {
     groupid: string
 }
 
-const Menu = ({ 
-    orientation,
-    groupid,
-              }: MenuProps) => {
+const Menu = ({ orientation, groupid }: MenuProps) => {
     const { section, onSetSection } = useNavigation()
     switch (orientation) {
         case "desktop":

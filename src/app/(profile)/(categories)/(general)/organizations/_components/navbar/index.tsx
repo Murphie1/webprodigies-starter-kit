@@ -18,8 +18,8 @@ type NavbarProps = {
 }
 
 export const Navbar = async ({ groupid, userid }: NavbarProps) => {
-    const user = await onAuthenticatedUser()//currentUser()
-   
+    const user = await onAuthenticatedUser() //currentUser()
+
     return (
         <div className="bg-white dark:bg-[#1A1A1D] py-2 px-3 md:px-7 md:py-5 flex gap-5 justify-between md:justify-end items-center">
             <GlassSheet trigger={<Menu className="md:hidden cursor-pointer" />}>

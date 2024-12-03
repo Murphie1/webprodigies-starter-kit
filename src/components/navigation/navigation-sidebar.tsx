@@ -15,7 +15,7 @@ export const NavigationSideBar = async ({ groupId }: NavSideProps) => {
         where: {
             groupId,
         },
-    });
+    })
 
     if (groupspaces.length > 0) {
         return (
@@ -45,7 +45,7 @@ export const NavigationSideBar = async ({ groupId }: NavSideProps) => {
                     />
                 </div>
             </div>
-        );
+        )
     }
-    return null;
-};
+    return null
+}

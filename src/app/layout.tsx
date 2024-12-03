@@ -14,7 +14,6 @@ import "./globals.css"
 import { dark } from "@clerk/themes"
 import Provider from "./Provider"
 
-
 const jakarta = Plus_Jakarta_Sans({ subsets: ["latin"] })
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
 const ibmPlexSerif = IBM_Plex_Serif({
@@ -45,9 +44,7 @@ export default function RootLayout({
                     >
                         <ReduxProvider>
                             <ReactQueryProvider>
-                                <Provider>
-                                    {children}
-                            </Provider>
+                                <Provider>{children}</Provider>
                             </ReactQueryProvider>
                         </ReduxProvider>
                         <Toaster />

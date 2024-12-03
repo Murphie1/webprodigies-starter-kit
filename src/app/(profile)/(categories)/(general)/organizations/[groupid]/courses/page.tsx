@@ -32,15 +32,22 @@ const CoursesPage = async ({ params }: Props) => {
         <HydrationBoundary state={dehydrate(client)}>
             <div className="relative">
                 <div className="flex justify-start items-center p-5 md:hidden">
-                    <GlassSheet trigger={<Menu />} className="md:hidden cursor-pointer" >
-                        <SideBar groupid={params.groupid} userid={user.id} mobile />
+                    <GlassSheet
+                        trigger={<Menu />}
+                        className="md:hidden cursor-pointer"
+                    >
+                        <SideBar
+                            groupid={params.groupid}
+                            userid={user.id}
+                            mobile
+                        />
                     </GlassSheet>
                 </div>
-            <div className="container grid lg:grid-cols-2 2xl:grid-cols-3 py-10 gap-5">
-                <CourseCreate groupid={params.groupid} />
-                <CourseList groupid={params.groupid} />
-            </div>
+                <div className="container grid lg:grid-cols-2 2xl:grid-cols-3 py-10 gap-5">
+                    <CourseCreate groupid={params.groupid} />
+                    <CourseList groupid={params.groupid} />
                 </div>
+            </div>
         </HydrationBoundary>
     )
 }

@@ -15,11 +15,10 @@ export const ourFileRouter = {
     groupspaceImage: f({ image: { maxFileSize: "1GB", maxFileCount: 1 } })
         .middleware(() => handleAuth())
         .onUploadComplete(() => {}),
-    
+
     profileImage: f({ image: { maxFileSize: "1GB", maxFileCount: 1 } })
         .middleware(() => handleAuth())
         .onUploadComplete(() => {}),
-            
 
     messageFile: f(["image", "pdf", "video"])
         .middleware(() => handleAuth())

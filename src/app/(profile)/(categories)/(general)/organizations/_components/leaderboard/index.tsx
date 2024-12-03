@@ -10,11 +10,11 @@ export const LeaderBoardCard = ({ groupId }: LeaderBoardCardProps) => {
     return (
         <Card className="bg-transparent border-black dark:border-themeGray lg:sticky lg:top-0 mt-10 lg:mt-0 rounded-xl p-5 overflow-hidden">
             <div className="overflow-y-auto">
-            <p className="text-black dark:text-themeTextGray text-sm">
-                Group Members
-            </p>
+                <p className="text-black dark:text-themeTextGray text-sm">
+                    Group Members
+                </p>
                 <GroupChatMenu groupid={groupId} />
-                </div>
+            </div>
         </Card>
     )
 }

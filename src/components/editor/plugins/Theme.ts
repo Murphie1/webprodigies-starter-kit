@@ -15,71 +15,61 @@
  */
 
 export default {
+    code: "editor-code",
 
-  code: 'editor-code',
+    heading: {
+        h1: "editor-heading-h1",
 
-  heading: {
+        h2: "editor-heading-h2",
 
-    h1: 'editor-heading-h1',
+        h3: "editor-heading-h3",
 
-    h2: 'editor-heading-h2',
+        h4: "editor-heading-h4",
 
-    h3: 'editor-heading-h3',
-
-    h4: 'editor-heading-h4',
-
-    h5: 'editor-heading-h5',
-
-  },
-
-  image: 'editor-image',
-
-  link: 'editor-link',
-
-  list: {
-
-    listitem: 'editor-listitem',
-
-    nested: {
-
-      listitem: 'editor-nested-listitem',
-
+        h5: "editor-heading-h5",
     },
 
-    ol: 'editor-list-ol',
+    image: "editor-image",
 
-    ul: 'editor-list-ul',
+    link: "editor-link",
 
-  },
+    list: {
+        listitem: "editor-listitem",
 
-  ltr: 'ltr',
+        nested: {
+            listitem: "editor-nested-listitem",
+        },
 
-  paragraph: 'editor-paragraph',
+        ol: "editor-list-ol",
 
-  placeholder: 'editor-placeholder',
+        ul: "editor-list-ul",
+    },
 
-  quote: 'editor-quote',
+    ltr: "ltr",
 
-  rtl: 'rtl',
+    paragraph: "editor-paragraph",
 
-  text: {
+    placeholder: "editor-placeholder",
 
-    bold: 'editor-text-bold',
+    quote: "editor-quote",
 
-    code: 'editor-text-code',
+    rtl: "rtl",
 
-    hashtag: 'editor-text-hashtag',
+    text: {
+        bold: "editor-text-bold",
 
-    italic: 'editor-text-italic',
+        code: "editor-text-code",
 
-    overflowed: 'editor-text-overflowed',
+        hashtag: "editor-text-hashtag",
 
-    strikethrough: 'editor-text-strikethrough',
+        italic: "editor-text-italic",
 
-    underline: 'editor-text-underline',
+        overflowed: "editor-text-overflowed",
 
-    underlineStrikethrough: 'editor-text-underlineStrikethrough',
+        strikethrough: "editor-text-strikethrough",
 
-  },
+        underline: "editor-text-underline",
 
-};
+        underlineStrikethrough: "editor-text-underlineStrikethrough",
+    },
+}

@@ -41,7 +41,9 @@ export const CustomDomainForm = ({ groupid }: CustomDomainFormProps) => {
             <div
                 className={cn(
                     "flex gap-x-5 bg-white dark:bg-themeBlack p-4 rounded-xl text-sm items-center",
-                    data?.status.misconfigured ? "text-red-500" : "text-black dark:text-white",
+                    data?.status.misconfigured
+                        ? "text-red-500"
+                        : "text-black dark:text-white",
                 )}
             >
                 {data?.status.misconfigured ? (

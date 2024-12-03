@@ -65,10 +65,12 @@ export const useCreateCourse = (groupid: string) => {
             privacy: string
             published: boolean
         }) => {
-            {/* const uploaded = data.image && data.image.length > 0 
+            {
+                /* const uploaded = data.image && data.image.length > 0 
     ? await upload.uploadFile(data.image[0]) 
     : "https://via.placeholder.com/150"; // Replace with your fallback URL
-            //*/}
+            //*/
+            }
             const uploaded = await upload.uploadFile(data.image[0])
             const course = await onCreateGroupCourse(
                 groupid,

@@ -31,4 +31,4 @@ export async function POST(req: Request) {
         console.log("[PROFILES_POST]", error)
         return new NextResponse("Internal Error", { status: 500 })
     }
-  }
+}
