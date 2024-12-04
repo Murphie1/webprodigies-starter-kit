@@ -1,4 +1,4 @@
-import { EmptyStateProps } from "@/types"
+import { EmptyStateProps } from "@/type"
 import Image from "next/image"
 import React from "react"
 import { Button } from "./ui/button"
