@@ -32,14 +32,14 @@ export interface PodcastProps {
     user: Id<"users">
     podcastTitle: string
     podcastDescription: string
-    audioUrl: string | null
-    imageUrl: string | null
+    audioUrl?: string | null
+    imageUrl?: string | null
     imageStorageId?: Id<"_storage"> | null
     author: string
     authorId: string
     authorImageUrl: string
     voicePrompt: string
-    imagePrompt: string | null
+    imagePrompt?: string | null
     voiceType: string
     audioDuration: number
     views: number
