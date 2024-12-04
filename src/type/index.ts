@@ -2,7 +2,7 @@
 
 import { Dispatch, SetStateAction } from "react"
 
-import { Id } from "@/convex/_generated/dataModel"
+import { Id } from "~/convex/_generated/dataModel"
 
 export interface EmptyStateProps {
     title: string
