@@ -50,6 +50,7 @@ const PodcastDetails = ({
             <PodcastDetailPlayer
                 isOwner={isOwner}
                 podcastId={podcast._id}
+                audioUrl={podcast?.audioUrl || "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"}
                 {...podcast}
             />
 
