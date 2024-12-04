@@ -10,7 +10,7 @@ import Image from "next/image"
 import { useToast } from "./ui/use-toast"
 import { useAction, useMutation } from "convex/react"
 import { useUploadFiles } from "@xixixao/uploadstuff/react"
-import { api } from "@/convex/_generated/api"
+import { api } from "~/convex/_generated/api"
 import { v4 as uuidv4 } from "uuid"
 
 const GenerateThumbnail = ({
