@@ -4,7 +4,7 @@ import Image from "next/image"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 
-import { api } from "@/convex/_generated/api"
+import { api } from "~/convex/_generated/api"
 import { useAudio } from "@/providers/AudioProvider"
 import { PodcastDetailPlayerProps } from "@/type"
 
