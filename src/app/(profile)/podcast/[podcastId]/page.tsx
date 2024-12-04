@@ -51,7 +51,13 @@ const PodcastDetails = ({
                 isOwner={isOwner}
                 podcastId={podcast._id}
                 audioUrl={podcast?.audioUrl || "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"}
-                {...podcast}
+    podcastTitle={podcast.podcastTitle!}
+    author={podcast.author!}
+    imageUrl={podcast.imageUrl!}
+    imageStorageId={podcast.imageStorageId!}
+    audioStorageId={podcast.audioStorageId!}
+    authorImageUrl={podcast.authorImageUrl!}
+    authorId={podcast.authorId!}
             />
 
             <p className="text-white-2 text-16 pb-8 pt-[45px] font-medium max-md:text-center">
