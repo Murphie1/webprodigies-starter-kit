@@ -29,10 +29,10 @@ import { Textarea } from "@/components/ui/textarea"
 import GeneratePodcast from "@/components/GeneratePodcast"
 import GenerateThumbnail from "@/components/GenerateThumbnail"
 import { Loader } from "lucide-react"
-import { Id } from "@/convex/_generated/dataModel"
+import { Id } from "~/convex/_generated/dataModel"
 import { useToast } from "@/components/ui/use-toast"
 import { useMutation } from "convex/react"
-import { api } from "@/convex/_generated/api"
+import { api } from "~/convex/_generated/api"
 import { useRouter } from "next/navigation"
 
 const voiceCategories = ['alloy', 'shimmer', 'nova', 'echo', 'fable', 'onyx'];
