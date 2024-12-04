@@ -18,10 +18,6 @@ const config = {
                 //xs: '360px',
             },
         },
-        // backgroundImage: {
-        //"radial-gradient":
-        //    "radial-gradient(circle at 50% 40%, white, black)",
-        // },
         extend: {
             fontFamily: {
                 sans: ["var(--font-inter)"],
@@ -135,6 +131,11 @@ const config = {
             },
         },
     },
+  variants: {
+    extend: {
+      textColor: ['disabled'], // Enable `disabled` for text color
+    },
+  },
     plugins: [require("tailwindcss-animate")],
 } satisfies Config
 
