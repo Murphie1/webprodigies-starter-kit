@@ -47,6 +47,7 @@ const PodcastDetails = ({
                 </figure>
             </header>
 
+                        {podcast ? (
             <PodcastDetailPlayer
                 isOwner={isOwner}
                 podcastId={podcast._id}
@@ -58,7 +59,7 @@ const PodcastDetails = ({
     audioStorageId={podcast.audioStorageId!}
     authorImageUrl={podcast.authorImageUrl!}
     authorId={podcast.authorId!}
-            />
+            /> ) : ( <div/> )}
 
             <p className="text-white-2 text-16 pb-8 pt-[45px] font-medium max-md:text-center">
                 {podcast?.podcastDescription}
