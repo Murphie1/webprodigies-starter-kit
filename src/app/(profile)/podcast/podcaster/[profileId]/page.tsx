@@ -30,11 +30,11 @@ const ProfilePage = ({
                 Podcaster Profile
             </h1>
             <div className="mt-6 flex flex-col gap-6 max-md:items-center md:flex-row">
-                <ProfileCard
+                                  {podcastsData && user ? (  <ProfileCard
                     podcastData={podcastsData!}
                     imageUrl={user?.imageUrl!}
                     userFirstName={user?.name!}
-                />
+                /> ) : ( <div/> )}
             </div>
             <section className="mt-9 flex flex-col gap-5">
                 <h1 className="text-20 font-bold text-white-1">All Podcasts</h1>
