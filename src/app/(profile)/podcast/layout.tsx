@@ -29,9 +29,7 @@ export default function RootLayout({
                         </div>
                         <div className="flex flex-col md:pb-14">
                             <Toaster />
-                            <AudioProvider>
-                                {children}
-                            </AudioProvider>
+                            <AudioProvider>{children}</AudioProvider>
                         </div>
                     </div>
                 </section>
