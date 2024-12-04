@@ -17,7 +17,7 @@ const nextConfig = {
             },
             {
                 protocol: "https",
-                hostname: "sleek-capybara-771.convex.cloud",
+                hostname: "combative-meerkat-957.convex.cloud",
             },
         ],
         domains: ["uploadthing.com"],
