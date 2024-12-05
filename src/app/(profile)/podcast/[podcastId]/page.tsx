@@ -34,7 +34,7 @@ const PodcastDetails = ({
 
     return (
         <section className="flex w-full flex-col">
-            <LeftSidebar />
+            <div className="hidden md:flex"><LeftSidebar /></div>
             <MobileNav />
             <header className="mt-9 flex items-center justify-between">
                 <h1 className="text-20 font-bold text-white-1">
@@ -123,7 +123,7 @@ const PodcastDetails = ({
                     </>
                 )}
             </section>
-            <RightSidebar />
+            <div className="hidden md:flex"><RightSidebar /></div>
             <PodcastPlayer />
         </section>
     )
