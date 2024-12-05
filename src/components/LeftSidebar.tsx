@@ -53,7 +53,7 @@ const LeftSidebar = () => {
 
     return (
         <section
-            className={cn("left_sidebar h-[calc(100vh-5px)]", {
+            className={cn("hidden md:left_sidebar h-[calc(100vh-5px)]", {
                 "h-[calc(100vh-140px)]": audio?.audioUrl,
             })}
         >
