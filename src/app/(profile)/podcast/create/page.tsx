@@ -26,6 +26,8 @@ import {
 import { cn } from "@/lib/utils"
 import { useState } from "react"
 import { Textarea } from "@/components/ui/textarea"
+import MobileNav from "@/components/MobileNav"
+import LeftSidebar from "@/components/LeftSidebar"
 import GeneratePodcast from "@/components/GeneratePodcast"
 import GenerateThumbnail from "@/components/GenerateThumbnail"
 import { Loader } from "lucide-react"
@@ -108,6 +110,8 @@ const CreatePodcast = () => {
 
   return (
     <section className="mt-10 flex flex-col">
+      <LeftSidebar />
+      <MobileNav />
       <h1 className="text-20 font-bold text-white-1">Create Podcast</h1>
 
        <Form {...form}>
@@ -187,7 +191,7 @@ const CreatePodcast = () => {
               />
 
               <div className="mt-10 w-full">
-                <Button type="submit" className="text-16 w-full bg-orange-1 py-4 font-extrabold text-white-1 transition-all duration-500 hover:bg-black-1">
+                <Button type="submit" className="text-16 sm:w-[300px] md:w-full bg-orange-1 py-4 font-extrabold text-white-1 transition-all duration-500 hover:bg-black-1">
                   {isSubmitting ? (
                     <>
                       Submitting
