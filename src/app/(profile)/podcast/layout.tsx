@@ -1,8 +1,5 @@
-//import LeftSidebar from "@/components/LeftSidebar";
-//import MobileNav from "@/components/MobileNav";
-//import RightSidebar from "@/components/RightSidebar";
+
 import { Toaster } from "@/components/ui/toaster"
-//import PodcastPlayer from "@/components/PodcastPlayer";
 import  AudioProvider  from "@/providers/AudioProvider"
 
 
@@ -12,7 +9,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-      <main className="relative flex flex-col pl-5 pb-5 max-w-screen">
+      <main className="relative flex flex-col mx-auto pb-5 max-w-screen">
              <AudioProvider>
                <Toaster />
                {children}
