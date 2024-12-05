@@ -1,4 +1,4 @@
-"use client"
+{/*"use client"
 
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
@@ -41,9 +41,9 @@ const formSchema = z.object({
   podcastTitle: z.string().min(2),
   podcastDescription: z.string().min(2),
 })
-
+*/}
 const CreatePodcast = () => {
-  const router = useRouter()
+  {/*const router = useRouter()
   const [imagePrompt, setImagePrompt] = useState('');
   const [imageStorageId, setImageStorageId] = useState<Id<"_storage"> | null>(null)
   const [imageUrl, setImageUrl] = useState('');
@@ -104,7 +104,7 @@ const CreatePodcast = () => {
       })
       setIsSubmitting(false);
     }
-  }
+  }*/}
 
   return (
     <section className="mt-10 flex flex-col">
