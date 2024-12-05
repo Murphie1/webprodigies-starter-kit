@@ -10,12 +10,11 @@ import LeftSidebar from "./LeftSidebar"
 import { Menu } from "lucide-react"
 
 const MobileNav = () => {
-    const pathname = usePathname()
 
     return (
         <section>
             <Sheet>
-                <SheetTrigger>
+                <SheetTrigger className="md:hidden pr-3">
                     <Menu />
                 </SheetTrigger>
                 <SheetContent side="left" className="border-none bg-white dark:bg-black">
