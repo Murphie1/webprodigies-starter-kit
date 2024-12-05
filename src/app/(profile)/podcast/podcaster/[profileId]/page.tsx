@@ -66,7 +66,7 @@ const ProfilePage = ({
                     />
                 )}
             </section>
-          <div className="hidden md:flex"></div><RightSidebar /></div>
+          <div className="hidden md:flex"><RightSidebar /></div>
             <PodcastPlayer />
         </section>
     )
