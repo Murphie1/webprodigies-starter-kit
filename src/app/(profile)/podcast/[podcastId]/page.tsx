@@ -4,6 +4,10 @@ import EmptyState from "@/components/EmptyState"
 import LoaderSpinner from "@/components/LoaderSpinner"
 import PodcastCard from "@/components/PodcastCard"
 import PodcastDetailPlayer from "@/components/PodcastDetailPlayer"
+import PodcastPlayer from "@/components/PodcastPlayer"
+import LeftSidebar from "@/components/LeftSidebar"
+import RightSidebar from "@/components/RightSidebar"
+import MobileNav from "@/components/MobileNav"
 import { api } from "~/convex/_generated/api"
 import { Id } from "~/convex/_generated/dataModel"
 import { useUser } from "@clerk/nextjs"
@@ -30,6 +34,8 @@ const PodcastDetails = ({
 
     return (
         <section className="flex w-full flex-col">
+            <LeftSidebar />
+            <MobileNav />
             <header className="mt-9 flex items-center justify-between">
                 <h1 className="text-20 font-bold text-white-1">
                     Currenty Playing
@@ -117,6 +123,8 @@ const PodcastDetails = ({
                     </>
                 )}
             </section>
+            <RightSidebar />
+            <PodcastPlayer />
         </section>
     )
 }
