@@ -28,7 +28,7 @@ export const SidebarItem = ({ icon: Icon, label, href }: SidebarItemProps) => {
             onClick={onClick}
             type="button"
             className={cn(
-                "flex items-center gap-x-2 text-slate-500 text-sm font-[500] pl-6 transition-all hover:text-slate-600 hover:bg-slate-300/20 dark:text-white dark:hover:bg-themeBlack line-clamp-1",
+                "flex items-center gap-x-2 text-slate-500 text-sm font-[500] pl-6 transition-all hover:text-slate-600 hover:bg-slate-300/20 dark:text-white dark:hover:bg-themeBlack",
                 isActive &&
                     "text-sky-700 bg-sky-200/20 hover:bg-sky-200/20 hover:text-sky-700",
             )}
@@ -41,7 +41,7 @@ export const SidebarItem = ({ icon: Icon, label, href }: SidebarItemProps) => {
                         isActive && "text-sky-700",
                     )}
                 />
-                {label}
+                <p className="relative line-clamp-1">{label}</p>
             </div>
             <div
                 className={cn(
