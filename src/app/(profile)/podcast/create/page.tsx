@@ -110,7 +110,7 @@ const CreatePodcast = () => {
 
   return (
     <section className="mt-10 flex flex-col">
-      <LeftSidebar />
+     <div className="hidden md:flex"><LeftSidebar /></div>
       <MobileNav />
       <h1 className="text-20 font-bold text-white-1">Create Podcast</h1>
 
