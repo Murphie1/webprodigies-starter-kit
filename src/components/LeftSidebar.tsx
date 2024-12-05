@@ -1,20 +1,54 @@
 "use client"
 
-import { sidebarLinks } from "@/constants"
-import { cn } from "@/lib/utils"
-import { SignedIn, SignedOut, useClerk } from "@clerk/nextjs"
-import Image from "next/image"
-import Link from "next/link"
-import { usePathname, useRouter } from "next/navigation"
+import { SidebarItem } from "./sidebar-item"
+import { Home, Heart } from "lucide-react"
+import { usePathname } from "next/navigation"
 import React from "react"
-import { Button } from "./ui/button"
 import { useAudio } from "@/providers/AudioProvider"
+
+
+const podcastRoutes = [
+    {
+        key: 1,
+        icon: Home,
+        label: "Return Home",
+        href: "/home",
+    },
+    {
+        key: 2,
+        icon: Heart,
+        label: "Create a Podcast",
+        href: "/podcast/create,
+    },
+    {
+        key: 3,
+        icon: Heart,
+        label: "Browse other podcasts",
+        href: "/home/search/podcasts",
+    },
+    ]
+const prepRoutes = [
+    {
+        key: 4,
+        icon: Heart,
+        label: "Tests",
+        href: "/prep/tests",
+    },
+    {
+        key: 5,
+        icon: Heart,
+        label: "Practice",
+        href: "/prep/practice",
+    },
+    ]
 
 const LeftSidebar = () => {
     const pathname = usePathname()
-    const router = useRouter()
-    const { signOut } = useClerk()
     const { audio } = useAudio()
+    const isPrepPage = pathname?.includes("/prep")
+
+    const routes = isPrepPage ? prepRoutes : podcastRoutes
+    
 
     return (
         <section
@@ -22,69 +56,18 @@ const LeftSidebar = () => {
                 "h-[calc(100vh-140px)]": audio?.audioUrl,
             })}
         >
-            <nav className="flex flex-col gap-6">
-                <Link
-                    href="/"
-                    className="flex cursor-pointer items-center gap-1 pb-10 max-lg:justify-center"
-                >
-                    <Image
-                        src="/icons/logo.svg"
-                        alt="logo"
-                        width={23}
-                        height={27}
-                    />
-                    <h1 className="text-24 font-extrabold text-white max-lg:hidden">
-                        Podcastr
-                    </h1>
-                </Link>
-
-                {sidebarLinks.map(({ route, label, imgURL }) => {
-                    const isActive =
-                        pathname === route || pathname.startsWith(`${route}/`)
-
-                    return (
-                        <Link
-                            href={route}
-                            key={label}
-                            className={cn(
-                                "flex gap-3 items-center py-4 max-lg:px-4 justify-center lg:justify-start",
-                                {
-                                    "bg-nav-focus border-r-4 border-orange-1":
-                                        isActive,
-                                },
-                            )}
-                        >
-                            <Image
-                                src={imgURL}
-                                alt={label}
-                                width={24}
-                                height={24}
-                            />
-                            <p>{label}</p>
-                        </Link>
-                    )
-                })}
+            <nav className="flex flex-col">
+                <div className="flex flex-col w-full">
+            {routes.map((route) => (
+                <SidebarItem
+                    key={route.key}
+                    icon={route.icon}
+                    label={route.label}
+                    href={route.href}
+                />
+            ))}
+        </div>
             </nav>
-            <SignedOut>
-                <div className="flex-center w-full pb-14 max-lg:px-4 lg:pr-8">
-                    <Button
-                        asChild
-                        className="text-16 w-full bg-orange-1 font-extrabold"
-                    >
-                        <Link href="/sign-in">Sign in</Link>
-                    </Button>
-                </div>
-            </SignedOut>
-            <SignedIn>
-                <div className="flex-center w-full pb-14 max-lg:px-4 lg:pr-8">
-                    <Button
-                        className="text-16 w-full bg-orange-1 font-extrabold"
-                        onClick={() => signOut(() => router.push("/"))}
-                    >
-                        Log Out
-                    </Button>
-                </div>
-            </SignedIn>
         </section>
     )
 }
