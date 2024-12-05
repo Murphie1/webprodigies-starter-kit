@@ -4,7 +4,7 @@
 import Image from "next/image"
 import { Toaster } from "@/components/ui/toaster"
 //import PodcastPlayer from "@/components/PodcastPlayer"
-//import AudioProvider from "@/providers/AudioProvider"
+import AudioProvider from "@/providers/AudioProvider"
 
 export default function RootLayout({
     children,
@@ -29,7 +29,7 @@ export default function RootLayout({
                         </div>
                         <div className="flex flex-col md:pb-14">
                             <Toaster />
-                            {children}
+                           <AudioProvider>{children}</AudioProvider>
                         </div>
                     </div>
                 </section>
