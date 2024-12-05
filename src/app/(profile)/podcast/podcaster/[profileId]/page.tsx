@@ -7,6 +7,10 @@ import LoaderSpinner from "@/components/LoaderSpinner"
 import PodcastCard from "@/components/PodcastCard"
 import ProfileCard from "@/components/ProfileCard"
 import { api } from "~/convex/_generated/api"
+import PodcastPlayer from "@/components/PodcastPlayer"
+import LeftSidebar from "@/components/LeftSidebar"
+import RightSidebar from "@/components/RightSidebar"
+import MobileNav from "@/components/MobileNav"
 
 const ProfilePage = ({
     params,
@@ -26,6 +30,8 @@ const ProfilePage = ({
 
     return (
         <section className="mt-9 flex flex-col">
+            <LeftSidebar />
+            <MobileNav />
             <h1 className="text-20 font-bold text-white-1 max-md:text-center">
                 Podcaster Profile
             </h1>
@@ -60,6 +66,8 @@ const ProfilePage = ({
                     />
                 )}
             </section>
+            <RightSidebar />
+            <PodcastPlayer />
         </section>
     )
 }
