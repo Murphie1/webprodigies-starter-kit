@@ -20,7 +20,7 @@ const MobileNav = () => {
                     <h1>
                         Podcasts
                         </h1>
-                        <SheetClose asChild>
+                        <SheetClose>
                             <LeftSidebar />
                         </SheetClose>
                 </SheetContent>
