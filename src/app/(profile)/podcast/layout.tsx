@@ -3,7 +3,7 @@
 //import RightSidebar from "@/components/RightSidebar";
 //import { Toaster } from "@/components/ui/toaster"
 //import PodcastPlayer from "@/components/PodcastPlayer";
-
+import { AudioProvider } from "@/providers/AudioProvider"
 export default function RootLayout({
   children,
 }: Readonly<{
