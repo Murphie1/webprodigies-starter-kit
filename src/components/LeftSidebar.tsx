@@ -18,7 +18,7 @@ const podcastRoutes = [
         key: 2,
         icon: Heart,
         label: "Create a Podcast",
-        href: "/podcast/create,
+        href: "/podcast/create",
     },
     {
         key: 3,
