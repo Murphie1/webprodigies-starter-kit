@@ -12,7 +12,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-      <main className="relative flex flex-col">
+      <main className="relative flex flex-col pl-5 pb-5">
              <AudioProvider>{children}</AudioProvider>
       </main>
   );
