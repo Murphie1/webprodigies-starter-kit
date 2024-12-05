@@ -30,7 +30,7 @@ const ProfilePage = ({
 
     return (
         <section className="mt-9 flex flex-col">
-            <LeftSidebar />
+          <div className="hidden md:flex"><LeftSidebar /></div>
             <MobileNav />
             <h1 className="text-20 font-bold text-white-1 max-md:text-center">
                 Podcaster Profile
