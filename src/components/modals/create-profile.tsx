@@ -72,14 +72,19 @@ export const CreateProfile = () => {
     return (
         <Dialog>
             <DialogTrigger>
-                <div className="bg-transparent w-[150px] h-[150px] items-center border border-black dark:border-white">
-                    <CirclePlus />
-                </div>
+                 <span>
+                        <Card className="bg-white dark:bg-[#101011] border-black dark:border-themeGray hover:bg-sky-100 dark:hover:bg-themeBlack transition duration-100 cursor-pointer border-dashed aspect-square rounded-xl">
+                            <CardContent className="opacity-20 flex gap-x-2 p-0 justify-center items-center h-full">
+                                <BadgePlus />
+                                <p>Create Course</p>
+                            </CardContent>
+                        </Card>
+                    </span>
             </DialogTrigger>
             <DialogContent className="bg-white text-black p-0 overflow-hidden">
                 <DialogHeader className="pt-8 px-6">
                     <DialogTitle className="text-2xl text-center font-bold">
-                        Create your Groupspace
+                        Create a Profile
                     </DialogTitle>
                     <DialogDescription className="text-center text-zinc-500">
                         Add a name and an image. You&apos;re free to change this
