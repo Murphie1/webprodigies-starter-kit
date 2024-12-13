@@ -60,7 +60,7 @@ export const CreateProfile = () => {
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         try {
-            await axios.post("/app/api/profile", values)
+            await axios.post("/api/profile", values)
 
             form.reset()
             router.refresh()
@@ -78,14 +78,14 @@ export const CreateProfile = () => {
         <Dialog>
             <DialogTrigger>
                  <span>
-                        <Card className="bg-white dark:bg-[#101011] border-black dark:border-themeGray hover:bg-sky-100 dark:hover:bg-themeBlack transition duration-100 cursor-pointer border-dashed aspect-square rounded-xl">
+                        <Card className="bg-white dark:bg-[#101011] border-black dark:border-themeGray hover:bg-sky-100 dark:hover:bg-themeBlack transition duration-100 cursor-pointer border-dashed aspect-square rounded-md">
                             <CardContent className="opacity-20 flex gap-x-2 p-0 justify-center items-center h-full">
                                 <CirclePlus />
                             </CardContent>
                         </Card>
                     </span>
             </DialogTrigger>
-            <DialogContent className="bg-white text-black p-0 overflow-hidden">
+            <DialogContent className="bg-white text-black p-0 overflow-hidden dark:bg-black dark:text-white">
                 <DialogHeader className="pt-8 px-6">
                     <DialogTitle className="text-2xl text-center font-bold">
                         Create a Profile
