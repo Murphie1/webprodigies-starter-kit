@@ -3,11 +3,12 @@ import { UploadDropZone } from "@/lib/uploadthing"
 import "@uploadthing/react/styles.css"
 import Image from "next/image"
 import { X } from "lucide-react"
+import { ourFileRouter } from "@/app/api/uploadthing/core"
 
 interface FileUploadProps {
     onChange: (url?: string) => void
     value: string
-    endpoint: "messageFile" | "groupspaceImage" | "profileImage"
+    endpoint: keyof typeof ourFileRouter
 }
 
 export const FileUpload = ({ onChange, value, endpoint }: FileUploadProps) => {
