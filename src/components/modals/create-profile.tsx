@@ -76,7 +76,6 @@ export const CreateProfile = () => {
                         <Card className="bg-white dark:bg-[#101011] border-black dark:border-themeGray hover:bg-sky-100 dark:hover:bg-themeBlack transition duration-100 cursor-pointer border-dashed aspect-square rounded-xl">
                             <CardContent className="opacity-20 flex gap-x-2 p-0 justify-center items-center h-full">
                                 <BadgePlus />
-                                <p>Create Course</p>
                             </CardContent>
                         </Card>
                     </span>
