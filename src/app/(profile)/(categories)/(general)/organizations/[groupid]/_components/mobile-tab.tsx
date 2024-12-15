@@ -18,11 +18,11 @@ const Tab = ({ groupId, image }: Props): JSX.Element => {
   return (
     isOpen ? (
        <div className="bg-white dark:bg-[#1A1A1D] space-x-7 w-auto overflow-x-auto whitespace-nowrap py-3 fixed bottom-10 z-50 md:hidden justify-between items-center flex">
-            <Link href={`/organizations/${groupid}/groupspaces`}>
+            <Link href={`/organizations/${groupId}/groupspaces`}>
                 <LayoutGrid />
             </Link>
             <Notification />
-            <Link href={`/organizations/${groupid}/messages`}>
+            <Link href={`/organizations/${groupId}/messages`}>
                 <MessageSquare />
             </Link>
             <Link href={`/organizations/explore`}>
