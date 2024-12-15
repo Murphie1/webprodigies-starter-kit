@@ -3,7 +3,7 @@ import { client } from "@/lib/prisma"
 import { currentUser } from "@clerk/nextjs/server"
 import { redirect } from "next/navigation"
 import { NextResponse } from "next/server"
-import { v4 as uuidv4 } from "uuid"
+
 
 export async function POST(req: Request) {
     try {
@@ -22,7 +22,7 @@ export async function POST(req: Request) {
             data: {
                 clerkId: clerk.id,
                 name,
-                imageUrl,
+                imageUrl: imageUrl || clerk.imageUrl,
                 email: clerk.emailAddresses[0]?.emailAddress,
                 userId: user.id,
             },
