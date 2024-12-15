@@ -36,9 +36,9 @@ const formSchema = z.object({
     name: z.string().min(1, {
         message: "Your Profile needs a name.",
     }),
-    imageUrl: z.string().min(1, {
-        message: "Having an image is also quite important you know.",
-    }),
+    //imageUrl: z.string().min(1, {
+       // message: "Having an image is also quite important you know.",
+  //  }),
 })
 
 export const CreateProfile = () => {
@@ -78,7 +78,7 @@ export const CreateProfile = () => {
         <Dialog>
             <DialogTrigger>
                  <span>
-                        <Card className="bg-white dark:bg-[#101011] border-black dark:border-themeGray hover:bg-sky-100 dark:hover:bg-themeBlack transition duration-100 cursor-pointer border-dashed aspect-square rounded-md">
+                        <Card className="bg-white dark:bg-[#101011] border-black dark:border-themeGray hover:bg-sky-100 dark:hover:bg-themeBlack transition duration-100 cursor-pointer border-dashed aspect-square rounded-md h-[200px] w-[200px]">
                             <CardContent className="opacity-20 flex gap-x-2 p-0 justify-center items-center h-full">
                                 <CirclePlus />
                             </CardContent>
@@ -90,7 +90,7 @@ export const CreateProfile = () => {
                     <DialogTitle className="text-2xl text-center font-bold">
                         Create a Profile
                     </DialogTitle>
-                    <DialogDescription className="text-center text-zinc-500">
+                    <DialogDescription className="text-center text-zinc-500 dark:text-themeWhite">
                         Add a name and an image. You&apos;re free to change this
                         at anytime.
                     </DialogDescription>
@@ -130,7 +130,7 @@ export const CreateProfile = () => {
                                         <FormControl>
                                             <Input
                                                 disabled={isLoading}
-                                                className="bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0"
+                                                className="bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0 dark:text-white dark:border-2 dark:border-themeGray"
                                                 placeholder="e.g College Stuff"
                                                 {...field}
                                             />
