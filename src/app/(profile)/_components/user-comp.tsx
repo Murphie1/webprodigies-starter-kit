@@ -12,12 +12,12 @@ const UserComp = async () => {
                     name={localUser.name}
                     imageUrl={localUser?.imageUrl || "@/app/favicon.ico"}
                     type="User Account"
-                    email={localUser.email || null}
+                    email={localUser?.email || null}
                 />
-                <div>
+                <div className="items-center justify-center font-bold">
                     <Separator className="md:hidden" />
                     <Separator className="hidden md:flex" />
-                    <h5>OR</h5>
+                   <span>OR</span>
                 </div>
             </div>
         )
