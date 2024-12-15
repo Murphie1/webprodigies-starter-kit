@@ -25,7 +25,12 @@ const ProfileComp = async () => {
     }
     return null
 
-    return <CreateProfile />
+    return 
+    {profiles.length < 3 ( 
+        <CreateProfile /> 
+    ) : (
+        <div/>
+    )}
 }
 
 export default ProfileComp
