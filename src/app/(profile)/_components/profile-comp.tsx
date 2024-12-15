@@ -18,7 +18,7 @@ const ProfileComp = async () => {
     return (
         <div className="flex flex-col space-y-4">
             <h2 className="justify-center">Continue with your profiles</h2>
-            <div className="flex overflow-x-auto whitespace-nowrap w-auto max-w-screen space-x-6 pl-6">
+            <div className="flex overflow-x-auto whitespace-nowrap w-auto max-w-screen space-x-6">
                 {profiles.map((profile) => (
                     <ProfileCard
                         key={profile.id}
