@@ -5,8 +5,8 @@ import ProfileTop from "./_components/profile-top"
 
 const Home = () => {
     return (
-        <div className="flex flex-col items-center space-y-3 h-auto min-h-screen justify-center">
-            <div className="pb-5">
+        <div className="flex flex-col items-center space-y-8 h-auto min-h-screen justify-center">
+            <div className="pb-10">
                 <ProfileTop />
             </div>
             <UserComp />
