@@ -1,4 +1,5 @@
 import { onAuthenticatedUser } from "@/actions/auth"
+import { currentUser } from "@clerk/nextjs/server"
 import {
     onGetAllGroupMembers,
     onGetGroupChannels,
@@ -27,6 +28,9 @@ const GroupLayout = async ({ children, params }: Props) => {
 
     const user = await onAuthenticatedUser()
     if (!user.id) redirect("/sign-in")
+
+    const clerk = await currentUser();
+    if (!clerk) redirect("/sign-in")
 
     //group info
     await query.prefetchQuery({
@@ -67,6 +71,7 @@ const GroupLayout = async ({ children, params }: Props) => {
                     <div className="fixed pl-3 bottom-10 pb-10 md:hidden">
                         <Tab
                             groupId={params.groupid}
+                            image={clerk.imageUrl!}
                             />
                     </div>
                 </div>
