@@ -1,33 +1,36 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import MobileNav from "../../_components/mobile-nav"
-import { ChevronsRight, X } from "lucide-react"
+import { useState } from "react";
+import MobileNav from "../../_components/mobile-nav";
+import { ChevronsRight, X } from "lucide-react";
 
 type Props = {
-  groupId: string
-}
+  groupId: string;
+};
 
-const Tab = ({ groupId } : Props) => {
-    const [ isOpen, setIsOpen] = useState("false")
+const Tab = ({ groupId }: Props): JSX.Element => {
+  const [isOpen, setIsOpen] = useState(false); // Correct type: boolean
 
-        return (
-          {isOpen ? (
-            <div className="flex w-screen space-y-4 justify-center bg-white dark:bg-black border-2 border-black dark:border-white">
-              <MobileNav groupid={groupId} />
-                <X 
-                  size="30" 
-                  onClick={() => setIsOpen(false)}
-                  />
-            </div>
-        ) : ( 
-          <div 
-            className="h-[50px] w-[50px] rounded-full bg-white dark:bg-black border-2 border-black dark:border-white"
-            onClick={() => setIsOpen(true)}
-            >
-            <ChevronsRight size="30" />
-        </div>
-             )}
-)
-}
-export default Tab
+  return (
+    isOpen ? (
+      <div className="flex w-screen space-y-4 justify-center bg-white dark:bg-black border-2 border-black dark:border-white">
+        <MobileNav groupid={groupId} /> {/* Fix prop casing */}
+        <X
+          size="30"
+          onClick={() => setIsOpen(false)}
+          aria-label="Close menu" // Optional: Improve accessibility
+        />
+      </div>
+    ) : (
+      <div
+        className="h-[50px] w-[50px] rounded-full bg-white dark:bg-black border-2 border-black dark:border-white"
+        onClick={() => setIsOpen(true)}
+        aria-label="Open menu" // Optional: Improve accessibility
+      >
+        <ChevronsRight size="30" />
+      </div>
+    )
+  );
+};
+
+export default Tab;
