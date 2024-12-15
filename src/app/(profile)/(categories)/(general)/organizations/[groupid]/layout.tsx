@@ -68,12 +68,12 @@ const GroupLayout = async ({ children, params }: Props) => {
                 <SideBar groupid={params.groupid} userid={user.id} />
                 <div className="md:ml-[300px] flex flex-col flex-1 bg-white dark:bg-[#101011] md:rounded-tl-xl overflow-y-auto border-l-[1px] border-t-[1px] border-black dark:border-[#28282D]">
                     {children}
-                    <div className="fixed pl-3 bottom-15 pb-10 md:hidden">
+        {/*<div className="fixed pl-3 bottom-15 pb-10 md:hidden">
                         <Tab
                             groupId={params.groupid}
                             image={clerk.imageUrl!}
                             />
-                    </div>
+                    </div>*/}
                 </div>
             </div>
         </HydrationBoundary>
