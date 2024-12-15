@@ -14,10 +14,10 @@ const UserComp = async () => {
                     type="User Account"
                     email={localUser?.email || null}
                 />
-                <div className="items-center justify-center font-bold">
-                    <Separator className="md:hidden" />
-                    <Separator className="hidden md:flex" />
-                   <span>OR</span>
+                <div className="text-center justify-center font-bold">
+                    <Separator className="bg-black dark:bg-white md:hidden" />
+                    <Separator className="hidden md:flex bg-black dark: bg-white" />
+                   <span className="justify-center">OR</span>
                 </div>
             </div>
         )
