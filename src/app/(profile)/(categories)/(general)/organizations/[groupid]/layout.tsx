@@ -14,7 +14,7 @@ import {
     dehydrate,
 } from "@tanstack/react-query"
 import { redirect } from "next/navigation"
-import Tab from "./_components/mobile-tab"
+//import Tab from "./_components/mobile-tab"
 
 type Props = {
     children: React.ReactNode
