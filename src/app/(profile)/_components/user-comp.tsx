@@ -16,8 +16,8 @@ const UserComp = async () => {
                 />
                 <div className="text-center justify-center font-bold space-y-0">
                     <Separator className="bg-black dark:bg-white md:hidden" />
+                    <span className="justify-center">OR</span>
                     <Separator className="hidden md:flex bg-black dark: bg-white" />
-                   <span className="justify-center">OR</span>
                 </div>
             </div>
         )
