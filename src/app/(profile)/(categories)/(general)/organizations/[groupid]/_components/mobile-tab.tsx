@@ -17,7 +17,7 @@ const Tab = ({ groupId, image }: Props): JSX.Element => {
 
   return (
     isOpen ? (
-       <div className="bg-white dark:bg-[#1A1A1D] space-x-7 w-auto overflow-x-auto whitespace-nowrap py-3 fixed bottom-10 z-50 md:hidden justify-between items-center flex">
+       <div className="bg-white dark:bg-[#1A1A1D] space-x-7 w-auto overflow-x-auto whitespace-nowrap py-3 fixed bottom-[100px] z-50 md:hidden justify-between items-center flex">
             <Link href={`/organizations/${groupId}/groupspaces`}>
                 <LayoutGrid />
             </Link>
