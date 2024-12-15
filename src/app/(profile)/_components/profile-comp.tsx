@@ -26,7 +26,7 @@ const ProfileComp = async () => {
     return null
 
     return 
-    {profiles.length < 3 ( 
+    {profiles.length < 3 ? ( 
         <CreateProfile /> 
     ) : (
         <div/>
