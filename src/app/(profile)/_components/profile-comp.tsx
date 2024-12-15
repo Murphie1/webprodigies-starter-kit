@@ -18,6 +18,7 @@ const ProfileComp = async () => {
     return (
         <div className="flex flex-col w-full space-y-4">
             <h2 className="justify-center">Continue with your profiles</h2>
+           <div className="relative flex-col-2">
             <div className="flex overflow-x-auto whitespace-nowrap max-w-screen space-x-6 pl-6">
                 {profiles.map((profile) => (
                     <ProfileCard
@@ -28,9 +29,10 @@ const ProfileComp = async () => {
                         email={profile.email || null}
                     />
                 ))}
-                {profiles.length < 3 && <CreateProfile />}
             </div>
             {/* Show CreateProfile if profiles are fewer than 3 */}
+        {profiles.length < 3 && <CreateProfile />}
+       </div>
         </div>
     );
 };
