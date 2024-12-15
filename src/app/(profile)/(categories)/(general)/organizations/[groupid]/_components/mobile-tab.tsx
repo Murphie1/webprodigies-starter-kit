@@ -6,15 +6,16 @@ import { ChevronsRight, X } from "lucide-react";
 
 type Props = {
   groupId: string;
+  image: string;
 };
 
-const Tab = ({ groupId }: Props): JSX.Element => {
+const Tab = ({ groupId, image }: Props): JSX.Element => {
   const [isOpen, setIsOpen] = useState(false); // Correct type: boolean
 
   return (
     isOpen ? (
       <div className="flex w-screen space-y-4 justify-center bg-white dark:bg-black border-2 border-black dark:border-white">
-        <MobileNav groupid={groupId} /> {/* Fix prop casing */}
+        <MobileNav groupid={groupId} imageUrl={image} /> {/* Fix prop casing */}
         <X
           size="30"
           onClick={() => setIsOpen(false)}
