@@ -37,7 +37,7 @@ const Tab = ({ groupId, image }: Props): JSX.Element => {
         </div>
     ) : (
       <div
-        className="h-[50px] w-[50px] rounded-full bg-white dark:bg-black border-2 border-black dark:border-white items-center"
+        className="h-[50px] w-[50px] rounded-full bg-white dark:bg-black border-2 border-black dark:border-white items-center fixed bottom-[100px]"
         onClick={() => setIsOpen(true)}
         aria-label="Open menu" // Optional: Improve accessibility
       >
