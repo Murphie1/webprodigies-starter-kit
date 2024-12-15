@@ -13,10 +13,7 @@ import {
     dehydrate,
 } from "@tanstack/react-query"
 import { redirect } from "next/navigation"
-//import { Navbar } from "../_components/navbar"
-import MobileNav from "../_components/mobile-nav"
-import { ChevronsRight } from "lucide-react"
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+import Tab from "./_components/mobile-tab"
 
 type Props = {
     children: React.ReactNode
@@ -66,19 +63,11 @@ const GroupLayout = async ({ children, params }: Props) => {
             <div className="flex h-screen md:pt-5">
                 <SideBar groupid={params.groupid} userid={user.id} />
                 <div className="md:ml-[300px] flex flex-col flex-1 bg-white dark:bg-[#101011] md:rounded-tl-xl overflow-y-auto border-l-[1px] border-t-[1px] border-black dark:border-[#28282D]">
-                    {/*  <Navbar groupid={params.groupid} userid={user.id} /> */}
                     {children}
-                    <div className="fixed pl-1 bottom-10 pb-10 md:hidden">
-                        <Sheet>
-                            <SheetTrigger>
-                                <div className="h-[30px] w-[30px] rounded-full bg-white dark:bg-black items-center justify-center">
-                                    <ChevronsRight />
-                                </div>
-                            </SheetTrigger>
-                            <SheetContent className="h-[50px] w-full position-bottom fixed">
-                                <MobileNav groupid={params.groupid} />
-                            </SheetContent>
-                        </Sheet>
+                    <div className="fixed pl-3 bottom-10 pb-10 md:hidden">
+                        <Tab
+                            groupId={params.groupid}
+                            />
                     </div>
                 </div>
             </div>
