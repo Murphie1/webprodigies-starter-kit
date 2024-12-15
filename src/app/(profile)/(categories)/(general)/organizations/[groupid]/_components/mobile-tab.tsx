@@ -1,8 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import MobileNav from "../../_components/mobile-nav";
-import { ChevronsRight, X } from "lucide-react";
+import { Notification } from "@/components/global/user-widget/notification"
+import { UserAvatar } from "@/components/global/user-widget/user"
+import { LayoutGrid, MessageSquare, Compass, ChevronsRight, X} from "lucide-react"
+import Link from "next/link"
+
 
 type Props = {
   groupId: string;
@@ -14,14 +17,24 @@ const Tab = ({ groupId, image }: Props): JSX.Element => {
 
   return (
     isOpen ? (
-      <div className="flex w-screen space-y-4 justify-between border-2 border-black dark:border-white pb-15">
-        <MobileNav groupid={groupId} imageUrl={image} /> {/* Fix prop casing */}
-        <X
+       <div className="bg-white dark:bg-[#1A1A1D] space-x-7 w-auto overflow-x-auto whitespace-nowrap py-3 fixed bottom-10 z-50 md:hidden justify-between items-center flex">
+            <Link href={`/organizations/${groupid}/groupspaces`}>
+                <LayoutGrid />
+            </Link>
+            <Notification />
+            <Link href={`/organizations/${groupid}/messages`}>
+                <MessageSquare />
+            </Link>
+            <Link href={`/organizations/explore`}>
+                <Compass />
+            </Link>
+            <UserAvatar image={image} groupid={groupId} />
+         <X
           size="30"
           onClick={() => setIsOpen(false)}
           aria-label="Close menu" // Optional: Improve accessibility
         />
-      </div>
+        </div>
     ) : (
       <div
         className="h-[50px] w-[50px] rounded-full bg-white dark:bg-black border-2 border-black dark:border-white items-center"
