@@ -9,10 +9,12 @@ const Home = () => {
             <div className="pb-10">
                 <ProfileTop />
             </div>
+            <div className="relative md:flex grid grid-cols-2">
             <UserComp />
             <div className="overflow-x-auto whitespace-nowrap">
                 <ProfileComp />
             </div>
+                </div>
             <ProfileBottom />
         </div>
     )
