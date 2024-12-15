@@ -14,7 +14,7 @@ const Tab = ({ groupId, image }: Props): JSX.Element => {
 
   return (
     isOpen ? (
-      <div className="flex w-screen space-y-4 justify-center bg-white dark:bg-black border-2 border-black dark:border-white">
+      <div className="flex w-screen space-y-4 justify-between border-2 border-black dark:border-white pb-15">
         <MobileNav groupid={groupId} imageUrl={image} /> {/* Fix prop casing */}
         <X
           size="30"
@@ -24,11 +24,11 @@ const Tab = ({ groupId, image }: Props): JSX.Element => {
       </div>
     ) : (
       <div
-        className="h-[50px] w-[50px] rounded-full bg-white dark:bg-black border-2 border-black dark:border-white"
+        className="h-[50px] w-[50px] rounded-full bg-white dark:bg-black border-2 border-black dark:border-white items-center"
         onClick={() => setIsOpen(true)}
         aria-label="Open menu" // Optional: Improve accessibility
       >
-        <ChevronsRight size="30" />
+        <ChevronsRight size="30" className="justify-center"/>
       </div>
     )
   );
