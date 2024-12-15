@@ -8,7 +8,7 @@ type Props = {
     imageUrl: string
 }
 
-const MobileNav = async ({ groupid, image }: Props) => {
+const MobileNav = async ({ groupid, imageUrl }: Props) => {
     
 
     return (
