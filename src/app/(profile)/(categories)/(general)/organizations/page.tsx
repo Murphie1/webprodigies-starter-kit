@@ -28,10 +28,10 @@ const group = await client.group.findMany({
                 {groups.map((group) => (
                     <GroupBox
                         key={profile.id}
-                        name={profile.name}
-                        imageUrl={profile.imageUrl}
-                        type={profile.type || null}
-                        email={profile.email || null}
+                        name={group.name}
+                        image={group.thumbnail || user.image}
+                        description={group.description || " "}
+                        href={`/organizations/about/${group.id}`}
                     />
                 ))}
             </div>
