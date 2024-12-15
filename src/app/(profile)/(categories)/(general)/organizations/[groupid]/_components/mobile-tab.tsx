@@ -41,7 +41,7 @@ const Tab = ({ groupId, image }: Props): JSX.Element => {
         onClick={() => setIsOpen(true)}
         aria-label="Open menu" // Optional: Improve accessibility
       >
-        <ChevronsRight size="30" className="justify-center pl-1 pt-1"/>
+        <ChevronsRight size="30" className="justify-center pl-2 pt-1.5"/>
       </div>
     )
   );
