@@ -7,7 +7,7 @@ const ProfileComp = async () => {
 
     if (profiles && profiles.length > 0) {
         return (
-            <div className="flex flex-col w-full">
+            <div className="flex flex-col w-full space-y-4">
                 <h2>Continue with another Profile</h2>
                 <div className="flex overflow-x-auto whitespace-nowrap w-full">
                     {profiles.map((profile) => (
@@ -23,6 +23,7 @@ const ProfileComp = async () => {
             </div>
         )
     }
+    return null
 
     return <CreateProfile />
 }
