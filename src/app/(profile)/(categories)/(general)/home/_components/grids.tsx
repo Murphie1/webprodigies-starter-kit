@@ -11,9 +11,9 @@ const Grids = () => {
             {categories.map((category, index) => (
                 <div
                     key={index}
-                    className="flex flex-col items-center justify-center w-[150px] h-[100px] bg-gray-100 dark:bg-gray-800 rounded-2xl shadow-md transition-transform duration-300 hover:scale-105"
+                    className="flex items-center justify-between w-[170px] h-[80px] bg-gray-100 dark:bg-gray-800 rounded-2xl shadow-md transition-transform duration-300 hover:scale-105"
                 >
-                    <span className="text-3xl text-blue-500 mb-2">{category.icon}</span>
+                    <span className="text-lg text-blue-500 mb-2">{category.icon}</span>
                     <p className="text-lg font-medium text-gray-800 dark:text-white">
                         {category.name}
                     </p>
