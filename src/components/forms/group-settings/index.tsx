@@ -2,7 +2,7 @@
 import GroupCard from "@/app/(profile)/(categories)/(general)/organizations/_components/group-card"
 import { FormGenerator } from "@/components/global/form-generator"
 import { Loader } from "@/components/global/loader"
-import BlockTextEditor from "@/components/global/rich-text-editor"
+//import BlockTextEditor from "@/components/global/rich-text-editor"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -97,7 +97,7 @@ const GroupSettingsForm = ({ groupId }: Props) => {
                 />
                 <Label className="flex flex-col gap-y-2">
                     <p>Organization Description</p>
-                    <BlockTextEditor
+                    {/*<BlockTextEditor
                         errors={errors}
                         name="jsondescription"
                         min={150}
@@ -106,7 +106,7 @@ const GroupSettingsForm = ({ groupId }: Props) => {
                         content={onJsonDescription}
                         setContent={setJsonDescription}
                         setTextContent={setOnDescription}
-                    />
+                    />*/}
                 </Label>
                 <Button className="self-start" type="submit">
                     <Loader loading={isPending}>Update Settings</Loader>
