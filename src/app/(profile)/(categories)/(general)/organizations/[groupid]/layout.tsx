@@ -1,5 +1,4 @@
 import { onAuthenticatedUser } from "@/actions/auth"
-//import { currentUser } from "@clerk/nextjs/server"
 import {
     onGetAllGroupMembers,
     onGetGroupChannels,
@@ -14,7 +13,6 @@ import {
     dehydrate,
 } from "@tanstack/react-query"
 import { redirect } from "next/navigation"
-import Tab from "./_components/mobile-tab"
 
 type Props = {
     children: React.ReactNode
@@ -29,8 +27,6 @@ const GroupLayout = async ({ children, params }: Props) => {
     const user = await onAuthenticatedUser()
     if (!user.id) redirect("/sign-in")
 
-   // const clerk = await currentUser();
-   // if (!clerk) redirect("/sign-in")
 
     //group info
     await query.prefetchQuery({
@@ -68,13 +64,7 @@ const GroupLayout = async ({ children, params }: Props) => {
                 <SideBar groupid={params.groupid} userid={user.id} />
                 <div className="md:ml-[300px] flex flex-col flex-1 bg-white dark:bg-[#101011] md:rounded-tl-xl overflow-y-auto border-l-[1px] border-t-[1px] border-black dark:border-[#28282D]">
                     {children}
-        <div className="fixed pl-3 bottom-15 pb-10 md:hidden">
-                        <Tab
-                            groupId={params.groupid}
-                            image={user.image!}
-                            />
-                    </div>
-                </div>
+                     </div>
             </div>
         </HydrationBoundary>
     )
