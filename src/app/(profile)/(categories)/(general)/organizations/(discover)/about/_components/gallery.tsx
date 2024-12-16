@@ -86,7 +86,7 @@ const MediaGallery = ({
                     trigger={
                         <Card className="border-dashed border-black dark:border-themeGray dark:hover:bg-themeBlack bg-transparent cursor-pointer">
                             <CardContent className="flex justify-center items-center py-10 px-16">
-                                <BadgePlus />
+                                <Badgeplus />
                             </CardContent>
                         </Card>
                     }
