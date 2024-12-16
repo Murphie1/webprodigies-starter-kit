@@ -1,7 +1,7 @@
 "use client"
-//import { HtmlParser } from "@/components/global/html-parser"
+import { HtmlParser } from "@/components/global/html-parser"
 import { Loader } from "@/components/global/loader"
-//import BlockTextEditor from "@/components/global/rich-text-editor"
+import BlockTextEditor from "@/components/global/rich-text-editor"
 import { NoResult } from "@/components/global/search/no-results"
 import { Button } from "@/components/ui/button"
 import { useGroupAbout, useGroupInfo } from "@/hooks/groups"
@@ -85,10 +85,9 @@ const AboutGroup = ({ groupid, userid }: Props) => {
                 groupUserid={group.userId}
             />
             {userid !== group.userId ? (
-              <p> Html parser should be here </p> // <HtmlParser html={group.htmlDescription || "<></>"} />
+              <HtmlParser html={group.htmlDescription || "<></>"} />
             ) : (
-                <p>Block email should be  here </p>
-                {/*<form
+                <form
                     ref={editor}
                     onSubmit={onUpdateDescription}
                     className="mt-5 flex flex-col"
@@ -120,7 +119,7 @@ const AboutGroup = ({ groupid, userid }: Props) => {
                             <Loader loading={isPending}>Update</Loader>
                         </Button>
                     )}
-                </form>*/}
+                </form>
             )}
         </div>
     )
