@@ -1,16 +1,17 @@
-// pages/homepage.js
-
 const Homepage = () => {
     return (
-        <div className="flex pl-8 pt-8 items-center md:grid grid-cols-2 mx-auto">
-        <div className="justify-center items-center bg-sky-300 dark:bg-themeGray border-2 rounded-lg w-[350px] h-[175px] hover:scale-310 transition-200">
-           <p className="text-2xl justify-center">Text</p> 
-        </div>
-            <div className="hidden md:bg-themeWhite dark:bg-themeBlack border-2 rounded-lg w-[500px] h-[300px]">
-           <p className="text-2xl">Text</p> 
-        </div>
+        <div className="flex flex-col items-center justify-center h-screen space-y-8 md:grid md:grid-cols-2 md:space-y-0 md:space-x-8">
+            {/* Card 1 */}
+            <div className="flex items-center justify-center bg-sky-300 dark:bg-gray-700 border-2 border-gray-300 dark:border-gray-600 rounded-2xl w-[350px] h-[175px] hover:scale-105 transition-transform duration-300">
+                <p className="text-2xl text-center">Text</p>
             </div>
-        )
-}
 
-export default Homepage
+            {/* Card 2 */}
+            <div className="hidden md:flex items-center justify-center bg-white dark:bg-gray-800 border-2 border-gray-300 dark:border-gray-600 rounded-2xl w-[500px] h-[300px] hover:scale-105 transition-transform duration-300">
+                <p className="text-2xl text-center">Text</p>
+            </div>
+        </div>
+    );
+};
+
+export default Homepage;
