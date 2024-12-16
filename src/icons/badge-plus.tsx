@@ -1,7 +1,7 @@
 import { BadgePlus } from "lucide-react"
 
 
-export const BadgePlus = () => {
+export const Badgeplus = () => {
     return (
 
         <BadgePlus size="15" />  
