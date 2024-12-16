@@ -85,9 +85,9 @@ const AboutGroup = ({ groupid, userid }: Props) => {
                 groupUserid={group.userId}
             />
             {userid !== group.userId ? (
-               // <HtmlParser html={group.htmlDescription || "<></>"} />
+              <p> Html parser should be here </p> // <HtmlParser html={group.htmlDescription || "<></>"} />
             ) : (
-                <div/>
+                <p>Block email should be  here </p>
                 {/*<form
                     ref={editor}
                     onSubmit={onUpdateDescription}
