@@ -1,7 +1,7 @@
 import MediaGalleryForm from "@/components/forms/media-gallery"
 import { GlassModal } from "@/components/global/glass-modal"
 import { Card, CardContent } from "@/components/ui/card"
-import { BadgePlus } from "@/icons"
+import { Badgeplus } from "@/icons"
 import { validateURLString } from "@/lib/utils"
 
 type Props = {
