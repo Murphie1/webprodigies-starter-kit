@@ -36,7 +36,7 @@ const MediaGalleryForm = ({ groupid }: Props) => {
                         multiple
                         {...register("image")}
                     />
-                    <BadgePlus />
+                    <Badgeplus />
                     <p>Drag and drop an image</p>
                 </span>
                 <ErrorMessage
