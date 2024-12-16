@@ -47,7 +47,8 @@ return (
               className="
                 text-md
                 font-medium
-                text-gray-900
+                text-black
+              dark:text-white
               "
             >
               {name}
@@ -57,6 +58,8 @@ return (
             className="
               truncate
               text-sm
+            text-gray-500
+            dark:text-gray-100
             "
           >
             {description}
