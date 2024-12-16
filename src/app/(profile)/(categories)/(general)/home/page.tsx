@@ -1,8 +1,8 @@
 const Homepage = () => {
     return (
-        <div className="flex flex-col items-center justify-center md:grid md:grid-cols-2 md:space-y-0 md:space-x-8">
+        <div className="flex flex-col pt-6 items-center justify-center md:grid md:grid-cols-2 md:space-y-0 md:space-x-8">
             {/* Card 1 */}
-            <div className="flex items-center justify-center bg-sky-50 dark:bg-themeGray border-1 border-black dark:border-themeBlack rounded-2xl w-[350px] h-[175px] hover:scale-105 transition-transform duration-300">
+            <div className="flex items-center justify-center bg-gray-50 dark:bg-themeGray border-2 border-black dark:border-themeBlack rounded-2xl w-[350px] h-[175px] hover:scale-105 transition-transform duration-300">
                 <p className="text-2xl text-center">Text</p>
             </div>
 
