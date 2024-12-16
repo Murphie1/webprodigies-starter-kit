@@ -1,4 +1,4 @@
-import { Grids } from "./_components/grids"
+import Grids from "./_components/grids"
 
 const Homepage = () => {
     return (
