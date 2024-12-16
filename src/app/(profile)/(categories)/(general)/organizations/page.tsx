@@ -2,6 +2,8 @@ import { client } from "@/lib/prisma";
 import GroupBox from "./_components/group-box";
 import { onAuthenticatedUser } from "@/actions/auth";
 import { redirect } from "next/navigation";
+import { NavBar } from "@/components/navbar"
+import { SideBar } from "@/components/sidebar"
 
 const Orgs = async () => {
     // Authenticate the user
@@ -20,7 +22,16 @@ const Orgs = async () => {
     });
 
     return (
-        <div className="flex flex-col h-full w-full space-y-8">
+        <div className="h-full relative flex"> 
+        <div className="h-[50px] md:h-[75px] md:pl-56 fixed inset-y-0 w-full z-50">
+                <NavBar />
+            </div>
+
+            {/* Sidebar */}
+            <div className="hidden md:flex h-full w-56 flex-col fixed inset-y-0 z-50">
+                <SideBar />
+            </div>
+        <div className="flex flex-col h-full w-full space-y-8 pt-[75px] md:pl-56">
             {/* Display groups or a message */}
             {groups.length > 0 ? (
                 <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -56,6 +67,7 @@ const Orgs = async () => {
                 </a>
             </div>
         </div>
+            </div>
     );
 };
 
