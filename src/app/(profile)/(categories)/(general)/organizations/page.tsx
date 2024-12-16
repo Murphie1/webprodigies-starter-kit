@@ -41,7 +41,7 @@ const Orgs = async () => {
             )}
 
             {/* Buttons for "Create" and "Explore" */}
-            <div className="flex justify-center space-x-4">
+            <div className="flex justify-center space-x-4 bottom-10">
                 <a
                     href="/organizations/create"
                     className="px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700"
