@@ -7,7 +7,7 @@ const Grids = () => {
     ];
 
     return (
-        <div className="flex flex-wrap items-center justify-center mx-auto grid grid-cols-2 space-x-2 space-y-2 md:grid-cols-4 md:gap-6">
+        <div className="flex flex-wrap items-center justify-center grid grid-cols-2 space-x-2 space-y-2 md:grid-cols-4 md:gap-6">
             {categories.map((category, index) => (
                 <div
                     key={index}
