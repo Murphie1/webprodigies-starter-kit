@@ -5,7 +5,7 @@ import { currentUser } from "@clerk/nextjs/server";
   
  export const getUsers = async () => {
     const localUser = await onAuthenticatedUser();
-  if (!localUser || localUser?.id) {
+  if (!localUser || localUser.id) {
     return [];
   }
     const clerk = await currentUser();
@@ -60,7 +60,7 @@ export const getMessages = async (
       export const getConversations = async () => {
   const localUser = await onAuthenticatedUser();
 
-  if (!localUser || !localUser?.id) {
+  if (!localUser || !localUser.id) {
     return [];
   }
 
@@ -118,7 +118,7 @@ export const getMessages = async (
 
 export const getRequests = async () => {
     const localUser = await onAuthenticatedUser();
-  if (!localUser || localUser?.id) {
+  if (!localUser || localUser.id) {
     return [];
   }
     const clerk = await currentUser();
