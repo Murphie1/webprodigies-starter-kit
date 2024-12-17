@@ -9,8 +9,13 @@ export async function POST(
 ) {
   try {
     const clerk = await currentUser();
+    if (!clerk) {
+      return new NextResponse('Unauthorized', { status: 401 });
+    }
     const localUser = await onAuthenticatedUser();
-    
+    if (!localUser) {
+      return new NextResponse('Unauthorized', { status: 401 });
+    }
     
     const body = await request.json();
     const {
