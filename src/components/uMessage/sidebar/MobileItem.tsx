@@ -8,7 +8,6 @@ interface MobileItemProps {
   href: string;
   icon: LucideIcon;
   active?: boolean;
-  onClick?: () => void;
 }
 
 const MobileItem: React.FC<MobileItemProps> = ({
@@ -35,10 +34,9 @@ const MobileItem: React.FC<MobileItemProps> = ({
         dark:text-themeTextWhite
         hover:text-black
         dark:hover:text-white
-        hover:bg-gray-100
-        dark:hover:bg-sky-700
+        hover:bg-sky-700
       `,
-        active && "bg-gray-100 text-black dark:bg-sky-700 dark:text-white"
+        active && "text-black bg-sky-700 dark:text-white"
       )}
     >
       <Icon className="h-10 w-10" />
