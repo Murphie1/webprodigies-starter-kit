@@ -3,7 +3,7 @@ import { onAuthenticatedUser } from "./auth";
 import { currentUser } from "@clerk/nextjs/server";
 
   
- export const getUsers = async () => {
+ export const getFriends = async () => {
     const localUser = await onAuthenticatedUser();
   if (!localUser || localUser.id) {
     return [];
