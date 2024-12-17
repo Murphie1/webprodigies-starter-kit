@@ -39,7 +39,7 @@ model User {
   conversations      Conversation[] @relation(fields: [conversationIds], references: [id])
   
   seenChatIds     String[]   
-  seenChats       Chat[]     @relation(fields: [seenChatIds], references: [id])
+  seenChats       Chat[]     @relation("Seen", fields: [seenChatIds], references: [id])
   
   chats           Chat[]
 }
@@ -283,8 +283,8 @@ model Conversation {
   createdAt      DateTime    @default(now())
   lastMessageAt  DateTime    @default(now())
   name           String?     
-  isGroup        Boolean?    @default(false)
-
+  isGroup        Boolean?   
+  imageUrl          String?
   // Many-to-many relation between Conversation and Message
   chats       Chat[]   
 
@@ -301,7 +301,7 @@ model Chat {
 
   // Many-to-many relation for 'seen' users
   seenIds         String[]     
-  seen            User[]       @relation(fields: [seenIds], references: [id])
+  seen            User[]       @relation("Seen", fields: [seenIds], references: [id])
 
   // Relation to Conversation
   conversationId  String       @db.Uuid
