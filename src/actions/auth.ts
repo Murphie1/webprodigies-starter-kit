@@ -16,13 +16,16 @@ export const onAuthenticatedUser = async () => {
                 id: true,
                 firstname: true,
                 lastname: true,
+                image: true,
+                role: true,
             },
         })
         if (user)
             return {
                 status: 200,
                 id: user.id,
-                image: clerk.imageUrl,
+                role: user.role,
+                image: user.image || `${clerk.imageUrl}`,
                 username: `${user.firstname} ${user.lastname}`,
             }
         return {
