@@ -2,7 +2,7 @@ import { client } from "@/lib/prisma"
 import { redirect } from "next/navigation"
 import { currentUser } from "@clerk/nextjs/server"
 
-export const InitialProfile = async () => {
+export const initialProfile = async () => {
     const clerk = await currentUser()
 
     if (!clerk) {
