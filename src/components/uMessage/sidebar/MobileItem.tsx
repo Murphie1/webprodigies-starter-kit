@@ -2,10 +2,11 @@
 
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { LucideIcon } from "lucide-react";
 
 interface MobileItemProps {
   href: string;
-  icon: any;
+  icon: LucideIcon;
   active?: boolean;
   onClick?: () => void;
 }
