@@ -14,7 +14,7 @@ export async function POST(
       image
     } = body;
 
-    if (!clerk.id) {
+    if (!clerk || !clerk.id) {
       return new NextResponse('Unauthorized', { status: 401 });
     }
 
