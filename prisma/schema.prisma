@@ -309,6 +309,7 @@ model Chat {
   image          String?
   createdAt      DateTime  @default(now())
 
+ seenIds        String[]
   seen           User[]    @relation("SeenChats")
   conversation   Conversation @relation(fields: [conversationId], references: [id])
   conversationId String
