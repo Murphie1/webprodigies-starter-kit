@@ -36,10 +36,10 @@ model User {
   gsMember  GSMember[]
   session   Session[]
   conversationIds    String[]      
-  conversations      Conversation[] @relation(fields: [conversationIds], references: [id])
+  conversations      Conversation[] //@relation(fields: [conversationIds], references: [id])
   
   seenChatIds     String[]   
-  seenChats       Chat[]     @relation("Seen", fields: [seenChatIds], references: [id])
+  seenChats       Chat[]     @relation("Seen", references: [id])
   
   chats           Chat[]
 }
@@ -290,7 +290,7 @@ model Conversation {
 
   // JSON array for user IDs to simplify storage
   userIds        String[]    
-  users          User[]      @relation(fields: [userIds], references: [id])
+  users          User[]      @relation("UsersConversations", references: [id])
 }
 
 model Chat {
@@ -301,7 +301,7 @@ model Chat {
 
   // Many-to-many relation for 'seen' users
   seenIds         String[]     
-  seen            User[]       @relation("Seen", fields: [seenIds], references: [id])
+  seen            User[]       @relation("Seen", references: [id])
 
   // Relation to Conversation
   conversationId  String       @db.Uuid
@@ -318,4 +318,3 @@ enum UserRole {
   SUPPORT
   LEARNER
 }
-
