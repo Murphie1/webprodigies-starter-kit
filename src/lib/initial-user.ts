@@ -1,8 +1,6 @@
 import { client } from "@/lib/prisma"
 import { redirect } from "next/navigation"
 import { currentUser } from "@clerk/nextjs/server"
-import { ProfileCard } from "@/components/user-profile-card"
-import { Separator } from "@/components/ui/separator"
 
 export const initialUser = async () => {
     const clerk = await currentUser()
@@ -26,7 +24,7 @@ export const initialUser = async () => {
     const newUser = await client.user.create({
         data: {
             clerkId: clerk.id, // Use clerkId when creating a new user
-            firstname: `${clerk.firstName}`|| `${clerk.userName}`,
+            firstname: `${clerk.firstName}`|| `${clerk.username}`,
             lastname: `${clerk.lastName}` || " ",
             image: clerk.imageUrl || "@/app/favicon.ico",
             email: clerk.emailAddresses[0]?.emailAddress || null, // add by me to the user model
