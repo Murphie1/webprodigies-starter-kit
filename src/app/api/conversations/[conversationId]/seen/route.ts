@@ -1,7 +1,7 @@
 import { currentUser } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 import { onAuthenticatedUser } from "@/actions/auth";
-import prisma from "@/lib/prisma";
+import { client } from "@/lib/prisma";
 import { pusherServer } from "@/lib/pusher";
 
 interface IParams {
@@ -14,7 +14,13 @@ export async function POST(
 ) {
   try {
     const localUser = await onAuthenticatedUser();
+    if (!localUser) {
+       return new NextResponse('Unauthorized', { status: 401});
+    }
     const clerk = await currentUser();
+    if (!clerk) {
+      return new NextResponse('Unauthorized', { status: 401});
+    }
     const {
       conversationId
     } = params;
