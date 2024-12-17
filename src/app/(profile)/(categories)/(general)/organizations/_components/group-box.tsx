@@ -17,7 +17,7 @@ type GBProps = {
 
 const GroupBox = ({ image, href, name, description } : GBProps) => {
 return ( 
-  <Link href={href}>
+
     <div
       className="
         w-full,
@@ -33,6 +33,7 @@ return (
       "
     >
         <GroupImage imageUrl={image} />
+        <Link href={href}>
       <div className="min-w-0 flex-1">
         <div className="focus:outline-none">
           <div
@@ -66,8 +67,8 @@ return (
           </p>
         </div>
       </div>
+          </Link>
     </div>
-    </Link>
    )
 }
  
