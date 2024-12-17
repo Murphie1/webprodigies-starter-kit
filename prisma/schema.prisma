@@ -40,6 +40,8 @@ model User {
   chats       Chat[]       @relation("SentChats")
   conversationIds    String[]      
   seenChatIds     String[]
+  friends     Friend[]  @relation("UserFriends")
+  friendRequests Friendrequest[] @relation("UserFriendRequests")
 }
 
 model Profile {
@@ -317,3 +319,21 @@ model Chat {
   sender         User      @relation("SentChats", fields: [senderId], references: [id])
   senderId       String   @db.Uuid
 }
+
+model Friend {
+id   String @id @default(uuid())
+userIds String[]
+users User[]  @relation("UserFriends")
+createdAt DateTime @default(now())
+updatedAt DateTime @updatedAt
+}
+
+model Friendrequest {
+id   String @id @default(uuid())
+userIds String[]
+isAccepted  Boolean @default(false)
+users User[]  @relation("UserFriendRequests")
+createdAt DateTime @default(now())
+updatedAt DateTime @updatedAt
+}
+
