@@ -299,6 +299,7 @@ model Conversation {
   imageUrl       String?
 
   chats       Chat[]
+  userIds     String[]
   users          User[]     @relation("UserConversations")
 }
 
