@@ -32,6 +32,21 @@ const Orgs = async () => {
                 <SideBar />
             </div>
         <div className="flex flex-col h-full w-full space-y-8 pt-[75px] md:pl-56">
+            {/* Buttons for "Create" and "Explore" */}
+            <div className="flex justify-center space-x-4 bottom-10">
+                <a
+                    href="/organizations/create"
+                    className="px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700"
+                >
+                    Create
+                </a>
+                <a
+                    href="/organizations/explore"
+                    className="px-4 py-2 text-white bg-gray-600 rounded-lg hover:bg-gray-700"
+                >
+                    Explore
+                </a>
+            </div>
             {/* Display groups or a message */}
             {groups.length > 0 ? (
                 <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -50,22 +65,6 @@ const Orgs = async () => {
                     <h2>Create your first Group</h2>
                 </div>
             )}
-
-            {/* Buttons for "Create" and "Explore" */}
-            <div className="flex justify-center space-x-4 bottom-10">
-                <a
-                    href="/organizations/create"
-                    className="px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700"
-                >
-                    Create
-                </a>
-                <a
-                    href="/organizations/explore"
-                    className="px-4 py-2 text-white bg-gray-600 rounded-lg hover:bg-gray-700"
-                >
-                    Explore
-                </a>
-            </div>
         </div>
             </div>
     );
