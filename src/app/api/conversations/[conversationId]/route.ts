@@ -17,7 +17,7 @@ export async function DELETE(
     const localUser = await onAuthenticatedUser();
     const clerk = await currentUser();
 
-    if (!localUser?.id) {
+    if (!localUser || !localUser?.id) {
       return new NextResponse('Unauthorized', { status: 401 });
     }
 
