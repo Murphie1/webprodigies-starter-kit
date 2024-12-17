@@ -22,7 +22,7 @@ model User {
   clerkId   String   @unique
   image     String?
   stripeId  String?
-
+  role      UserRole @default(LEARNER)
   group      Group[]
   membership Members[]
   posts      Post[]
@@ -33,6 +33,14 @@ model User {
   groupSpace Groupspace[]
   gsMember  GSMember[]
   session   Session[]
+  conversationIds    String[]      @default([]) // Using a JSONB array for simplicity
+  conversations      Conversation[] @relation("UserConversations", references: [id])
+  
+  seenChatIds     String[]      @default([]) // JSONB array to store IDs of seen messages
+  seenChats       Chat[]     @relation("SeenChats", references: [id])
+  
+  chats           Chat[]
+}
 }
 
 model Profile {
@@ -258,7 +266,7 @@ model Session {
   name String
   type SessionType @default(TEXT)
   user User?      @relation(fields: [userId], references: [id], onDelete: Cascade)
-   userId   String?         @db.Uuid
+  userId   String?         @db.Uuid
   clerkId   String
   groupSpace Groupspace   @relation(fields: [groupSpaceId], references: [id], onDelete: Cascade)
   groupSpaceId String
@@ -268,3 +276,45 @@ model Session {
 
    @@index([userId, clerkId, groupSpaceId])
 }
+
+model Conversation {
+  id             String      @id @default(uuid()) @db.Uuid
+  createdAt      DateTime    @default(now())
+  lastMessageAt  DateTime    @default(now())
+  name           String?     
+  isGroup        Boolean?    @default(false)
+
+  // Many-to-many relation between Conversation and Message
+  chats       Chat[]   
+
+  // JSON array for user IDs to simplify storage
+  userIds        String[]    @default([]) @db.Json 
+  users          User[]      @relation("UserConversations", references: [id])
+}
+
+model Chat {
+  id              String       @id @default(uuid()) @db.Uuid
+  body            String?      
+  image           String?      
+  createdAt       DateTime     @default(now())
+
+  // Many-to-many relation for 'seen' users
+  seenIds         String[]     @default([]) @db.Json
+  seen            User[]       @relation("SeenChats", references: [id])
+
+  // Relation to Conversation
+  conversationId  String       @db.Uuid
+  conversation    Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+
+  // Relation to sender User
+  senderId        String       @db.Uuid
+  sender          User         @relation(fields: [senderId], references: [id], onDelete: Cascade)
+}
+
+enum UserRole {
+  ADMIN
+  MODERATOR
+  SUPPORT
+  LEARNER
+}
+
