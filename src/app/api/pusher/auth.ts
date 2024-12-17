@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next"
 import { currentUser } from "@clerk/nextjs/server"
-
+import { NextResponse } from "next/server"
 import { pusherServer } from "@/lib/pusher"
 
 
