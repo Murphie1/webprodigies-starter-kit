@@ -20,7 +20,7 @@ export async function POST(
 
     const updatedUser = await client.user.update({
       where: {
-        id: currentUser.id
+        clerkId: clerk.id
       },
       data: {
         image: image,
