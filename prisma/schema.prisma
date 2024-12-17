@@ -24,7 +24,7 @@ model User {
   stripeId  String?
   role      UserRole @default(LEARNER)
   
-  attributes String[]?
+  attributes String[]
   group      Group[]
   membership Members[]
   posts      Post[]
