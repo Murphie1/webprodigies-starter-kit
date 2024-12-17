@@ -23,6 +23,8 @@ model User {
   image     String?
   stripeId  String?
   role      UserRole @default(LEARNER)
+  
+  
   group      Group[]
   membership Members[]
   posts      Post[]
@@ -33,11 +35,11 @@ model User {
   groupSpace Groupspace[]
   gsMember  GSMember[]
   session   Session[]
-  conversationIds    String[]      @default([]) // Using a JSONB array for simplicity
-  conversations      Conversation[] @relation("UserConversations", references: [id])
+  conversationIds    String[]      
+  conversations      Conversation[] @relation(fields: [conversationIds], references: [id])
   
-  seenChatIds     String[]      @default([]) // JSONB array to store IDs of seen messages
-  seenChats       Chat[]     @relation("SeenChats", references: [id])
+  seenChatIds     String[]   
+  seenChats       Chat[]     @relation(fields: [seenChatIds], references: [id])
   
   chats           Chat[]
 }
@@ -288,8 +290,8 @@ model Conversation {
   chats       Chat[]   
 
   // JSON array for user IDs to simplify storage
-  userIds        String[]    @default([]) @db.Json 
-  users          User[]      @relation("UserConversations", references: [id])
+  userIds        String[]    
+  users          User[]      @relation(fields: [userIds], references: [id])
 }
 
 model Chat {
@@ -299,8 +301,8 @@ model Chat {
   createdAt       DateTime     @default(now())
 
   // Many-to-many relation for 'seen' users
-  seenIds         String[]     @default([]) @db.Json
-  seen            User[]       @relation("SeenChats", references: [id])
+  seenIds         String[]     
+  seen            User[]       @relation(fields: [seenIds], references: [id])
 
   // Relation to Conversation
   conversationId  String       @db.Uuid
