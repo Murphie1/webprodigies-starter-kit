@@ -43,7 +43,6 @@ model User {
   
   chats           Chat[]
 }
-}
 
 model Profile {
   id String @id @default(uuid())
