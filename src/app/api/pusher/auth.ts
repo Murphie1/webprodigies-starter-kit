@@ -9,6 +9,9 @@ export default async function handler(
   response: NextApiResponse
 ) {
   const session = await currentUser()
+  if (!session) {
+      return new NextResponse('Unauthorized', { status: 401 });
+  }
 
   if (!session.emailAddresses[0]?.emailAddress) {
     return response.status(401)
