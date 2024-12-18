@@ -25,8 +25,8 @@ const FriendBox: React.FC<FriendBoxProps> = ({
     axios.post('/api/conversations', { 
       userId: otherUser.id
     })
-    .then((data) => {
-      router.push(`/socials/${otherUser.data.id}`);
+    .then((res) => {
+      router.push(`/socials/${res.data.id}`);
     })
     .finally(() => setIsLoading(false));
   }, [otherUser, router]);
