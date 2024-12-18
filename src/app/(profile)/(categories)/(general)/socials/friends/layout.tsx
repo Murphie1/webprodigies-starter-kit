@@ -1,7 +1,7 @@
 import { getFriends } from '@/actions/uMessage';
 import Sidebar from '@/components/uMessage/sidebar/Sidebar';
 import FriendList from './_components/FriendList';
-import FriendRequest from './_components/FriendRequests';
+import { FriendRequests } from './_components/FriendRequests';
 
 export default async function FriendsLayout({
   children
@@ -15,7 +15,7 @@ export default async function FriendsLayout({
     <Sidebar>
       <div className="h-full">
         <a>
-          <FriendRequest />
+          <FriendRequests />
         </a>
         <FriendList items={friends} />
         {children}
