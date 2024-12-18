@@ -15,7 +15,7 @@ interface FriendBoxProps {
 }
 
 const RequestBox: React.FC<FriendBoxProps> = ({
-  data
+  item
 }) => {
   const otherUser = useOtherUser(item);
   if (!otherUser) return;
@@ -75,7 +75,7 @@ const RequestBox: React.FC<FriendBoxProps> = ({
                 dark:text-themeTextWhite
               "
             >
-              {otherUser.name}
+              {otherUser.firstname}
             </p>
             {item.createdAt && (
               <p
