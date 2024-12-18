@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/dialog";
 import Input from "@/components/uMessage/inputs/Input";
 import Select from "@/components/uMessage/inputs/Select";
-import { Friend } from "@prisma/client";
+import { User } from "@prisma/client";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -17,7 +17,7 @@ import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useToast } from "@/components/ui/use-toast";
 
 interface GroupChatModalProps {
-  users: Friend[]
+  users: User[]
 }
 
 const GroupChatModal: React.FC<GroupChatModalProps> = ({
