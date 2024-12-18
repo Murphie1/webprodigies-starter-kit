@@ -1,6 +1,7 @@
 import { getFriends } from '@/actions/uMessage';
 import Sidebar from '@/components/uMessage/sidebar/Sidebar';
 import FriendList from './_components/FriendList';
+import FriendRequest from './_components/FriendRequests';
 
 export default async function FriendsLayout({
   children
@@ -13,6 +14,9 @@ export default async function FriendsLayout({
     // @ts-expect-error Server Component
     <Sidebar>
       <div className="h-full">
+        <a>
+          <FriendRequest />
+        </a>
         <FriendList items={friends} />
         {children}
       </div>
