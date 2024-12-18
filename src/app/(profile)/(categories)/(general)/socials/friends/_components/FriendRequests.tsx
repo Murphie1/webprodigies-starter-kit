@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/drawer";
 import RequestBox from "./RequestBox";
 import { getRequests } from "@/actions/uMessage"; // Fixed syntax error
-// import CreateRequest from "./CreateRequest"; // Uncomment if used
+import { CreateRequest } from "./CreateRequest"; // Uncomment if used
 
 export const FriendRequests = async () => {
   const friendRequests = await getRequests(); // Renamed for clarity
@@ -44,9 +44,9 @@ export const FriendRequests = async () => {
           </div>
         )}
         {/* Uncomment below if you want to include CreateRequest */}
-        {/* <DrawerFooter className="p-4 border-t border-gray-200 dark:border-gray-700">
+         <DrawerFooter className="p-4 border-t border-gray-200 dark:border-gray-700">
           <CreateRequest />
-        </DrawerFooter> */}
+        </DrawerFooter> 
       </DrawerContent>
     </Drawer>
   );
