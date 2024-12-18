@@ -32,8 +32,8 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({
   }, [otherUser.createdAt]);
 
   const title = useMemo(() => {
-    return data.name || otherUser.name;
-  }, [data.name, otherUser.name]);
+    return data.name || otherUser.firstname;
+  }, [data.name, otherUser.firstname]);
 
   const statusText = useMemo(() => {
     if (data.isGroup) {
@@ -101,7 +101,6 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({
                           </div>
                           <div className="flex gap-10 my-8">
                             <div
-                              onClick={() => setConfirmOpen(true)}
                               className="
                                 flex
                                 flex-col
