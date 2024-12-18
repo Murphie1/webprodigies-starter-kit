@@ -333,6 +333,7 @@ model Friendrequest {
 id   String @id @default(uuid())
 userIds String[]
 message  String?
+senderId  String @db.Uuid
 isAccepted  Boolean @default(false)
 users User[]  @relation("UserFriendRequests")
 createdAt DateTime @default(now())
