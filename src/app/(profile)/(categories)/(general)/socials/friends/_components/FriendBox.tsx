@@ -8,11 +8,11 @@ import { useCallback, useState } from "react";
 import useOtherUser from "@/hooks/uMessage/useOtherFriend;
 import Avatar from "@/components/uMessage/Avatar";
 
-interface UserBoxProps {
+interface FriendBoxProps {
   data: FullFriendType
 }
 
-const UserBox: React.FC<UserBoxProps> = ({
+const FriendBox: React.FC<FriendBoxProps> = ({
   data
 }) => {
   const otherUser = useOtherUser(data);
