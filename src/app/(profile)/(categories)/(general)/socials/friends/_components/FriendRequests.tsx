@@ -14,7 +14,7 @@ import { getRequests } from @/actions/uMessage";
 
 
 
-const FriendRequests = async () => {
+export const FriendRequests = async () => {
 
 const friendrequest = await getRequests();
   if (!friendrequest) return;
