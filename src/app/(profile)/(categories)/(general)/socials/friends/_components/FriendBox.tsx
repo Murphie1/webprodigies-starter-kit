@@ -70,7 +70,7 @@ const FriendBox: React.FC<FriendBoxProps> = ({
                   text-gray-900
                 "
               >
-                {otherUser.name}
+                {otherUser.firstname}
               </p>
             </div>
           </div>
