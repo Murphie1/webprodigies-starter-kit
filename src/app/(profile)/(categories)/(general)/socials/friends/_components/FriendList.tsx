@@ -36,7 +36,7 @@ const FriendList: React.FC<UserListProps> = ({
             text-neutral-800
             py-4
           ">
-            People
+          Friends
           </div>
         </div>
         {items.map((item) => (
