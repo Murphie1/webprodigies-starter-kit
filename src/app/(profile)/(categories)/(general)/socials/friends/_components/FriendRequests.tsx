@@ -28,7 +28,7 @@ const friendrequest = await getRequests();
     </DrawerHeader>
     {friendrequest ? (
       <div className="flex flex-col-1 w-full">
-        {friendrequests.map((friend) => (
+        {friendrequests.map((friendrequest) => (
                     <RequestBox
                         key={friendrequest.id}
                         item={friendrequest}
