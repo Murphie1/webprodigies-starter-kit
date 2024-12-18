@@ -60,7 +60,8 @@ export async function POST(
               id: userId
             }
           ]
-        }
+        },
+        userIds: [localUser.id, userId],
       },
       include: {
         users: true
