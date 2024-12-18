@@ -5,8 +5,8 @@ import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 
 import useConversation from "@/hooks/uMessage/useConversation";
-import { FullConversationType } from "@/type";
-
+import { FullConversationType, FullFriendType } from "@/type";
+import useOtherUser from "@/hooks/uMessage/useOtherFriend";
 import ConversationBox from "./ConversationBox";
 import GroupChatModal from "./GroupChatModal";
 import { Friend } from "@prisma/client";
@@ -16,7 +16,7 @@ import { find } from "lodash";
 
 interface ConversationListProps {
   initialItems: FullConversationType[];
-  users: Friend[]
+  users: FullFriendType[]
 }
 
 const ConversationList: React.FC<ConversationListProps> = ({
@@ -27,7 +27,7 @@ const ConversationList: React.FC<ConversationListProps> = ({
   if (!session || !session.primartEmailAddress?.emailAddress)  return redirect("/sign-in");
 
   const [items, setItems] = useState(initialItems);
-
+ const friends = useOtherUser(users);
   const router = useRouter();
 
   const { conversationId, isOpen } = useConversation();
@@ -131,7 +131,7 @@ const ConversationList: React.FC<ConversationListProps> = ({
               "
             >
               <GroupChatModal
-            users={users}
+            users={friends}
                   />
             </div>
           </div>
