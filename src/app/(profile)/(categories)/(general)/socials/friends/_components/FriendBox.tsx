@@ -5,7 +5,7 @@ import { Friend, User } from "@prisma/client";
 import { FullFriendType } from "@/type";
 import { useRouter } from "next/navigation";
 import { useCallback, useState } from "react";
-import useOtherUser from "@/hooks/uMessage/useOtherFriend;
+import useOtherUser from "@/hooks/uMessage/useOtherFriend";
 import Avatar from "@/components/uMessage/Avatar";
 
 interface FriendBoxProps {
