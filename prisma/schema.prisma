@@ -309,7 +309,8 @@ model Chat {
   id             String  @id @default(uuid())
   body           String?
   image          String?
-  createdAt      DateTime  @default(now())
+  video          String?
+ createdAt      DateTime  @default(now())
 
  seenIds        String[]
   seen           User[]    @relation("SeenChats")
@@ -331,6 +332,7 @@ updatedAt DateTime @updatedAt
 model Friendrequest {
 id   String @id @default(uuid())
 userIds String[]
+message  String?
 isAccepted  Boolean @default(false)
 users User[]  @relation("UserFriendRequests")
 createdAt DateTime @default(now())
