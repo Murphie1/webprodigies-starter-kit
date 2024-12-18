@@ -1,5 +1,5 @@
-import getConversations from "@/actions/uMessage"
-import getFriends from "@/actions/uMessage"
+import { getConversations } from "@/actions/uMessage"
+import { getFriends } from "@/actions/uMessage"
 import Sidebar from "@/components/uMessage/sidebar/Sidebar"
 import ConversationList from "./_components/ConversationList"
 
