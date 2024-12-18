@@ -3,7 +3,7 @@
 import { Dispatch, SetStateAction } from "react"
 
 import { Id } from "~/convex/_generated/dataModel"
-import { Conversation, Chat, User, Friend } from "@prisma/client";
+import { Conversation, Chat, User, Friend, Friendrequest } from "@prisma/client";
 
 export type FullMessageType = Chat & {
   sender: User,
@@ -16,6 +16,10 @@ export type FullConversationType = Conversation & {
 };
 
 export type FullFriendType = Friend & {
+  users: User[],
+};
+
+export type FullFriendRequestType = Friendrequest & {
   users: User[],
 };
 
