@@ -43,10 +43,10 @@ export async function POST(
       }
     });
 
-    const singleConversation = exisitingConversations[0];
+    const singleFriend = exisitingFriends[0];
 
-    if (singleConversation) {
-      return NextResponse.json(singleConversation);
+    if (singleFriend) {
+      return NextResponse.json(singleFriend);
     }
 
     const newFriend = await client.friend.create({
