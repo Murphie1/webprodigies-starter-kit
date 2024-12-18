@@ -118,7 +118,7 @@ const ConversationBox: React.FC<ConversationBoxProps> = ({
                 dark:text-themeTextWhite
               "
             >
-              {data.name || otherUser.name}
+              {data.name || otherUser.firstname}
             </p>
             {lastMessage?.createdAt && (
               <p
