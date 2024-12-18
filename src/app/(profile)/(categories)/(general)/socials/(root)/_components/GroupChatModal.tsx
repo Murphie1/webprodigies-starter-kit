@@ -1,5 +1,5 @@
 "use client";
-
+import { Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -72,7 +72,7 @@ const onSubmit: SubmitHandler<FieldValues> = (data) => {
   return ( 
     <Dialog>
       <DialogTrigger>
-      <Heart size="20" />
+      <Heart size={20} />
       </DialogTrigger>
       <DialogContent>
       <form onSubmit={handleSubmit(onSubmit)}>
