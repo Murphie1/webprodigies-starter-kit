@@ -35,7 +35,7 @@ title: 'Something went wrong!'
 }
 ))
     .finally(() => setIsLoading(false))
-  }, [conversationId, router, onClose]);
+  }, [conversationId, router]);
 
   return ( 
     <Dialog>
