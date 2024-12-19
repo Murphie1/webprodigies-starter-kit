@@ -18,7 +18,7 @@ const DesktopSidebar: React.FC<DesktopSidebarProps> = ({
   const routes = useRoutes();
 
 
-  console.log({ currentUser })
+  console.log({ loggedUser })
 
   return (
     <>
@@ -82,7 +82,6 @@ const DesktopSidebar: React.FC<DesktopSidebarProps> = ({
           "
         >
           <div
-            onClick={() => setIsOpen(true)}
             className="
               cursor-pointer
               hover:opacity-75
