@@ -1,4 +1,4 @@
-import { currentUser } from "@clerk/nextjs/server"
+import { loggedInUser } from "@clerk/nextjs/server"
 import { useMemo } from "react"
 import { FullConversationType } from "@/type"
 import { User } from "@prisma/client"
@@ -11,20 +11,20 @@ const useOtherUser = async (
               users: User[]
           },
 ) => {
-    const clerk = await currentUser()
-    if (!clerk || clerk.emailAddresses[0]?.emailAddress) {
+    const clerk = await loggedInUser()
+    if (!clerk || clerk.email) {
         return new NextResponse("Unauthorized", { status: 401 })
     }
 
     const otherUser = useMemo(() => {
-        const currentUserEmail = clerk.emailAddresses[0]?.emailAddress
+        const currentUserEmail = clerk.email
 
         const otherUser = conversation.users.filter(
             (user) => user.email !== currentUserEmail,
         )
 
         return otherUser[0]
-    }, [clerk.emailAddresses[0]?.emailAddress, conversation.users])
+    }, [clerk.email, conversation.users])
 
     return otherUser
 }
