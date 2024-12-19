@@ -36,9 +36,9 @@ const formSchema = z.object({
     name: z.string().min(1, {
         message: "Your Profile needs a name.",
     }),
-    //imageUrl: z.string().min(1, {
-       // message: "Having an image is also quite important you know.",
-  //  }),
+    imageUrl: z.string().min(1, {
+        message: "Having an image is also quite important you know.",
+    }),
 })
 
 export const CreateProfile = () => {
