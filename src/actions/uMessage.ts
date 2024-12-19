@@ -1,4 +1,4 @@
-import { client } from "@/lib/prismad"
+import { client } from "@/lib/prisma"
 import { onAuthenticatedUser } from "./auth"
 import { currentUser } from "@clerk/nextjs/server"
 
