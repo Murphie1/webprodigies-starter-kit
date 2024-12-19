@@ -4,7 +4,7 @@ import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
 import Image from "next/image"
 
 interface ImageModalProps {
-    src?: string | null
+    src?: FullMessageType | null
 }
 
 const ImageModal: React.FC<ImageModalProps> = ({ src }) => {
@@ -15,11 +15,12 @@ const ImageModal: React.FC<ImageModalProps> = ({ src }) => {
     return (
         <Dialog>
             <DialogTrigger>
+                {src?.image ? (
                 <Image
                     alt="Image"
                     height="288"
                     width="288"
-                    src={src}
+                    src={src.image}
                     className="
                 object-cover
                 cursor-pointer
@@ -28,15 +29,39 @@ const ImageModal: React.FC<ImageModalProps> = ({ src }) => {
                 translate
               "
                 />
+            ) : (
+            <video
+                alt="video"
+                height="288"
+                    width="288"
+                src={src.video || ""}
+                className="object-cover
+                cursor-pointer
+                hover:scale-110
+                transition
+                translate
+                "
+                />
+            )}
             </DialogTrigger>
             <DialogContent>
                 <div className="w-80 h-80">
-                    <Image
+                    {src?.image ? (
+            <Image
                         alt="Image"
                         className="object-cover"
                         fill
-                        src={src}
+                        src={src.image!}
                     />
+            ) : (
+            <video
+                        alt="video"
+                        className="object-cover"
+                        fill
+                        src={src.video || ""}
+                    />
+            )}
+            
                 </div>
             </DialogContent>
         </Dialog>
