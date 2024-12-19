@@ -1,13 +1,14 @@
 import DesktopSidebar from "./DesktopSidebar";
 import MobileHeader from "./MobileHeader";
-
+import { redirect } from "next/navigation";
 import { onAuthenticatedUser } from "@/actions/auth";
 
 async function Sidebar({ children }: {
   children: React.ReactNode;
 }) {
   const currentUser = await onAuthenticatedUser();
-
+  if (!currentUser) return redirect("/sign-in");
+  
   return (
     <div className="h-full">
       <DesktopSidebar currentUser={currentUser!} />
@@ -16,7 +17,7 @@ async function Sidebar({ children }: {
         {children}
       </main>
     </div>
-  )
-}
+  );
+};
 
 export default Sidebar;
