@@ -28,15 +28,13 @@ const ConversationList: React.FC<ConversationListProps> = ({
     // Redirect if session is invalid
     if (!session || !session.primaryEmailAddress?.emailAddress) {
         router.push("/sign-in");
-        return null;
+        return null; // Ensure early return
     }
 
     const [items, setItems] = useState(initialItems);
 
     // Memoized pusherKey
-    const pusherKey = useMemo(() => {
-        return session.primaryEmailAddress?.emailAddress || "";
-    }, [session.primaryEmailAddress?.emailAddress]);
+    const pusherKey = session.primaryEmailAddress?.emailAddress || "";
 
     // Handle real-time updates via Pusher
     useEffect(() => {
