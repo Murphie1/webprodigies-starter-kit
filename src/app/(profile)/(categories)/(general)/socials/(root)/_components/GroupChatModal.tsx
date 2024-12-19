@@ -42,18 +42,19 @@ const GroupChatModal: React.FC<GroupChatModalProps> = ({ users }) => {
     const onSubmit: SubmitHandler<FieldValues> = (data) => {
         setIsLoading(true)
 
-        try {
-            await axios.post("/api/conversations", {
+        axios.post("/api/conversations", {
                 ...data,
                 isGroup: true,
             })
+        .then(() => {
             router.refresh()
             toast({
                 title: "Success",
                 description: "Conversation created successfully!",
                 variant: "success",
             })
-        } catch (error) {
+        })
+            .catch ((error) => {
             toast({
                 title: "Something went wrong",
                 description:
@@ -61,9 +62,10 @@ const GroupChatModal: React.FC<GroupChatModalProps> = ({ users }) => {
                 variant: "destructive",
             })
             console.error("API Error:", error)
-        } finally {
+        })
+        .finally(() => {
             setIsLoading(false)
-        }
+        })
     }
 
     return (
