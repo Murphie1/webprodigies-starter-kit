@@ -1,17 +1,17 @@
 import DesktopSidebar from "./DesktopSidebar";
 import MobileHeader from "./MobileHeader";
 import { redirect } from "next/navigation";
-import { onAuthenticatedUser } from "@/actions/auth";
+import { currentUser } from "@clerk/nextjs/server";
 
 async function Sidebar({ children }: {
   children: React.ReactNode;
 }) {
-  const currentUser = await onAuthenticatedUser();
-  if (!currentUser) return redirect("/sign-in");
+  const user = await currentUser();
+  if (!user) return redirect("/sign-in");
   
   return (
     <div className="h-full">
-      <DesktopSidebar currentUser={currentUser!} />
+      <DesktopSidebar loggedUser={user!} />
       <MobileHeader />
       <main className="h-[700px] w-[calc(100vw-10px)] bg-themeWhite dark:bg-gray-900 sm:rounded-2xl border-1 border-gray-500 dark:border-themeGray sm:overflow-y-auto justify-center md:w-full lg:pl-20 lg:h-full">
         {children}
