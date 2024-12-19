@@ -4,7 +4,6 @@ import { currentUser } from "@clerk/nextjs/server"
 import { redirect } from "next/navigation"
 import { NextResponse } from "next/server"
 
-
 export async function POST(req: Request) {
     try {
         const clerk = await currentUser()

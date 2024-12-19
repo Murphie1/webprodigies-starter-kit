@@ -1,9 +1,6 @@
 "use client"
 
-import {
-    Card,
-    CardContent,
-} from "@/components/ui/card"
+import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import {
     Dialog,
@@ -77,13 +74,13 @@ export const CreateProfile = () => {
     return (
         <Dialog>
             <DialogTrigger>
-                 <span>
-                        <Card className="bg-white dark:bg-[#101011] border-black dark:border-themeGray hover:bg-sky-100 dark:hover:bg-themeBlack transition duration-100 cursor-pointer border-dashed aspect-square rounded-md h-[200px] w-[200px]">
-                            <CardContent className="opacity-20 flex gap-x-2 p-0 justify-center items-center h-full">
-                                <CirclePlus />
-                            </CardContent>
-                        </Card>
-                    </span>
+                <span>
+                    <Card className="bg-white dark:bg-[#101011] border-black dark:border-themeGray hover:bg-sky-100 dark:hover:bg-themeBlack transition duration-100 cursor-pointer border-dashed aspect-square rounded-md h-[200px] w-[200px]">
+                        <CardContent className="opacity-20 flex gap-x-2 p-0 justify-center items-center h-full">
+                            <CirclePlus />
+                        </CardContent>
+                    </Card>
+                </span>
             </DialogTrigger>
             <DialogContent className="bg-white text-black p-0 overflow-hidden dark:bg-black dark:text-white">
                 <DialogHeader className="pt-8 px-6">

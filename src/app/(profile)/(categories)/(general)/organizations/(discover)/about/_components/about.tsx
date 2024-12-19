@@ -85,14 +85,14 @@ const AboutGroup = ({ groupid, userid }: Props) => {
                 groupUserid={group.userId}
             />
             {userid !== group.userId ? (
-              <HtmlParser html={group.htmlDescription || "<></>"} />
+                <HtmlParser html={group.htmlDescription || "<></>"} />
             ) : (
                 <form
                     ref={editor}
                     onSubmit={onUpdateDescription}
                     className="mt-5 flex flex-col"
                 >
-             <BlockTextEditor
+                    <BlockTextEditor
                         onEdit={onEditDescription}
                         max={10000}
                         inline

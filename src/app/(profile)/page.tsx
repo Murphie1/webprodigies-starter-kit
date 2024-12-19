@@ -10,11 +10,11 @@ const Home = () => {
                 <ProfileTop />
             </div>
             <div className="relative space-y-8 justify-center md:flex md:space-x-6 md:grid grid-cols-2">
-            <UserComp />
-            <div className="overflow-x-auto whitespace-nowrap">
-                <ProfileComp />
-            </div>
+                <UserComp />
+                <div className="overflow-x-auto whitespace-nowrap">
+                    <ProfileComp />
                 </div>
+            </div>
             <ProfileBottom />
         </div>
     )

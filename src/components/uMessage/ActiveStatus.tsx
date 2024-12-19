@@ -1,11 +1,11 @@
-"use client";
+"use client"
 
-import useActiveChannel from "@/hooks/uMessage/useActiveChannel";
+import useActiveChannel from "@/hooks/uMessage/useActiveChannel"
 
 const ActiveStatus = () => {
-  useActiveChannel();
+    useActiveChannel()
 
-  return null;
-};
+    return null
+}
 
-export default ActiveStatus;
+export default ActiveStatus

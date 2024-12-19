@@ -55,8 +55,7 @@ export const loggedInUser = async () => {
                 role: true,
             },
         })
-        if (user)
-            return user
+        if (user) return user
         return {
             status: 404,
         }
@@ -65,8 +64,8 @@ export const loggedInUser = async () => {
             status: 400,
         }
     }
-            }
-        
+}
+
 export const onSignUpUser = async (data: {
     firstname: string
     lastname: string

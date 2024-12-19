@@ -1,29 +1,28 @@
-'use client';
+"use client"
 
-import { cn } from "@/lib/utils";
-import Link from "next/link";
-import { LucideIcon } from "lucide-react";
+import { cn } from "@/lib/utils"
+import Link from "next/link"
+import { LucideIcon } from "lucide-react"
 
 interface DesktopItemProps {
-  label: string;
-  icon: LucideIcon;
-  href: string;
-  active?: boolean;
+    label: string
+    icon: LucideIcon
+    href: string
+    active?: boolean
 }
 
 const DesktopItem: React.FC<DesktopItemProps> = ({
-  label,
-  icon: Icon,
-  href,
-  active
+    label,
+    icon: Icon,
+    href,
+    active,
 }) => {
-  
-
-  return ( 
-    <li>
-      <Link 
-        href={href}
-        className={cn(`
+    return (
+        <li>
+            <Link
+                href={href}
+                className={cn(
+                    `
           group
           flex
           gap-x-3
@@ -39,14 +38,14 @@ const DesktopItem: React.FC<DesktopItemProps> = ({
           hover:bg-sky-700
           dark:hover:bg-sky-700
         `,
-          active && 'bg-sky-700 text-black dark:text-white'
-        )}
-      >
-        <Icon className="h-10 w-10 shrink-0" />
-        <span className="sr-only">{label}</span>
-      </Link>
-    </li>
-   );
+                    active && "bg-sky-700 text-black dark:text-white",
+                )}
+            >
+                <Icon className="h-10 w-10 shrink-0" />
+                <span className="sr-only">{label}</span>
+            </Link>
+        </li>
+    )
 }
- 
-export default DesktopItem;
+
+export default DesktopItem

@@ -14,7 +14,7 @@ const Homepage = () => {
             </div>
             <Grids />
         </div>
-    );
-};
+    )
+}
 
-export default Homepage;
+export default Homepage

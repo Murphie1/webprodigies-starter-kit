@@ -1,18 +1,16 @@
-"use client";
+"use client"
 
-import { FullFriendType } from "@/type";
-import FriendBox from "./FriendBox";
+import { FullFriendType } from "@/type"
+import FriendBox from "./FriendBox"
 
 interface UserListProps {
-  items: FullFriendType[]
-};
+    items: FullFriendType[]
+}
 
-const FriendList: React.FC<UserListProps> = ({
-  items
-}) => {
-  return ( 
-    <aside
-      className="
+const FriendList: React.FC<UserListProps> = ({ items }) => {
+    return (
+        <aside
+            className="
         fixed
         inset-y-0
         pb-20
@@ -27,27 +25,26 @@ const FriendList: React.FC<UserListProps> = ({
         w-full
         left-0
       "
-    >
-      <div className="px-5">
-        <div className="flex-col">
-          <div className="
+        >
+            <div className="px-5">
+                <div className="flex-col">
+                    <div
+                        className="
             text-2xl
             font-bold
             text-neutral-800
             py-4
-          ">
-          Friends
-          </div>
-        </div>
-        {items.map((item) => (
-          <FriendBox
-            key={item.id}
-            data={item}
-          />
-        ))}
-      </div>
-    </aside>
-   );
+          "
+                    >
+                        Friends
+                    </div>
+                </div>
+                {items.map((item) => (
+                    <FriendBox key={item.id} data={item} />
+                ))}
+            </div>
+        </aside>
+    )
 }
- 
-export default FriendList;
+
+export default FriendList

@@ -1,26 +1,25 @@
-"use client";
+"use client"
 
-import Link from "next/link";
-import { cn } from "@/lib/utils";
-import { LucideIcon } from "lucide-react";
+import Link from "next/link"
+import { cn } from "@/lib/utils"
+import { LucideIcon } from "lucide-react"
 
 interface MobileItemProps {
-  href: string;
-  icon: LucideIcon;
-  active?: boolean;
+    href: string
+    icon: LucideIcon
+    active?: boolean
 }
 
 const MobileItem: React.FC<MobileItemProps> = ({
-  href,
-  icon: Icon,
-  active,
+    href,
+    icon: Icon,
+    active,
 }) => {
-  
-
-  return ( 
-    <Link 
-      href={href}
-      className={cn(`
+    return (
+        <Link
+            href={href}
+            className={cn(
+                `
         group
         flex
         gap-x-3
@@ -36,12 +35,12 @@ const MobileItem: React.FC<MobileItemProps> = ({
         dark:hover:text-white
         hover:bg-sky-700
       `,
-        active && "text-black bg-sky-700 dark:text-white"
-      )}
-    >
-      <Icon className="h-10 w-10" />
-    </Link>
-   );
+                active && "text-black bg-sky-700 dark:text-white",
+            )}
+        >
+            <Icon className="h-10 w-10" />
+        </Link>
+    )
 }
- 
-export default MobileItem;
+
+export default MobileItem

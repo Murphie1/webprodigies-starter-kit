@@ -1,29 +1,26 @@
-'use client';
+"use client"
 
-import { useState } from "react";
-import { User } from "@prisma/client";
+import { useState } from "react"
+import { User } from "@prisma/client"
 
-import useRoutes from "@/hooks/uMessage/useRoutes";
+import useRoutes from "@/hooks/uMessage/useRoutes"
 
-import DesktopItem from "./DesktopItem";
-import SettingsModal from "./SettingsModal";
+import DesktopItem from "./DesktopItem"
+import SettingsModal from "./SettingsModal"
 
 interface DesktopSidebarProps {
-  loggedUser: User
+    loggedUser: User
 }
 
-const DesktopSidebar: React.FC<DesktopSidebarProps> = ({
-  loggedUser
-}) => {
-  const routes = useRoutes();
+const DesktopSidebar: React.FC<DesktopSidebarProps> = ({ loggedUser }) => {
+    const routes = useRoutes()
 
+    console.log({ loggedUser })
 
-  console.log({ loggedUser })
-
-  return (
-    <>
-      <div
-        className="
+    return (
+        <>
+            <div
+                className="
           hidden
           lg:h-[calc(100vh-30px)]
           lg:fixed
@@ -43,59 +40,57 @@ const DesktopSidebar: React.FC<DesktopSidebarProps> = ({
           lg:flex-col
           justify-between
         "
-      >
-        <nav
-          className="
+            >
+                <nav
+                    className="
             mt-4
             flex
             flex-col
             justify-between
           "
-        >
-          <ul
-            role="list"
-            className="
+                >
+                    <ul
+                        role="list"
+                        className="
               flex
               flex-col
               items-center
               space-y-1
             "
-          >
-            {routes.map((item) => (
-              <DesktopItem
-                key={item.label}
-                href={item.href}
-                label={item.label}
-                icon={item.icon}
-                active={item.active}
-              />
-            ))}
-          </ul>
-        </nav>
-        <nav
-          className="
+                    >
+                        {routes.map((item) => (
+                            <DesktopItem
+                                key={item.label}
+                                href={item.href}
+                                label={item.label}
+                                icon={item.icon}
+                                active={item.active}
+                            />
+                        ))}
+                    </ul>
+                </nav>
+                <nav
+                    className="
             mt-4
             flex
             flex-col
             justify-between
             items-center
           "
-        >
-          <div
-            className="
+                >
+                    <div
+                        className="
               cursor-pointer
               hover:opacity-75
               transition
             "
-          >
-            <SettingsModal
-        currentUser={loggedUser}
-      />
-          </div>
-        </nav>
-      </div>
-    </>
-   );
+                    >
+                        <SettingsModal currentUser={loggedUser} />
+                    </div>
+                </nav>
+            </div>
+        </>
+    )
 }
- 
-export default DesktopSidebar;
+
+export default DesktopSidebar

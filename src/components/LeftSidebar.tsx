@@ -7,7 +7,6 @@ import React from "react"
 import { cn } from "@/lib/utils"
 import { useAudio } from "@/providers/AudioProvider"
 
-
 const podcastRoutes = [
     {
         key: 1,
@@ -27,7 +26,7 @@ const podcastRoutes = [
         label: "Browse other podcasts",
         href: "/home/search/podcasts",
     },
-    ]
+]
 const prepRoutes = [
     {
         key: 4,
@@ -41,7 +40,7 @@ const prepRoutes = [
         label: "Practice",
         href: "/prep/practice",
     },
-    ]
+]
 
 const LeftSidebar = () => {
     const pathname = usePathname()
@@ -49,7 +48,6 @@ const LeftSidebar = () => {
     const isPrepPage = pathname?.includes("/prep")
 
     const routes = isPrepPage ? prepRoutes : podcastRoutes
-    
 
     return (
         <section
@@ -59,15 +57,15 @@ const LeftSidebar = () => {
         >
             <nav className="flex flex-col">
                 <div className="flex flex-col w-full">
-            {routes.map((route) => (
-                <SidebarItem
-                    key={route.key}
-                    icon={route.icon}
-                    label={route.label}
-                    href={route.href}
-                />
-            ))}
-        </div>
+                    {routes.map((route) => (
+                        <SidebarItem
+                            key={route.key}
+                            icon={route.icon}
+                            label={route.label}
+                            href={route.href}
+                        />
+                    ))}
+                </div>
             </nav>
         </section>
     )

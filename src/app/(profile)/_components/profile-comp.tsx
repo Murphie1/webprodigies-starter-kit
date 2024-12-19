@@ -1,9 +1,9 @@
-import { initialProfile } from "@/lib/initial-profile";
-import { ProfileCard } from "@/components/user-profile-card";
-import { CreateProfile } from "@/components/modals/create-profile";
+import { initialProfile } from "@/lib/initial-profile"
+import { ProfileCard } from "@/components/user-profile-card"
+import { CreateProfile } from "@/components/modals/create-profile"
 
 const ProfileComp = async () => {
-    const profiles = await initialProfile();
+    const profiles = await initialProfile()
 
     // Handle null or undefined profiles
     if (!profiles) {
@@ -12,7 +12,7 @@ const ProfileComp = async () => {
                 <h2 className="justify-center">Create your first profile</h2>
                 <CreateProfile />
             </div>
-        );
+        )
     }
 
     return (
@@ -30,9 +30,9 @@ const ProfileComp = async () => {
                 ))}
             </div>
             {/* Show CreateProfile if profiles are fewer than 3 */}
-        {profiles.length < 3 && <CreateProfile />}
+            {profiles.length < 3 && <CreateProfile />}
         </div>
-    );
-};
+    )
+}
 
-export default ProfileComp;
+export default ProfileComp

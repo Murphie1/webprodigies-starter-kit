@@ -1,5 +1,4 @@
-
-import Image from "next/image";
+import Image from "next/image"
 import {
     Dialog,
     DialogContent,
@@ -11,15 +10,15 @@ import {
 } from "@/components/ui/dialog"
 
 interface ImageProps {
-  imageUrl: string;
+    imageUrl: string
 }
 
-const GroupImage = ({ imageUrl } : ImageProps) => {
-  return (
-    <Dialog>
-      <DialogTrigger>
-<div
-        className="
+const GroupImage = ({ imageUrl }: ImageProps) => {
+    return (
+        <Dialog>
+            <DialogTrigger>
+                <div
+                    className="
           relative
           inline-block
           rounded-full
@@ -30,22 +29,14 @@ const GroupImage = ({ imageUrl } : ImageProps) => {
           md:w-11
          hover:scale-15
         "
-      >
-        <Image
-          alt="Group"
-          src={imageUrl}
-          fill
-        />
-      </div>
-        <DialogContent className="rounded-md h-[350px] w-[350px]">
-          <Image
-            src={imageUrl}
-            alt="GroupLarge"
-            fill
-            />
-        </DialogContent>
-        </DialogTrigger>
-      </Dialog>
-  )
+                >
+                    <Image alt="Group" src={imageUrl} fill />
+                </div>
+                <DialogContent className="rounded-md h-[350px] w-[350px]">
+                    <Image src={imageUrl} alt="GroupLarge" fill />
+                </DialogContent>
+            </DialogTrigger>
+        </Dialog>
+    )
 }
 export default GroupImage

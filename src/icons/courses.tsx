@@ -1,7 +1,5 @@
 import { TextCursorInput } from "lucide-react"
 
 export const Courses = () => {
-    return (
-        <TextCursorInput size="15" />
-    )
+    return <TextCursorInput size="15" />
 }

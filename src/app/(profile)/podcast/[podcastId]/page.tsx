@@ -34,7 +34,9 @@ const PodcastDetails = ({
 
     return (
         <section className="flex w-full flex-col">
-            <div className="hidden md:flex"><LeftSidebar /></div>
+            <div className="hidden md:flex">
+                <LeftSidebar />
+            </div>
             <MobileNav />
             <header className="mt-9 flex items-center justify-between">
                 <h1 className="text-20 font-bold text-white-1">
@@ -53,19 +55,25 @@ const PodcastDetails = ({
                 </figure>
             </header>
 
-                        {podcast ? (
-            <PodcastDetailPlayer
-                isOwner={isOwner}
-                podcastId={podcast._id}
-                audioUrl={podcast?.audioUrl || "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"}
-    podcastTitle={podcast.podcastTitle!}
-    author={podcast.author!}
-    imageUrl={podcast.imageUrl!}
-    imageStorageId={podcast.imageStorageId!}
-    audioStorageId={podcast.audioStorageId!}
-    authorImageUrl={podcast.authorImageUrl!}
-    authorId={podcast.authorId!}
-            /> ) : ( <div/> )}
+            {podcast ? (
+                <PodcastDetailPlayer
+                    isOwner={isOwner}
+                    podcastId={podcast._id}
+                    audioUrl={
+                        podcast?.audioUrl ||
+                        "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
+                    }
+                    podcastTitle={podcast.podcastTitle!}
+                    author={podcast.author!}
+                    imageUrl={podcast.imageUrl!}
+                    imageStorageId={podcast.imageStorageId!}
+                    audioStorageId={podcast.audioStorageId!}
+                    authorImageUrl={podcast.authorImageUrl!}
+                    authorId={podcast.authorId!}
+                />
+            ) : (
+                <div />
+            )}
 
             <p className="text-white-2 text-16 pb-8 pt-[45px] font-medium max-md:text-center">
                 {podcast?.podcastDescription}
@@ -123,7 +131,9 @@ const PodcastDetails = ({
                     </>
                 )}
             </section>
-            <div className="hidden md:flex"><RightSidebar /></div>
+            <div className="hidden md:flex">
+                <RightSidebar />
+            </div>
             <PodcastPlayer />
         </section>
     )

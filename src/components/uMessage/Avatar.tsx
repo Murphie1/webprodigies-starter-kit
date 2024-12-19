@@ -1,23 +1,21 @@
-'use client';
+"use client"
 
-import Image from "next/image";
-import { User } from "@prisma/client";
-import useActiveList from "@/hooks/uMessage/useActiveList";
+import Image from "next/image"
+import { User } from "@prisma/client"
+import useActiveList from "@/hooks/uMessage/useActiveList"
 
 interface AvatarProps {
-  user?: User;
+    user?: User
 }
 
-const Avatar: React.FC<AvatarProps> = ({
-  user
-}) => {
-  const { members } = useActiveList();
-  const isActive = members.indexOf(user?.email!) !== -1;
+const Avatar: React.FC<AvatarProps> = ({ user }) => {
+    const { members } = useActiveList()
+    const isActive = members.indexOf(user?.email!) !== -1
 
-  return ( 
-    <div className="relative">
-      <div
-        className="
+    return (
+        <div className="relative">
+            <div
+                className="
           relative
           inline-block
           rounded-full
@@ -27,16 +25,12 @@ const Avatar: React.FC<AvatarProps> = ({
           md:h-11
           md:w-11
         "
-      >
-        <Image
-          alt="Avatar"
-          src={user?.image || '/next.svg'}
-          fill
-        />
-      </div>
-      {isActive && (
-        <span
-          className="
+            >
+                <Image alt="Avatar" src={user?.image || "/next.svg"} fill />
+            </div>
+            {isActive && (
+                <span
+                    className="
             absolute
             block
             rounded-full
@@ -50,10 +44,10 @@ const Avatar: React.FC<AvatarProps> = ({
             md:h-3
             md:w-3
           "
-        />
-      )}
-    </div>
-   );
+                />
+            )}
+        </div>
+    )
 }
- 
-export default Avatar;
+
+export default Avatar

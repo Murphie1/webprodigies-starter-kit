@@ -23,42 +23,41 @@ model User {
   image     String?
   stripeId  String?
   role      UserRole @default(LEARNER)
-  
-  attributes String[]
-  group      Group[]
-  membership Members[]
-  posts      Post[]
-  likes      Like[]
-  profile    Profile[]
-  comments   Comment[]
-  message    Message[]
-  groupSpace Groupspace[]
-  gsMember  GSMember[]
-  session   Session[]
-  conversations  Conversation[]  @relation("UserConversations")
-  seenChats   Chat[]       @relation("SeenChats")
-  chats       Chat[]       @relation("SentChats")
-  conversationIds    String[]      
+
+  attributes      String[]
+  group           Group[]
+  membership      Members[]
+  posts           Post[]
+  likes           Like[]
+  profile         Profile[]
+  comments        Comment[]
+  message         Message[]
+  groupSpace      Groupspace[]
+  gsMember        GSMember[]
+  session         Session[]
+  conversations   Conversation[]  @relation("UserConversations")
+  seenChats       Chat[]          @relation("SeenChats")
+  chats           Chat[]          @relation("SentChats")
+  conversationIds String[]
   seenChatIds     String[]
-  friends     Friend[]  @relation("UserFriends")
-  friendRequests Friendrequest[] @relation("UserFriendRequests")
+  friends         Friend[]        @relation("UserFriends")
+  friendRequests  Friendrequest[] @relation("UserFriendRequests")
 }
 
 model Profile {
-  id String @id @default(uuid())
-  clerkId  String @unique
-  user  User?           @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId  String      @db.Uuid
-  name String
-  email String
-  imageUrl String @db.Text
-  type ProfileType @default(KIDS)
-
+  id       String      @id @default(uuid())
+  clerkId  String      @unique
+  user     User?       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId   String      @db.Uuid
+  name     String
+  email    String
+  imageUrl String      @db.Text
+  type     ProfileType @default(KIDS)
 
   updatedAt DateTime @updatedAt
   createdAt DateTime @default(now())
-  
-@@index([userId, clerkId])
+
+  @@index([userId, clerkId])
 }
 
 model Subscription {
@@ -80,8 +79,8 @@ model Group {
   jsonDescription String?
   htmlDescription String?
   icon            String?
-  createdFree     Boolean  @default(false)
-  groupFree       Boolean  @default(false)
+  createdFree     Boolean        @default(false)
+  groupFree       Boolean        @default(false)
   member          Members[]
   groupSpaces     Groupspace[]
   channel         Channel[]
@@ -97,32 +96,32 @@ model Group {
 }
 
 model Groupspace {
-  id String @id @default(uuid())
-  name            String      @unique
-  createdAt       DateTime    @default(now())
-  User            User?        @relation(fields: [userId], references: [id], onDelete: Cascade)
- userId          String       @db.Uuid
- clerkId          String      
- joinCode         String?
- inviteCode       String   @db.Text
- imageUrl         String   @db.Text
- Group            Group?   @relation(fields: [groupId], references: [id], onDelete: Cascade)
- groupId          String?  @db.Uuid
- updatedAt        DateTime @updatedAt
- gsMember         GSMember[]
- session   Session[]
+  id         String     @id @default(uuid())
+  name       String     @unique
+  createdAt  DateTime   @default(now())
+  User       User?      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId     String     @db.Uuid
+  clerkId    String
+  joinCode   String?
+  inviteCode String     @db.Text
+  imageUrl   String     @db.Text
+  Group      Group?     @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  groupId    String?    @db.Uuid
+  updatedAt  DateTime   @updatedAt
+  gsMember   GSMember[]
+  session    Session[]
 
- @@index([userId, clerkId, groupId])
+  @@index([userId, clerkId, groupId])
 }
 
 model Members {
-  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  User      User?    @relation(fields: [userId], references: [id])
-  userId    String?  @db.Uuid
-  Group     Group?   @relation(fields: [groupId], references: [id])
-  role     MemberRole @default(STUDENT)
-  groupId   String?  @db.Uuid
-  createdAt DateTime @default(now())
+  id        String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  User      User?      @relation(fields: [userId], references: [id])
+  userId    String?    @db.Uuid
+  Group     Group?     @relation(fields: [groupId], references: [id])
+  role      MemberRole @default(STUDENT)
+  groupId   String?    @db.Uuid
+  createdAt DateTime   @default(now())
 
   @@index([userId, groupId])
 }
@@ -226,30 +225,33 @@ model Message {
   senderid   String?  @db.Uuid
   recieverId String?  @db.Uuid
 }
+
 enum GSMemberRole {
   ADMIN
   MODERATOR
   STUDENT
   GUEST
 }
-enum MemberRole {
-OWNER
-MODERATOR
-FINANCE
-STUDENT
-}
-model GSMember {
- id   String @id @default(uuid())
- role GSMemberRole @default(STUDENT)
- user User?      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId  String?         @db.Uuid
- clerkId   String 
- groupSpace Groupspace   @relation(fields: [groupSpaceId], references: [id], onDelete: Cascade)
- groupSpaceId String
- updatedAt DateTime @updatedAt
- createdAt DateTime @default(now())
 
- @@index([userId, clerkId, groupSpaceId])
+enum MemberRole {
+  OWNER
+  MODERATOR
+  FINANCE
+  STUDENT
+}
+
+model GSMember {
+  id           String       @id @default(uuid())
+  role         GSMemberRole @default(STUDENT)
+  user         User?        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId       String?      @db.Uuid
+  clerkId      String
+  groupSpace   Groupspace   @relation(fields: [groupSpaceId], references: [id], onDelete: Cascade)
+  groupSpaceId String
+  updatedAt    DateTime     @updatedAt
+  createdAt    DateTime     @default(now())
+
+  @@index([userId, clerkId, groupSpaceId])
 }
 
 enum GROUP_PRIVACY {
@@ -265,24 +267,24 @@ enum SessionType {
 }
 
 enum ProfileType {
-KIDS
-GENERAL
+  KIDS
+  GENERAL
 }
 
 model Session {
-  id String @id @default(uuid())
-  name String
-  type SessionType @default(TEXT)
-  user User?      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId   String?         @db.Uuid
-  clerkId   String
-  groupSpace Groupspace   @relation(fields: [groupSpaceId], references: [id], onDelete: Cascade)
+  id           String      @id @default(uuid())
+  name         String
+  type         SessionType @default(TEXT)
+  user         User?       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId       String?     @db.Uuid
+  clerkId      String
+  groupSpace   Groupspace  @relation(fields: [groupSpaceId], references: [id], onDelete: Cascade)
   groupSpaceId String
 
   updatedAt DateTime @updatedAt
   createdAt DateTime @default(now())
 
-   @@index([userId, clerkId, groupSpaceId])
+  @@index([userId, clerkId, groupSpaceId])
 }
 
 enum UserRole {
@@ -293,50 +295,49 @@ enum UserRole {
 }
 
 model Conversation {
-  id             String  @id @default(uuid())
-  createdAt      DateTime  @default(now())
-  lastMessageAt  DateTime  @default(now())
-  name           String?
-  isGroup        Boolean?
-  imageUrl       String?
+  id            String   @id @default(uuid())
+  createdAt     DateTime @default(now())
+  lastMessageAt DateTime @default(now())
+  name          String?
+  isGroup       Boolean?
+  imageUrl      String?
 
-  chats       Chat[]
-  userIds     String[]
-  users          User[]     @relation("UserConversations")
+  chats   Chat[]
+  userIds String[]
+  users   User[]   @relation("UserConversations")
 }
 
 model Chat {
-  id             String  @id @default(uuid())
-  body           String?
-  image          String?
-  video          String?
- createdAt      DateTime  @default(now())
+  id        String   @id @default(uuid())
+  body      String?
+  image     String?
+  video     String?
+  createdAt DateTime @default(now())
 
- seenIds        String[]
-  seen           User[]    @relation("SeenChats")
+  seenIds        String[]
+  seen           User[]       @relation("SeenChats")
   conversation   Conversation @relation(fields: [conversationId], references: [id])
   conversationId String
 
-  sender         User      @relation("SentChats", fields: [senderId], references: [id])
-  senderId       String   @db.Uuid
+  sender   User   @relation("SentChats", fields: [senderId], references: [id])
+  senderId String @db.Uuid
 }
 
 model Friend {
-id   String @id @default(uuid())
-userIds String[]
-users User[]  @relation("UserFriends")
-createdAt DateTime @default(now())
-updatedAt DateTime @updatedAt
+  id        String   @id @default(uuid())
+  userIds   String[]
+  users     User[]   @relation("UserFriends")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Friendrequest {
-id   String @id @default(uuid())
-userIds String[]
-message  String?
-senderId  String @db.Uuid
-isAccepted  Boolean @default(false)
-users User[]  @relation("UserFriendRequests")
-createdAt DateTime @default(now())
-updatedAt DateTime @updatedAt
+  id         String   @id @default(uuid())
+  userIds    String[]
+  message    String?
+  senderId   String   @db.Uuid
+  isAccepted Boolean  @default(false)
+  users      User[]   @relation("UserFriendRequests")
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 }
-

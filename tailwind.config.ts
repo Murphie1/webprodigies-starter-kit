@@ -24,7 +24,7 @@ const config = {
             },
             colors: {
                 white: {
-                    DEFAULT: '#FFFFFF',
+                    DEFAULT: "#FFFFFF",
                     1: "#FFFFFF",
                     2: "rgba(255, 255, 255, 0.72)",
                     3: "rgba(255, 255, 255, 0.4)",
@@ -32,7 +32,7 @@ const config = {
                     5: "rgba(255, 255, 255, 0.80)",
                 },
                 black: {
-                    DEFAULT: '#000000',
+                    DEFAULT: "#000000",
                     1: "#15171C",
                     2: "#222429",
                     3: "#101114",
@@ -44,7 +44,7 @@ const config = {
                     1: "#F97535",
                 },
                 gray: {
-                    DEFAULT: '#808080',
+                    DEFAULT: "#808080",
                     1: "#71788B",
                 },
                 blue: {
@@ -134,11 +134,11 @@ const config = {
             },
         },
     },
-  variants: {
-    extend: {
-      textColor: ['disabled'], // Enable `disabled` for text color
+    variants: {
+        extend: {
+            textColor: ["disabled"], // Enable `disabled` for text color
+        },
     },
-  },
     plugins: [require("tailwindcss-animate")],
 } satisfies Config
 

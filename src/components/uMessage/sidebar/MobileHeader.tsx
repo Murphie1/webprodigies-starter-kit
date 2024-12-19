@@ -1,21 +1,21 @@
-"use client";
+"use client"
 
-import useConversation from "@/app/hooks/useConversation";
-import useRoutes from "@/hooks/uMessage/useRoutes";
+import useConversation from "@/hooks/uMessage/useConversation"
+import useRoutes from "@/hooks/uMessage/useRoutes"
 
-import MobileItem from "./MobileItem";
+import MobileItem from "./MobileItem"
 
 const MobileHeader = () => {
-  const routes = useRoutes();
-  const { isOpen } = useConversation();
+    const routes = useRoutes()
+    const { isOpen } = useConversation()
 
-  if (isOpen) {
-    return null;
-  }
+    if (isOpen) {
+        return null
+    }
 
-  return ( 
-    <div
-      className="
+    return (
+        <div
+            className="
         fixed
         justify-between
         overflow-x-auto
@@ -30,17 +30,17 @@ const MobileHeader = () => {
         border-b-[1px]
         lg:hidden
       "
-    >
-      {routes.map((route) => (
-        <MobileItem
-          key={route.href}
-          href={route.href}
-          active={route.active}
-          icon={route.icon}
-        />
-      ))}
-    </div>
-   );
+        >
+            {routes.map((route) => (
+                <MobileItem
+                    key={route.href}
+                    href={route.href}
+                    active={route.active}
+                    icon={route.icon}
+                />
+            ))}
+        </div>
+    )
 }
- 
-export default MobileHeader;
+
+export default MobileHeader

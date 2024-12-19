@@ -4,7 +4,7 @@ const Grids = () => {
         { name: "Simulation", icon: "🕶️" },
         { name: "Puzzle", icon: "🧩" },
         { name: "Adventure", icon: "🧭" },
-    ];
+    ]
 
     return (
         <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-2 grid grid-cols-2 md:grid-cols-4 md:gap-x-6">
@@ -16,11 +16,13 @@ const Grids = () => {
                     <p className="text-lg pl-1 font-medium text-gray-800 dark:text-white">
                         {category.name}
                     </p>
-                    <span className="text-lg text-blue-500 pr-1">{category.icon}</span>
+                    <span className="text-lg text-blue-500 pr-1">
+                        {category.icon}
+                    </span>
                 </div>
             ))}
         </div>
-    );
-};
+    )
+}
 
-export default Grids;
+export default Grids

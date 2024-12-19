@@ -32,8 +32,8 @@ const formSchema = z.object({
         message: "Your Profile needs a name.",
     }),
     //imageUrl: z.string().min(1, {
-       // message: "Having an image is also quite important you know.",
-  //  }),
+    // message: "Having an image is also quite important you know.",
+    //  }),
 })
 
 export const CreateRequest = () => {
@@ -72,9 +72,9 @@ export const CreateRequest = () => {
     return (
         <Dialog>
             <DialogTrigger>
-                 <span>
-                                <CirclePlus /> <p>Send a request</p>
-                    </span>
+                <span>
+                    <CirclePlus /> <p>Send a request</p>
+                </span>
             </DialogTrigger>
             <DialogContent className="bg-white text-black p-0 overflow-hidden dark:bg-black dark:text-white">
                 <DialogHeader className="pt-8 px-6">
@@ -94,25 +94,25 @@ export const CreateRequest = () => {
                         <div className="space-y-8 px-6">
                             <div className="flex items-center justify-center text-center">
                                 <FormField
-                                control={form.control}
-                                name="message"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel className="uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70">
-                                            Add a message (optional)
-                                        </FormLabel>
-                                        <FormControl>
-                                            <Input
-                                                disabled={isLoading}
-                                                className="bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0 dark:text-white dark:border-2 dark:border-themeGray"
-                                                placeholder="e.g College Stuff"
-                                                {...field}
-                                            />
-                                          </FormControl>
-                                      <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
+                                    control={form.control}
+                                    name="message"
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel className="uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70">
+                                                Add a message (optional)
+                                            </FormLabel>
+                                            <FormControl>
+                                                <Input
+                                                    disabled={isLoading}
+                                                    className="bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0 dark:text-white dark:border-2 dark:border-themeGray"
+                                                    placeholder="e.g College Stuff"
+                                                    {...field}
+                                                />
+                                            </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
                             </div>
                             <FormField
                                 control={form.control}
@@ -149,4 +149,4 @@ export const CreateRequest = () => {
             </DialogContent>
         </Dialog>
     )
-  }
+}

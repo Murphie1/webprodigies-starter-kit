@@ -27,7 +27,6 @@ const GroupLayout = async ({ children, params }: Props) => {
     const user = await onAuthenticatedUser()
     if (!user.id) redirect("/sign-in")
 
-
     //group info
     await query.prefetchQuery({
         queryKey: ["group-info"],
@@ -64,7 +63,7 @@ const GroupLayout = async ({ children, params }: Props) => {
                 <SideBar groupid={params.groupid} userid={user.id} />
                 <div className="md:ml-[300px] flex flex-col flex-1 bg-white dark:bg-[#101011] md:rounded-tl-xl overflow-y-auto border-l-[1px] border-t-[1px] border-black dark:border-[#28282D]">
                     {children}
-                     </div>
+                </div>
             </div>
         </HydrationBoundary>
     )
