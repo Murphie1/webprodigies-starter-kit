@@ -1,4 +1,4 @@
-import { loggedInUser } from "@clerk/nextjs/server"
+import { loggedInUser } from "@/actions/auth"
 import { useMemo } from "react"
 import { FullFriendType } from "@/type"
 import { User } from "@prisma/client"
