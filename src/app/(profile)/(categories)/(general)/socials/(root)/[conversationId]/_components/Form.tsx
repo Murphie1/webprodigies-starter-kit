@@ -38,6 +38,14 @@ const Form = () => {
         })
     }
 
+    const handleUploadTwo = (result: any) => {
+        axios.post("/api/uMessage", {
+            video: result?.info?.secure_url,
+            conversationId,
+        })
+    }
+
+    
     return (
         <div
             className="
@@ -53,12 +61,25 @@ const Form = () => {
       "
         >
             <CldUploadButton
-                options={{ maxFiles: 1 }}
-                onUpload={handleUpload}
-                uploadPreset="g1usl1sb"
-            >
-                <Heart size={30} className="text-sky-500" />
-            </CldUploadButton>
+    options={{
+        maxFiles: 1,              // Limit to 1 file per upload
+        accept: 'image/*',        // Restrict to image MIME types (JPEG, PNG, GIF, etc.)
+    }}
+    onUpload={handleUpload}
+    uploadPreset="uMessageImages"
+>
+    <Heart size={30} className="text-sky-500" />
+</CldUploadButton>
+            <CldUploadButton
+    options={{
+        maxFiles: 1,              // Limit to 1 file per upload
+        accept: 'video/*',        // Restrict to image MIME types (JPEG, PNG, GIF, etc.)
+    }}
+    onUpload={handleUploadTwo}
+    uploadPreset="uMessageVideos"
+>
+    <Heart size={30} className="text-sky-500" />
+</CldUploadButton>
             <form
                 onSubmit={handleSubmit(onSubmit)}
                 className="flex items-center gap-2 lg:gap-4 w-full"
