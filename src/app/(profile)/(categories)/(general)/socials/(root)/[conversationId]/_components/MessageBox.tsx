@@ -25,7 +25,7 @@ const MessageBox: React.FC<MessageBoxProps> = ({
   const isOwn = session.primaryEmailAddress?.emailAddress === data?.sender?.email;
   const seenList = (data.seen || [])
   .filter((user) => user.email !== data?.sender?.email)
-  .map((user) => user.name)
+  .map((user) => user.firstname)
   .join(', ');
 
   const container = cn(
@@ -54,7 +54,7 @@ const MessageBox: React.FC<MessageBoxProps> = ({
       <div className={body}>
         <div className="flex items-center gap-1">
           <div className="text-sm text-gray-500 dark:text-themeTextGray">
-            {data.sender.name}
+            {data.sender.firstname}
           </div>
           <div className="text-xs text-gray-400 dark:text-gray-300">
             {format(new Date(data.createdAt), 'p')}
