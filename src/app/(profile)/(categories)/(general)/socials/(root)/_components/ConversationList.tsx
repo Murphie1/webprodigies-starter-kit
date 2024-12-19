@@ -25,18 +25,22 @@ const ConversationList: React.FC<ConversationListProps> = ({
     const router = useRouter();
     const { conversationId, isOpen } = useConversation();
 
-    // Redirect if session is invalid
-    if (!session || !session.primaryEmailAddress?.emailAddress) {
-        router.push("/sign-in");
-        return null; // Ensure early return
-    }
-
+    // Always call hooks unconditionally
     const [items, setItems] = useState(initialItems);
 
-    // Memoized pusherKey
-    const pusherKey = session.primaryEmailAddress?.emailAddress || "";
+    const pusherKey = useMemo(
+        () => session?.primaryEmailAddress?.emailAddress || "",
+        [session?.primaryEmailAddress?.emailAddress]
+    );
 
-    // Handle real-time updates via Pusher
+    // Redirect if the session is invalid
+    useEffect(() => {
+        if (!session || !session.primaryEmailAddress?.emailAddress) {
+            router.push("/sign-in");
+        }
+    }, [session, router]);
+
+    // Handle Pusher subscription
     useEffect(() => {
         if (!pusherKey) return;
 
@@ -86,6 +90,11 @@ const ConversationList: React.FC<ConversationListProps> = ({
             pusherClient.unbind("conversation:remove", removeHandler);
         };
     }, [pusherKey, conversationId, router]);
+
+    // Render null if session is invalid
+    if (!session || !session.primaryEmailAddress?.emailAddress) {
+        return null;
+    }
 
     return (
         <aside
