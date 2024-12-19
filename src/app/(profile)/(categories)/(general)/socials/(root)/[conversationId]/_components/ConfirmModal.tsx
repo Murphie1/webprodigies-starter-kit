@@ -26,7 +26,6 @@ const ConfirmModal = () => {
 
     axios.delete(`/api/conversations/${conversationId}`)
     .then(() => {
-      onClose();
       router.push('/socials');
       router.refresh();
     })
