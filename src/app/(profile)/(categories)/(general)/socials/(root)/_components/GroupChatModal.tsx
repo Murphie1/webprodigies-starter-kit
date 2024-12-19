@@ -14,7 +14,7 @@ import { FullFriendType } from "@/type"
 import axios from "axios"
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
-import useOtherUsers from "@/hooks/uMessage/friend"
+import useOtherUsers from "@/hooks/uMessage/friends"
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form"
 import { useToast } from "@/components/ui/use-toast"
 
