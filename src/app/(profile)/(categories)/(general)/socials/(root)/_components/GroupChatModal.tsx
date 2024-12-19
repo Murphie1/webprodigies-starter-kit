@@ -27,22 +27,22 @@ const GroupChatModal: React.FC<GroupChatModalProps> = ({ users }) => {
     const [isLoading, setIsLoading] = useState(false)
 
     // Call `useOtherUsers` at the top level
-    const otherUsers = useOtherUsers(users)
-    const [friends, setFriends] = useState<FullFriendType[]>([])
+const otherUsers = useOtherUsers(users) // Returns an array
+const [friends, setFriends] = useState<FullFriendType[]>([])
 
-    // Process `otherUsers` asynchronously if needed
-    useEffect(() => {
-        const fetchFriends = async () => {
-            try {
-                const fetchedFriends = await Promise.resolve(otherUsers) // Ensure it's handled as a promise
-                setFriends(fetchedFriends)
-            } catch (error) {
-                console.error("Error fetching friends:", error)
-            }
+// Process `otherUsers` asynchronously if needed
+useEffect(() => {
+    const fetchFriends = async () => {
+        try {
+            const fetchedFriends = await Promise.resolve(otherUsers) // Ensures async handling if needed
+            setFriends(fetchedFriends) // Directly set the array to state
+        } catch (error) {
+            console.error("Error fetching friends:", error)
         }
+    }
 
-        fetchFriends()
-    }, [otherUsers]) // Re-fetch when `otherUsers` changes
+    fetchFriends()
+}, [otherUsers]) // Re-fetch when `otherUsers` changes
 
     const {
         register,
