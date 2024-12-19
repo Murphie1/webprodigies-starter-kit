@@ -1,32 +1,26 @@
 import { loggedInUser } from "@/actions/auth"
-import { useMemo } from "react"
 import { FullFriendRequestType } from "@/type"
 import { User } from "@prisma/client"
 import { NextResponse } from "next/server"
 
 const useOtherUser = async (
-    friendrequest:
+    conversation:
         | FullFriendRequestType
         | {
               users: User[]
           },
 ) => {
     const clerk = await loggedInUser()
-    if (!clerk || clerk.email) {
+    if (!clerk || !clerk.email) {
         return new NextResponse("Unauthorized", { status: 401 })
     }
 
-    const otherUser = useMemo(() => {
-        const currentUserEmail = clerk.email
+    const currentUserEmail = clerk.email
+    const otherUser = friendrequest.users.find(
+        (user) => user.email !== currentUserEmail,
+    )
 
-        const otherUser = friendrequest.users.filter(
-            (user) => user.email !== currentUserEmail,
-        )
-
-        return otherUser[0]
-    }, [clerk.email, friendrequest.users])
-
-    return otherUser
+    return otherUser || null
 }
 
 export default useOtherUser
