@@ -4,7 +4,7 @@ import { User } from "@prisma/client"
 import { NextResponse } from "next/server"
 
 const useOtherUser = async (
-    conversation:
+    friendrequest:
         | FullFriendRequestType
         | {
               users: User[]
