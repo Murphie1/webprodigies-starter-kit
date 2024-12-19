@@ -15,12 +15,12 @@ import { find } from "lodash";
 
 interface ConversationListProps {
     initialItems: FullConversationType[];
-    friends: FullFriendType[];
+    users: FullFriendType[];
 }
 
 const ConversationList: React.FC<ConversationListProps> = ({
     initialItems,
-    friends,
+    users,
 }) => {
     const { session } = useUser();
     const router = useRouter();
