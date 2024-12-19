@@ -1,4 +1,4 @@
-import EmptyState from "../Emptystate"
+import EmptyState from "@/components/EmptyState"
 
 const EmptyStateTwo = () => {
     return (
