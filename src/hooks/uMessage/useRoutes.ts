@@ -35,6 +35,12 @@ const useRoutes = () => {
                 icon: Heart,
             },
             {
+                label: "Problems and Solutions",
+                href: "/socials/problems",
+                icon: Heart,
+                active: pathname?.includes("/socials/problems"),
+            },
+            {
                 label: "Events",
                 href: "/socials/events",
                 icon: Heart,
