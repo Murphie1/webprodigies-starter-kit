@@ -26,6 +26,7 @@ export async function POST(request: Request) {
             data: {
                 body: message,
                 image: image,
+                video: video,
                 conversation: {
                     connect: {
                         id: conversationId,
