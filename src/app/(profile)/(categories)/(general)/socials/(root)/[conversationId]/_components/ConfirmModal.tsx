@@ -73,7 +73,7 @@ title: 'Something went wrong!'
             sm:text-left
           "
         >
-          <DialogHeader>
+          <DialogHeader
             className="
               text-base
               font-semibold
