@@ -3,7 +3,6 @@
 import { useUser } from "@clerk/nextjs";
 import { useCallback, useMemo } from "react";
 import { useRouter } from "next/navigation";
-import { Conversation, Chat, User } from "@prisma/client";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 
@@ -21,44 +20,58 @@ const ConversationBox: React.FC<ConversationBoxProps> = ({ data, selected }) => 
     const { session } = useUser();
     const router = useRouter();
 
-    if (!session?.primaryEmailAddress?.emailAddress) {
-        // Handle redirect outside the rendering logic
-        router.replace("/sign-in");
-        return null;
-    }
+    // Extract the user's email once to avoid multiple access calls
+    const userEmail = session?.primaryEmailAddress?.emailAddress;
 
     const otherUser = useOtherUser(data);
 
+    // Redirect to sign-in if no session or email
+    const handleRedirect = useCallback(() => {
+        if (!userEmail) {
+            router.replace("/sign-in");
+        }
+    }, [userEmail, router]);
+
+    // Run the redirect logic as an effect
+    useMemo(() => {
+        handleRedirect();
+    }, [handleRedirect]);
+
+    // Navigate to the conversation page
     const handleClick = useCallback(() => {
         router.push(`/socials/${data.id}`);
     }, [data.id, router]);
 
+    // Get the last message from the conversation
     const lastMessage = useMemo(() => {
         const messages = data.chats || [];
         return messages[messages.length - 1];
     }, [data.chats]);
 
-    const userEmail = session.primaryEmailAddress.emailAddress;
-
+    // Check if the last message was seen by the user
     const hasSeen = useMemo(() => {
         if (!lastMessage) return false;
         const seenArray = lastMessage.seen || [];
         return seenArray.some((user) => user.email === userEmail);
     }, [userEmail, lastMessage]);
 
+    // Determine the text to display for the last message
     const lastMessageText = useMemo(() => {
         if (lastMessage?.image) return "Sent an image";
-        if (lastMessage?.video) return "Sent a Video";
+        if (lastMessage?.video) return "Sent a video";
         if (lastMessage?.body) return lastMessage.body;
         return "Started a conversation";
     }, [lastMessage]);
+
+    // Render null if no session or email (after redirect handling)
+    if (!userEmail) return null;
 
     return (
         <div
             onClick={handleClick}
             className={cn(
                 `
-        w-full,
+        w-full
         relative
         flex
         items-center
