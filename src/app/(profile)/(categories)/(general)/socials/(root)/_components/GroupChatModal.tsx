@@ -1,4 +1,5 @@
 "use client"
+
 import { Heart } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import {
@@ -12,8 +13,8 @@ import Select from "@/components/uMessage/inputs/Select"
 import { FullFriendType } from "@/type"
 import axios from "axios"
 import { useRouter } from "next/navigation"
-import { useState } from "react"
-import useOtherUsers from "@/hooks/uMessage/friend
+import { useEffect, useState } from "react"
+import useOtherUsers from "@/hooks/uMessage/friend"
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form"
 import { useToast } from "@/components/ui/use-toast"
 
@@ -21,9 +22,24 @@ interface GroupChatModalProps {
     users: FullFriendType[]
 }
 
-const GroupChatModal: React.FC<GroupChatModalProps> = async ({ users }) => {
+const GroupChatModal: React.FC<GroupChatModalProps> = ({ users }) => {
     const router = useRouter()
     const [isLoading, setIsLoading] = useState(false)
+    const [friends, setFriends] = useState<FullFriendType[]>([])
+
+    // Fetch friends data asynchronously
+    useEffect(() => {
+        const fetchFriends = async () => {
+            try {
+                const fetchedFriends = await useOtherUsers(users)
+                setFriends(fetchedFriends)
+            } catch (error) {
+                console.error("Error fetching friends:", error)
+            }
+        }
+        
+        fetchFriends()
+    }, [users]) // Re-fetch when `users` prop changes
 
     const {
         register,
@@ -39,8 +55,8 @@ const GroupChatModal: React.FC<GroupChatModalProps> = async ({ users }) => {
     })
 
     const members = watch("members")
- const friends = await useOtherUsers(users);
-    const onSubmit: SubmitHandler<FieldValues> = (data) => {
+    
+    const onSubmit: SubmitHandler<FieldValues> = async (data) => {
         setIsLoading(true)
 
         try {
@@ -76,34 +92,13 @@ const GroupChatModal: React.FC<GroupChatModalProps> = async ({ users }) => {
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="space-y-12">
                         <div className="border-b border-gray-900/10 pb-12">
-                            <h2
-                                className="
-                text-base
-                font-semibold
-                leading-7
-                text-gray-900
-              "
-                            >
+                            <h2 className="text-base font-semibold leading-7 text-gray-900">
                                 Create a group chat
                             </h2>
-                            <p
-                                className="
-                mt-1
-                text-sm
-                leading-6
-                text-gray-600
-              "
-                            >
-                                Create a chat with atleast 2 other people.
+                            <p className="mt-1 text-sm leading-6 text-gray-600">
+                                Create a chat with at least 2 other people.
                             </p>
-                            <div
-                                className="
-                mt-10
-                flex
-                flex-col
-                gap-y-8
-              "
-                            >
+                            <div className="mt-10 flex flex-col gap-y-8">
                                 <Input
                                     register={register}
                                     label="Name"
@@ -129,21 +124,9 @@ const GroupChatModal: React.FC<GroupChatModalProps> = async ({ users }) => {
                             </div>
                         </div>
                     </div>
-                    <div
-                        className="
-            mt-6
-            flex
-            items-center
-            justify-end
-            gap-x-6
-          "
-                    >
+                    <div className="mt-6 flex items-center justify-end gap-x-6">
                         <DialogClose>
-                            <Button
-                                disabled={isLoading}
-                                type="button"
-                                variant="secondary"
-                            >
+                            <Button disabled={isLoading} type="button" variant="secondary">
                                 Cancel
                             </Button>
                         </DialogClose>
@@ -158,4 +141,3 @@ const GroupChatModal: React.FC<GroupChatModalProps> = async ({ users }) => {
 }
 
 export default GroupChatModal
-                
