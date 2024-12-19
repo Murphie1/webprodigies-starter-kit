@@ -9,11 +9,11 @@ import DesktopItem from "./DesktopItem";
 import SettingsModal from "./SettingsModal";
 
 interface DesktopSidebarProps {
-  currentUser: User
+  loggedUser: User
 }
 
 const DesktopSidebar: React.FC<DesktopSidebarProps> = ({
-  currentUser
+  loggedUser
 }) => {
   const routes = useRoutes();
 
@@ -90,7 +90,7 @@ const DesktopSidebar: React.FC<DesktopSidebarProps> = ({
             "
           >
             <SettingsModal
-        currentUser={currentUser}
+        currentUser={loggedUser}
       />
           </div>
         </nav>
