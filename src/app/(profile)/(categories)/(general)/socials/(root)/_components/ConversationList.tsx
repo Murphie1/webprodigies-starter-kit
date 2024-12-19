@@ -6,7 +6,6 @@ import { useRouter } from "next/navigation";
 
 import useConversation from "@/hooks/uMessage/useConversation";
 import { FullConversationType, FullFriendType } from "@/type";
-import useOtherUser from "@/hooks/uMessage/useOtherFriend";
 import ConversationBox from "./ConversationBox";
 import GroupChatModal from "./GroupChatModal";
 import { useUser } from "@clerk/nextjs";
@@ -33,7 +32,6 @@ const ConversationList: React.FC<ConversationListProps> = ({
     }
 
     const [items, setItems] = useState(initialItems);
-    const friends = useOtherUser(users);
 
     // Memoized pusherKey
     const pusherKey = useMemo(() => {
@@ -134,7 +132,7 @@ const ConversationList: React.FC<ConversationListProps> = ({
                             transition
                         "
                     >
-                        <GroupChatModal users={friends} />
+                        <GroupChatModal users={users} />
                     </div>
                 </div>
                 {items.map((item) => (
