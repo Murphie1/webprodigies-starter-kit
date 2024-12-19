@@ -20,7 +20,7 @@ const ConfirmModal = () => {
   const router = useRouter();
   const { conversationId } = useConversation();
   const [isLoading, setIsLoading] = useState(false);
-
+  const { toast } = useToast();
   const onDelete = useCallback(() => {
     setIsLoading(true);
 
