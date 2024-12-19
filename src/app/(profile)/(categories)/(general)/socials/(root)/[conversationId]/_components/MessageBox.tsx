@@ -54,8 +54,8 @@ const MessageBox: React.FC<MessageBoxProps> = ({ data, isLast }) => {
                     </div>
                 </div>
                 <div className={message}>
-                    {data.image ? (
-                        <ImageModal src={data.image} />
+                    {data.image || data.video ? (
+                        <ImageModal data={data} />
                     ) : (
                         <div>{data.body}</div>
                     )}
