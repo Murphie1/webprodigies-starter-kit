@@ -145,10 +145,12 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ currentUser }) => {
                                             alt="Avatar"
                                         />
                                         <CldUploadButton
-                                            options={{ maxFiles: 1 }}
-                                            onUpload={handleUpload}
-                                            uploadPreset="g1usl1sb"
-                                        >
+                                           options={{
+                                               maxFiles: 1,              // Limit to 1 file per upload
+                                               accept: 'image/*',        // Restrict to image MIME types (JPEG, PNG, GIF, etc.) 
+                                               }}onUpload={handleUpload}
+                                            uploadPreset="uMessageImages"
+                                            >
                                             <Button
                                                 disabled={isLoading}
                                                 secondary
