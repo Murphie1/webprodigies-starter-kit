@@ -25,7 +25,7 @@ interface GroupChatModalProps {
 const GroupChatModal: React.FC<GroupChatModalProps> = ({ users }) => {
     const router = useRouter()
     const [isLoading, setIsLoading] = useState(false)
-
+    const { toast } = useToast();
     // Call `useOtherUsers` at the top level
 const otherUsers = useOtherUsers(users) // Returns an array
 const [friends, setFriends] = useState<FullFriendType[]>([])
