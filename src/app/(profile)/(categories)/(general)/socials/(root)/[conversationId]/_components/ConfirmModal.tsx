@@ -6,7 +6,8 @@ import {
 Dialog,
 DialogHeader,
 DialogTrigger,
-DialogContent
+DialogContent,
+  DialogClose
 } from "@/components/ui/dialog";
 import axios from "axios";
 import { useRouter } from "next/navigation";
