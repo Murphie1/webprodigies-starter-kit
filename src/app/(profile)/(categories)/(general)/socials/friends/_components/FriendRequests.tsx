@@ -8,7 +8,7 @@ import {
     DrawerTitle,
     DrawerTrigger,
 } from "@/components/ui/drawer"
-import RequestBox from "./RequestBox"
+import AsyncRequestBox from "./AsyncRequestBox"
 import { getRequests } from "@/actions/uMessage" // Fixed syntax error
 import { CreateRequest } from "./CreateRequest" // Uncomment if used
 
@@ -33,7 +33,7 @@ export const FriendRequests = async () => {
                 {friendRequests.length > 0 ? (
                     <div className="flex flex-col space-y-4 p-4">
                         {friendRequests.map((friend) => (
-                            <RequestBox key={friend.id} item={friend} />
+                            <AsyncRequestBox key={friend.id} item={friend} />
                         ))}
                     </div>
                 ) : (
