@@ -47,13 +47,6 @@ export const loggedInUser = async () => {
             where: {
                 clerkId: clerk.id,
             },
-            select: {
-                id: true,
-                firstname: true,
-                lastname: true,
-                image: true,
-                role: true,
-            },
         })
         if (user) return user
         return {
