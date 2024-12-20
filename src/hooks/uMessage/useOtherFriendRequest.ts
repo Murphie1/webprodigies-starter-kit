@@ -12,7 +12,7 @@ const useOtherUser = async (
 ) => {
     const clerk = await loggedInUser()
     if (!clerk || !clerk.email) {
-        return new NextResponse("Unauthorized", { status: 401 })
+        throw new Error("Unauthorized")
     }
 
     const currentUserEmail = clerk.email
@@ -20,7 +20,7 @@ const useOtherUser = async (
         (user) => user.email !== currentUserEmail,
     )
 
-    return otherUser || null
+    return otherUser || clerk
 }
 
 export default useOtherUser
