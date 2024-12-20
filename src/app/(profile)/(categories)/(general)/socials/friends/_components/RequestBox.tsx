@@ -7,15 +7,16 @@ import { useCallback, useState } from "react";
 import useOtherUser from "@/hooks/uMessage/useOtherFriendRequest";
 import Avatar from "@/components/uMessage/Avatar";
 import { format } from "date-fns";
+import { User } from "@prisma/client";
 import { useUser } from "@clerk/nextjs"; // Import Clerk's useUser hook
 
 interface FriendBoxProps {
     item: FullFriendRequestType;
+    otherUser: User;
 }
 
-const RequestBox: React.FC<FriendBoxProps> = ({ item }) => {
+const RequestBox: React.FC<FriendBoxProps> = ({ item, otherUser }) => {
     const { user } = useUser(); // Get the current logged-in user
-    const otherUser = useOtherUser(item);
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
 
