@@ -3,21 +3,22 @@
 import { client } from "@/lib/prisma"
 import { currentUser } from "@clerk/nextjs/server"
 
-type LoggedInUser = {
-    status: number;
-    id: string;
-    firstname: string;
-    lastname: string | null;
-    email: string | null;
-    createdAt: Date;
-    clerkId: string;
-    image: string | null;
-    stripeId: string | null;
-    role: string;
-    attributes: string[];
-    conversationIds: string[];
-    seenChatIds: string[];
-};
+type LoggedInUser =
+    | { status: number; email?: string | null }
+    | {
+          id: string
+          firstname: string
+          lastname: string | null
+          email: string | null
+          createdAt: Date
+          clerkId: string
+          image: string | null
+          stripeId: string | null
+          role: string
+          attributes: string[]
+          conversationIds: string[]
+          seenChatIds: string[]
+    }
 
 export const onAuthenticatedUser = async () => {
     try {
@@ -66,6 +67,21 @@ export const loggedInUser = async (): Promise<LoggedInUser> => {
             where: {
                 clerkId: clerk.id,
             },
+            select: {
+                id: true,
+                firstname: true,
+                lastname: true,
+                email: true,
+                createdAt: true,
+                clerkId: true,
+                image: true,
+                stripeId: true,
+                role: true,
+                attributes: true,
+                conversationIds: true,
+                seenChatIds: true,
+                // You can choose to include other related data as needed
+            },
         })
 
         if (!user) {
@@ -86,7 +102,7 @@ export const loggedInUser = async (): Promise<LoggedInUser> => {
             }
         }
 
-        // Make sure you return a full user object
+        // Return the user with the full structure
         return {
             status: 200,
             id: user.id,
@@ -108,7 +124,41 @@ export const loggedInUser = async (): Promise<LoggedInUser> => {
             email: null,
         } as any
     }
+                }
+
+
+export const onSignUpUser = async (data: {
+    firstname: string
+    lastname: string
+    image: string
+    clerkId: string
+}) => {
+    try {
+        const createdUser = await client.user.create({
+            data: {
+                ...data,
+            },
+        })
+
+        if (createdUser) {
+            return {
+                status: 200,
+                message: "User successfully created",
+                id: createdUser.id,
             }
+        }
+
+        return {
+            status: 400,
+            message: "User could not be created! Try again",
+        }
+    } catch (error) {
+        return {
+            status: 400,
+            message: "Oops! something went wrong. Try again",
+        }
+    }
+}
 
 export const onSignInUser = async (clerkId: string) => {
     try {
@@ -162,4 +212,4 @@ export const onSignInUser = async (clerkId: string) => {
             message: "Oops! something went wrong. Try again",
         }
     }
-}
+        }
