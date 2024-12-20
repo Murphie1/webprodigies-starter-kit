@@ -4,7 +4,7 @@ import ConversationBox from "./ConversationBox"
 
 interface AsyncHeaderProps {
     conversation: FullConversationType;
-    selected?: Boolean;
+    selected?: boolean;
 }
 
 const AsyncConversationBox: React.FC<AsyncHeaderProps> = async ({ conversation, selected }) => {
