@@ -1,5 +1,4 @@
 
-import useOtherUser from "@/hooks/uMessage/useOtherUser"
 import { Conversation, User } from "@prisma/client"
 import { useMemo } from "react"
 import { format } from "date-fns"
@@ -14,10 +13,11 @@ interface ProfileDrawerProps {
     data: Conversation & {
         users: User[]
     }
+    otherUser: User
 }
 
-const ProfileDrawer: React.FC<ProfileDrawerProps> = async ({ data }) => {
-    const otherUser = await useOtherUser(data);
+const ProfileDrawer: React.FC<ProfileDrawerProps> = async ({ data, otherUser }) => {
+    const otherUser = {otherUser}
     const { members } = useActiveList()
     const isActive = members.indexOf(otherUser.email!) !== -1
 
