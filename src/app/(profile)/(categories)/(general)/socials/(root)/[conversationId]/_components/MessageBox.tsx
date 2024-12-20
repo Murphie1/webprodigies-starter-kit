@@ -15,11 +15,11 @@ interface MessageBoxProps {
 }
 
 const MessageBox: React.FC<MessageBoxProps> = async ({ data, isLast }) => {
-    const session = await loggedInUser()
-    if (!session || !session?.email) redirect("/sign-in")
+    const session = await loggedInUser();
+    if (!session || !session.email) redirect("/sign-in")
 
     const isOwn =
-        session?.email === data?.sender?.email
+        session.email === data?.sender?.email
     const seenList = (data.seen || [])
         .filter((user) => user.email !== data?.sender?.email)
         .map((user) => user.firstname)
