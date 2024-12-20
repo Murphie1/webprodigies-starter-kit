@@ -1,7 +1,6 @@
 import { loggedInUser } from "@/actions/auth"
 import { FullFriendRequestType } from "@/type"
 import { User } from "@prisma/client"
-import { NextResponse } from "next/server"
 
 const useOtherUser = async (
     friendrequest:
@@ -9,10 +8,10 @@ const useOtherUser = async (
         | {
               users: User[]
           },
-) => {
+): Promise<User | null> => {
     const clerk = await loggedInUser()
     if (!clerk || !clerk.email) {
-        throw new Error("Unauthorized")
+        throw new Error("Unauthorized") // Throw an error instead of returning NextResponse
     }
 
     const currentUserEmail = clerk.email
