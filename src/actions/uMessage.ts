@@ -23,6 +23,9 @@ export const getFriends = async () => {
                     has: localUser.id, // Check if the array includes localUser.id
                 },
             },
+            include: {
+                users: true,
+            },
         })
 
         return friends
@@ -131,6 +134,9 @@ export const getRequests = async () => {
                     has: localUser.id, // Check if the array includes localUser.id
                 },
             },
+            include: {
+                users: true,
+                },
         })
 
         return friendrequests
