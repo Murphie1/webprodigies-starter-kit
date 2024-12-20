@@ -11,7 +11,7 @@ interface HeaderProps {
     conversation: Conversation & {
         users: User[]
     }
-    otherUser: User | null
+    otherUser: User
 }
 
 const Header: React.FC<HeaderProps> = ({ conversation, otherUser }) => {
