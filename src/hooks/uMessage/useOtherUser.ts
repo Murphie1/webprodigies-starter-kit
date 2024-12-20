@@ -1,25 +1,38 @@
-import { loggedInUser } from "@/actions/auth"
-import { FullConversationType } from "@/type"
-import { User } from "@prisma/client"
+"use client"
 
-const useOtherUser = async (
+import { useState, useEffect } from "react";
+import { loggedInUser } from "@/actions/auth";
+import { FullConversationType } from "@/type";
+import { User } from "@prisma/client";
+
+const useOtherUser = (
     conversation:
         | FullConversationType
-        | {
-              users: User[]
-          },
-): Promise<User | null> => {
-    const clerk = await loggedInUser()
-    if (!clerk || !clerk.email) {
-        throw new Error("Unauthorized") // Throw an error instead of returning NextResponse
-    }
+        | { users: User[] },
+): User | null => {
+    const [otherUser, setOtherUser] = useState<User | null>(null);
 
-    const currentUserEmail = clerk.email
-    const otherUser = conversation.users.find(
-        (user) => user.email !== currentUserEmail,
-    )
+    useEffect(() => {
+        const fetchOtherUser = async () => {
+            const clerk = await loggedInUser();
+            if (!clerk || !clerk.email) {
+                throw new Error("Unauthorized");
+            }
 
-    return otherUser || clerk
-}
+            const currentUserEmail = clerk.email;
+            const otherUser = conversation.users.find(
+                (user) => user.email !== currentUserEmail,
+            );
 
-export default useOtherUser
+            setOtherUser(otherUser || clerk);
+        };
+
+        fetchOtherUser().catch((error) => {
+            console.error(error); // Handle errors if necessary
+        });
+    }, [conversation]);
+
+    return otherUser;
+};
+
+export default useOtherUser;
