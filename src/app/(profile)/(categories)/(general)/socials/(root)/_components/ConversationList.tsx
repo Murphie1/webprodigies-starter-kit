@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 
 import useConversation from "@/hooks/uMessage/useConversation";
 import { FullConversationType, FullFriendType } from "@/type";
-import ConversationBox from "./ConversationBox";
+import AsyncConversationBox from "./AsyncConversationBox";
 import GroupChatModal from "./GroupChatModal";
 import { useUser } from "@clerk/nextjs";
 import { pusherClient } from "@/lib/pusher";
@@ -21,7 +21,7 @@ const ConversationList: React.FC<ConversationListProps> = ({
     initialItems,
     users,
 }) => {
-    const { session } = useUser();
+    const { user } = useUser();
     const router = useRouter();
     const { conversationId, isOpen } = useConversation();
 
@@ -29,16 +29,16 @@ const ConversationList: React.FC<ConversationListProps> = ({
     const [items, setItems] = useState(initialItems);
 
     const pusherKey = useMemo(
-        () => session?.primaryEmailAddress?.emailAddress || "",
-        [session?.primaryEmailAddress?.emailAddress]
+        () => user?.primaryEmailAddress?.emailAddress || "",
+        [user?.primaryEmailAddress?.emailAddress]
     );
 
     // Redirect if the session is invalid
     useEffect(() => {
-        if (!session || !session.primaryEmailAddress?.emailAddress) {
+        if (!user || !user.primaryEmailAddress?.emailAddress) {
             router.push("/sign-in");
         }
-    }, [session, router]);
+    }, [user, router]);
 
     // Handle Pusher subscription
     useEffect(() => {
@@ -92,7 +92,7 @@ const ConversationList: React.FC<ConversationListProps> = ({
     }, [pusherKey, conversationId, router]);
 
     // Render null if session is invalid
-    if (!session || !session.primaryEmailAddress?.emailAddress) {
+    if (!user || !user.primaryEmailAddress?.emailAddress) {
         return null;
     }
 
@@ -143,9 +143,9 @@ const ConversationList: React.FC<ConversationListProps> = ({
                     </div>
                 </div>
                 {items.map((item) => (
-                    <ConversationBox
+                    <AsyncConversationBox
                         key={item.id}
-                        data={item}
+                        conversation={item}
                         selected={conversationId === item.id}
                     />
                 ))}
