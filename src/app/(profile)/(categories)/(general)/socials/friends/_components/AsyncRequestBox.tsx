@@ -6,7 +6,7 @@ interface AsyncHeaderProps {
     item: FullFriendRequestType;
 }
 
-const AsyncRequestBox: React.FC<AsyncHeaderProps> = async ({ conversation, selected }) => {
+const AsyncRequestBox: React.FC<AsyncHeaderProps> = async ({ item }) => {
     const otherUser = await useOtherUser(item)
    if(!otherUser) {
        throw new Error("No other User")
