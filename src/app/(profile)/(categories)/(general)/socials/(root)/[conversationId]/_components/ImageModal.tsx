@@ -4,15 +4,15 @@ import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import Image from "next/image";
 import { FullMessageType } from "@/type";
 interface ImageModalProps {
-  src?: FullMessageType | null;
+  data?: FullMessageType | null;
 }
 
 const ImageModal: React.FC<ImageModalProps> = ({ src }) => {
-  if (!src) {
+  if (!data) {
     return null;
   }
 
-  const isImage = Boolean(src.image);
+  const isImage = Boolean(data.image);
   const videoFallback =
     "https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4";
 
@@ -24,7 +24,7 @@ const ImageModal: React.FC<ImageModalProps> = ({ src }) => {
             alt="Image"
             height={288}
             width={288}
-            src={src.image!}
+            src={data.image!}
             className="
               object-cover
               cursor-pointer
@@ -37,7 +37,7 @@ const ImageModal: React.FC<ImageModalProps> = ({ src }) => {
           <video
             height={288}
             width={288}
-            src={src.video || videoFallback}
+            src={data.video || videoFallback}
             className="
               object-cover
               cursor-pointer
@@ -57,12 +57,12 @@ const ImageModal: React.FC<ImageModalProps> = ({ src }) => {
               alt="Image"
               className="object-cover"
               fill
-              src={src.image!}
+              src={data.image!}
             />
           ) : (
             <video
               className="object-cover w-full h-full"
-              src={src.video || videoFallback}
+              src={data.video || videoFallback}
               controls
               poster="https://via.placeholder.com/320"
             />
