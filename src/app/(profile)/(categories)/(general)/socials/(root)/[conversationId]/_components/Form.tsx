@@ -62,8 +62,7 @@ const Form = () => {
         >
             <CldUploadButton
     options={{
-        maxFiles: 1,              // Limit to 1 file per upload
-        accept: 'image/*',        // Restrict to image MIME types (JPEG, PNG, GIF, etc.)
+        maxFiles: 1,              // Limit to 1 file per upload        )
     }}
     onUpload={handleUpload}
     uploadPreset="uMessageImages"
@@ -72,8 +71,7 @@ const Form = () => {
 </CldUploadButton>
             <CldUploadButton
     options={{
-        maxFiles: 1,              // Limit to 1 file per upload
-        accept: 'video/*',        // Restrict to image MIME types (JPEG, PNG, GIF, etc.)
+        maxFiles: 1,              // Limit to 1 file per upload       
     }}
     onUpload={handleUploadTwo}
     uploadPreset="uMessageVideos"
