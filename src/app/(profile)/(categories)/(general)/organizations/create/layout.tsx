@@ -18,19 +18,10 @@ const CreateGroupLayout = ({ children }: Props) => {
             <div className="container h-auto grid grid-cols-1 lg:grid-cols-2 content-center">
                 <div className="flex items-center">
                     <BackdropGradient className="w-8/12 h-2/6 opacity-50">
-                        <h5 className="text-2xl font-bold text-black dark:text-themeTextWhite">
-                            Welcome.
-                        </h5>
-                        {/*<GradientText
-                            element="H2"
-                            className="dark:text-4xl font-semibold py-3"
-                        >
-                            Create Your Organization
-                        </GradientText>*/}
                         <h2 className="text-4xl font-bold text-black dark:text-themeTextGray">
                             Create Your Organization
                         </h2>
-                        <p className="pt-1 text-black dark:text-themeTextGray text-xs">
+                        <p className="pt-1 text-black dark:text-themeTextGray text-xs truncate line-clamp-2">
                             Create an organization to get started. You can
                             choose between creating a free organization or
                             subscribe, all depenion your needs. To see more and
