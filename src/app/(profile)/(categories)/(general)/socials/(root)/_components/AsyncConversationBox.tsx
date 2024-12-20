@@ -7,7 +7,7 @@ interface AsyncHeaderProps {
     selected?: Boolean;
 }
 
-const AsyncConversationBox: React.FC<AsyncHeaderProps> = async ({ conversation }) => {
+const AsyncConversationBox: React.FC<AsyncHeaderProps> = async ({ conversation, selected }) => {
     const otherUser = await useOtherUser(conversation)
    if(!otherUser) {
        throw new Error("No other User")
