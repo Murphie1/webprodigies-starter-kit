@@ -27,7 +27,7 @@ export const onAuthenticatedUser = async () => {
                 id: user.id,
                 role: user.role,
                 image: user.image || `${clerk.imageUrl}`,
-                email: user.email || `${clerk.emailAddresses[0]?.emailAddress},
+                email: user.email || `${clerk.emailAddresses[0]?.emailAddress}`,
                 username: `${user.firstname} ${user.lastname}`,
             }
         return {
@@ -41,24 +41,41 @@ export const onAuthenticatedUser = async () => {
     }
 }
 
-export const loggedInUser = async () => {
+export const loggedInUser = async (): Promise<LoggedInUser> => {
     try {
         const clerk = await currentUser()
-        if (!clerk) return { status: 404 }
+        if (!clerk) return { status: 404, email: null } as any
 
         const user = await client.user.findUnique({
             where: {
                 clerkId: clerk.id,
             },
         })
-        if (user) 
-            return user
+        return (
+            user || {
+                status: 404,
+                id: "",
+                firstname: "",
+                lastname: null,
+                email: null,
+                createdAt: new Date(),
+                clerkId: "",
+                image: null,
+                stripeId: null,
+                role: "user", // Default role
+                attributes: [],
+                conversationIds: [],
+                seenChatIds: [],
+            }
+        )
     } catch (error) {
         return {
             status: 400,
-        }
+            email: null,
+        } as any
     }
-}
+    }
+
 
 export const onSignUpUser = async (data: {
     firstname: string
