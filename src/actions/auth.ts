@@ -9,7 +9,7 @@ type LoggedInUser =
           id: string
           firstname: string
           lastname: string | null
-          email: string
+          email: string | null
           createdAt: Date
           clerkId: string
           image: string | null
