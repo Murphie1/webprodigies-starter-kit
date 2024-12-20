@@ -64,9 +64,7 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ currentUser }) => {
                 console.error("Error updating settings:", error)
                 toast({
                     title: "Something went wrong!",
-                    description:
-                        error.response?.data?.message ||
-                        "Please try again later.",
+                    description: "Please try again later.",
                     variant: "destructive", // Optional: highlight error visually
                 })
             })
@@ -145,9 +143,9 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ currentUser }) => {
                                         />
                                         <CldUploadButton
                                            options={{
-                                               maxFiles: 1,              // Limit to 1 file per upload
-                                               accept: 'image/*',        // Restrict to image MIME types (JPEG, PNG, GIF, etc.) 
-                                               }}onUpload={handleUpload}
+                                               maxFiles: 1,              // Limit to 1 file per upload  
+                                               }}
+                                            onUpload={handleUpload}
                                             uploadPreset="uMessageImages"
                                             >
                                             <Button
