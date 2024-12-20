@@ -59,8 +59,16 @@ export const onAuthenticatedUser = async () => {
 
 export const loggedInUser = async (): Promise<LoggedInUser> => {
     try {
-        const clerk = await currentUser();
-        if (!clerk) {
+        const clerk = await currentUser()
+        if (!clerk) return { status: 404, email: null } as any
+
+        const user = await client.user.findUnique({
+            where: {
+                clerkId: clerk.id,
+            },
+        })
+
+        if (!user) {
             return {
                 status: 404,
                 id: "",
@@ -75,82 +83,32 @@ export const loggedInUser = async (): Promise<LoggedInUser> => {
                 attributes: [],
                 conversationIds: [],
                 seenChatIds: [],
-            };
-        }
-
-        const user = await client.user.findUnique({
-            where: {
-                clerkId: clerk.id,
-            },
-        });
-
-        return {
-            status: 200,
-            id: user?.id || "",
-            firstname: user?.firstname || "",
-            lastname: user?.lastname || null,
-            email: user?.email || clerk.emailAddresses[0]?.emailAddress || null,
-            createdAt: user?.createdAt || new Date(),
-            clerkId: clerk.id,
-            image: user?.image || clerk.imageUrl || null,
-            stripeId: user?.stripeId || null,
-            role: user?.role || "user",
-            attributes: user?.attributes || [],
-            conversationIds: user?.conversationIds || [],
-            seenChatIds: user?.seenChatIds || [],
-        };
-    } catch (error) {
-        return {
-            status: 400,
-            id: "",
-            firstname: "",
-            lastname: null,
-            email: null,
-            createdAt: new Date(),
-            clerkId: "",
-            image: null,
-            stripeId: null,
-            role: "user", // Default role
-            attributes: [],
-            conversationIds: [],
-            seenChatIds: [],
-        };
-    }
-};
-
-
-export const onSignUpUser = async (data: {
-    firstname: string
-    lastname: string
-    image: string
-    clerkId: string
-}) => {
-    try {
-        const createdUser = await client.user.create({
-            data: {
-                ...data,
-            },
-        })
-
-        if (createdUser) {
-            return {
-                status: 200,
-                message: "User successfully created",
-                id: createdUser.id,
             }
         }
 
+        // Make sure you return a full user object
         return {
-            status: 400,
-            message: "User could not be created! Try again",
+            status: 200,
+            id: user.id,
+            firstname: user.firstname,
+            lastname: user.lastname,
+            email: user.email,
+            createdAt: user.createdAt,
+            clerkId: user.clerkId,
+            image: user.image,
+            stripeId: user.stripeId,
+            role: user.role,
+            attributes: user.attributes || [],
+            conversationIds: user.conversationIds || [],
+            seenChatIds: user.seenChatIds || [],
         }
     } catch (error) {
         return {
             status: 400,
-            message: "Oops! something went wrong. Try again",
-        }
+            email: null,
+        } as any
     }
-}
+            }
 
 export const onSignInUser = async (clerkId: string) => {
     try {
