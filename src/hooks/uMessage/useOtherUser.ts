@@ -19,7 +19,7 @@ const useOtherUser = async (
         (user) => user.email !== currentUserEmail,
     )
 
-    return otherUser || null
+    return otherUser || clerk
 }
 
 export default useOtherUser
