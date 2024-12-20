@@ -11,7 +11,7 @@ export default async function FriendsLayout({
     const friends = await getFriends()
 
     return (
-        // @ts-expect-error Server Component
+        
         <Sidebar>
             <div className="h-full">
                 <a>
