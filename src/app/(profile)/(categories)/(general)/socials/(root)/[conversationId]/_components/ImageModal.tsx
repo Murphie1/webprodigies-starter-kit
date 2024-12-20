@@ -7,7 +7,7 @@ interface ImageModalProps {
   data?: FullMessageType | null;
 }
 
-const ImageModal: React.FC<ImageModalProps> = ({ src }) => {
+const ImageModal: React.FC<ImageModalProps> = ({ data }) => {
   if (!data) {
     return null;
   }
