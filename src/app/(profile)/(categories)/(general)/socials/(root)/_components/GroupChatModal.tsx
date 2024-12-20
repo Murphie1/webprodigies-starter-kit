@@ -72,7 +72,7 @@ useEffect(() => {
             toast({
                 title: "Success",
                 description: "Conversation created successfully!",
-                variant: "success",
+                variant: "default",
             })
         } catch (error) {
             toast({
@@ -130,7 +130,7 @@ useEffect(() => {
                     </div>
                     <div className="mt-6 flex items-center justify-end gap-x-6">
                         <DialogClose>
-                            <Button disabled={isLoading} type="button" variant="secondary">
+                            <Button disabled={isLoading} type="button" variant="ghost">
                                 Cancel
                             </Button>
                         </DialogClose>
