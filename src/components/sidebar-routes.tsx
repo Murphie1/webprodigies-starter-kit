@@ -31,6 +31,12 @@ const guestRoutes = [
         href: "/prep",
     },
     {
+        key: 18,
+        icon: Heart,
+        label: "Niche",
+        href: "/niche",
+    },
+    {
         key: 5,
         icon: Heart,
         label: "Vision and Cognitive Learning",
