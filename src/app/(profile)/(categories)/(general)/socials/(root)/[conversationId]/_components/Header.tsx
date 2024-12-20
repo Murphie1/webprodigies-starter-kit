@@ -4,7 +4,7 @@ import Link from "next/link"
 import { ChevronLeft } from "lucide-react"
 import Avatar from "@/components/uMessage/Avatar"
 import AvatarGroup from "@/components/uMessage/AvatarGroup"
-import ProfileDrawer from "./ProfileDrawer"
+import AsyncProfileDrawer from "./AsyncProfileDrawer"
 import useActiveList from "@/hooks/uMessage/useActiveList"
 
 interface HeaderProps {
@@ -79,7 +79,7 @@ const Header: React.FC<HeaderProps> = ({ conversation, otherUser }) => {
                     </div>
                 </div>
             </div>
-            <ProfileDrawer data={conversation} />
+            <AsyncProfileDrawer conversation={conversation} />
         </div>
     )
 }
