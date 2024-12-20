@@ -29,8 +29,9 @@ export const onAuthenticatedUser = async () => {
                 username: `${user.firstname} ${user.lastname}`,
             }
         return {
-            status: 404,
+            status: 200,
         }
+            
     } catch (error) {
         return {
             status: 400,
@@ -48,10 +49,8 @@ export const loggedInUser = async () => {
                 clerkId: clerk.id,
             },
         })
-        if (user) return user
-        return {
-            status: 404,
-        }
+        if (user) 
+            return user
     } catch (error) {
         return {
             status: 400,
