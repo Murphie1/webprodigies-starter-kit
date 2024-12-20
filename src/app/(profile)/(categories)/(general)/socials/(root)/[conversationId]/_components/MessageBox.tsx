@@ -1,12 +1,11 @@
-"use client"
+
 
 import Avatar from "@/components/uMessage/Avatar"
 import { FullMessageType } from "@/type"
 import { cn } from "@/lib/utils"
-import { useUser } from "@clerk/nextjs"
+import { loggedInUser } from "@/actions/auth"
 import { format } from "date-fns"
 import Image from "next/image"
-import { useState } from "react"
 import ImageModal from "./ImageModal"
 import { redirect } from "next/navigation"
 
@@ -15,13 +14,12 @@ interface MessageBoxProps {
     isLast?: boolean
 }
 
-const MessageBox: React.FC<MessageBoxProps> = ({ data, isLast }) => {
-    const session = useUser()
-    if (!session || !session.primaryEmailAddress?.emailAddress)
-        return redirect("/sign-in")
+const MessageBox: React.FC<MessageBoxProps> = async ({ data, isLast }) => {
+    const session = await loggedInUser()
+    if (!session || !session?.email) redirect("/sign-in")
 
     const isOwn =
-        session.primaryEmailAddress?.emailAddress === data?.sender?.email
+        session?.email === data?.sender?.email
     const seenList = (data.seen || [])
         .filter((user) => user.email !== data?.sender?.email)
         .map((user) => user.firstname)
