@@ -2,18 +2,15 @@
 
 import axios from "axios"
 import { Friend, User } from "@prisma/client"
-import { FullFriendType } from "@/type"
 import { useRouter } from "next/navigation"
 import { useCallback, useState } from "react"
-import useOtherUser from "@/hooks/uMessage/useOtherFriend"
 import Avatar from "@/components/uMessage/Avatar"
 
 interface FriendBoxProps {
-    data: FullFriendType
+    otherUser: User
 }
 
-const FriendBox: React.FC<FriendBoxProps> = ({ data }) => {
-    const otherUser = useOtherUser(data)
+const FriendBox: React.FC<FriendBoxProps> = ({ otherUser }) => {
     const router = useRouter()
     const [isLoading, setIsLoading] = useState(false)
 
