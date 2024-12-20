@@ -16,7 +16,7 @@ export async function POST(request: Request) {
         }
 
         const body = await request.json()
-        const { message, image, conversationId } = body
+        const { message, image, video, conversationId } = body
 
         if (!localUser?.id || !clerk.emailAddresses[0]?.emailAddress) {
             return new NextResponse("Unauthorized", { status: 401 })
