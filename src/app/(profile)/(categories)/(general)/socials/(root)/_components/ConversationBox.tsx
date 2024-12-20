@@ -17,11 +17,11 @@ interface ConversationBoxProps {
 }
 
 const ConversationBox: React.FC<ConversationBoxProps> = ({ data, selected }) => {
-    const { session } = useUser();
+    const { user } = useUser();
     const router = useRouter();
 
     // Extract the user's email once to avoid multiple access calls
-    const userEmail = session?.primaryEmailAddress?.emailAddress;
+    const userEmail = user?.primaryEmailAddress?.emailAddress;
 
     const otherUser = useOtherUser(data);
 
