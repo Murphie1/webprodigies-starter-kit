@@ -7,7 +7,6 @@ import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 import { User } from "@prisma/client";
 import { FullConversationType } from "@/type";
-import useOtherUser from "@/hooks/uMessage/useOtherUser";
 import Avatar from "@/components/uMessage/Avatar";
 import AvatarGroup from "@/components/uMessage/AvatarGroup";
 
@@ -17,7 +16,7 @@ interface ConversationBoxProps {
     otherUser: User
 }
 
-const ConversationBox: React.FC<ConversationBoxProps> = ({ data, selected }) => {
+const ConversationBox: React.FC<ConversationBoxProps> = ({ data, selected, otherUser }) => {
     const { user } = useUser();
     const router = useRouter();
 
