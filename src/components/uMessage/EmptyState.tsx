@@ -1,4 +1,5 @@
-import EmptyState from "@/components/EmptyState"
+import Image from "next/image"
+import React from "react"
 
 const EmptyStateTwo = () => {
     return (
@@ -15,8 +16,15 @@ const EmptyStateTwo = () => {
         bg-gray-100
       "
         >
+            <Image
+                src="/icons/emptyState.svg"
+                width={250}
+                height={250}
+                alt="empty state"
+            />
+            
             <div className="text-center items-center flex flex-col">
-                <EmptyState />
+                
                 <h3
                     className="
             mt-2
