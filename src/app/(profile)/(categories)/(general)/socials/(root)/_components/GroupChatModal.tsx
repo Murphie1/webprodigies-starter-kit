@@ -77,8 +77,7 @@ useEffect(() => {
         } catch (error) {
             toast({
                 title: "Something went wrong",
-                description:
-                    error.response?.data?.message || "Please try again later.",
+                description: "Please try again later.",
                 variant: "destructive",
             })
             console.error("API Error:", error)
