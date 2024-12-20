@@ -1,4 +1,4 @@
-"use client"
+
 
 import { Conversation, User } from "@prisma/client"
 
@@ -18,8 +18,8 @@ interface HeaderProps {
     }
 }
 
-const Header: React.FC<HeaderProps> = ({ conversation }) => {
-    const otherUser = useOtherUser(conversation)
+const Header: React.FC<HeaderProps> = async ({ conversation }) => {
+    const otherUser = await useOtherUser(conversation)
 
     const { members } = useActiveList()
     const isActive = members.indexOf(otherUser?.email!) !== -1
