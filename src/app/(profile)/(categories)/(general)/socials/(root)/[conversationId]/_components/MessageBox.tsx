@@ -1,9 +1,8 @@
 
-
 import Avatar from "@/components/uMessage/Avatar"
 import { FullMessageType } from "@/type"
 import { cn } from "@/lib/utils"
-import { loggedInUser } from "@/actions/auth"
+import { onAuthenticatedUser } from "@/actions/auth"
 import { format } from "date-fns"
 import Image from "next/image"
 import ImageModal from "./ImageModal"
@@ -15,11 +14,11 @@ interface MessageBoxProps {
 }
 
 const MessageBox: React.FC<MessageBoxProps> = async ({ data, isLast }) => {
-    const session = await loggedInUser();
-    if (!session || !session.id) redirect("/sign-in")
+    const session = await onAuthenticatedUser();
+    if (!session || !session.email) redirect("/sign-in")
 
     const isOwn =
-        session.id === data?.sender?.email
+        session.email === data?.sender?.email
     const seenList = (data.seen || [])
         .filter((user) => user.email !== data?.sender?.email)
         .map((user) => user.firstname)
