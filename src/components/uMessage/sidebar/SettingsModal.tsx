@@ -150,7 +150,7 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ currentUser }) => {
                                             >
                                             <Button
                                                 disabled={isLoading}
-                                                secondary
+                                                variant="secondary"
                                                 type="button"
                                             >
                                                 Change
@@ -173,7 +173,7 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ currentUser }) => {
                             <DialogClose>
                                 <Button
                                     disabled={isLoading}
-                                    variant="secondary"
+                                    variant="ghost"
                                 >
                                     Cancel
                                 </Button>
