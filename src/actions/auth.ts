@@ -3,22 +3,21 @@
 import { client } from "@/lib/prisma"
 import { currentUser } from "@clerk/nextjs/server"
 
-type LoggedInUser =
-    | { status: number; email?: string | null }
-    | {
-          id: string
-          firstname: string
-          lastname: string | null
-          email: string | null
-          createdAt: Date
-          clerkId: string
-          image: string | null
-          stripeId: string | null
-          role: string
-          attributes: string[]
-          conversationIds: string[]
-          seenChatIds: string[]
-    }
+type LoggedInUser = {
+    status: number;
+    id: string;
+    firstname: string;
+    lastname: string | null;
+    email: string | null;
+    createdAt: Date;
+    clerkId: string;
+    image: string | null;
+    stripeId: string | null;
+    role: string;
+    attributes: string[];
+    conversationIds: string[];
+    seenChatIds: string[];
+};
 
 export const onAuthenticatedUser = async () => {
     try {
@@ -60,16 +59,9 @@ export const onAuthenticatedUser = async () => {
 
 export const loggedInUser = async (): Promise<LoggedInUser> => {
     try {
-        const clerk = await currentUser()
-        if (!clerk) return { status: 404, email: null } as any
-
-        const user = await client.user.findUnique({
-            where: {
-                clerkId: clerk.id,
-            },
-        })
-        return (
-            user || {
+        const clerk = await currentUser();
+        if (!clerk) {
+            return {
                 status: 404,
                 id: "",
                 firstname: "",
@@ -83,15 +75,48 @@ export const loggedInUser = async (): Promise<LoggedInUser> => {
                 attributes: [],
                 conversationIds: [],
                 seenChatIds: [],
-            }
-        )
+            };
+        }
+
+        const user = await client.user.findUnique({
+            where: {
+                clerkId: clerk.id,
+            },
+        });
+
+        return {
+            status: 200,
+            id: user?.id || "",
+            firstname: user?.firstname || "",
+            lastname: user?.lastname || null,
+            email: user?.email || clerk.emailAddresses[0]?.emailAddress || null,
+            createdAt: user?.createdAt || new Date(),
+            clerkId: clerk.id,
+            image: user?.image || clerk.imageUrl || null,
+            stripeId: user?.stripeId || null,
+            role: user?.role || "user",
+            attributes: user?.attributes || [],
+            conversationIds: user?.conversationIds || [],
+            seenChatIds: user?.seenChatIds || [],
+        };
     } catch (error) {
         return {
             status: 400,
+            id: "",
+            firstname: "",
+            lastname: null,
             email: null,
-        } as any
+            createdAt: new Date(),
+            clerkId: "",
+            image: null,
+            stripeId: null,
+            role: "user", // Default role
+            attributes: [],
+            conversationIds: [],
+            seenChatIds: [],
+        };
     }
-    }
+};
 
 
 export const onSignUpUser = async (data: {
