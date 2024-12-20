@@ -1,7 +1,7 @@
 
 import useOtherUser from "@/hooks/uMessage/useOtherUser"
 import { Conversation, User } from "@prisma/client"
-import { useMemo, useState } from "react"
+import { useMemo } from "react"
 import { format } from "date-fns"
 import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet"
 import { Heart } from "lucide-react"
