@@ -5,7 +5,7 @@ import { useCallback, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
-
+import { User } from "@prisma/client";
 import { FullConversationType } from "@/type";
 import useOtherUser from "@/hooks/uMessage/useOtherUser";
 import Avatar from "@/components/uMessage/Avatar";
@@ -14,6 +14,7 @@ import AvatarGroup from "@/components/uMessage/AvatarGroup";
 interface ConversationBoxProps {
     data: FullConversationType;
     selected?: boolean;
+    otherUser: User
 }
 
 const ConversationBox: React.FC<ConversationBoxProps> = ({ data, selected }) => {
@@ -22,8 +23,6 @@ const ConversationBox: React.FC<ConversationBoxProps> = ({ data, selected }) => 
 
     // Extract the user's email once to avoid multiple access calls
     const userEmail = user?.primaryEmailAddress?.emailAddress;
-
-    const otherUser = useOtherUser(data);
 
     // Redirect to sign-in if no session or email
     const handleRedirect = useCallback(() => {
