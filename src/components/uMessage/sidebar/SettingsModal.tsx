@@ -25,7 +25,7 @@ interface SettingsModalProps {
 const SettingsModal: React.FC<SettingsModalProps> = ({ currentUser }) => {
     const router = useRouter()
     const [isLoading, setIsLoading] = useState(false)
-
+    const { toast } = useToast();
     const {
         register,
         handleSubmit,
@@ -54,7 +54,6 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ currentUser }) => {
             .post("/api/settings/uMessage", data)
             .then(() => {
                 router.refresh()
-                onClose()
                 toast({
                     title: "Success!",
                     description: "Settings updated successfully.",
