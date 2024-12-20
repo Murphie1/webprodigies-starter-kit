@@ -1,7 +1,7 @@
 "use client"
 
 import { FullFriendType } from "@/type"
-import FriendBox from "./FriendBox"
+import AsyncFriendBox from "./AsyncFriendBox"
 
 interface UserListProps {
     items: FullFriendType[]
@@ -40,7 +40,7 @@ const FriendList: React.FC<UserListProps> = ({ items }) => {
                     </div>
                 </div>
                 {items.map((item) => (
-                    <FriendBox key={item.id} data={item} />
+                    <AsyncFriendBox key={item.id} data={item} />
                 ))}
             </div>
         </aside>
