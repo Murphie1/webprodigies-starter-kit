@@ -3,6 +3,23 @@
 import { client } from "@/lib/prisma"
 import { currentUser } from "@clerk/nextjs/server"
 
+type LoggedInUser =
+    | { status: number; email?: string | null }
+    | {
+          id: string
+          firstname: string
+          lastname: string | null
+          email: string
+          createdAt: Date
+          clerkId: string
+          image: string | null
+          stripeId: string | null
+          role: string
+          attributes: string[]
+          conversationIds: string[]
+          seenChatIds: string[]
+    }
+
 export const onAuthenticatedUser = async () => {
     try {
         const clerk = await currentUser()
