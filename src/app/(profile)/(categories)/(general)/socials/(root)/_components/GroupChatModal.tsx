@@ -12,6 +12,7 @@ import Input from "@/components/uMessage/inputs/Input"
 import Select from "@/components/uMessage/inputs/Select"
 import { FullFriendType } from "@/type"
 import axios from "axios"
+import { User } from "@prisma/client";
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 import useOtherUsers from "@/hooks/uMessage/friends"
@@ -28,7 +29,7 @@ const GroupChatModal: React.FC<GroupChatModalProps> = ({ users }) => {
     const { toast } = useToast();
     // Call `useOtherUsers` at the top level
 const otherUsers = useOtherUsers(users) // Returns an array
-const [friends, setFriends] = useState<FullFriendType[]>([])
+const [friends, setFriends] = useState<User[]>([])
 
 // Process `otherUsers` asynchronously if needed
 useEffect(() => {
