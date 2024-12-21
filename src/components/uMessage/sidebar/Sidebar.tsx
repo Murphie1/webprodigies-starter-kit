@@ -5,9 +5,8 @@ import { loggedInUser } from "@/actions/auth"
 
 async function Sidebar({ children }: { children: React.ReactNode }) {
     const user = await loggedInUser()
-    if (!user) {
-        throw new Error("Unauthorized")
-}
+    //if (!user) redirect("/sign-in")
+
     return (
         <div className="h-full">
             <DesktopSidebar loggedUser={user!} />
