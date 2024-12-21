@@ -115,6 +115,7 @@
         "tailwind-merge": "^2.5.2",
         "tailwindcss-animate": "^1.0.7",
         "uploadthing": "^7.1.0",
+        "use-sync-external-store": "^1.4.0",
         "uuid": "^10.0.0",
         "vaul": "^0.9.1",
         "yjs": "^13.6.20",
