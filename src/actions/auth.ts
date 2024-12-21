@@ -43,31 +43,40 @@ export const onAuthenticatedUser = async () => {
 
 export const loggedInUser = async (): Promise<User> => {
     try {
-        const clerk = await currentUser()
-        if (!clerk) return {
-            throw new Error("Unauthorized")
-    }
+        const clerk = await currentUser();
 
-        const user = await client.user.findUnique({
+        // Throw an error if Clerk is not authenticated
+        if (!clerk) {
+            throw new Error("Unauthorized");
+        }
+
+        // Try to find the user in the database
+        let user = await client.user.findUnique({
             where: {
                 clerkId: clerk.id,
             },
-        })
+        });
 
-        return user;
-    
+        // If the user doesn't exist, create a new one
         if (!user) {
-            const newUser = await client.user.create({
+            user = await client.user.create({
                 data: {
                     clerkId: clerk.id,
                     firstname: `${clerk.firstName || clerk.username}`,
                     lastname: `${clerk.lastName || ""}`,
                     email: `${clerk.emailAddresses[0]?.emailAddress || ""}`,
                     image: `${clerk.imageUrl || null}`,
-                              }
-            })
-            return newUser;
+                },
+            });
+        }
+
+        return user;
+    } catch (error) {
+        console.error("Error fetching or creating user:", error);
+        throw error; // Re-throw the error to handle it at a higher level
+    }
 };
+
 
 export const onSignUpUser = async (data: {
     firstname: string
