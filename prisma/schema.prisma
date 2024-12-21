@@ -89,7 +89,7 @@ model Group {
   createdAt       DateTime       @default(now())
   User            User           @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId          String         @db.Uuid
-  courses         Course[]
+  courses         Groupcourse[]
   affiliate       Affiliate?
   domain          String?
   subscription    Subscription[]
@@ -175,7 +175,7 @@ model Channel {
   groupId   String?  @db.Uuid
 }
 
-model Course {
+model Groupcourse {
   id          String   @id @db.Uuid
   name        String
   thumbnail   String
@@ -190,7 +190,7 @@ model Course {
 
 model Module {
   id        String    @id @db.Uuid
-  Course    Course?   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  Course    Groupcourse?   @relation(fields: [courseId], references: [id], onDelete: Cascade)
   courseId  String?   @db.Uuid
   title     String
   section   Section[]
