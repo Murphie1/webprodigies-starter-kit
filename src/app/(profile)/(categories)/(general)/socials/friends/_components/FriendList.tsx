@@ -2,7 +2,7 @@
 
 import { FullFriendType } from "@/type"
 import AsyncFriendBox from "./AsyncFriendBox"
-
+import { FriendRequests } from "./FriendRequests"
 interface UserListProps {
     items: FullFriendType[]
 }
@@ -33,11 +33,13 @@ const FriendList: React.FC<UserListProps> = ({ items }) => {
             text-2xl
             font-bold
             text-neutral-800
+            dark:text-themeTextWhite
             py-4
           "
                     >
                         Friends
                     </div>
+                    <FriendRequests />
                 </div>
                 {items.map((item) => (
                     <AsyncFriendBox key={item.id} data={item} />
