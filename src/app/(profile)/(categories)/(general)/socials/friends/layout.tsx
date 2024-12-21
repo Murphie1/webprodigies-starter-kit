@@ -13,8 +13,8 @@ export default async function FriendsLayout({
     return (
         
         <Sidebar>
-            <div className="h-full sm:rounded-2xl bg-themeWhite dark:bg-themeGray">
-                <a className="bg-black dark: bg-white pt-8">
+            <div className="h-full sm:rounded-2xl bg-themeWhite dark:bg-gray-900">
+                <a className="pt-8">
                     <FriendRequests />
                 </a>
                 <FriendList items={friends} />
