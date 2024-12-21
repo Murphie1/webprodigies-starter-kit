@@ -1,5 +1,6 @@
 import Grids from "./_components/grids"
-
+import { FriendRequests } from "../socials/friends/_components/FriendRequests"
+import { CreateRequest } from "../socials/friends/_components/CreateRequest"
 const Homepage = () => {
     return (
         <div className="flex flex-col pt-6 space-y-2 items-center justify-center md:grid md:grid-cols-2 md:space-y-0 md:space-x-8">
@@ -13,6 +14,8 @@ const Homepage = () => {
                 <p className="text-2xl text-center">Text</p>
             </div>
             <Grids />
+            <FriendRequests />
+            <CreateRequest />
         </div>
     )
 }
