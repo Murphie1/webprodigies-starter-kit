@@ -14,7 +14,7 @@ export default async function FriendsLayout({
         
         <Sidebar>
             <div className="h-full sm:rounded-2xl bg-themeWhite dark:bg-gray-900">
-                <div className="flex flex-col">
+                <div className="flex flex-col gap-y-3">
                     <FriendRequests />
                     <FriendList items={friends} />
                     </div>
