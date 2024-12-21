@@ -14,7 +14,7 @@ const useRoutes = () => {
                 label: "uMessages",
                 href: "/socials",
                 icon: Heart,
-                active: pathname?.includes("/socials"),
+                active: pathname === "/socials",
             },
             {
                 label: "CatchUp",
