@@ -41,21 +41,32 @@ export const onAuthenticatedUser = async () => {
     }
 }
 
-export const loggedInUser = async (): Promise<User | null }> => {
+export const loggedInUser = async (): Promise<User> => {
     try {
-        const clerk = await currentUser();
-        if (!clerk) return { status: 404, email: null };
+        const clerk = await currentUser()
+        if (!clerk) return {
+            throw new Error("Unauthorized")
+    }
 
         const user = await client.user.findUnique({
             where: {
                 clerkId: clerk.id,
             },
-        });
+        })
 
         return user;
-    } catch (error) {
-        return { status: 400, email: null };
-    }
+    
+        if (!user) {
+            const newUser = await client.user.create({
+                data: {
+                    clerkId: clerk.id,
+                    firstname: `${clerk.firstName || clerk.username}`,
+                    lastname: `${clerk.lastName || ""}`,
+                    email: `${clerk.emailAddresses[0]?.emailAddress || ""}`,
+                    image: `${clerk.imageUrl || null}`,
+                              }
+            })
+            return newUser;
 };
 
 export const onSignUpUser = async (data: {
