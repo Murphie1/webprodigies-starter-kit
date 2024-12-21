@@ -14,7 +14,7 @@ import { CreateRequest } from "./CreateRequest" // Uncomment if used
 
 export const FriendRequests = async () => {
     const friendRequests = await getRequests() // Renamed for clarity
-    if (!friendRequests) return <p>No friend requests available.</p>
+    if (!friendRequests) return <CreateRequest />
 
     return (
         <Drawer>
