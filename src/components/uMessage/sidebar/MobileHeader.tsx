@@ -24,6 +24,7 @@ const MobileHeader = () => {
         top-0
         z-40
         flex
+        h-[68px]
         items-center
         bg-white
         dark:bg-black
