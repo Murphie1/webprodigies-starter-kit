@@ -4,7 +4,7 @@ import { currentUser } from "@clerk/nextjs/server"
 
 export const getFriends = async () => {
     const localUser = await onAuthenticatedUser()
-    if (!localUser || localUser.id) {
+    if (!localUser || !localUser.id) {
         return []
     }
     const clerk = await currentUser()
@@ -115,7 +115,7 @@ export const getConversationById = async (conversationId: string) => {
 
 export const getRequests = async () => {
     const localUser = await onAuthenticatedUser()
-    if (!localUser || localUser.id) {
+    if (!localUser || !localUser.id) {
         return []
     }
     const clerk = await currentUser()
