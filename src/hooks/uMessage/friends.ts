@@ -10,9 +10,8 @@ const useOtherUsers = async (
 ): Promise<User[]> => {
     const clerk = await loggedInUser()
     if (!clerk || !clerk.email) {
-        return new NextResponse("Unauthorized", { status: 401 })
+        throw new Error("Unauthorized")
     }
-
     const currentUserEmail = clerk.email
 
     // Accumulate all users from the friends array
