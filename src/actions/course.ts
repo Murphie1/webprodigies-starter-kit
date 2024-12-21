@@ -4,7 +4,7 @@ import { client } from "@/lib/prisma"
 
 export const onGetGroupCourses = async (groupid: string) => {
     try {
-        const courses = await client.course.findMany({
+        const courses = await client.groupcourse.findMany({
             where: {
                 groupId: groupid,
             },
@@ -112,7 +112,7 @@ export const onCreateCourseModule = async (
     moduleId: string,
 ) => {
     try {
-        const courseModule = await client.course.update({
+        const courseModule = await client.groupcourse.update({
             where: {
                 id: courseId,
             },
