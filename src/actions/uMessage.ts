@@ -7,11 +7,6 @@ export const getFriends = async () => {
     if (!localUser || !localUser.id) {
         return []
     }
-    const clerk = await currentUser()
-
-    if (!clerk || !clerk.emailAddresses[0]?.emailAddress) {
-        return []
-    }
 
     try {
         const friends = await client.friend.findMany({
@@ -92,11 +87,6 @@ export const getConversations = async () => {
 
 export const getConversationById = async (conversationId: string) => {
     try {
-        const clerk = await currentUser()
-
-        if (!clerk || !clerk.emailAddresses[0]?.emailAddress) {
-            return null
-        }
 
         const conversation = await client.conversation.findUnique({
             where: {
@@ -116,11 +106,6 @@ export const getConversationById = async (conversationId: string) => {
 export const getRequests = async () => {
     const localUser = await onAuthenticatedUser()
     if (!localUser || !localUser.id) {
-        return []
-    }
-    const clerk = await currentUser()
-
-    if (!clerk || !clerk.emailAddresses[0]?.emailAddress) {
         return []
     }
 
