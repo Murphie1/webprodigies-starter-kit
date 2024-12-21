@@ -5,7 +5,7 @@ import { loggedInUser } from "@/actions/auth"
 
 async function Sidebar({ children }: { children: React.ReactNode }) {
     const user = await loggedInUser()
-    if (!user) return {
+    if (!user) {
         throw new Error("Unauthorized")
 }
     return (
