@@ -9,12 +9,12 @@ import {
     DrawerTrigger,
 } from "@/components/ui/drawer"
 import AsyncRequestBox from "./AsyncRequestBox"
-import { getRequests } from "@/actions/uMessage" // Fixed syntax error
-import { CreateRequest } from "./CreateRequest" // Uncomment if used
+import { getRequests } from "@/actions/uMessage"
+import { CreateRequest } from "./CreateRequest"
 
+// Component accepts requests as a prop (server-side fetched)
 export const FriendRequests = async () => {
-    const friendRequests = await getRequests() // Renamed for clarity
-    if (!friendRequests) return <CreateRequest />
+    const friendRequests = await getRequests()
 
     return (
         <Drawer>
@@ -30,7 +30,7 @@ export const FriendRequests = async () => {
                         Check and manage your friend requests.
                     </DrawerDescription>
                 </DrawerHeader>
-                {friendRequests.length > 0 ? (
+                {friendRequests?.length > 0 ? (
                     <div className="flex flex-col space-y-4 p-4">
                         {friendRequests.map((friend) => (
                             <AsyncRequestBox key={friend.id} item={friend} />
@@ -43,11 +43,10 @@ export const FriendRequests = async () => {
                         </p>
                     </div>
                 )}
-                {/* Uncomment below if you want to include CreateRequest */}
                 <DrawerFooter className="p-4 border-t border-gray-200 dark:border-gray-700">
                     <CreateRequest />
                 </DrawerFooter>
             </DrawerContent>
         </Drawer>
     )
-}
+                        }
