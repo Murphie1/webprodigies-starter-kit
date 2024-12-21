@@ -11,7 +11,7 @@ async function Sidebar({ children }: { children: React.ReactNode }) {
         <div className="h-full">
             <DesktopSidebar loggedUser={user!} />
             <MobileHeader />
-            <main className="h-[500px] w-[calc(100vw-10px)] pl-[5px] sm:pt-[70px] sm:rounded-2xl border-1 border-gray-500 dark:border-themeGray sm:overflow-y-auto md:w-full lg:pl-20 lg:h-full">
+            <main className="h-[650px] w-[calc(100vw-10px)] pl-[5px] pt-[75px] rounded-2xl border-1 border-gray-500 dark:border-themeGray sm:overflow-y-auto md:pt-0 md:w-full lg:pl-20 lg:h-full">
                 {children}
             </main>
         </div>
