@@ -1,25 +1,7 @@
 "use server"
-
+import { User } from "@prisma/client";
 import { client } from "@/lib/prisma"
 import { currentUser } from "@clerk/nextjs/server"
-
-type LoggedInUser =
-    | { status: number; email?: string | null }
-    | {
-          status: number;
-          id: string;
-          firstname: string;
-          lastname: string | null;
-          email: string | null;
-          createdAt: Date;
-          clerkId: string;
-          image: string | null;
-          stripeId: string | null;
-          role: string;
-          attributes: string[];
-          conversationIds: string[];
-          seenChatIds: string[];
-    }
 
 export const onAuthenticatedUser = async () => {
     try {
@@ -59,74 +41,22 @@ export const onAuthenticatedUser = async () => {
     }
 }
 
-export const loggedInUser = async (): Promise<LoggedInUser> => {
+export const loggedInUser = async (): Promise<User | null }> => {
     try {
-        const clerk = await currentUser()
-        if (!clerk) return { status: 404, email: null } as any
+        const clerk = await currentUser();
+        if (!clerk) return { status: 404, email: null };
 
         const user = await client.user.findUnique({
             where: {
                 clerkId: clerk.id,
             },
-            select: {
-                id: true,
-                firstname: true,
-                lastname: true,
-                email: true,
-                createdAt: true,
-                clerkId: true,
-                image: true,
-                stripeId: true,
-                role: true,
-                attributes: true,
-                conversationIds: true,
-                seenChatIds: true,
-                // You can choose to include other related data as needed
-            },
-        })
+        });
 
-        if (!user) {
-            return {
-                status: 404,
-                id: "",
-                firstname: "",
-                lastname: null,
-                email: null,
-                createdAt: new Date(),
-                clerkId: "",
-                image: null,
-                stripeId: null,
-                role: "user", // Default role
-                attributes: [],
-                conversationIds: [],
-                seenChatIds: [],
-            }
-        }
-
-        // Return the user with the full structure
-        return {
-            status: 200,
-            id: user.id,
-            firstname: user.firstname,
-            lastname: user.lastname,
-            email: user.email,
-            createdAt: user.createdAt,
-            clerkId: user.clerkId,
-            image: user.image,
-            stripeId: user.stripeId,
-            role: user.role,
-            attributes: user.attributes || [],
-            conversationIds: user.conversationIds || [],
-            seenChatIds: user.seenChatIds || [],
-        }
+        return user;
     } catch (error) {
-        return {
-            status: 400,
-            email: null,
-        } as any
+        return { status: 400, email: null };
     }
-                }
-
+};
 
 export const onSignUpUser = async (data: {
     firstname: string
