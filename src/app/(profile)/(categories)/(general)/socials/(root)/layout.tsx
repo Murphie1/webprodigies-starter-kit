@@ -11,7 +11,7 @@ export default async function ConversationsLayout({
 }: {
     children: React.ReactNode
 }) {
-  /  const conversations = await getConversations()
+  //  const conversations = await getConversations()
    // const users = await getFriends()
    const current = await onAuthenticatedUser()
     if (!current || !current.email) redirect("/sign-in")
