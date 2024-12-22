@@ -6,27 +6,32 @@ import { pusherServer } from "@/lib/pusher"
 
 export async function POST(request: Request) {
     try {
+        // Authenticate user
         const clerk = await currentUser()
         if (!clerk) {
             return new NextResponse("Unauthorized", { status: 401 })
         }
+
         const localUser = await onAuthenticatedUser()
         if (!localUser) {
             return new NextResponse("Unauthorized", { status: 401 })
         }
 
+        // Parse request body
         const body = await request.json()
         const { message, image, video, conversationId } = body
 
-        if (!localUser?.id || !clerk.emailAddresses[0]?.emailAddress) {
-            return new NextResponse("Unauthorized", { status: 401 })
+        // Validate required fields
+        if (!message || !conversationId) {
+            return new NextResponse("Missing message or conversationId", { status: 400 })
         }
 
+        // Create the new message
         const newMessage = await client.chat.create({
             data: {
                 body: message,
-                image: image,
-                video: video,
+                image,
+                video,
                 conversation: {
                     connect: {
                         id: conversationId,
@@ -49,10 +54,9 @@ export async function POST(request: Request) {
             },
         })
 
+        // Update conversation with the new message
         const updatedConversation = await client.conversation.update({
-            where: {
-                id: conversationId,
-            },
+            where: { id: conversationId },
             data: {
                 lastMessageAt: new Date(),
                 chats: {
@@ -71,21 +75,23 @@ export async function POST(request: Request) {
             },
         })
 
+        // Trigger message:new event
         await pusherServer.trigger(conversationId, "messages:new", newMessage)
 
-        const lastMessage =
-            updatedConversation.chats[updatedConversation.chats.length - 1]
-
-        updatedConversation.users.map((user) => {
-            pusherServer.trigger(user.email!, "conversation:update", {
+        // Send update to each user in the conversation
+        const lastMessage = updatedConversation.chats[updatedConversation.chats.length - 1]
+        const userEmails = updatedConversation.users.map(user => user.email)
+        
+        for (const email of userEmails) {
+            await pusherServer.trigger(email!, "conversation:update", {
                 id: conversationId,
                 chats: [lastMessage],
             })
-        })
+        }
 
         return NextResponse.json(newMessage)
     } catch (error: any) {
         console.log(error, "ERROR_MESSAGES")
-        return new NextResponse("InternalError", { status: 500 })
+        return new NextResponse("Internal Error", { status: 500 })
     }
-}
+                }
