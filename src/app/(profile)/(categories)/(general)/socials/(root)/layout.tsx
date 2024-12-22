@@ -1,7 +1,7 @@
 //import { getConversations } from "@/actions/uMessage"
 //import { getFriends } from "@/actions/uMessage"
 //import Sidebar from "@/components/uMessage/sidebar/Sidebar"
-import ConversationList from "./_components/ConversationList"
+//import ConversationList from "./_components/ConversationList"
 import { onAuthenticatedUser } from "@/actions/auth"
 import { redirect } from "next/navigation"
 
