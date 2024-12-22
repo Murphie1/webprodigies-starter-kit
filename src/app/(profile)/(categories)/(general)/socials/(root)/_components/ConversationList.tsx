@@ -8,57 +8,26 @@ import useConversation from "@/hooks/uMessage/useConversation";
 import { FullConversationType, FullFriendType } from "@/type";
 import AsyncConversationBox from "./AsyncConversationBox";
 import GroupChatModal from "./GroupChatModal";
-import { onAuthenticatedUser } from "@/actions/auth"; // Replace Clerk's useUser with this
 import { pusherClient } from "@/lib/pusher";
 import { find } from "lodash";
-
-// Define the type for the authenticated user
-interface AuthenticatedUser {
-    status: number;
-    id?: string;
-    role?: string;
-    image?: string;
-    email?: string;
-    username?: string;
-}
 
 interface ConversationListProps {
     initialItems: FullConversationType[];
     users: FullFriendType[];
+    email: string; // Pass email directly as a prop
 }
 
 const ConversationList: React.FC<ConversationListProps> = ({
     initialItems,
     users,
+    email,
 }) => {
     const router = useRouter();
     const { conversationId, isOpen } = useConversation();
 
     const [items, setItems] = useState(initialItems);
-    const [user, setUser] = useState<AuthenticatedUser | null>(null);
 
-    const pusherKey = useMemo(() => {
-        return user?.email || ""; // Memoize pusherKey based on the user's email
-    }, [user]);
-
-    // Fetch authenticated user
-    useEffect(() => {
-        const fetchUser = async () => {
-            try {
-                const authenticatedUser = await onAuthenticatedUser();
-                if (!authenticatedUser || !authenticatedUser.email) {
-                    router.push("/sign-in");
-                } else {
-                    setUser(authenticatedUser); // Set the authenticated user to state
-                }
-            } catch (error) {
-                console.error("Error fetching authenticated user:", error);
-                router.push("/sign-in"); // Redirect to sign-in on error
-            }
-        };
-
-        fetchUser();
-    }, [router]);
+    const pusherKey = useMemo(() => email, [email]);
 
     // Handle Pusher subscription
     useEffect(() => {
@@ -94,7 +63,7 @@ const ConversationList: React.FC<ConversationListProps> = ({
                 current.filter((convo) => convo.id !== conversation.id)
             );
 
-            if (conversationId === conversation.id) {
+            if (conversationId === conversation.id && router.pathname !== "/socials") {
                 router.push("/socials");
             }
         };
@@ -110,15 +79,6 @@ const ConversationList: React.FC<ConversationListProps> = ({
             pusherClient.unbind("conversation:remove", removeHandler);
         };
     }, [pusherKey, conversationId, router]);
-
-    // Render loading state
-    if (!user) {
-        return (
-            <div className="flex justify-center items-center h-full">
-                <p>Loading conversations...</p>
-            </div>
-        );
-    }
 
     return (
         <aside
