@@ -2,7 +2,7 @@ import { getConversationById } from "@/actions/uMessage"
 import { getMessages } from "@/actions/uMessage"
 import EmptyStateTwo from "@/components/uMessage/EmptyState"
 
-import AsyncHeader from "./_components/AsyncHeader"
+//import AsyncHeader from "./_components/AsyncHeader"
 import Body from "./_components/Body"
 import Form from "./_components/Form"
 
@@ -27,7 +27,7 @@ const ConversationId = async ({ params }: { params: IParams }) => {
     return (
         <div className="lg:pl-80 h-full">
             <div className="h-full flex flex-col">
-                <AsyncHeader conversation={conversation} />
+                {/*<AsyncHeader conversation={conversation} />*/}
                 <Body initialMessages={messages} />
                 <Form />
             </div>
