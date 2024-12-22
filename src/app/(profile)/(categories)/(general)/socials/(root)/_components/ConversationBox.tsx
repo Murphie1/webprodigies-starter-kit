@@ -1,7 +1,7 @@
 "use client";
 
 import { useUser } from "@clerk/nextjs";
-import { useCallback, useMemo } from "react";
+import { useCallback, useMemo, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
@@ -13,27 +13,25 @@ import AvatarGroup from "@/components/uMessage/AvatarGroup";
 interface ConversationBoxProps {
     data: FullConversationType;
     selected?: boolean;
-    otherUser: User
+    otherUser: User;
 }
 
 const ConversationBox: React.FC<ConversationBoxProps> = ({ data, selected, otherUser }) => {
-    const { user } = useUser();
+    const { isLoaded, user } = useUser();
     const router = useRouter();
 
-    // Extract the user's email once to avoid multiple access calls
-    const userEmail = user?.primaryEmailAddress?.emailAddress;
-
     // Redirect to sign-in if no session or email
-    const handleRedirect = useCallback(() => {
-        if (!userEmail) {
+    useEffect(() => {
+        if (isLoaded && !user?.primaryEmailAddress?.emailAddress) {
             router.replace("/sign-in");
         }
-    }, [userEmail, router]);
+    }, [isLoaded, user, router]);
 
-    // Run the redirect logic as an effect
-    useMemo(() => {
-        handleRedirect();
-    }, [handleRedirect]);
+    // Memoize user email after isLoaded
+    const userEmail = useMemo(() => {
+        if (!isLoaded) return null;
+        return user?.primaryEmailAddress?.emailAddress || null;
+    }, [isLoaded, user]);
 
     // Navigate to the conversation page
     const handleClick = useCallback(() => {
@@ -50,7 +48,7 @@ const ConversationBox: React.FC<ConversationBoxProps> = ({ data, selected, other
     const hasSeen = useMemo(() => {
         if (!lastMessage) return false;
         const seenArray = lastMessage.seen || [];
-        return seenArray.some((user) => user.email === userEmail);
+        return seenArray.some((seenUser) => seenUser.email === userEmail);
     }, [userEmail, lastMessage]);
 
     // Determine the text to display for the last message
@@ -61,7 +59,12 @@ const ConversationBox: React.FC<ConversationBoxProps> = ({ data, selected, other
         return "Started a conversation";
     }, [lastMessage]);
 
-    // Render null if no session or email (after redirect handling)
+    // Handle loading state
+    if (!isLoaded) {
+        return <div>Loading...</div>; // Optionally, show a placeholder or spinner
+    }
+
+    // Render null if no session or email
     if (!userEmail) return null;
 
     return (
