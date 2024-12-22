@@ -25,23 +25,21 @@ const ConversationList: React.FC<ConversationListProps> = ({
     const router = useRouter();
     const { conversationId, isOpen } = useConversation();
 
-    // State for conversations
     const [items, setItems] = useState(initialItems);
 
-    // Compute the Pusher key once data is loaded
     const pusherKey = useMemo(() => {
         if (!isLoaded) return "";
         return user?.primaryEmailAddress?.emailAddress || "";
     }, [isLoaded, user]);
 
-    // Redirect if the session is invalid once data is loaded
+    // Redirect if user is not authenticated after loading
     useEffect(() => {
         if (isLoaded && (!user || !user.primaryEmailAddress?.emailAddress)) {
             router.push("/sign-in");
         }
     }, [isLoaded, user, router]);
 
-    // Handle Pusher subscription once the key is ready
+    // Handle Pusher subscription
     useEffect(() => {
         if (!pusherKey) return;
 
@@ -92,9 +90,13 @@ const ConversationList: React.FC<ConversationListProps> = ({
         };
     }, [pusherKey, conversationId, router]);
 
-    // Show loading state until Clerk has loaded the user
+    // Render loading state
     if (!isLoaded) {
-        return <div>Loading conversations...</div>;
+        return (
+            <div className="flex justify-center items-center h-full">
+                <p>Loading conversations...</p>
+            </div>
+        );
     }
 
     // Render null if the user is invalid
