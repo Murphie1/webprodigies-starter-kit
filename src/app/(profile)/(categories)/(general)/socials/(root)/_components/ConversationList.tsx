@@ -21,26 +21,27 @@ const ConversationList: React.FC<ConversationListProps> = ({
     initialItems,
     users,
 }) => {
-    const { user } = useUser();
+    const { isLoaded, user } = useUser();
     const router = useRouter();
     const { conversationId, isOpen } = useConversation();
 
-    // Always call hooks unconditionally
+    // State for conversations
     const [items, setItems] = useState(initialItems);
 
-    const pusherKey = useMemo(
-        () => user?.primaryEmailAddress?.emailAddress || "",
-        [user?.primaryEmailAddress?.emailAddress]
-    );
+    // Compute the Pusher key once data is loaded
+    const pusherKey = useMemo(() => {
+        if (!isLoaded) return "";
+        return user?.primaryEmailAddress?.emailAddress || "";
+    }, [isLoaded, user]);
 
-    // Redirect if the session is invalid
+    // Redirect if the session is invalid once data is loaded
     useEffect(() => {
-        if (!user || !user.primaryEmailAddress?.emailAddress) {
+        if (isLoaded && (!user || !user.primaryEmailAddress?.emailAddress)) {
             router.push("/sign-in");
         }
-    }, [user, router]);
+    }, [isLoaded, user, router]);
 
-    // Handle Pusher subscription
+    // Handle Pusher subscription once the key is ready
     useEffect(() => {
         if (!pusherKey) return;
 
@@ -91,7 +92,12 @@ const ConversationList: React.FC<ConversationListProps> = ({
         };
     }, [pusherKey, conversationId, router]);
 
-    // Render null if session is invalid
+    // Show loading state until Clerk has loaded the user
+    if (!isLoaded) {
+        return <div>Loading conversations...</div>;
+    }
+
+    // Render null if the user is invalid
     if (!user || !user.primaryEmailAddress?.emailAddress) {
         return null;
     }
