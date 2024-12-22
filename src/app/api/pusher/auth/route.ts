@@ -1,23 +1,27 @@
-import { currentUser } from "@clerk/nextjs/server"
-import { NextResponse } from "next/server"
-import { pusherServer } from "@/lib/pusher"
+import { NextResponse } from 'next/server';
+import { pusherServer } from "@/lib/pusher"; // Adjust to your Pusher server configuration
+import { currentUser } from "@clerk/nextjs/server"; // Assuming you use Clerk for authentication
 
-export default async function handler(request: Request) {
-    const session = await currentUser()
-    if (!session) {
-        return new NextResponse("Unauthorized", { status: 401 })
+export async function POST(request: Request) {
+    try {
+        const clerkUser = await currentUser();
+
+        if (!clerkUser) {
+            return new NextResponse("Unauthorized", { status: 401 });
+        }
+
+        const body = await request.json();
+        const { channel_name, socket_id } = body;
+
+        if (!channel_name || !socket_id) {
+            return new NextResponse("Bad Request", { status: 400 });
+        }
+
+        const authPayload = pusherServer.authenticate(socket_id, channel_name);
+
+        return NextResponse.json(authPayload);
+    } catch (error) {
+        console.error("Error with Pusher authentication:", error);
+        return new NextResponse("Internal Server Error", { status: 500 });
     }
-
-    if (!session.emailAddresses[0]?.emailAddress) {
-        return new NextResponse("Unauthorized", { status: 401 })
-    }
-
-    const { socket_id, channel_name } = await request.json()
-    const data = {
-        user_id: session.emailAddresses[0]?.emailAddress,
-    }
-
-    const authResponse = pusherServer.authorizeChannel(socket_id, channel_name, data)
-
-    return new NextResponse(JSON.stringify(authResponse))
-            }
+               }
