@@ -1,27 +1,39 @@
-import { NextResponse } from 'next/server';
-import { pusherServer } from "@/lib/pusher"; // Adjust to your Pusher server configuration
-import { currentUser } from "@clerk/nextjs/server"; // Assuming you use Clerk for authentication
+import { currentUser } from "@clerk/nextjs/server"
+import { NextResponse } from "next/server"
+import { pusherServer } from "@/lib/pusher"
 
 export async function POST(request: Request) {
     try {
-        const clerkUser = await currentUser();
-
-        if (!clerkUser) {
-            return new NextResponse("Unauthorized", { status: 401 });
+        // Retrieve the session using Clerk
+        const session = await currentUser()
+        if (!session) {
+            return new NextResponse("Unauthorized", { status: 401 })
         }
 
-        const body = await request.json();
-        const { channel_name, socket_id } = body;
-
-        if (!channel_name || !socket_id) {
-            return new NextResponse("Bad Request", { status: 400 });
+        if (!session.emailAddresses[0]?.emailAddress) {
+            return new NextResponse("Unauthorized", { status: 401 })
         }
 
-        const authPayload = pusherServer.authenticate(socket_id, channel_name);
+        // Parse the incoming request body to get socket_id and channel_name
+        const { socket_id, channel_name } = await request.json()
 
-        return NextResponse.json(authPayload);
+        // Ensure both socket_id and channel_name are provided
+        if (!socket_id || !channel_name) {
+            return new NextResponse("Bad Request", { status: 400 })
+        }
+
+        // Prepare the data for Pusher authorization
+        const data = {
+            user_id: session.emailAddresses[0]?.emailAddress,
+        }
+
+        // Authorize the Pusher channel
+        const authResponse = pusherServer.authorizeChannel(socket_id, channel_name, data)
+
+        // Return the Pusher auth response
+        return new NextResponse(JSON.stringify(authResponse), { status: 200 })
     } catch (error) {
-        console.error("Error with Pusher authentication:", error);
-        return new NextResponse("Internal Server Error", { status: 500 });
+        console.error("Pusher authorization error:", error)
+        return new NextResponse("Internal Server Error", { status: 500 })
     }
-               }
+}
