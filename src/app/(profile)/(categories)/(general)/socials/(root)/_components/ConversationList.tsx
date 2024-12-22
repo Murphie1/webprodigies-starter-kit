@@ -2,7 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import { useEffect, useMemo, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 
 import useConversation from "@/hooks/uMessage/useConversation";
 import { FullConversationType, FullFriendType } from "@/type";
@@ -23,6 +23,7 @@ const ConversationList: React.FC<ConversationListProps> = ({
     email,
 }) => {
     const router = useRouter();
+    const pathname = usePathname();
     const { conversationId, isOpen } = useConversation();
 
     const [items, setItems] = useState(initialItems);
@@ -63,7 +64,7 @@ const ConversationList: React.FC<ConversationListProps> = ({
                 current.filter((convo) => convo.id !== conversation.id)
             );
 
-            if (conversationId === conversation.id && router.pathname !== "/socials") {
+            if (conversationId === conversation.id && pathname !== "/socials") {
                 router.push("/socials");
             }
         };
