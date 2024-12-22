@@ -8,7 +8,7 @@ import useConversation from "@/hooks/uMessage/useConversation";
 import { FullConversationType, FullFriendType } from "@/type";
 import AsyncConversationBox from "./AsyncConversationBox";
 import GroupChatModal from "./GroupChatModal";
-import { useUser } from "@clerk/nextjs";
+import { onAuthenticatedUser } from "@/actions/auth"; // Replace Clerk's useUser with this
 import { pusherClient } from "@/lib/pusher";
 import { find } from "lodash";
 
@@ -21,23 +21,34 @@ const ConversationList: React.FC<ConversationListProps> = ({
     initialItems,
     users,
 }) => {
-    const { isLoaded, user } = useUser();
     const router = useRouter();
     const { conversationId, isOpen } = useConversation();
 
     const [items, setItems] = useState(initialItems);
+    const [user, setUser] = useState(null);
 
     const pusherKey = useMemo(() => {
-        if (!isLoaded) return "";
-        return user?.primaryEmailAddress?.emailAddress || "";
-    }, [isLoaded, user]);
+        return user?.email || "";
+    }, [user]);
 
-    // Redirect if user is not authenticated after loading
+    // Fetch authenticated user
     useEffect(() => {
-        if (isLoaded && (!user || !user.primaryEmailAddress?.emailAddress)) {
-            router.push("/sign-in");
-        }
-    }, [isLoaded, user, router]);
+        const fetchUser = async () => {
+            try {
+                const authenticatedUser = await onAuthenticatedUser();
+                if (!authenticatedUser || !authenticatedUser.email) {
+                    router.push("/sign-in");
+                } else {
+                    setUser(authenticatedUser);
+                }
+            } catch (error) {
+                console.error("Error fetching authenticated user:", error);
+                router.push("/sign-in");
+            }
+        };
+
+        fetchUser();
+    }, [router]);
 
     // Handle Pusher subscription
     useEffect(() => {
@@ -91,17 +102,12 @@ const ConversationList: React.FC<ConversationListProps> = ({
     }, [pusherKey, conversationId, router]);
 
     // Render loading state
-    if (!isLoaded) {
+    if (!user) {
         return (
             <div className="flex justify-center items-center h-full">
                 <p>Loading conversations...</p>
             </div>
         );
-    }
-
-    // Render null if the user is invalid
-    if (!user || !user.primaryEmailAddress?.emailAddress) {
-        return null;
     }
 
     return (
