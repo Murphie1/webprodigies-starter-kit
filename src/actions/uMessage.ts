@@ -1,6 +1,5 @@
 import { client } from "@/lib/prisma"
 import { onAuthenticatedUser } from "./auth"
-import { currentUser } from "@clerk/nextjs/server"
 
 export const getFriends = async () => {
     const localUser = await onAuthenticatedUser()
