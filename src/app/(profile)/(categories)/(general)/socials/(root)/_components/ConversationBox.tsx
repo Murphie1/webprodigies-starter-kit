@@ -1,14 +1,23 @@
 "use client";
 
-import { useUser } from "@clerk/nextjs";
-import { useCallback, useMemo, useEffect } from "react";
+import { useCallback, useMemo, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
-import { User } from "@prisma/client";
 import { FullConversationType } from "@/type";
 import Avatar from "@/components/uMessage/Avatar";
 import AvatarGroup from "@/components/uMessage/AvatarGroup";
+import { onAuthenticatedUser } from "@/actions/auth"; // Use this action instead of useUser
+import { User } from "@prisma/client";
+
+// Type for the authenticated user
+interface UserSession {
+    id: string;
+    role: string;
+    email: string;
+    image: string;
+    username: string;
+}
 
 interface ConversationBoxProps {
     data: FullConversationType;
@@ -17,28 +26,44 @@ interface ConversationBoxProps {
 }
 
 const ConversationBox: React.FC<ConversationBoxProps> = ({ data, selected, otherUser }) => {
-    const { isLoaded, user } = useUser();
+    const [user, setUser] = useState<UserSession | null>(null); // Typed user state
+    const [isLoading, setIsLoading] = useState(true); // Track loading state
     const router = useRouter();
 
-    // Redirect to sign-in if no session or email
+    // Fetch authenticated user
     useEffect(() => {
-        if (isLoaded && !user?.primaryEmailAddress?.emailAddress) {
+        const fetchUser = async () => {
+            try {
+                const authenticatedUser = await onAuthenticatedUser();
+                if (!authenticatedUser || !authenticatedUser.email) {
+                    router.replace("/sign-in");
+                } else {
+                    setUser(authenticatedUser); // Set user data to state
+                }
+            } catch (error) {
+                console.error("Error fetching authenticated user:", error);
+                router.replace("/sign-in");
+            } finally {
+                setIsLoading(false); // Set loading to false after fetching user
+            }
+        };
+
+        fetchUser();
+    }, [router]);
+
+    // Memoize user email
+    const userEmail = useMemo(() => {
+        return user?.email || null;
+    }, [user]);
+
+    // Redirect to sign-in if user email is not found
+    useEffect(() => {
+        if (!userEmail && !isLoading) {
             router.replace("/sign-in");
         }
-    }, [isLoaded, user, router]);
+    }, [userEmail, isLoading, router]);
 
-    // Memoize user email after isLoaded
-    const userEmail = useMemo(() => {
-        if (!isLoaded) return null;
-        return user?.primaryEmailAddress?.emailAddress || null;
-    }, [isLoaded, user]);
-
-    // Navigate to the conversation page
-    const handleClick = useCallback(() => {
-        router.push(`/socials/${data.id}`);
-    }, [data.id, router]);
-
-    // Get the last message from the conversation
+    // Memoize the last message of the conversation
     const lastMessage = useMemo(() => {
         const messages = data.chats || [];
         return messages[messages.length - 1];
@@ -60,30 +85,35 @@ const ConversationBox: React.FC<ConversationBoxProps> = ({ data, selected, other
     }, [lastMessage]);
 
     // Handle loading state
-    if (!isLoaded) {
+    if (isLoading) {
         return <div>Loading...</div>; // Optionally, show a placeholder or spinner
     }
 
-    // Render null if no session or email
+    // Render null if no user email
     if (!userEmail) return null;
+
+    // Navigate to conversation page when clicked
+    const handleClick = useCallback(() => {
+        router.push(`/socials/${data.id}`);
+    }, [data.id, router]);
 
     return (
         <div
             onClick={handleClick}
             className={cn(
                 `
-        w-full
-        relative
-        flex
-        items-center
-        space-x-3
-        hover:bg-neutral-100
-        dark:hover:bg-sky-700
-        rounded-lg
-        transition
-        cursor-pointer
-        p-3
-      `,
+                w-full
+                relative
+                flex
+                items-center
+                space-x-3
+                hover:bg-neutral-100
+                dark:hover:bg-sky-700
+                rounded-lg
+                transition
+                cursor-pointer
+                p-3
+            `,
                 selected ? "bg-sky-700" : "bg-white dark:bg-themeBlack"
             )}
         >
