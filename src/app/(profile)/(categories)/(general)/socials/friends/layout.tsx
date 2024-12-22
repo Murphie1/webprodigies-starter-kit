@@ -1,5 +1,5 @@
 import { getFriends } from "@/actions/uMessage"
-import Sidebar from "@/components/uMessage/sidebar/Sidebar"
+//import Sidebar from "@/components/uMessage/sidebar/Sidebar"
 import FriendList from "./_components/FriendList"
 import { FriendRequests } from "./_components/FriendRequests"
 
@@ -12,7 +12,7 @@ export default async function FriendsLayout({
 
     return (
         
-        <Sidebar>
+        //<Sidebar>
             <div className="h-full rounded-2xl bg-themeWhite dark:bg-gray-900">
                 <div className="flex flex-col gap-y-3">
                     <FriendRequests />
@@ -20,6 +20,6 @@ export default async function FriendsLayout({
                     </div>
                 {children}
             </div>
-        </Sidebar>
+       // </Sidebar>
     )
 }
