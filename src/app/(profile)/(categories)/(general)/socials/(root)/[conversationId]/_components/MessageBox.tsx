@@ -1,4 +1,3 @@
-
 import Avatar from "@/components/uMessage/Avatar"
 import { FullMessageType } from "@/type"
 import { cn } from "@/lib/utils"
@@ -17,23 +16,20 @@ const MessageBox: React.FC<MessageBoxProps> = async ({ data, isLast }) => {
     const session = await onAuthenticatedUser();
     if (!session || !session.email) redirect("/sign-in")
 
-    const isOwn =
-        session.email === data?.sender?.email
+    const isOwn = session.email === data?.sender?.email
     const seenList = (data.seen || [])
         .filter((user) => user.email !== data?.sender?.email)
         .map((user) => user.firstname)
         .join(", ")
 
     const container = cn("flex gap-3 p-4", isOwn && "justify-end")
-
     const avatar = cn(isOwn && "order-2")
-
     const body = cn("flex flex-col gap-2", isOwn && "items-end")
 
     const message = cn(
         "text-sm w-fit overflow-hidden",
         isOwn ? "bg-black-500 text-white" : "bg-gray-100 text-black",
-        data.image ? "rounded-md p-0" : "rounded-full py-2 px-3",
+        data.image || data.video ? "rounded-md p-0" : "rounded-full py-2 px-3",
     )
 
     return (
@@ -58,13 +54,7 @@ const MessageBox: React.FC<MessageBoxProps> = async ({ data, isLast }) => {
                     )}
                 </div>
                 {isLast && isOwn && seenList.length > 0 && (
-                    <div
-                        className="
-              text-xs
-              font-light
-              text-gray-500
-            "
-                    >
+                    <div className="text-xs font-light text-gray-500">
                         {`Seen by ${seenList}`}
                     </div>
                 )}
