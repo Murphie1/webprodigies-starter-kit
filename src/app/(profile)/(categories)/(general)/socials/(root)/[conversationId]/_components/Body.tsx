@@ -37,17 +37,18 @@ const Body: React.FC<BodyProps> = ({ initialMessages }) => {
             setIsUserAtBottom(isAtBottom)
         }
 
-        const chatContainer = chatContainerRef.current
+        // Listen to scroll events
         if (chatContainer) {
             chatContainer.addEventListener("scroll", handleScroll)
         }
 
         return () => {
+            // Cleanup event listener
             if (chatContainer) {
                 chatContainer.removeEventListener("scroll", handleScroll)
             }
         }
-    }, [])
+    }, []) // Empty dependency array means this runs once after the initial render
 
     useEffect(() => {
         if (!conversationId) return
