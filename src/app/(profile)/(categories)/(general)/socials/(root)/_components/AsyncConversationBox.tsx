@@ -1,7 +1,8 @@
 import { FullConversationType } from "@/type"
 import useOtherUser from "@/hooks/uMessage/useOtherUser"
 import ConversationBox from "./ConversationBox"
-
+import { onAuthenticatedUser } from "@/actions/auth"
+import { redirect } from "next/navigation"
 interface AsyncHeaderProps {
     conversation: FullConversationType;
     selected?: boolean;
@@ -9,10 +10,13 @@ interface AsyncHeaderProps {
 
 const AsyncConversationBox: React.FC<AsyncHeaderProps> = async ({ conversation, selected }) => {
     const otherUser = await useOtherUser(conversation)
-   if(!otherUser) {
+   if (!otherUser) {
        throw new Error("No other User")
    }
-    return <ConversationBox data={conversation} selected={selected} otherUser={otherUser!} />
+    const user = await onAuthenticatedUser()
+    if (!user || !user.email) redirect("/")
+    
+    return <ConversationBox data={conversation} selected={selected} otherUser={otherUser!} userEmail={user.email} />
 }
 
 export default AsyncConversationBox
