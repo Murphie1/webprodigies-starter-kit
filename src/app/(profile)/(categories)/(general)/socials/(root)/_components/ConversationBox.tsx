@@ -1,69 +1,42 @@
 "use client";
 
-import { useCallback, useMemo, useEffect, useState } from "react";
+import { useCallback, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
+import { User } from "@prisma/client";
 import { FullConversationType } from "@/type";
 import Avatar from "@/components/uMessage/Avatar";
 import AvatarGroup from "@/components/uMessage/AvatarGroup";
-import { onAuthenticatedUser } from "@/actions/auth"; // Use this action instead of useUser
-import { User } from "@prisma/client";
-
-// Type for the authenticated user
-interface UserSession {
-    id: string;
-    role: string;
-    email: string;
-    image: string;
-    username: string;
-}
 
 interface ConversationBoxProps {
     data: FullConversationType;
     selected?: boolean;
     otherUser: User;
+    userEmail: string | null; // Added userEmail as a prop
 }
 
-const ConversationBox: React.FC<ConversationBoxProps> = ({ data, selected, otherUser }) => {
-    const [user, setUser] = useState<UserSession | null>(null); // Typed user state
-    const [isLoading, setIsLoading] = useState(true); // Track loading state
+const ConversationBox: React.FC<ConversationBoxProps> = ({ data, selected, otherUser, userEmail }) => {
     const router = useRouter();
 
-    // Fetch authenticated user
-    useEffect(() => {
-        const fetchUser = async () => {
-            try {
-                const authenticatedUser = await onAuthenticatedUser();
-                if (!authenticatedUser || !authenticatedUser.email) {
-                    router.replace("/sign-in");
-                } else {
-                    setUser(authenticatedUser); // Set user data to state
-                }
-            } catch (error) {
-                console.error("Error fetching authenticated user:", error);
-                router.replace("/sign-in");
-            } finally {
-                setIsLoading(false); // Set loading to false after fetching user
-            }
-        };
-
-        fetchUser();
-    }, [router]);
-
-    // Memoize user email
-    const userEmail = useMemo(() => {
-        return user?.email || null;
-    }, [user]);
-
-    // Redirect to sign-in if user email is not found
-    useEffect(() => {
-        if (!userEmail && !isLoading) {
+    // Redirect to sign-in if no session or email
+    const handleRedirect = useCallback(() => {
+        if (!userEmail) {
             router.replace("/sign-in");
         }
-    }, [userEmail, isLoading, router]);
+    }, [userEmail, router]);
 
-    // Memoize the last message of the conversation
+    // Run the redirect logic as an effect
+    useMemo(() => {
+        handleRedirect();
+    }, [handleRedirect]);
+
+    // Navigate to the conversation page
+    const handleClick = useCallback(() => {
+        router.push(`/socials/${data.id}`);
+    }, [data.id, router]);
+
+    // Get the last message from the conversation
     const lastMessage = useMemo(() => {
         const messages = data.chats || [];
         return messages[messages.length - 1];
@@ -73,7 +46,7 @@ const ConversationBox: React.FC<ConversationBoxProps> = ({ data, selected, other
     const hasSeen = useMemo(() => {
         if (!lastMessage) return false;
         const seenArray = lastMessage.seen || [];
-        return seenArray.some((seenUser) => seenUser.email === userEmail);
+        return seenArray.some((user) => user.email === userEmail);
     }, [userEmail, lastMessage]);
 
     // Determine the text to display for the last message
@@ -84,36 +57,26 @@ const ConversationBox: React.FC<ConversationBoxProps> = ({ data, selected, other
         return "Started a conversation";
     }, [lastMessage]);
 
-    // Handle loading state
-    if (isLoading) {
-        return <div>Loading...</div>; // Optionally, show a placeholder or spinner
-    }
-
-    // Render null if no user email
+    // Render null if no session or email (after redirect handling)
     if (!userEmail) return null;
-
-    // Navigate to conversation page when clicked
-    const handleClick = useCallback(() => {
-        router.push(`/socials/${data.id}`);
-    }, [data.id, router]);
 
     return (
         <div
             onClick={handleClick}
             className={cn(
                 `
-                w-full
-                relative
-                flex
-                items-center
-                space-x-3
-                hover:bg-neutral-100
-                dark:hover:bg-sky-700
-                rounded-lg
-                transition
-                cursor-pointer
-                p-3
-            `,
+        w-full
+        relative
+        flex
+        items-center
+        space-x-3
+        hover:bg-neutral-100
+        dark:hover:bg-sky-700
+        rounded-lg
+        transition
+        cursor-pointer
+        p-3
+      `,
                 selected ? "bg-sky-700" : "bg-white dark:bg-themeBlack"
             )}
         >
