@@ -12,6 +12,16 @@ import { onAuthenticatedUser } from "@/actions/auth"; // Replace Clerk's useUser
 import { pusherClient } from "@/lib/pusher";
 import { find } from "lodash";
 
+// Define the type for the authenticated user
+interface AuthenticatedUser {
+    status: number;
+    id?: string;
+    role?: string;
+    image?: string;
+    email?: string;
+    username?: string;
+}
+
 interface ConversationListProps {
     initialItems: FullConversationType[];
     users: FullFriendType[];
@@ -25,10 +35,10 @@ const ConversationList: React.FC<ConversationListProps> = ({
     const { conversationId, isOpen } = useConversation();
 
     const [items, setItems] = useState(initialItems);
-    const [user, setUser] = useState(null);
+    const [user, setUser] = useState<AuthenticatedUser | null>(null);
 
     const pusherKey = useMemo(() => {
-        return user?.email || "";
+        return user?.email || ""; // Memoize pusherKey based on the user's email
     }, [user]);
 
     // Fetch authenticated user
@@ -39,11 +49,11 @@ const ConversationList: React.FC<ConversationListProps> = ({
                 if (!authenticatedUser || !authenticatedUser.email) {
                     router.push("/sign-in");
                 } else {
-                    setUser(authenticatedUser);
+                    setUser(authenticatedUser); // Set the authenticated user to state
                 }
             } catch (error) {
                 console.error("Error fetching authenticated user:", error);
-                router.push("/sign-in");
+                router.push("/sign-in"); // Redirect to sign-in on error
             }
         };
 
