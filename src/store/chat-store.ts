@@ -36,9 +36,9 @@ export interface IMessage {
 	messageType: "text" | "image" | "video";
 	sender: {
 		_id: Id<"users">;
-		image: string;
+		imageUrl: string;
 		name?: string;
-		tokenIdentifier: string;
+		clerkId: string;
 		email: string;
 		_creationTime: number;
 		isOnline: boolean;
