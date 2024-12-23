@@ -57,7 +57,7 @@ export const getMyConversations = query({
 
 		const user = await ctx.db
 			.query("users")
-			.withIndex("by_clerkId", (q) => q.eq("clerkId", identity.clerkId))
+			.filter((q) => q.eq(q.field("clerkId"), identity.clerkId))
 			.unique();
 
 		if (!user) throw new ConvexError("User not found");

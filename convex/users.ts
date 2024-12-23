@@ -63,6 +63,7 @@ export const createUser = internalMutation({
             email: args.email,
             imageUrl: args.imageUrl,
             name: args.name,
+            isOnline: true,
         })
     },
 })
@@ -120,11 +121,11 @@ export const deleteUser = internalMutation({
 })
 
 export const setUserOnline = internalMutation({
-	args: { tokenIdentifier: v.string() },
+	args: { clerkId: v.string() },
 	handler: async (ctx, args) => {
 		const user = await ctx.db
 			.query("users")
-			.withIndex("by_tokenIdentifier", (q) => q.eq("tokenIdentifier", args.tokenIdentifier))
+			.filter((q) => q.eq(q.field("clerkId"), args.clerkId))
 			.unique();
 
 		if (!user) {
@@ -136,11 +137,11 @@ export const setUserOnline = internalMutation({
 });
 
 export const setUserOffline = internalMutation({
-	args: { tokenIdentifier: v.string() },
+	args: { clerkId: v.string() },
 	handler: async (ctx, args) => {
 		const user = await ctx.db
 			.query("users")
-			.withIndex("by_tokenIdentifier", (q) => q.eq("tokenIdentifier", args.tokenIdentifier))
+			.filter((q) => q.eq(q.field("clerkId"), args.clerkId))
 			.unique();
 
 		if (!user) {
@@ -160,7 +161,7 @@ export const getUsers = query({
 		}
 
 		const users = await ctx.db.query("users").collect();
-		return users.filter((user) => user.tokenIdentifier !== identity.tokenIdentifier);
+		return users.filter((user) => user.clerkId !== identity.clerkId);
 	},
 });
 
@@ -174,7 +175,7 @@ export const getMe = query({
 
 		const user = await ctx.db
 			.query("users")
-			.withIndex("by_tokenIdentifier", (q) => q.eq("tokenIdentifier", identity.tokenIdentifier))
+			.filter((q) => q.eq(q.field("clerkId"), identity.clerkId))
 			.unique();
 
 		if (!user) {

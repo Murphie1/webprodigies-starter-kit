@@ -16,7 +16,7 @@ export const sendTextMessage = mutation({
 
 		const user = await ctx.db
 			.query("users")
-			.withIndex("by_clerkId", (q) => q.eq("clerkId", identity.clerkId))
+			.filter((q) => q.eq(q.field("clerkId"), identity.clerkId))
 			.unique();
 
 		if (!user) {
@@ -43,7 +43,7 @@ export const sendTextMessage = mutation({
 			messageType: "text",
 		});
 
-		// TODO => add @gpt check later
+		// TODO => add @hakima check later
 		if (args.content.startsWith("@hakima")) {
 			// Schedule the chat action to run immediately
 			await ctx.scheduler.runAfter(0, api.openaitwo.chat, {
