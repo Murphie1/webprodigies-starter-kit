@@ -46,14 +46,14 @@ export const sendTextMessage = mutation({
 		// TODO => add @gpt check later
 		if (args.content.startsWith("@hakima")) {
 			// Schedule the chat action to run immediately
-			await ctx.scheduler.runAfter(0, api.openai.chat, {
+			await ctx.scheduler.runAfter(0, api.openaitwo.chat, {
 				messageBody: args.content,
 				conversation: args.conversation,
 			});
 		}
 
 		if (args.content.startsWith("~hakima")) {
-			await ctx.scheduler.runAfter(0, api.openai.dall_e, {
+			await ctx.scheduler.runAfter(0, api.openaitwo.dall_e, {
 				messageBody: args.content,
 				conversation: args.conversation,
 			});
@@ -61,7 +61,7 @@ export const sendTextMessage = mutation({
 	},
 });
 
-export const sendChatGPTMessage = mutation({
+export const sendHakimaMessage = mutation({
 	args: {
 		content: v.string(),
 		conversation: v.id("conversations"),
