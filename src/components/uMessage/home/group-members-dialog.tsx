@@ -6,11 +6,11 @@ import {
 	DialogTitle,
 	DialogTrigger,
 } from "@/components/ui/dialog";
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Crown } from "lucide-react";
 import { Conversation } from "@/store/chat-store";
 import { useQuery } from "convex/react";
-import { api } from "../../../convex/_generated/api";
+import { api } from "~/convex/_generated/api";
 
 type GroupMembersDialogProps = {
 	selectedConversation: Conversation;
@@ -34,7 +34,7 @@ const GroupMembersDialog = ({ selectedConversation }: GroupMembersDialogProps) =
 										{user.isOnline && (
 											<div className='absolute top-0 right-0 w-2 h-2 bg-green-500 rounded-full border-2 border-foreground' />
 										)}
-										<AvatarImage src={user.image} className='rounded-full object-cover' />
+										<AvatarImage src={user.imageUrl} className='rounded-full object-cover' />
 										<AvatarFallback>
 											<div className='animate-pulse bg-gray-tertiary w-full h-full rounded-full'></div>
 										</AvatarFallback>
