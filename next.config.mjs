@@ -4,6 +4,9 @@ const nextConfig = {
   images: {
     // Combine remotePatterns and domains
     remotePatterns: [
+      { 
+        hostname: "oaidalleapiprodscus.blob.core.windows.net" 
+      },
       {
         protocol: "https",
         hostname: "utfs.io",
