@@ -2,7 +2,7 @@ import { IMessage, useConversationStore } from "@/store/chat-store";
 import { useMutation } from "convex/react";
 import { Ban, LogOut } from "lucide-react";
 import toast from "react-hot-toast";
-import { api } from "../../../convex/_generated/api";
+import { api } from "~/convex/_generated/api";
 import React from "react";
 
 type ChatAvatarActionsProps = {
@@ -16,7 +16,7 @@ const ChatAvatarActions = ({ me, message }: ChatAvatarActionsProps) => {
 	const isMember = selectedConversation?.participants.includes(message.sender._id);
 	const kickUser = useMutation(api.conversations.kickUser);
 	const createConversation = useMutation(api.conversations.createConversation);
-	const fromAI = message.sender?.name === "ChatGPT";
+	const fromAI = message.sender?.name === "Hakima";
 	const isGroup = selectedConversation?.isGroup;
 
 	const handleKickUser = async (e: React.MouseEvent) => {
@@ -53,7 +53,7 @@ const ChatAvatarActions = ({ me, message }: ChatAvatarActionsProps) => {
 				participants: [me._id, message.sender._id],
 				isGroup: false,
 				isOnline: message.sender.isOnline,
-				image: message.sender.image,
+				image: message.sender.imageUrl,
 			});
 		} catch (error) {
 			toast.error("Failed to create conversation");
