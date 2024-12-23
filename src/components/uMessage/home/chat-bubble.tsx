@@ -4,7 +4,7 @@ import ChatBubbleAvatar from "./chat-bubble-avatar";
 import DateIndicator from "./date-indicator";
 import Image from "next/image";
 import { useState } from "react";
-import { Dialog, DialogContent, DialogDescription } from "../ui/dialog";
+import { Dialog, DialogContent, DialogDescription } from "@/components/ui/dialog";
 import ReactPlayer from "react-player";
 import ChatAvatarActions from "./chat-avatar-actions";
 import { Bot } from "lucide-react";
@@ -25,7 +25,7 @@ const ChatBubble = ({ me, message, previousMessage }: ChatBubbleProps) => {
 	const isMember = selectedConversation?.participants.includes(message.sender?._id) || false;
 	const isGroup = selectedConversation?.isGroup;
 	const fromMe = message.sender?._id === me._id;
-	const fromAI = message.sender?.name === "ChatGPT";
+	const fromAI = message.sender?.name === "Hakima";
 	const bgClass = fromMe ? "bg-green-chat" : !fromAI ? "bg-white dark:bg-gray-primary" : "bg-blue-500 text-white";
 
 	console.log(message.sender);
