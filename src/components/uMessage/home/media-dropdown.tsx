@@ -1,13 +1,13 @@
 import { useEffect, useRef, useState } from "react";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "../ui/dropdown-menu";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { ImageIcon, Plus, Video } from "lucide-react";
-import { Dialog, DialogContent, DialogDescription } from "../ui/dialog";
-import { Button } from "../ui/button";
+import { Dialog, DialogContent, DialogDescription } from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import ReactPlayer from "react-player";
 import toast from "react-hot-toast";
 import { useMutation, useQuery } from "convex/react";
-import { api } from "../../../convex/_generated/api";
+import { api } from "~/convex/_generated/api";
 import { useConversationStore } from "@/store/chat-store";
 
 const MediaDropdown = () => {
