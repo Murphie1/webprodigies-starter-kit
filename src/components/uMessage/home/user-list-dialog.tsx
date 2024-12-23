@@ -10,12 +10,12 @@ import {
 	DialogTitle,
 	DialogTrigger,
 } from "@/components/ui/dialog";
-import { Input } from "../ui/input";
-import { Button } from "../ui/button";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import { ImageIcon, MessageSquareDiff } from "lucide-react";
-import { Id } from "../../../convex/_generated/dataModel";
+import { Id } from "~/convex/_generated/dataModel";
 import { useMutation, useQuery } from "convex/react";
-import { api } from "../../../convex/_generated/api";
+import { api } from "~/convex/_generated/api";
 import toast from "react-hot-toast";
 import { useConversationStore } from "@/store/chat-store";
 
@@ -80,7 +80,7 @@ const UserListDialog = () => {
 				_id: conversationId,
 				participants: selectedUsers,
 				isGroup,
-				image: isGroup ? renderedImage : users?.find((user) => user._id === selectedUsers[0])?.image,
+				image: isGroup ? renderedImage : users?.find((user) => user._id === selectedUsers[0])?.imageUrl,
 				name: conversationName,
 				admin: me?._id!,
 			});
@@ -108,7 +108,7 @@ const UserListDialog = () => {
 				<DialogHeader>
 					{/* TODO: <DialogClose /> will be here */}
 					<DialogClose ref={dialogCloseRef} />
-					<DialogTitle>USERS</DialogTitle>
+					<DialogTitle>People</DialogTitle>
 				</DialogHeader>
 
 				<DialogDescription>Start a new chat</DialogDescription>
@@ -158,7 +158,7 @@ const UserListDialog = () => {
 									<div className='absolute top-0 right-0 w-2.5 h-2.5 bg-green-500 rounded-full border-2 border-foreground' />
 								)}
 
-								<AvatarImage src={user.image} className='rounded-full object-cover' />
+								<AvatarImage src={user.imageUrl} className='rounded-full object-cover' />
 								<AvatarFallback>
 									<div className='animate-pulse bg-gray-tertiary w-full h-full rounded-full'></div>
 								</AvatarFallback>
