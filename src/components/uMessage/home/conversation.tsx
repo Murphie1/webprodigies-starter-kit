@@ -1,14 +1,15 @@
 import { formatDate } from "@/lib/utils";
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { MessageSeenSvg } from "@/lib/svgs";
 import { ImageIcon, Users, VideoIcon } from "lucide-react";
 import { useQuery } from "convex/react";
-import { api } from "../../../convex/_generated/api";
+import { api } from "~/convex/_generated/api";
 import { useConversationStore } from "@/store/chat-store";
 
 const Conversation = ({ conversation }: { conversation: any }) => {
 	const conversationImage = conversation.groupImage || conversation.image;
 	const conversationName = conversation.groupName || conversation.name;
+	const convoId = conversation._id || ""
 	const lastMessage = conversation.lastMessage;
 	const lastMessageType = lastMessage?.messageType;
 	const me = useQuery(api.users.getMe);
@@ -18,6 +19,7 @@ const Conversation = ({ conversation }: { conversation: any }) => {
 
 	return (
 		<>
+			<Link href={`/socials/new/${convoId}`}>
 			<div
 				className={`flex gap-2 items-center p-3 hover:bg-chat-hover cursor-pointer
 					${activeBgClass ? "bg-gray-tertiary" : ""}
@@ -56,6 +58,7 @@ const Conversation = ({ conversation }: { conversation: any }) => {
 					</p>
 				</div>
 			</div>
+				</Link>
 			<hr className='h-[1px] mx-10 bg-gray-primary' />
 		</>
 	);
