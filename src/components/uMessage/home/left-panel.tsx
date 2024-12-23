@@ -1,13 +1,13 @@
 "use client";
 import { ListFilter, Search } from "lucide-react";
-import { Input } from "../ui/input";
+import { Input } from "@/components/ui/input";
 import ThemeSwitch from "./theme-switch";
 import Conversation from "./conversation";
 import { UserButton } from "@clerk/nextjs";
 
 import UserListDialog from "./user-list-dialog";
 import { useConvexAuth, useQuery } from "convex/react";
-import { api } from "../../../convex/_generated/api";
+import { api } from "~/convex/_generated/api";
 import { useEffect } from "react";
 import { useConversationStore } from "@/store/chat-store";
 
@@ -27,7 +27,7 @@ const LeftPanel = () => {
 	if (isLoading) return null;
 
 	return (
-		<div className='w-1/4 border-gray-600 border-r'>
+		<div className='w-screen md:w-1/4 md:border-gray-600 md:border-r'>
 			<div className='sticky top-0 bg-left-panel z-10'>
 				{/* Header */}
 				<div className='flex justify-between bg-gray-primary p-3 items-center'>
