@@ -1,10 +1,10 @@
-import ChatPlaceHolder from "@/components/uMessage/home/chat-placeholder";
+import EmptyStateTwo from "@/components/uMessage/EmptyState";
 
 
 const SocialsHome = () => {
 	return (
 		<main className='hidden md:flex relative'>
-	<ChatPlaceHolder />
+	<EmptyStateTwo />
 		</main>
 	);
         }
