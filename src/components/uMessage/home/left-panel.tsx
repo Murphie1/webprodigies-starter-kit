@@ -59,7 +59,7 @@ const LeftPanel = () => {
 			<div className='my-3 flex flex-col gap-0 max-h-[80%] overflow-auto'>
 				{/* Conversations will go here*/}
 				{conversations?.map((conversation) => (
-					<div> Sharp </div>//<Conversation key={conversation._id} conversation={conversation} />
+					<div key={conversation._id}> Sharp </div>//<Conversation key={conversation._id} conversation={conversation} />
 				))}
 
 				{conversations?.length === 0 && (
