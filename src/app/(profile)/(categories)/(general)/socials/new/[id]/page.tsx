@@ -2,9 +2,9 @@
 import RightPanel from "@/components/uMessage/home/right-panel";
 import { useTheme } from "next-themes";
 
-export defaultyoub function Pages() {
+export default function Pages() {
 	return (
-		<main className='m-5'>
+		<main className='relative flex h-full w-full'>
 				<RightPanel />
 		</main>
 	);
