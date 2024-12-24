@@ -31,11 +31,16 @@ const UserListDialog = () => {
 
 	const createConversation = useMutation(api.conversations.createConversation);
 	const generateUploadUrl = useMutation(api.conversations.generateUploadUrl);
-	const me = useQuery(api.users.getMe);
-	const users = useQuery(api.users.getUsers);
+	const { data: me, isLoading: isMeLoading, error: meError } = useQuery(api.users.getMe);
+	const { data: users, isLoading: isUsersLoading } = useQuery(api.users.getUsers);
 
 	const { setSelectedConversation } = useConversationStore();
 
+	// Handle user not found or loading state
+	if (isMeLoading) return <div>Loading user...</div>;
+	if (meError) return <div>Error loading user data</div>;
+
+	// Handle create conversation
 	const handleCreateConversation = async () => {
 		if (selectedUsers.length === 0) return;
 		setIsLoading(true);
@@ -73,7 +78,6 @@ const UserListDialog = () => {
 			setGroupName("");
 			setSelectedImage(null);
 
-			// TODO => Update a global state called "selectedConversation"
 			const conversationName = isGroup ? groupName : users?.find((user) => user._id === selectedUsers[0])?.name;
 
 			setSelectedConversation({
@@ -106,7 +110,6 @@ const UserListDialog = () => {
 			</DialogTrigger>
 			<DialogContent>
 				<DialogHeader>
-					{/* TODO: <DialogClose /> will be here */}
 					<DialogClose ref={dialogCloseRef} />
 					<DialogTitle>People</DialogTitle>
 				</DialogHeader>
@@ -117,7 +120,6 @@ const UserListDialog = () => {
 						<Image src={renderedImage} fill alt='user image' className='rounded-full object-cover' />
 					</div>
 				)}
-				{/* TODO: input file */}
 				<input
 					type='file'
 					accept='image/*'
@@ -178,7 +180,6 @@ const UserListDialog = () => {
 						onClick={handleCreateConversation}
 						disabled={selectedUsers.length === 0 || (selectedUsers.length > 1 && !groupName) || isLoading}
 					>
-						{/* spinner */}
 						{isLoading ? (
 							<div className='w-5 h-5 border-t-2 border-b-2  rounded-full animate-spin' />
 						) : (
@@ -190,4 +191,5 @@ const UserListDialog = () => {
 		</Dialog>
 	);
 };
+
 export default UserListDialog;
