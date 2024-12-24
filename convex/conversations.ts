@@ -1,5 +1,26 @@
 import { ConvexError, v } from "convex/values";
 import { mutation, query } from "./_generated/server";
+import Clerk from "@clerk/backend";
+
+// Initialize Clerk with your API key
+const clerk = Clerk({ apiKey: process.env.CLERK_SECRET_KEY });
+
+// Utility function to verify Clerk sessions
+async function verifyClerkSession(ctx) {
+	const authHeader = ctx.request.headers.authorization;
+	if (!authHeader || !authHeader.startsWith("Bearer ")) {
+		throw new ConvexError("Unauthorized");
+	}
+
+	const token = authHeader.split(" ")[1];
+	try {
+		const session = await clerk.sessions.verifySession(token);
+		return session.userId; // Return the Clerk user ID
+	} catch (error) {
+		console.error("Clerk session verification failed:", error);
+		throw new ConvexError("Unauthorized");
+	}
+}
 
 export const createConversation = mutation({
 	args: {
@@ -10,13 +31,9 @@ export const createConversation = mutation({
 		admin: v.optional(v.id("users")),
 	},
 	handler: async (ctx, args) => {
-		const identity = await ctx.auth.getUserIdentity();
-		if (!identity) throw new ConvexError("Unauthorized");
+		const userId = await verifyClerkSession(ctx);
 
-		// jane and john
-		// [jane, john]
-		// [john, jane]
-
+		// Verify if participants exist in the database
 		const existingConversation = await ctx.db
 			.query("conversations")
 			.filter((q) =>
@@ -32,7 +49,6 @@ export const createConversation = mutation({
 		}
 
 		let groupImage;
-
 		if (args.groupImage) {
 			groupImage = (await ctx.storage.getUrl(args.groupImage)) as string;
 		}
@@ -52,21 +68,21 @@ export const createConversation = mutation({
 export const getMyConversations = query({
 	args: {},
 	handler: async (ctx, args) => {
-		const identity = await ctx.auth.getUserIdentity();
-		if (!identity) throw new ConvexError("Unauthorized");
+		const clerkUserId = await verifyClerkSession(ctx);
 
+		// Find the Convex user matching the Clerk user ID
 		const user = await ctx.db
 			.query("users")
-			.filter((q) => q.eq(q.field("clerkId"), identity.clerkId))
+			.filter((q) => q.eq(q.field("clerkId"), clerkUserId))
 			.unique();
 
 		if (!user) throw new ConvexError("User not found");
 
+		// Fetch all conversations involving the user
 		const conversations = await ctx.db.query("conversations").collect();
-
-		const myConversations = conversations.filter((conversation) => {
-			return conversation.participants.includes(user._id);
-		});
+		const myConversations = conversations.filter((conversation) =>
+			conversation.participants.includes(user._id)
+		);
 
 		const conversationsWithDetails = await Promise.all(
 			myConversations.map(async (conversation) => {
@@ -88,7 +104,6 @@ export const getMyConversations = query({
 					.order("desc")
 					.take(1);
 
-				// return should be in this order, otherwise _id field will be overwritten
 				return {
 					...userDetails,
 					...conversation,
@@ -107,8 +122,7 @@ export const kickUser = mutation({
 		userId: v.id("users"),
 	},
 	handler: async (ctx, args) => {
-		const identity = await ctx.auth.getUserIdentity();
-		if (!identity) throw new ConvexError("Unauthorized");
+		const userId = await verifyClerkSession(ctx);
 
 		const conversation = await ctx.db
 			.query("conversations")
@@ -124,5 +138,6 @@ export const kickUser = mutation({
 });
 
 export const generateUploadUrl = mutation(async (ctx) => {
+	await verifyClerkSession(ctx); // Verify session before generating upload URL
 	return await ctx.storage.generateUploadUrl();
 });
