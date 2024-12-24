@@ -1,3 +1,4 @@
+"use client"
 import ChatPlaceHolder from "@/components/uMessage/home/chat-placeholder";
 
 
