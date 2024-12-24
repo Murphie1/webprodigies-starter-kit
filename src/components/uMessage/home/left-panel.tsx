@@ -13,16 +13,16 @@ import { useConversationStore } from "@/store/chat-store";
 
 const LeftPanel = () => {
 	const { isAuthenticated, isLoading } = useConvexAuth();
-	const conversations = useQuery(api.conversations.getMyConversations, isAuthenticated ? undefined : "skip");
+	//const conversations = useQuery(api.conversations.getMyConversations, isAuthenticated ? undefined : "skip");
 
-	const { selectedConversation, setSelectedConversation } = useConversationStore();
+	//const { selectedConversation, setSelectedConversation } = useConversationStore();
 
-	useEffect(() => {
-		const conversationIds = conversations?.map((conversation) => conversation._id);
-		if (selectedConversation && conversationIds && !conversationIds.includes(selectedConversation._id)) {
-			setSelectedConversation(null);
-		}
-	}, [conversations, selectedConversation, setSelectedConversation]);
+	//useEffect(() => {
+		//const conversationIds = conversations?.map((conversation) => conversation._id);
+		//if (selectedConversation && conversationIds && !conversationIds.includes(selectedConversation._id)) {
+			//setSelectedConversation(null);
+		//}
+	//}, [conversations, selectedConversation, setSelectedConversation]);
 
 	if (isLoading) return null;
 
@@ -58,18 +58,18 @@ const LeftPanel = () => {
 			{/* Chat List */}
 			<div className='my-3 flex flex-col gap-0 max-h-[80%] overflow-auto'>
 				{/* Conversations will go here*/}
-				{conversations?.map((conversation) => (
+				{/*{conversations?.map((conversation) => (
 					<div key={conversation._id}> Sharp </div>//<Conversation key={conversation._id} conversation={conversation} />
 				))}
 
-				{conversations?.length === 0 && (
+				{conversations?.length === 0 && (*/}
 					<>
 						<p className='text-center text-gray-500 text-sm mt-3'>No conversations yet</p>
 						<p className='text-center text-gray-500 text-sm mt-3 '>
 							We understand {"you're"} an introvert, but {"you've"} got to start somewhere 😊
 						</p>
 					</>
-				)}
+				{/*)}*/}
 			</div>
 		</div>
 	);
