@@ -1,43 +1,43 @@
-"use client";
+"use client"
 
-import axios from "axios";
-import { FullFriendRequestType } from "@/type";
-import { useRouter } from "next/navigation";
-import { useCallback, useState } from "react";
-import useOtherUser from "@/hooks/uMessage/useOtherFriendRequest";
-import Avatar from "@/components/uMessage/Avatar";
-import { format } from "date-fns";
-import { User } from "@prisma/client";
-import { useUser } from "@clerk/nextjs"; // Import Clerk's useUser hook
+import axios from "axios"
+import { FullFriendRequestType } from "@/type"
+import { useRouter } from "next/navigation"
+import { useCallback, useState } from "react"
+import useOtherUser from "@/hooks/uMessage/useOtherFriendRequest"
+import Avatar from "@/components/uMessage/Avatar"
+import { format } from "date-fns"
+import { User } from "@prisma/client"
+import { useUser } from "@clerk/nextjs" // Import Clerk's useUser hook
 
 interface FriendBoxProps {
-    item: FullFriendRequestType;
-    otherUser: User;
+    item: FullFriendRequestType
+    otherUser: User
 }
 
 const RequestBox: React.FC<FriendBoxProps> = ({ item, otherUser }) => {
-    const { user } = useUser(); // Get the current logged-in user
-    const router = useRouter();
-    const [isLoading, setIsLoading] = useState(false);
+    const { user } = useUser() // Get the current logged-in user
+    const router = useRouter()
+    const [isLoading, setIsLoading] = useState(false)
 
     // Ensure handleClick is always defined
     const handleClick = useCallback(() => {
-        if (!otherUser || user?.id === item.senderId) return; // Prevent action if no otherUser or if user sent the request
+        if (!otherUser || user?.id === item.senderId) return // Prevent action if no otherUser or if user sent the request
 
-        setIsLoading(true);
+        setIsLoading(true)
 
         axios
             .post("/api/uMessage/friend", {
                 userId: otherUser.id,
             })
             .then(() => {
-                router.push(`/socials/friends`);
+                router.push(`/socials/friends`)
             })
-            .finally(() => setIsLoading(false));
-    }, [user, item.senderId, otherUser, router]);
+            .finally(() => setIsLoading(false))
+    }, [user, item.senderId, otherUser, router])
 
     // Render null early if no otherUser
-    if (!otherUser) return null;
+    if (!otherUser) return null
 
     return (
         <>
@@ -107,7 +107,7 @@ const RequestBox: React.FC<FriendBoxProps> = ({ item, otherUser }) => {
                 </div>
             )}
         </>
-    );
-};
+    )
+}
 
-export default RequestBox;
+export default RequestBox

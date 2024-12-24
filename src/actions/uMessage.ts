@@ -86,7 +86,6 @@ export const getConversations = async () => {
 
 export const getConversationById = async (conversationId: string) => {
     try {
-
         const conversation = await client.conversation.findUnique({
             where: {
                 id: conversationId,
@@ -120,7 +119,7 @@ export const getRequests = async () => {
             },
             include: {
                 users: true,
-                },
+            },
         })
 
         return friendrequests

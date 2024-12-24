@@ -49,4 +49,4 @@ export const FriendRequests = async () => {
             </DrawerContent>
         </Drawer>
     )
-                        }
+}

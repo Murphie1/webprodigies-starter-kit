@@ -11,15 +11,14 @@ export default async function FriendsLayout({
     const friends = await getFriends()
 
     return (
-        
         //<Sidebar>
-            <div className="h-full rounded-2xl bg-themeWhite dark:bg-gray-900">
-                <div className="flex flex-col gap-y-3">
-                    <FriendRequests />
-                    <FriendList items={friends} />
-                    </div>
-                {children}
+        <div className="h-full rounded-2xl bg-themeWhite dark:bg-gray-900">
+            <div className="flex flex-col gap-y-3">
+                <FriendRequests />
+                <FriendList items={friends} />
             </div>
-       // </Sidebar>
+            {children}
+        </div>
+        // </Sidebar>
     )
 }

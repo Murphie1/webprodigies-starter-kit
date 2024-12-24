@@ -12,7 +12,7 @@ import Input from "@/components/uMessage/inputs/Input"
 import Select from "@/components/uMessage/inputs/Select"
 import { FullFriendType } from "@/type"
 import axios from "axios"
-import { User } from "@prisma/client";
+import { User } from "@prisma/client"
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 import useOtherUsers from "@/hooks/uMessage/friends"
@@ -26,24 +26,24 @@ interface GroupChatModalProps {
 const GroupChatModal: React.FC<GroupChatModalProps> = ({ users }) => {
     const router = useRouter()
     const [isLoading, setIsLoading] = useState(false)
-    const { toast } = useToast();
+    const { toast } = useToast()
     // Call `useOtherUsers` at the top level
-const otherUsers = useOtherUsers(users) // Returns an array
-const [friends, setFriends] = useState<User[]>([])
+    const otherUsers = useOtherUsers(users) // Returns an array
+    const [friends, setFriends] = useState<User[]>([])
 
-// Process `otherUsers` asynchronously if needed
-useEffect(() => {
-    const fetchFriends = async () => {
-        try {
-            const fetchedFriends = await Promise.resolve(otherUsers) // Ensures async handling if needed
-            setFriends(fetchedFriends) // Directly set the array to state
-        } catch (error) {
-            console.error("Error fetching friends:", error)
+    // Process `otherUsers` asynchronously if needed
+    useEffect(() => {
+        const fetchFriends = async () => {
+            try {
+                const fetchedFriends = await Promise.resolve(otherUsers) // Ensures async handling if needed
+                setFriends(fetchedFriends) // Directly set the array to state
+            } catch (error) {
+                console.error("Error fetching friends:", error)
+            }
         }
-    }
 
-    fetchFriends()
-}, [otherUsers]) // Re-fetch when `otherUsers` changes
+        fetchFriends()
+    }, [otherUsers]) // Re-fetch when `otherUsers` changes
 
     const {
         register,
@@ -59,7 +59,7 @@ useEffect(() => {
     })
 
     const members = watch("members")
-    
+
     const onSubmit: SubmitHandler<FieldValues> = async (data) => {
         setIsLoading(true)
 
@@ -129,7 +129,11 @@ useEffect(() => {
                     </div>
                     <div className="mt-6 flex items-center justify-end gap-x-6">
                         <DialogClose>
-                            <Button disabled={isLoading} type="button" variant="ghost">
+                            <Button
+                                disabled={isLoading}
+                                type="button"
+                                variant="ghost"
+                            >
                                 Cancel
                             </Button>
                         </DialogClose>

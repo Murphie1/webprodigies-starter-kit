@@ -10,9 +10,9 @@ interface AsyncHeaderProps {
 
 const AsyncHeader: React.FC<AsyncHeaderProps> = async ({ conversation }) => {
     const otherUser = await useOtherUser(conversation)
-   if(!otherUser) {
-       throw new Error("No other User")
-   }
+    if (!otherUser) {
+        throw new Error("No other User")
+    }
     return <Header conversation={conversation} otherUser={otherUser!} />
 }
 

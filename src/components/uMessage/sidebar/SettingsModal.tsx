@@ -25,7 +25,7 @@ interface SettingsModalProps {
 const SettingsModal: React.FC<SettingsModalProps> = ({ currentUser }) => {
     const router = useRouter()
     const [isLoading, setIsLoading] = useState(false)
-    const { toast } = useToast();
+    const { toast } = useToast()
     const {
         register,
         handleSubmit,
@@ -142,12 +142,12 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ currentUser }) => {
                                             alt="Avatar"
                                         />
                                         <CldUploadButton
-                                           options={{
-                                               maxFiles: 1,              // Limit to 1 file per upload  
-                                               }}
+                                            options={{
+                                                maxFiles: 1, // Limit to 1 file per upload
+                                            }}
                                             onUpload={handleUpload}
                                             uploadPreset="uMessageImages"
-                                            >
+                                        >
                                             <Button
                                                 disabled={isLoading}
                                                 variant="secondary"
@@ -171,10 +171,7 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ currentUser }) => {
             "
                         >
                             <DialogClose>
-                                <Button
-                                    disabled={isLoading}
-                                    variant="ghost"
-                                >
+                                <Button disabled={isLoading} variant="ghost">
                                     Cancel
                                 </Button>
                             </DialogClose>

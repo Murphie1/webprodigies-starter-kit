@@ -33,7 +33,8 @@ const Body: React.FC<BodyProps> = ({ initialMessages }) => {
         const handleScroll = () => {
             if (!chatContainer) return
             const isAtBottom =
-                chatContainer.scrollHeight - chatContainer.scrollTop === chatContainer.clientHeight
+                chatContainer.scrollHeight - chatContainer.scrollTop ===
+                chatContainer.clientHeight
             setIsUserAtBottom(isAtBottom)
         }
 
@@ -74,8 +75,10 @@ const Body: React.FC<BodyProps> = ({ initialMessages }) => {
         const updateMessageHandler = (newMessage: FullMessageType) => {
             setMessages((prevMessages) =>
                 prevMessages.map((currentMessage) =>
-                    currentMessage.id === newMessage.id ? newMessage : currentMessage
-                )
+                    currentMessage.id === newMessage.id
+                        ? newMessage
+                        : currentMessage,
+                ),
             )
         }
 

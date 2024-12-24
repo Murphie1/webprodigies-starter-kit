@@ -1,5 +1,5 @@
 "use server"
-import { User } from "@prisma/client";
+import { User } from "@prisma/client"
 import { client } from "@/lib/prisma"
 import { currentUser } from "@clerk/nextjs/server"
 
@@ -33,7 +33,6 @@ export const onAuthenticatedUser = async () => {
         return {
             status: 200,
         }
-            
     } catch (error) {
         return {
             status: 400,
@@ -43,11 +42,11 @@ export const onAuthenticatedUser = async () => {
 
 export const loggedInUser = async (): Promise<User> => {
     try {
-        const clerk = await currentUser();
+        const clerk = await currentUser()
 
         // Throw an error if Clerk is not authenticated
         if (!clerk) {
-            throw new Error("Unauthorized");
+            throw new Error("Unauthorized")
         }
 
         // Try to find the user in the database
@@ -55,7 +54,7 @@ export const loggedInUser = async (): Promise<User> => {
             where: {
                 clerkId: clerk.id,
             },
-        });
+        })
 
         // If the user doesn't exist, create a new one
         if (!user) {
@@ -67,16 +66,15 @@ export const loggedInUser = async (): Promise<User> => {
                     email: `${clerk.emailAddresses[0]?.emailAddress || ""}`,
                     image: `${clerk.imageUrl || null}`,
                 },
-            });
+            })
         }
 
-        return user;
+        return user
     } catch (error) {
-        console.error("Error fetching or creating user:", error);
-        throw error; // Re-throw the error to handle it at a higher level
+        console.error("Error fetching or creating user:", error)
+        throw error // Re-throw the error to handle it at a higher level
     }
-};
-
+}
 
 export const onSignUpUser = async (data: {
     firstname: string
@@ -163,4 +161,4 @@ export const onSignInUser = async (clerkId: string) => {
             message: "Oops! something went wrong. Try again",
         }
     }
-        }
+}

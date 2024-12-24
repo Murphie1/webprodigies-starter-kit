@@ -23,7 +23,9 @@ export async function POST(request: Request) {
 
         // Validate required fields
         if (!message || !conversationId) {
-            return new NextResponse("Missing message or conversationId", { status: 400 })
+            return new NextResponse("Missing message or conversationId", {
+                status: 400,
+            })
         }
 
         // Create the new message
@@ -79,9 +81,10 @@ export async function POST(request: Request) {
         await pusherServer.trigger(conversationId, "messages:new", newMessage)
 
         // Send update to each user in the conversation
-        const lastMessage = updatedConversation.chats[updatedConversation.chats.length - 1]
-        const userEmails = updatedConversation.users.map(user => user.email)
-        
+        const lastMessage =
+            updatedConversation.chats[updatedConversation.chats.length - 1]
+        const userEmails = updatedConversation.users.map((user) => user.email)
+
         for (const email of userEmails) {
             await pusherServer.trigger(email!, "conversation:update", {
                 id: conversationId,
@@ -94,4 +97,4 @@ export async function POST(request: Request) {
         console.log(error, "ERROR_MESSAGES")
         return new NextResponse("Internal Error", { status: 500 })
     }
-                }
+}

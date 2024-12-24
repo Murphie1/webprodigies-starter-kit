@@ -26,9 +26,8 @@ const EmptyStateTwo = () => {
                 height={250}
                 alt="empty state"
             />
-            
+
             <div className="text-center items-center flex flex-col">
-                
                 <h3
                     className="
             mt-2

@@ -1,20 +1,20 @@
-"use client";
+"use client"
 
-import { cn } from "@/lib/utils";
-import { useEffect, useMemo, useState } from "react";
-import { useRouter, usePathname } from "next/navigation";
+import { cn } from "@/lib/utils"
+import { useEffect, useMemo, useState } from "react"
+import { useRouter, usePathname } from "next/navigation"
 
-import useConversation from "@/hooks/uMessage/useConversation";
-import { FullConversationType, FullFriendType } from "@/type";
-import AsyncConversationBox from "./AsyncConversationBox";
-import GroupChatModal from "./GroupChatModal";
-import { pusherClient } from "@/lib/pusher";
-import { find } from "lodash";
+import useConversation from "@/hooks/uMessage/useConversation"
+import { FullConversationType, FullFriendType } from "@/type"
+import AsyncConversationBox from "./AsyncConversationBox"
+import GroupChatModal from "./GroupChatModal"
+import { pusherClient } from "@/lib/pusher"
+import { find } from "lodash"
 
 interface ConversationListProps {
-    initialItems: FullConversationType[];
-    users: FullFriendType[];
-    email: string; // Pass email directly as a prop
+    initialItems: FullConversationType[]
+    users: FullFriendType[]
+    email: string // Pass email directly as a prop
 }
 
 const ConversationList: React.FC<ConversationListProps> = ({
@@ -22,28 +22,28 @@ const ConversationList: React.FC<ConversationListProps> = ({
     users,
     email,
 }) => {
-    const router = useRouter();
-    const pathname = usePathname();
-    const { conversationId, isOpen } = useConversation();
+    const router = useRouter()
+    const pathname = usePathname()
+    const { conversationId, isOpen } = useConversation()
 
-    const [items, setItems] = useState(initialItems);
+    const [items, setItems] = useState(initialItems)
 
-    const pusherKey = useMemo(() => email, [email]);
+    const pusherKey = useMemo(() => email, [email])
 
     // Handle Pusher subscription
     useEffect(() => {
-        if (!pusherKey) return;
+        if (!pusherKey) return
 
-        pusherClient.subscribe(pusherKey);
+        pusherClient.subscribe(pusherKey)
 
         const newHandler = (conversation: FullConversationType) => {
             setItems((current) => {
                 if (find(current, { id: conversation.id })) {
-                    return current;
+                    return current
                 }
-                return [conversation, ...current];
-            });
-        };
+                return [conversation, ...current]
+            })
+        }
 
         const updateHandler = (conversation: FullConversationType) => {
             setItems((current) =>
@@ -52,34 +52,34 @@ const ConversationList: React.FC<ConversationListProps> = ({
                         return {
                             ...currentConversation,
                             messages: conversation.chats,
-                        };
+                        }
                     }
-                    return currentConversation;
-                })
-            );
-        };
+                    return currentConversation
+                }),
+            )
+        }
 
         const removeHandler = (conversation: FullConversationType) => {
             setItems((current) =>
-                current.filter((convo) => convo.id !== conversation.id)
-            );
+                current.filter((convo) => convo.id !== conversation.id),
+            )
 
             if (conversationId === conversation.id && pathname !== "/socials") {
-                router.push("/socials");
+                router.push("/socials")
             }
-        };
+        }
 
-        pusherClient.bind("conversation:new", newHandler);
-        pusherClient.bind("conversation:update", updateHandler);
-        pusherClient.bind("conversation:remove", removeHandler);
+        pusherClient.bind("conversation:new", newHandler)
+        pusherClient.bind("conversation:update", updateHandler)
+        pusherClient.bind("conversation:remove", removeHandler)
 
         return () => {
-            pusherClient.unsubscribe(pusherKey);
-            pusherClient.unbind("conversation:new", newHandler);
-            pusherClient.unbind("conversation:update", updateHandler);
-            pusherClient.unbind("conversation:remove", removeHandler);
-        };
-    }, [pusherKey, conversationId, router]);
+            pusherClient.unsubscribe(pusherKey)
+            pusherClient.unbind("conversation:new", newHandler)
+            pusherClient.unbind("conversation:update", updateHandler)
+            pusherClient.unbind("conversation:remove", removeHandler)
+        }
+    }, [pusherKey, conversationId, router])
 
     return (
         <aside
@@ -97,7 +97,7 @@ const ConversationList: React.FC<ConversationListProps> = ({
           border-gray-200
           dark:border-themeBlack
         `,
-                isOpen ? "hidden" : "block w-full left-0"
+                isOpen ? "hidden" : "block w-full left-0",
             )}
         >
             <div className="px-5">
@@ -136,7 +136,7 @@ const ConversationList: React.FC<ConversationListProps> = ({
                 ))}
             </div>
         </aside>
-    );
-};
+    )
+}
 
-export default ConversationList;
+export default ConversationList

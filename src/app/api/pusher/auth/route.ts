@@ -28,7 +28,11 @@ export async function POST(request: Request) {
         }
 
         // Authorize the Pusher channel
-        const authResponse = pusherServer.authorizeChannel(socket_id, channel_name, data)
+        const authResponse = pusherServer.authorizeChannel(
+            socket_id,
+            channel_name,
+            data,
+        )
 
         // Return the Pusher auth response
         return new NextResponse(JSON.stringify(authResponse), { status: 200 })

@@ -1,4 +1,4 @@
-"use client";
+"use client"
 import { useState } from "react"
 import useConversation from "@/hooks/uMessage/useConversation"
 import axios from "axios"
@@ -35,12 +35,13 @@ const Form = () => {
             conversationId,
         }
 
-        axios.post("/api/uMessage", payload)
+        axios
+            .post("/api/uMessage", payload)
             .then((response) => {
-                console.log('Message sent:', response.data)
+                console.log("Message sent:", response.data)
             })
             .catch((error) => {
-                console.error('Error sending message:', error)
+                console.error("Error sending message:", error)
             })
     }
 
@@ -74,7 +75,10 @@ const Form = () => {
                 <Heart size={30} className="text-sky-500" />
             </CldUploadButton>
 
-            <form onSubmit={handleSubmit(onSubmit)} className="flex items-center gap-2 lg:gap-4 w-full">
+            <form
+                onSubmit={handleSubmit(onSubmit)}
+                className="flex items-center gap-2 lg:gap-4 w-full"
+            >
                 <MessageInput
                     id="message"
                     register={register}

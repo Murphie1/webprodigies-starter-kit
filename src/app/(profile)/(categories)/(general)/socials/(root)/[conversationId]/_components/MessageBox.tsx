@@ -13,7 +13,7 @@ interface MessageBoxProps {
 }
 
 const MessageBox: React.FC<MessageBoxProps> = async ({ data, isLast }) => {
-    const session = await onAuthenticatedUser();
+    const session = await onAuthenticatedUser()
     if (!session || !session.email) redirect("/sign-in")
 
     const isOwn = session.email === data?.sender?.email

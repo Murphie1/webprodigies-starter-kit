@@ -121,7 +121,7 @@ const config = {
             // extend: {
             backgroundImage: {
                 "chat-tile-light": "url('/bg-light.png')",
-				"chat-tile-dark": "url('/bg-dark.png')",
+                "chat-tile-dark": "url('/bg-dark.png')",
                 "nav-focus":
                     "linear-gradient(270deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.00) 100%)",
                 "radial-gradient":
@@ -130,16 +130,16 @@ const config = {
                 modal: "url(/assets/images/modal.png)",
             },
             backgroundColor: {
-				container: "hsl(var(--container))",
-				"gray-primary": "hsl(var(--gray-primary))",
-				"gray-secondary": "hsl(var(--gray-secondary))",
-				"gray-tertiary": "hsl(var(--gray-tertiary))",
-				"left-panel": "hsl(var(--left-panel))",
-				"chat-hover": "hsl(var(--chat-hover))",
-				"green-primary": "hsl(var(--green-primary))",
-				"green-secondary": "hsl(var(--green-secondary))",
-				"green-chat": "hsl(var(--green-chat))",
-			},
+                container: "hsl(var(--container))",
+                "gray-primary": "hsl(var(--gray-primary))",
+                "gray-secondary": "hsl(var(--gray-secondary))",
+                "gray-tertiary": "hsl(var(--gray-tertiary))",
+                "left-panel": "hsl(var(--left-panel))",
+                "chat-hover": "hsl(var(--chat-hover))",
+                "green-primary": "hsl(var(--green-primary))",
+                "green-secondary": "hsl(var(--green-secondary))",
+                "green-chat": "hsl(var(--green-chat))",
+            },
             //}
             animation: {
                 "accordion-down": "accordion-down 0.2s ease-out",

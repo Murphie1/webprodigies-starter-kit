@@ -8,11 +8,13 @@ interface AsyncHeaderProps {
     }
 }
 
-const AsyncProfileDrawer: React.FC<AsyncHeaderProps> = async ({ conversation }) => {
+const AsyncProfileDrawer: React.FC<AsyncHeaderProps> = async ({
+    conversation,
+}) => {
     const otherUser = await useOtherUser(conversation)
-   if(!otherUser) {
-       throw new Error("No other User")
-   }
+    if (!otherUser) {
+        throw new Error("No other User")
+    }
     return <ProfileDrawer data={conversation} otherUser={otherUser!} />
 }
 

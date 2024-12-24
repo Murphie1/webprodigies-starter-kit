@@ -4,9 +4,7 @@ import { User } from "@prisma/client"
 import { NextResponse } from "next/server"
 
 const useOtherUsers = async (
-    friends: Array<
-        FullFriendType | { users: User[] }
-    >
+    friends: Array<FullFriendType | { users: User[] }>,
 ): Promise<User[]> => {
     const clerk = await loggedInUser()
     if (!clerk || !clerk.email) {
@@ -23,7 +21,7 @@ const useOtherUsers = async (
 
         // Filter users whose email is not the logged-in user's email
         const filteredUsers = users.filter(
-            (user) => user.email !== currentUserEmail
+            (user) => user.email !== currentUserEmail,
         )
 
         // Add the filtered users to the result array

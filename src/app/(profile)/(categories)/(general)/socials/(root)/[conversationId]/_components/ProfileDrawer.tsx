@@ -1,38 +1,38 @@
-import { Conversation, User } from "@prisma/client";
-import { useMemo } from "react";
-import { format } from "date-fns";
-import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet";
-import { Heart } from "lucide-react";
-import Avatar from "@/components/uMessage/Avatar";
-import ConfirmModal from "./ConfirmModal";
-import AvatarGroup from "@/components/uMessage/AvatarGroup";
-import useActiveList from "@/hooks/uMessage/useActiveList";
+import { Conversation, User } from "@prisma/client"
+import { useMemo } from "react"
+import { format } from "date-fns"
+import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet"
+import { Heart } from "lucide-react"
+import Avatar from "@/components/uMessage/Avatar"
+import ConfirmModal from "./ConfirmModal"
+import AvatarGroup from "@/components/uMessage/AvatarGroup"
+import useActiveList from "@/hooks/uMessage/useActiveList"
 
 interface ProfileDrawerProps {
     data: Conversation & {
-        users: User[];
-    };
-    otherUser: User;
+        users: User[]
+    }
+    otherUser: User
 }
 
 const ProfileDrawer: React.FC<ProfileDrawerProps> = ({ data, otherUser }) => {
-    const { members } = useActiveList();
-    const isActive = members.indexOf(otherUser.email!);
+    const { members } = useActiveList()
+    const isActive = members.indexOf(otherUser.email!)
 
     const joinedDate = useMemo(() => {
-        return format(new Date(otherUser.createdAt), "PP");
-    }, [otherUser.createdAt]);
+        return format(new Date(otherUser.createdAt), "PP")
+    }, [otherUser.createdAt])
 
     const title = useMemo(() => {
-        return data.name || otherUser.firstname;
-    }, [data.name, otherUser.firstname]);
+        return data.name || otherUser.firstname
+    }, [data.name, otherUser.firstname])
 
     const statusText = useMemo(() => {
         if (data.isGroup) {
-            return `${data.users.length} members`;
+            return `${data.users.length} members`
         }
-        return isActive ? "Active" : "Offline";
-    }, [data.isGroup, data.users.length, isActive]);
+        return isActive ? "Active" : "Offline"
+    }, [data.isGroup, data.users.length, isActive])
 
     return (
         <Sheet>
@@ -66,7 +66,9 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({ data, otherUser }) => {
                                 )}
                             </div>
                             <div>{title}</div>
-                            <div className="text-sm text-gray-500">{statusText}</div>
+                            <div className="text-sm text-gray-500">
+                                {statusText}
+                            </div>
                             <div className="flex gap-10 my-8">
                                 <div
                                     className="
@@ -135,7 +137,7 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({ data, otherUser }) => {
                 </div>
             </SheetContent>
         </Sheet>
-    );
-};
+    )
+}
 
-export default ProfileDrawer;
+export default ProfileDrawer

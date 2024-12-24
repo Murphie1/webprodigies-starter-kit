@@ -1,64 +1,69 @@
-"use client";
+"use client"
 
-import { useCallback, useMemo } from "react";
-import { useRouter } from "next/navigation";
-import { format } from "date-fns";
-import { cn } from "@/lib/utils";
-import { User } from "@prisma/client";
-import { FullConversationType } from "@/type";
-import Avatar from "@/components/uMessage/Avatar";
-import AvatarGroup from "@/components/uMessage/AvatarGroup";
+import { useCallback, useMemo } from "react"
+import { useRouter } from "next/navigation"
+import { format } from "date-fns"
+import { cn } from "@/lib/utils"
+import { User } from "@prisma/client"
+import { FullConversationType } from "@/type"
+import Avatar from "@/components/uMessage/Avatar"
+import AvatarGroup from "@/components/uMessage/AvatarGroup"
 
 interface ConversationBoxProps {
-    data: FullConversationType;
-    selected?: boolean;
-    otherUser: User;
-    userEmail: string | null; // Added userEmail as a prop
+    data: FullConversationType
+    selected?: boolean
+    otherUser: User
+    userEmail: string | null // Added userEmail as a prop
 }
 
-const ConversationBox: React.FC<ConversationBoxProps> = ({ data, selected, otherUser, userEmail }) => {
-    const router = useRouter();
+const ConversationBox: React.FC<ConversationBoxProps> = ({
+    data,
+    selected,
+    otherUser,
+    userEmail,
+}) => {
+    const router = useRouter()
 
     // Redirect to sign-in if no session or email
     const handleRedirect = useCallback(() => {
         if (!userEmail) {
-            router.replace("/sign-in");
+            router.replace("/sign-in")
         }
-    }, [userEmail, router]);
+    }, [userEmail, router])
 
     // Run the redirect logic as an effect
     useMemo(() => {
-        handleRedirect();
-    }, [handleRedirect]);
+        handleRedirect()
+    }, [handleRedirect])
 
     // Navigate to the conversation page
     const handleClick = useCallback(() => {
-        router.push(`/socials/${data.id}`);
-    }, [data.id, router]);
+        router.push(`/socials/${data.id}`)
+    }, [data.id, router])
 
     // Get the last message from the conversation
     const lastMessage = useMemo(() => {
-        const messages = data.chats || [];
-        return messages[messages.length - 1];
-    }, [data.chats]);
+        const messages = data.chats || []
+        return messages[messages.length - 1]
+    }, [data.chats])
 
     // Check if the last message was seen by the user
     const hasSeen = useMemo(() => {
-        if (!lastMessage) return false;
-        const seenArray = lastMessage.seen || [];
-        return seenArray.some((user) => user.email === userEmail);
-    }, [userEmail, lastMessage]);
+        if (!lastMessage) return false
+        const seenArray = lastMessage.seen || []
+        return seenArray.some((user) => user.email === userEmail)
+    }, [userEmail, lastMessage])
 
     // Determine the text to display for the last message
     const lastMessageText = useMemo(() => {
-        if (lastMessage?.image) return "Sent an image";
-        if (lastMessage?.video) return "Sent a video";
-        if (lastMessage?.body) return lastMessage.body;
-        return "Started a conversation";
-    }, [lastMessage]);
+        if (lastMessage?.image) return "Sent an image"
+        if (lastMessage?.video) return "Sent a video"
+        if (lastMessage?.body) return lastMessage.body
+        return "Started a conversation"
+    }, [lastMessage])
 
     // Render null if no session or email (after redirect handling)
-    if (!userEmail) return null;
+    if (!userEmail) return null
 
     return (
         <div
@@ -77,7 +82,7 @@ const ConversationBox: React.FC<ConversationBoxProps> = ({ data, selected, other
         cursor-pointer
         p-3
       `,
-                selected ? "bg-sky-700" : "bg-white dark:bg-themeBlack"
+                selected ? "bg-sky-700" : "bg-white dark:bg-themeBlack",
             )}
         >
             {data.isGroup ? (
@@ -102,7 +107,7 @@ const ConversationBox: React.FC<ConversationBoxProps> = ({ data, selected, other
                             `truncate text-sm`,
                             hasSeen
                                 ? "text-gray-500 dark:text-gray-300"
-                                : "text-black dark:text-white font-medium"
+                                : "text-black dark:text-white font-medium",
                         )}
                     >
                         {lastMessageText}
@@ -110,7 +115,7 @@ const ConversationBox: React.FC<ConversationBoxProps> = ({ data, selected, other
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default ConversationBox;
+export default ConversationBox
