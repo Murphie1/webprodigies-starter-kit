@@ -10,10 +10,14 @@ const EmptyStateTwo = () => {
         sm:px-6
         lg:px-8
         h-full
+        w-full 
+        max-w-screen
         flex
+        flex-col-1
         justify-center
         items-center
         bg-gray-100
+       dark:bg-gray-800
       "
         >
             <Image
