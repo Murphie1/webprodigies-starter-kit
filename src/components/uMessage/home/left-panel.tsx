@@ -2,7 +2,7 @@
 import { ListFilter, Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import ThemeSwitch from "./theme-switch";
-import Conversation from "./conversation";
+//import Conversation from "./conversation";
 import { UserButton } from "@clerk/nextjs";
 
 import UserListDialog from "./user-list-dialog";
@@ -59,7 +59,7 @@ const LeftPanel = () => {
 			<div className='my-3 flex flex-col gap-0 max-h-[80%] overflow-auto'>
 				{/* Conversations will go here*/}
 				{conversations?.map((conversation) => (
-					<Conversation key={conversation._id} conversation={conversation} />
+					<div> Sharp </div>//<Conversation key={conversation._id} conversation={conversation} />
 				))}
 
 				{conversations?.length === 0 && (
