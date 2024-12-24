@@ -1,22 +1,22 @@
-"use client"
+//"use client"
 
 import LeftPanel from "@/components/uMessage/home/left-panel"
-import { usePathname } from "next/navigation"
+//import { usePathname } from "next/navigation"
 
 export const MobileLeftPanel = () => {
 
-  const pathname = usePathname()
-	const isHome = pathname === "/socials/new"
+//  const pathname = usePathname()
+	//const isHome = pathname === "/socials/new"
   
   
 
 
 return (
   <section>
-  {isHome && (
+	  {/*{isHome && (*/}
      <div className="w-full h-full relative md:hidden">
        <LeftPanel />
-       </div>)}
+       </div>{/*)}*/}
 </section>
   )
 }
