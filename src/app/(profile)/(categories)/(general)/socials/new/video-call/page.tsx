@@ -3,7 +3,9 @@
 
 //const DynamicVideoUI = dynamic(() => import("./video-ui-kit"), { ssr: false });
 
-export default function VideoCall = () => {
+const VideoCall = () => {
 	return <div>Video Calling </div>;
 	//<DynamicVideoUI />;
 }
+
+export default VideoCall;
