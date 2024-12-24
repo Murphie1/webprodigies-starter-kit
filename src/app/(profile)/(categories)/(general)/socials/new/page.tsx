@@ -1,10 +1,11 @@
 import ChatPlaceHolder from "@/components/uMessage/home/chat-placeholder";
 
 
-export default function Home = () => {
+const SocialsHome = () => {
 	return (
 		<main className='hidden md:flex relative'>
 	<ChatPlaceHolder />
 		</main>
 	);
         }
+export default SocialsHome;
