@@ -3,7 +3,7 @@ import EmptyStateTwo from "@/components/uMessage/EmptyState";
 
 const SocialsHome = () => {
 	return (
-		<main className='flex relative'>
+		<main className='hidden md:flex relative'>
 	<EmptyStateTwo />
 		</main>
 	);
