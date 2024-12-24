@@ -9,4 +9,4 @@ export default function Pages() {
 		</main>
 	);
   }
-export default Pages;
+
