@@ -2,10 +2,10 @@
 const nextConfig = {
   reactStrictMode: false,
   images: {
-    // Combine remotePatterns and domains
     remotePatterns: [
-      { 
-        hostname: "oaidalleapiprodscus.blob.core.windows.net" 
+      {
+        protocol: "https",
+        hostname: "oaidalleapiprodscus.blob.core.windows.net",
       },
       {
         protocol: "https",
@@ -35,10 +35,6 @@ const nextConfig = {
       "lh3.googleusercontent.com",
     ],
   },
-  // Add the SWC plugin for next-superjson-plugin
-  swcPlugins: [
-    ["next-superjson-plugin", {}],
-  ],
 };
 
 export default nextConfig;
