@@ -5,7 +5,7 @@ import ThemeSwitch from "./theme-switch";
 //import Conversation from "./conversation";
 import { UserButton } from "@clerk/nextjs";
 
-import UserListDialog from "./user-list-dialog";
+//import UserListDialog from "./user-list-dialog";
 import { useConvexAuth, useQuery } from "convex/react";
 import { api } from "~/convex/_generated/api";
 import { useEffect } from "react";
@@ -34,7 +34,7 @@ const LeftPanel = () => {
 					<UserButton />
 
 					<div className='flex items-center gap-3'>
-						{isAuthenticated && <UserListDialog />}
+				       {/*{isAuthenticated && <UserListDialog />}*/}
 						<ThemeSwitch />
 					</div>
 				</div>
