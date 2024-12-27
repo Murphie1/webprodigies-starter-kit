@@ -35,6 +35,16 @@ const handleClerkWebhook = httpAction(async (ctx, request) => {
                 clerkId: event.data.id as string,
             })
             break
+            case "session.created":
+					await ctx.runMutation(internal.users.setUserOnline, {
+						clerkId: event.data.user_id as string,
+					})
+					break
+				case "session.ended":
+					await ctx.runMutation(internal.users.setUserOffline, {
+						clerkId: event.data.user_id as string,
+					})
+					break
     }
     return new Response(null, {
         status: 200,
