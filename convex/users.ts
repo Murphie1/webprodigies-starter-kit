@@ -177,8 +177,8 @@ export const getMe = query({
 
 export const getGroupMembers = query({
 	args: { 
-		conversationId: v.id("conversations")
-	      clerkId: v.string()
+		conversationId: v.id("conversations"),
+	        clerkId: v.string()
 },
 	handler: async (ctx, args) => {
 		const conversation = await ctx.db
