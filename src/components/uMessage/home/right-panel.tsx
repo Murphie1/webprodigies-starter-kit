@@ -4,17 +4,18 @@ import { Video, X } from "lucide-react"
 import MessageInput from "./message-input"
 import MessageContainer from "./message-container"
 import ChatPlaceHolder from "./chat-placeholder"
+import EmptyStateTwo from "@/components/uMessage/EmptyState"
 import GroupMembersDialog from "./group-members-dialog"
 import { useConversationStore } from "@/store/chat-store"
-import { useConvexAuth } from "convex/react"
+//import { useConvexAuth } from "convex/react"
 
 const RightPanel = () => {
     const { selectedConversation, setSelectedConversation } =
         useConversationStore()
-    const { isLoading } = useConvexAuth()
+   // const { isLoading } = useConvexAuth()
 
-    if (isLoading) return null
-    if (!selectedConversation) return <ChatPlaceHolder />
+   // if (isLoading) return null
+    if (!selectedConversation) return <EmptyStateTwo />//<ChatPlaceHolder />
 
     const conversationName =
         selectedConversation.groupName || selectedConversation.name
