@@ -4,19 +4,15 @@ import { api } from "./_generated/api";
 
 export const sendTextMessage = mutation({
 	args: {
+		clerkId: v.string(),
 		sender: v.string(),
 		content: v.string(),
 		conversation: v.id("conversations"),
 	},
 	handler: async (ctx, args) => {
-		const identity = await ctx.auth.getUserIdentity();
-		if (!identity) {
-			throw new ConvexError("Not authenticated");
-		}
-
 		const user = await ctx.db
 			.query("users")
-			.filter((q) => q.eq(q.field("clerkId"), identity.clerkId))
+			.filter((q) => q.eq(q.field("clerkId"), args.clerkId))
 			.unique();
 
 		if (!user) {
@@ -61,7 +57,7 @@ export const sendTextMessage = mutation({
 	},
 });
 
-export const sendChatGPTMessage = mutation({
+export const sendHakimaMessage = mutation({
 	args: {
 		content: v.string(),
 		conversation: v.id("conversations"),
@@ -80,13 +76,10 @@ export const sendChatGPTMessage = mutation({
 // Optimized
 export const getMessages = query({
 	args: {
+		clerkId: v.string(),
 		conversation: v.id("conversations"),
 	},
 	handler: async (ctx, args) => {
-		const identity = await ctx.auth.getUserIdentity();
-		if (!identity) {
-			throw new Error("Unauthorized");
-		}
 
 		const messages = await ctx.db
 			.query("messages")
@@ -126,11 +119,6 @@ export const getMessages = query({
 export const sendImage = mutation({
 	args: { imgId: v.id("_storage"), sender: v.id("users"), conversation: v.id("conversations") },
 	handler: async (ctx, args) => {
-		const identity = await ctx.auth.getUserIdentity();
-		if (!identity) {
-			throw new ConvexError("Unauthorized");
-		}
-
 		const content = (await ctx.storage.getUrl(args.imgId)) as string;
 
 		await ctx.db.insert("messages", {
@@ -145,11 +133,7 @@ export const sendImage = mutation({
 export const sendVideo = mutation({
 	args: { videoId: v.id("_storage"), sender: v.id("users"), conversation: v.id("conversations") },
 	handler: async (ctx, args) => {
-		const identity = await ctx.auth.getUserIdentity();
-		if (!identity) {
-			throw new ConvexError("Unauthorized");
-		}
-
+		
 		const content = (await ctx.storage.getUrl(args.videoId)) as string;
 
 		await ctx.db.insert("messages", {
