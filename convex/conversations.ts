@@ -1,149 +1,128 @@
-import { ConvexError, v } from "convex/values"
-import { mutation, query } from "./_generated/server"
-import Clerk from "@clerk/backend"
-
-// Initialize Clerk with your API key
-const clerk = Clerk({ apiKey: process.env.CLERK_SECRET_KEY })
-
-// Utility function to verify Clerk sessions
-async function verifyClerkSession(ctx) {
-    const authHeader = ctx.request.headers.authorization
-    if (!authHeader || !authHeader.startsWith("Bearer ")) {
-        throw new ConvexError("Unauthorized")
-    }
-
-    const token = authHeader.split(" ")[1]
-    try {
-        const session = await clerk.sessions.verifySession(token)
-        return session.userId // Return the Clerk user ID
-    } catch (error) {
-        console.error("Clerk session verification failed:", error)
-        throw new ConvexError("Unauthorized")
-    }
-}
+import { ConvexError, v } from "convex/values";
+import { mutation, query } from "./_generated/server";
 
 export const createConversation = mutation({
-    args: {
-        participants: v.array(v.id("users")),
-        isGroup: v.boolean(),
-        groupName: v.optional(v.string()),
-        groupImage: v.optional(v.id("_storage")),
-        admin: v.optional(v.id("users")),
-    },
-    handler: async (ctx, args) => {
-        const userId = await verifyClerkSession(ctx)
+	args: {
+		participants: v.array(v.id("users")),
+		isGroup: v.boolean(),
+		groupName: v.optional(v.string()),
+		groupImage: v.optional(v.id("_storage")),
+		admin: v.optional(v.id("users")),
+	},
+	handler: async (ctx, args) => {
+		const identity = await ctx.auth.getUserIdentity();
+		if (!identity) throw new ConvexError("Unauthorized");
 
-        // Verify if participants exist in the database
-        const existingConversation = await ctx.db
-            .query("conversations")
-            .filter((q) =>
-                q.or(
-                    q.eq(q.field("participants"), args.participants),
-                    q.eq(q.field("participants"), args.participants.reverse()),
-                ),
-            )
-            .first()
+		// jane and john
+		// [jane, john]
+		// [john, jane]
 
-        if (existingConversation) {
-            return existingConversation._id
-        }
+		const existingConversation = await ctx.db
+			.query("conversations")
+			.filter((q) =>
+				q.or(
+					q.eq(q.field("participants"), args.participants),
+					q.eq(q.field("participants"), args.participants.reverse())
+				)
+			)
+			.first();
 
-        let groupImage
-        if (args.groupImage) {
-            groupImage = (await ctx.storage.getUrl(args.groupImage)) as string
-        }
+		if (existingConversation) {
+			return existingConversation._id;
+		}
 
-        const conversationId = await ctx.db.insert("conversations", {
-            participants: args.participants,
-            isGroup: args.isGroup,
-            groupName: args.groupName,
-            groupImage,
-            admin: args.admin,
-        })
+		let groupImage;
 
-        return conversationId
-    },
-})
+		if (args.groupImage) {
+			groupImage = (await ctx.storage.getUrl(args.groupImage)) as string;
+		}
+
+		const conversationId = await ctx.db.insert("conversations", {
+			participants: args.participants,
+			isGroup: args.isGroup,
+			groupName: args.groupName,
+			groupImage,
+			admin: args.admin,
+		});
+
+		return conversationId;
+	},
+});
 
 export const getMyConversations = query({
-    args: {},
-    handler: async (ctx, args) => {
-        const clerkUserId = await verifyClerkSession(ctx)
+	args: {},
+	handler: async (ctx, args) => {
+		const identity = await ctx.auth.getUserIdentity();
+		if (!identity) throw new ConvexError("Unauthorized");
 
-        // Find the Convex user matching the Clerk user ID
-        const user = await ctx.db
-            .query("users")
-            .filter((q) => q.eq(q.field("clerkId"), clerkUserId))
-            .unique()
+		const user = await ctx.db
+			.query("users")
+			.filter((q) => q.eq(q.field("clerkId"), identity.clerkId))
+			.unique();
 
-        if (!user) throw new ConvexError("User not found")
+		if (!user) throw new ConvexError("User not found");
 
-        // Fetch all conversations involving the user
-        const conversations = await ctx.db.query("conversations").collect()
-        const myConversations = conversations.filter((conversation) =>
-            conversation.participants.includes(user._id),
-        )
+		const conversations = await ctx.db.query("conversations").collect();
 
-        const conversationsWithDetails = await Promise.all(
-            myConversations.map(async (conversation) => {
-                let userDetails = {}
+		const myConversations = conversations.filter((conversation) => {
+			return conversation.participants.includes(user._id);
+		});
 
-                if (!conversation.isGroup) {
-                    const otherUserId = conversation.participants.find(
-                        (id) => id !== user._id,
-                    )
-                    const userProfile = await ctx.db
-                        .query("users")
-                        .filter((q) => q.eq(q.field("_id"), otherUserId))
-                        .take(1)
+		const conversationsWithDetails = await Promise.all(
+			myConversations.map(async (conversation) => {
+				let userDetails = {};
 
-                    userDetails = userProfile[0]
-                }
+				if (!conversation.isGroup) {
+					const otherUserId = conversation.participants.find((id) => id !== user._id);
+					const userProfile = await ctx.db
+						.query("users")
+						.filter((q) => q.eq(q.field("_id"), otherUserId))
+						.take(1);
 
-                const lastMessage = await ctx.db
-                    .query("messages")
-                    .filter((q) =>
-                        q.eq(q.field("conversation"), conversation._id),
-                    )
-                    .order("desc")
-                    .take(1)
+					userDetails = userProfile[0];
+				}
 
-                return {
-                    ...userDetails,
-                    ...conversation,
-                    lastMessage: lastMessage[0] || null,
-                }
-            }),
-        )
+				const lastMessage = await ctx.db
+					.query("messages")
+					.filter((q) => q.eq(q.field("conversation"), conversation._id))
+					.order("desc")
+					.take(1);
 
-        return conversationsWithDetails
-    },
-})
+				// return should be in this order, otherwise _id field will be overwritten
+				return {
+					...userDetails,
+					...conversation,
+					lastMessage: lastMessage[0] || null,
+				};
+			})
+		);
+
+		return conversationsWithDetails;
+	},
+});
 
 export const kickUser = mutation({
-    args: {
-        conversationId: v.id("conversations"),
-        userId: v.id("users"),
-    },
-    handler: async (ctx, args) => {
-        const userId = await verifyClerkSession(ctx)
+	args: {
+		conversationId: v.id("conversations"),
+		userId: v.id("users"),
+	},
+	handler: async (ctx, args) => {
+		const identity = await ctx.auth.getUserIdentity();
+		if (!identity) throw new ConvexError("Unauthorized");
 
-        const conversation = await ctx.db
-            .query("conversations")
-            .filter((q) => q.eq(q.field("_id"), args.conversationId))
-            .unique()
+		const conversation = await ctx.db
+			.query("conversations")
+			.filter((q) => q.eq(q.field("_id"), args.conversationId))
+			.unique();
 
-        if (!conversation) throw new ConvexError("Conversation not found")
+		if (!conversation) throw new ConvexError("Conversation not found");
 
-        await ctx.db.patch(args.conversationId, {
-            participants: conversation.participants.filter(
-                (id) => id !== args.userId,
-            ),
-        })
-    },
-})
+		await ctx.db.patch(args.conversationId, {
+			participants: conversation.participants.filter((id) => id !== args.userId),
+		});
+	},
+});
 
 export const generateUploadUrl = mutation(async (ctx) => {
-    await verifyClerkSession(ctx) // Verify session before generating upload URL
-    return await ctx.storage.generateUploadUrl()
-})
+	return await ctx.storage.generateUploadUrl();
+});
