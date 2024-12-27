@@ -10,9 +10,6 @@ export const createConversation = mutation({
 		admin: v.optional(v.id("users")),
 	},
 	handler: async (ctx, args) => {
-		const identity = await ctx.auth.getUserIdentity();
-		if (!identity) throw new ConvexError("Unauthorized");
-
 		// jane and john
 		// [jane, john]
 		// [john, jane]
@@ -50,14 +47,11 @@ export const createConversation = mutation({
 });
 
 export const getMyConversations = query({
-	args: {},
+	args: { clerkId: v.string() },
 	handler: async (ctx, args) => {
-		const identity = await ctx.auth.getUserIdentity();
-		if (!identity) throw new ConvexError("Unauthorized");
-
 		const user = await ctx.db
 			.query("users")
-			.filter((q) => q.eq(q.field("clerkId"), identity.clerkId))
+			.filter((q) => q.eq(q.field("clerkId"), args.clerkId))
 			.unique();
 
 		if (!user) throw new ConvexError("User not found");
@@ -107,9 +101,7 @@ export const kickUser = mutation({
 		userId: v.id("users"),
 	},
 	handler: async (ctx, args) => {
-		const identity = await ctx.auth.getUserIdentity();
-		if (!identity) throw new ConvexError("Unauthorized");
-
+		
 		const conversation = await ctx.db
 			.query("conversations")
 			.filter((q) => q.eq(q.field("_id"), args.conversationId))
