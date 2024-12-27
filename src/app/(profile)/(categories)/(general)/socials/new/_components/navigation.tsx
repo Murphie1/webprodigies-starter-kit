@@ -1,6 +1,6 @@
 "use client"
 
-import LeftPanel from "@/components/uMessage/home/left-panel"
+import AsyncLeftPanel from "@/components/uMessage/home/AsyncLeftPanel"
 import { usePathname } from "next/navigation"
 
 export const MobileLeftPanel = () => {
@@ -11,7 +11,7 @@ export const MobileLeftPanel = () => {
         <section>
             {isHome && (
                 <div className="w-full h-full relative md:hidden">
-                    <LeftPanel />
+                    <AsyncLeftPanel />
                 </div>
             )}
         </section>
