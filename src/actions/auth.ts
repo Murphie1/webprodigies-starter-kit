@@ -19,6 +19,7 @@ export const onAuthenticatedUser = async () => {
                 image: true,
                 role: true,
                 email: true,
+                clerkId: true,
             },
         })
         if (user)
@@ -26,6 +27,7 @@ export const onAuthenticatedUser = async () => {
                 status: 200,
                 id: user.id,
                 role: user.role,
+                clerkId: user.clerkId || clerk.id
                 image: user.image || `${clerk.imageUrl}`,
                 email: user.email || `${clerk.emailAddresses[0]?.emailAddress}`,
                 username: `${user.firstname} ${user.lastname}`,
