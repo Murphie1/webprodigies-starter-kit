@@ -7,17 +7,20 @@ import { useQuery } from "convex/react"
 import { api } from "~/convex/_generated/api"
 import { useConversationStore } from "@/store/chat-store"
 import { onAuthenticatedUser } from "@/actions/auth"
-
+import { redirect } from "next/navigation"
 
 const Conversation = async ({ conversation }: { conversation: any }) => {
     const conversationImage = conversation.groupImage || conversation.image
     const conversationName = conversation.groupName || conversation.name
     const convoId = conversation._id || ""
     const lastMessage = conversation.lastMessage
-	const clerk = await onAuthenticatedUser()
+   const clerk = await onAuthenticatedUser()
+	if (!clerk || !clerk.clerkId) redirect("/")
     const lastMessageType = lastMessage?.messageType
-    const isme = useQuery(api.users.getMe)
-    const me = await isme({ clerkId: clerk.id })
+    const me = useQuery(api.users.getMe, {
+	    clerkId: clerk.clerkId,
+    })
+    
 	
     const { setSelectedConversation, selectedConversation } =
         useConversationStore()
