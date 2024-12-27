@@ -151,29 +151,20 @@ export const setUserOffline = internalMutation({
 });
 
 export const getUsers = query({
-	args: {},
+	args: { clerkId: v.string() },
 	handler: async (ctx, args) => {
-		const identity = await ctx.auth.getUserIdentity();
-		if (!identity) {
-			throw new ConvexError("Unauthorized");
-		}
 
 		const users = await ctx.db.query("users").collect();
-		return users.filter((user) => user.clerkId !== identity.clerkId);
+		return users.filter((user) => user.clerkId !== args.clerkId);
 	},
 });
 
 export const getMe = query({
-	args: {},
+	args: { clerkId: v.string() },
 	handler: async (ctx, args) => {
-		const identity = await ctx.auth.getUserIdentity();
-		if (!identity) {
-			throw new ConvexError("Unauthorized");
-		}
-
 		const user = await ctx.db
 			.query("users")
-			.filter((q) => q.eq(q.field("clerkId"), identity.clerkId))
+			.filter((q) => q.eq(q.field("clerkId"), args.clerkId))
 			.unique();
 
 		if (!user) {
@@ -185,14 +176,11 @@ export const getMe = query({
 });
 
 export const getGroupMembers = query({
-	args: { conversationId: v.id("conversations") },
+	args: { 
+		conversationId: v.id("conversations")
+	      clerkId: v.string()
+},
 	handler: async (ctx, args) => {
-		const identity = await ctx.auth.getUserIdentity();
-
-		if (!identity) {
-			throw new ConvexError("Unauthorized");
-		}
-
 		const conversation = await ctx.db
 			.query("conversations")
 			.filter((q) => q.eq(q.field("_id"), args.conversationId))
