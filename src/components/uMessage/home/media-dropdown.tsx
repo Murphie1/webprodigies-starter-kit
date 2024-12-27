@@ -1,3 +1,4 @@
+import { onAuthenticatedUser } from "@/actions/auth"
 import { useEffect, useRef, useState } from "react"
 import {
     DropdownMenu,
