@@ -27,7 +27,7 @@ export const onAuthenticatedUser = async () => {
                 status: 200,
                 id: user.id,
                 role: user.role,
-                clerkId: user.clerkId || clerk.id
+                clerkId: user.clerkId || clerk.id,
                 image: user.image || `${clerk.imageUrl}`,
                 email: user.email || `${clerk.emailAddresses[0]?.emailAddress}`,
                 username: `${user.firstname} ${user.lastname}`,
