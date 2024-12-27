@@ -16,13 +16,16 @@ const MessageInput = () => {
     const { ref, isComponentVisible, setIsComponentVisible } =
         useComponentVisible(false)
 
-    const me = useQuery(api.users.getMe)
+    const me = useQuery(api.users.getMe, {
+        clerkId: clerk.clerkId,
+    })
     const sendTextMsg = useMutation(api.messages.sendTextMessage)
 
     const handleSendTextMsg = async (e: React.FormEvent) => {
         e.preventDefault()
         try {
             await sendTextMsg({
+                clerkId: clerk.clerkId,
                 content: msgText,
                 conversation: selectedConversation!._id,
                 sender: me!._id,
