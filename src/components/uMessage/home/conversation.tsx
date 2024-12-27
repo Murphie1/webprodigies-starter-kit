@@ -6,15 +6,19 @@ import { ImageIcon, Users, VideoIcon } from "lucide-react"
 import { useQuery } from "convex/react"
 import { api } from "~/convex/_generated/api"
 import { useConversationStore } from "@/store/chat-store"
+import { onAuthenticatedUser } from "@/actions/auth"
 
-const Conversation = ({ conversation }: { conversation: any }) => {
+
+const Conversation = async ({ conversation }: { conversation: any }) => {
     const conversationImage = conversation.groupImage || conversation.image
     const conversationName = conversation.groupName || conversation.name
     const convoId = conversation._id || ""
     const lastMessage = conversation.lastMessage
+	const clerk = await onAuthenticatedUser()
     const lastMessageType = lastMessage?.messageType
-    const me = useQuery(api.users.getMe)
-
+    const isme = useQuery(api.users.getMe)
+    const me = await isme({ clerkId: clerk.id })
+	
     const { setSelectedConversation, selectedConversation } =
         useConversationStore()
     const activeBgClass = selectedConversation?._id === conversation._id
