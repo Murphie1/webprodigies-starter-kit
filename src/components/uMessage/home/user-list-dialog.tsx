@@ -22,7 +22,7 @@ import { useConversationStore } from "@/store/chat-store";
 
 const UserListDialog = async () => {
 	const clerk = await onAuthenticatedUser()
-	const [selectedUsers, setSelectedUsers] = useState<Id<"users">[]>([]);
+	const [selectedUsers, setSelectedUsers] = useState([]);//<Id<"users">[]>([]);
 	const [groupName, setGroupName] = useState("");
 	const [isLoading, setIsLoading] = useState(false);
 	const [selectedImage, setSelectedImage] = useState<File | null>(null);
