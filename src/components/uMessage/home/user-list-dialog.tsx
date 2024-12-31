@@ -80,13 +80,13 @@ const UserListDialog = async () => {
 			setSelectedImage(null);
 
 			// TODO => Update a global state called "selectedConversation"
-			const conversationName = isGroup ? groupName : users?.find((user) => user._id === selectedUsers[0])?.name;
+			const conversationName = isGroup ? groupName : clerk.name!; //users?.find((user) => user._id === selectedUsers[0])?.name;
 
 			setSelectedConversation({
 				_id: conversationId,
 				participants: selectedUsers,
 				isGroup,
-				image: isGroup ? renderedImage : users?.find((user) => user._id === selectedUsers[0])?.imageUrl,
+				image: isGroup ? renderedImage : clerk.image!,//users?.find((user) => user._id === selectedUsers[0])?.imageUrl,
 				name: conversationName,
 				admin: me?._id!,
 			});
