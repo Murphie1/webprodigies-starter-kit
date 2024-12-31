@@ -34,10 +34,10 @@ const UserListDialog = async () => {
 	const createConversation = useMutation(api.conversations.createConversation);
 	const generateUploadUrl = useMutation(api.conversations.generateUploadUrl);
 	const me = useQuery(api.users.getMe, {
-		clerkId: clerk.clerkId,
+		clerkId: clerk.clerkId!,
 	});
 	const users = useQuery(api.users.getUsers, {
-		clerkId: clerk.clerkId,
+		clerkId: clerk.clerkId!,
 	});
 
 	const { setSelectedConversation } = useConversationStore();
