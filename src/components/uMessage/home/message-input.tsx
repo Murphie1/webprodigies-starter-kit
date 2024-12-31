@@ -17,7 +17,7 @@ const MessageInput = () => {
         useComponentVisible(false)
 
     const me = useQuery(api.users.getMe, {
-        clerkId: clerk.clerkId,
+        clerkId: clerk.clerkId!,
     })
     const sendTextMsg = useMutation(api.messages.sendTextMessage)
 
@@ -25,7 +25,7 @@ const MessageInput = () => {
         e.preventDefault()
         try {
             await sendTextMsg({
-                clerkId: clerk.clerkId,
+                clerkId: clerk.clerkId!,
                 content: msgText,
                 conversation: selectedConversation!._id,
                 sender: me!._id,
