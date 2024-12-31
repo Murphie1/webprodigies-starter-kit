@@ -11,7 +11,7 @@ import useComponentVisible from "@/hooks/uMessage/useComponentVisible"
 import EmojiPicker, { Theme } from "emoji-picker-react"
 import MediaDropdown from "./media-dropdown"
 
-const MessageInput = () => {
+const MessageInput = async () => {
     const [msgText, setMsgText] = useState("")
     const { selectedConversation } = useConversationStore()
     const { ref, isComponentVisible, setIsComponentVisible } =
