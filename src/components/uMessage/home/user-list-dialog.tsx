@@ -36,9 +36,9 @@ const UserListDialog = async () => {
 	const me = useQuery(api.users.getMe, {
 		clerkId: clerk.clerkId!,
 	});
-	const users = useQuery(api.users.getUsers, {
-		clerkId: clerk.clerkId!,
-	});
+	//const users = useQuery(api.users.getUsers, {
+		//clerkId: clerk.clerkId!,
+	//});
 
 	const { setSelectedConversation } = useConversationStore();
 
@@ -145,7 +145,8 @@ const UserListDialog = async () => {
 					</>
 				)}
 				<div className='flex flex-col gap-3 overflow-auto max-h-60'>
-					{users?.map((user) => (
+					Users go here
+					{/*{users?.map((user) => (
 						<div
 							key={user._id}
 							className={`flex gap-3 items-center p-2 rounded cursor-pointer active:scale-95 
@@ -176,7 +177,7 @@ const UserListDialog = async () => {
 								</div>
 							</div>
 						</div>
-					))}
+					))}*/}
 				</div>
 				<div className='flex justify-between'>
 					<Button variant={"outline"}>Cancel</Button>
