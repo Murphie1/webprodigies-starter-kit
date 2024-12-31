@@ -1,3 +1,4 @@
+import { onAuthenticatedUser } from "@/actions/auth"
 import { Laugh, Mic, Plus, Send } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import { useState } from "react"
@@ -15,7 +16,7 @@ const MessageInput = () => {
     const { selectedConversation } = useConversationStore()
     const { ref, isComponentVisible, setIsComponentVisible } =
         useComponentVisible(false)
-
+const clerk = await onAuthenticatedUser()
     const me = useQuery(api.users.getMe, {
         clerkId: clerk.clerkId!,
     })
