@@ -21,8 +21,8 @@ const LeftPanel = ({ clerkId }: LeftPanelProps) => {
             clerkId: clerkId 
         })*/}
 
-    const { selectedConversation, setSelectedConversation } =
-        useConversationStore()
+    //const { selectedConversation, setSelectedConversation } =
+        //useConversationStore()
 
     {/*  useEffect(() => {
         const conversationIds = conversations?.map(
@@ -47,7 +47,7 @@ const LeftPanel = ({ clerkId }: LeftPanelProps) => {
                     <UserButton />
 
                     <div className="flex items-center gap-3">
-                        <UserListDialog />
+                        {/* <UserListDialog />*/}
                         <ThemeSwitch />
                     </div>
                 </div>
