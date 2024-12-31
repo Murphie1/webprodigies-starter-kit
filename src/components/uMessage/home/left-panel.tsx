@@ -12,14 +12,14 @@ import { useEffect } from "react"
 import { useConversationStore } from "@/store/chat-store"
 
 interface LeftPanelProps {
-    clerkId: string | null
+    clerkId: string
 }
 
 const LeftPanel = ({ clerkId }: LeftPanelProps) => {
     const conversations = useQuery(
-        api.conversations.getMyConversations,
-        clerkId ? { clerkId } : "skip"
-    )
+        api.conversations.getMyConversations, { 
+            clerkId: clerkId 
+        })
 
     const { selectedConversation, setSelectedConversation } =
         useConversationStore()
