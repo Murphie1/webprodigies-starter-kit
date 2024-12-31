@@ -17,9 +17,11 @@ interface LeftPanelProps {
 
 const LeftPanel = ({ clerkId }: LeftPanelProps) => {
  const conversations = useQuery(
-        api.conversations.getMyConversations, { 
-            clerkId: clerkId 
-        })
+        api.conversations.getMyConversations,// clerkId ? { 
+     {
+         clerkId: clerkId 
+        } //: "skip"
+ )
 
     const { selectedConversation, setSelectedConversation } =
         useConversationStore()
@@ -47,7 +49,7 @@ const LeftPanel = ({ clerkId }: LeftPanelProps) => {
                     <UserButton />
 
                     <div className="flex items-center gap-3">
-                        {/* <UserListDialog />*/}
+                         <UserListDialog />
                         <ThemeSwitch />
                     </div>
                 </div>
