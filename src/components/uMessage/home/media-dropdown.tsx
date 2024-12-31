@@ -33,7 +33,7 @@ const MediaDropdown = async () => {
     const sendImage = useMutation(api.messages.sendImage)
     const sendVideo = useMutation(api.messages.sendVideo)
     const me = useQuery(api.users.getMe, {
-        clerkId: clerk.clerkId,
+        clerkId: clerk.clerkId!,
     })
 
     const { selectedConversation } = useConversationStore()
