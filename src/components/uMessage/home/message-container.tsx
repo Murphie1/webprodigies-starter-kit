@@ -10,10 +10,10 @@ const MessageContainer = async () => {
     const clerk = await onAuthenticatedUser()
     const messages = useQuery(api.messages.getMessages, {
         conversation: selectedConversation!._id,
-        clerkId: clerk.clerkId,
+        clerkId: clerk.clerkId!,
     })
     const me = useQuery(api.users.getMe, {
-        clerkId: clerk.clerkId,
+        clerkId: clerk.clerkId!,
     })
     const lastMessageRef = useRef<HTMLDivElement>(null)
 
