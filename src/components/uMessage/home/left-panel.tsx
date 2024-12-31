@@ -16,15 +16,15 @@ interface LeftPanelProps {
 }
 
 const LeftPanel = ({ clerkId }: LeftPanelProps) => {
-{/* const conversations = useQuery(
+ const conversations = useQuery(
         api.conversations.getMyConversations, { 
             clerkId: clerkId 
-        })*/}
+        })
 
-    //const { selectedConversation, setSelectedConversation } =
-        //useConversationStore()
+    const { selectedConversation, setSelectedConversation } =
+        useConversationStore()
 
-    {/*  useEffect(() => {
+      useEffect(() => {
         const conversationIds = conversations?.map(
             (conversation) => conversation._id
         )
@@ -38,7 +38,7 @@ const LeftPanel = ({ clerkId }: LeftPanelProps) => {
     }, [conversations, selectedConversation, setSelectedConversation])
 
     if (!clerkId) return null // Ensure clerkId exists before rendering
-*/}
+
     return (
         <div className="w-screen md:w-1/4 md:border-gray-600 md:border-r">
             <div className="sticky top-0 bg-left-panel z-10">
@@ -71,14 +71,14 @@ const LeftPanel = ({ clerkId }: LeftPanelProps) => {
             {/* Chat List */}
             <div className="my-3 flex flex-col gap-0 max-h-[80%] overflow-auto">
                 {/* Conversations */}
-                {/* {conversations?.map((conversation) => (
+                {conversations?.map((conversation) => (
                     <Conversation
                         key={conversation._id}
                         conversation={conversation}
                     />
                 ))}
 
-                {conversations?.length === 0 && (*/}
+                {conversations?.length === 0 && (
                     <>
                         <p className="text-center text-gray-500 text-sm mt-3">
                             No conversations yet
@@ -88,7 +88,7 @@ const LeftPanel = ({ clerkId }: LeftPanelProps) => {
                             {"you've"} got to start somewhere 😊
                         </p>
                     </>
-                {/*    )}*/}
+                  )}
             </div>
         </div>
     )
