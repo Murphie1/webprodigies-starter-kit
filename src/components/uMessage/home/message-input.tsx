@@ -1,4 +1,4 @@
-import { onAuthenticatedUser } from "@/actions/auth"
+//import { onAuthenticatedUser } from "@/actions/auth"
 import { Laugh, Mic, Plus, Send } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import { useState } from "react"
@@ -11,14 +11,17 @@ import useComponentVisible from "@/hooks/uMessage/useComponentVisible"
 import EmojiPicker, { Theme } from "emoji-picker-react"
 import MediaDropdown from "./media-dropdown"
 
-const MessageInput = async () => {
+type Props = {
+    clerkId: string;
+}
+const MessageInput = ({ clerkId }: Props) => {
     const [msgText, setMsgText] = useState("")
     const { selectedConversation } = useConversationStore()
     const { ref, isComponentVisible, setIsComponentVisible } =
         useComponentVisible(false)
-const clerk = await onAuthenticatedUser()
+//const clerk = await onAuthenticatedUser()
     const me = useQuery(api.users.getMe, {
-        clerkId: clerk.clerkId!,
+        clerkId: clerkId!,
     })
     const sendTextMsg = useMutation(api.messages.sendTextMessage)
 
@@ -26,7 +29,7 @@ const clerk = await onAuthenticatedUser()
         e.preventDefault()
         try {
             await sendTextMsg({
-                clerkId: clerk.clerkId!,
+                clerkId: clerkId!,
                 content: msgText,
                 conversation: selectedConversation!._id,
                 sender: me!._id,
@@ -59,7 +62,7 @@ const clerk = await onAuthenticatedUser()
                     )}
                     <Laugh className="text-gray-600 dark:text-gray-400" />
                 </div>
-                <MediaDropdown />
+                <MediaDropdown clerkId={clerkId} />
             </div>
             <form onSubmit={handleSendTextMsg} className="w-full flex gap-3">
                 <div className="flex-1">
