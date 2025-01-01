@@ -1,13 +1,12 @@
 import { onAuthenticatedUser } from "@/actions/auth"
 import { CreateRequest } from "./CreateRequest"
-
+import { redirect } from "next/navigation"
 
 const AsyncCreateRequest = async () => {
-    const otherUser = await onAuthenticatedUser()
-    if (!otherUser || !otherUser.clerkId) {
-        throw new Error("No other User")
-    }
-    return <CreateRequest clerkstring={otherUser.clerkId!} />
+    const clerk = await onAuthenticatedUser()
+    if (!clerk || !clerk.clerkId) redirect("/")
+    
+    return <CreateRequest clerkstring={clerk.clerkId!} />
 }
 
 export default AsyncCreateRequest
