@@ -3,12 +3,31 @@
 
 import { usePathname } from "next/navigation"
 import { SidebarItem } from "./sidebar-item"
-import { Heart, Circle, CreditCard } from "lucide-react"
+import { 
+        TextCursorInput, 
+        Earth, 
+        Ungroup,
+        Languages,
+        Heart, 
+        ScanText,
+        Scan,
+        ScanSearch,
+        Brain,
+        BrainCircuit,
+        BrainCog,
+        Box,
+        Rotate3d,
+        Circle, 
+        MessageCircleQuestion,
+        FileSliders,
+        Settings2,
+        CreditCard
+} from "lucide-react"
 
 const guestRoutes = [
     {
         key: 1,
-        icon: Heart,
+        icon: TextCursorInput,
         label: "Courses",
         href: "/home",
     },
@@ -20,43 +39,43 @@ const guestRoutes = [
     },
     {
         key: 3,
-        icon: Heart,
+        icon: Languages,
         label: "Languages",
         href: "/languages",
     },
     {
         key: 4,
-        icon: Heart,
+        icon: MessageCircleQuestion,
         label: "Practice and Prep Resources",
         href: "/prep",
     },
     {
         key: 18,
-        icon: Heart,
+        icon: Settings2,
         label: "Niche",
         href: "/niche",
     },
     {
         key: 5,
-        icon: Heart,
+        icon: Scan,
         label: "Vision and Cognitive Learning",
         href: "/cognition",
     },
     {
         key: 6,
-        icon: Heart,
+        icon: Box,
         label: "XR & 3D learning",
         href: "/xr",
     },
     {
         key: 7,
-        icon: Heart,
+        icon: BrainCircuit,
         label: "Virtual Tutor",
         href: "/vikam",
     },
     {
         key: 8,
-        icon: Heart,
+        icon: Ungroup,
         label: "Institutions and Organizations",
         href: "/organizations",
     },
