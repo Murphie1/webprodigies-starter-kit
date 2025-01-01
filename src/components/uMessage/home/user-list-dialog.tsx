@@ -1,3 +1,13 @@
+import { ImageIcon } from "lucide-react"
+const UserListDialog = () => {
+	return (
+		<div>
+			<ImageIcon />
+		</div>
+		)
+}
+export default UserListDialog
+
 {/*import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -11,17 +21,17 @@ import {
 	DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";*/}
+import { Button } from "@/components/ui/button";
 import { ImageIcon, MessageSquareDiff } from "lucide-react";
-{/*import { Id } from "~/convex/_generated/dataModel";
+import { Id } from "~/convex/_generated/dataModel";
 import { useMutation, useQuery } from "convex/react";
 import { api } from "~/convex/_generated/api";
 import toast from "react-hot-toast";
 import { onAuthenticatedUser } from "@/actions/auth"
-import { useConversationStore } from "@/store/chat-store";*/}
+import { useConversationStore } from "@/store/chat-store";
 
 const UserListDialog = async () => {
-	{/*const clerk = await onAuthenticatedUser()
+	const clerk = await onAuthenticatedUser()
 	const [selectedUsers, setSelectedUsers] = useState<Id<"users">[]>([]);
 	const [groupName, setGroupName] = useState("");
 	const [isLoading, setIsLoading] = useState(false);
@@ -37,7 +47,7 @@ const UserListDialog = async () => {
 		clerkId: clerk.clerkId!,
 	});
 	const users = useQuery(api.users.getUsers, {
-		//clerkId: clerk.clerkId!,
+		clerkId: clerk.clerkId!,
 	});
 
 	const { setSelectedConversation } = useConversationStore();
@@ -103,13 +113,13 @@ const UserListDialog = async () => {
 		const reader = new FileReader();
 		reader.onload = (e) => setRenderedImage(e.target?.result as string);
 		reader.readAsDataURL(selectedImage);
-	}, [selectedImage]);*/}
+	}, [selectedImage]);
 
 	return (
 		<div>
 		<ImageIcon />
 		</div>
-		{/*<Dialog>
+		<Dialog>
 			<DialogTrigger>
 				<MessageSquareDiff size={20} />
 			</DialogTrigger>
@@ -197,8 +207,8 @@ const UserListDialog = async () => {
 					</Button>
 				</div>
 			</DialogContent>
-		</Dialog>*/}
+		</Dialog>
 	);
 };
-export default UserListDialog;
+export default UserListDialog;*/}
 										
