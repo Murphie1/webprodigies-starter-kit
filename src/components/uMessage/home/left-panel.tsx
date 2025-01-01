@@ -74,11 +74,16 @@ const LeftPanel = ({ clerkId }: LeftPanelProps) => {
             <div className="my-3 flex flex-col gap-0 max-h-[80%] overflow-auto">
                 {/* Conversations */}
                 {conversations?.map((conversation) => (
-                    <Conversation
+                  <div 
+                      key={conversation._id}
+                      >
+                  Convos go here
+                  </div>
+            {/*<Conversation
                         key={conversation._id}
                         conversation={conversation}
                         clerkId={clerkId}
-                    />
+                    />*/}
                 ))}
 
                 {conversations?.length === 0 && (
