@@ -61,35 +61,35 @@ const users = friends?.map((friend) => friend.friendDetails) || [];
 			const isGroup = selectedUsers.length > 1;
 
 		let conversationId;
-			if (!isGroup) {
+			//if (!isGroup) {
 				conversationId = await createConversation({
 					participants: [...selectedUsers, me?._id!],
 					isGroup: false,
 				});
-			} else {
-				const postUrl = await generateUploadUrl();
+			//} else {
+				//const postUrl = await generateUploadUrl();
 
-				const result = await fetch(postUrl, {
-					method: "POST",
-					headers: { "Content-Type": selectedImage?.type! },
-					body: selectedImage,
-				});
+				//const result = await fetch(postUrl, {
+					//method: "POST",
+					//headers: { "Content-Type": selectedImage?.type! },
+					//body: selectedImage,
+				//});
 
-				const { storageId } = await result.json();
+				//const { storageId } = await result.json();
 
-				conversationId = await createConversation({
-					participants: [...selectedUsers, me?._id!],
-					isGroup: true,
-					admin: me?._id!,
-					groupName,
-					groupImage: storageId,
-				});
-			}
+				//conversationId = await createConversation({
+					//participants: [...selectedUsers, me?._id!],
+					//isGroup: true,
+					//admin: me?._id!,
+					//groupName,
+					//groupImage: storageId,
+				//});
+			//}
 
 			//dialogCloseRef.current?.click();
-			setSelectedUsers([]);
-			setGroupName("");
-			setSelectedImage(null);
+			//setSelectedUsers([]);
+			//setGroupName("");
+			//setSelectedImage(null);
 
 			// TODO => Update a global state called "selectedConversation"
 			const conversationName = isGroup ? groupName : "Untitled Covno";//users?.find((user) => user._id === selectedUsers[0])?.name! ?? "Untitled Convo";
