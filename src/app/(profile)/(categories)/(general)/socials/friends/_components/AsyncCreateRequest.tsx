@@ -1,5 +1,5 @@
 import { onAuthenticatedUser } from "@/actions/auth"
-import CreateRequest from "./CreateRequest"
+import { CreateRequest } from "./CreateRequest"
 
 
 const AsyncCreateRequest = async () => {
