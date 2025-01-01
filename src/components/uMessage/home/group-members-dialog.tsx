@@ -11,24 +11,26 @@ import { Crown } from "lucide-react"
 import { Conversation } from "@/store/chat-store"
 import { useQuery } from "convex/react"
 import { api } from "~/convex/_generated/api"
-import { onAuthenticatedUser } from "@/actions/auth"
-import { redirect } from "next/navigation"
+//import { onAuthenticatedUser } from "@/actions/auth"
+//import { redirect } from "next/navigation"
 
 
 type GroupMembersDialogProps = {
     selectedConversation: Conversation
+    clerkId: string
 }
 
-const GroupMembersDialog = async ({
+const GroupMembersDialog = ({
     selectedConversation,
+    clerkId
 }: GroupMembersDialogProps) => {
     
-    const clerk = await onAuthenticatedUser()
-    if (!clerk || !clerk.clerkId) redirect("/")
+   // const clerk = await onAuthenticatedUser()
+   // if (!clerk || !clerk.clerkId) redirect("/")
     
     const users = useQuery(api.users.getGroupMembers, {
         conversationId: selectedConversation._id,
-        clerkId: clerk.clerkId,
+        clerkId: clerkId,
     })
     return (
         <Dialog>
