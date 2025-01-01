@@ -8,14 +8,10 @@ import {
     DrawerTitle,
     DrawerTrigger,
 } from "@/components/ui/drawer"
-import AsyncRequestBox from "./AsyncRequestBox"
-import { getRequests } from "@/actions/uMessage"
 import  AsyncCreateRequest from "./AsyncCreateRequest"
 
 // Component accepts requests as a prop (server-side fetched)
 export const FriendRequests = async () => {
-    const friendRequests = await getRequests()
-
     return (
         <Drawer>
             <DrawerTrigger className="px-4 py-2 w-40 md:w-56 justify-center text-sm font-medium transition bg-blue-500 rounded-md text-white hover:bg-blue-600 dark:bg-blue-700 dark:hover:bg-blue-800">
@@ -30,19 +26,7 @@ export const FriendRequests = async () => {
                         Check and manage your friend requests.
                     </DrawerDescription>
                 </DrawerHeader>
-                {friendRequests?.length > 0 ? (
-                    <div className="flex flex-col space-y-4 p-4">
-                        {friendRequests.map((friend) => (
-                            <AsyncRequestBox key={friend.id} item={friend} />
-                        ))}
-                    </div>
-                ) : (
-                    <div className="flex items-center justify-center h-40">
-                        <p className="text-center text-gray-500 dark:text-gray-400">
-                            No requests here
-                        </p>
-                    </div>
-                )}
+                Friend Requests Go Here
                 <DrawerFooter className="p-4 border-t border-gray-200 dark:border-gray-700">
                     <AsyncCreateRequest />
                 </DrawerFooter>
