@@ -1,5 +1,4 @@
-"use client"
-	
+
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -194,7 +193,13 @@ const users = friends?.map((friend) => friend.friendDetails) || [];
                 </div>
             </div>
         ) : (
-            <AsyncCreateRequest key={`async-create-${index}`} /> // Unique key for fallback
+		<div 
+			key={`async-create-${index}`}
+			className="flex flex-1 gap-x-2 text-semibold"
+			>
+            <AsyncCreateRequest />
+			Add a Friend to Continue
+			</div>
         )
     )}
 </div>
