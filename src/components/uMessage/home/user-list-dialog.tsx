@@ -91,13 +91,13 @@ const users = friends?.map((friend) => friend.friendDetails) || [];
 			setSelectedImage(null);
 
 			// TODO => Update a global state called "selectedConversation"
-			const conversationName = isGroup ? groupName : users?.find((user) => user._id! === selectedUsers[0])?.name;
+			const conversationName = isGroup ? groupName : users?.find((user) => user._id === selectedUsers[0])?.name ?? "Untitled Convo";
 
 			setSelectedConversation({
 				_id: conversationId,
 				participants: selectedUsers,
 				isGroup,
-				image: isGroup ? renderedImage : users?.find((user) => user._id! === selectedUsers[0])?.imageUrl,
+				image: isGroup ? renderedImage : users?.find((user) => user._id === selectedUsers[0])?.imageUrl ?? "https://images.unsplash.com/photo-1606787581180-b40a30072f4d",
 				name: conversationName,
 				admin: me?._id!,
 			});
