@@ -106,6 +106,7 @@ const users = friends?.map((friend) => friend.friendDetails) || [];
 		} catch (err) {
 			toast.error("Failed to create conversation");
 			console.error(err);
+			setIsLoading(false);
 		} finally {
 			setIsLoading(false);
 		}
@@ -158,42 +159,44 @@ const users = friends?.map((friend) => friend.friendDetails) || [];
 					</>
 				)}
 				<div className='flex flex-col gap-3 overflow-auto max-h-60'>
-					{users?.map((user) =>
-			                           user! ? (
-						<div
-							key={user._id!}
-							className={`flex gap-3 items-center p-2 rounded cursor-pointer active:scale-95 
-								transition-all ease-in-out duration-300
-							${selectedUsers.includes(user._id) ? "bg-green-primary" : ""}`}
-							onClick={() => {
-								if (selectedUsers.includes(user._id)) {
-									setSelectedUsers(selectedUsers.filter((id) => id !== user._id));
-								} else {
-									setSelectedUsers([...selectedUsers, user._id]);
-								}
-							}}
-						>
-							<Avatar className='overflow-visible'>
-								{user.isOnline && (
-									<div className='absolute top-0 right-0 w-2.5 h-2.5 bg-green-500 rounded-full border-2 border-foreground' />
-								)}
-
-								<AvatarImage src={user.imageUrl || "https://images.unsplash.com/photo-1606787581180-b40a30072f4d"} className='rounded-full object-cover' />
-								<AvatarFallback>
-									<div className='animate-pulse bg-gray-tertiary w-full h-full rounded-full'></div>
-								</AvatarFallback>
-							</Avatar>
-
-							<div className='w-full '>
-								<div className='flex items-center justify-between'>
-									<p className='text-md font-medium'>{user.name || user.email.split("@")[0] || "Unnamed"}</p>
-								</div>
-							</div>
-						</div>
-					) : 
-			<AsyncCreateRequest />
-						   )}
-				</div>
+    {users?.map((user, index) =>
+        user ? (
+            <div
+                key={user._id} // Ensure this is unique for each user
+                className={`flex gap-3 items-center p-2 rounded cursor-pointer active:scale-95 
+                    transition-all ease-in-out duration-300
+                ${selectedUsers.includes(user._id) ? "bg-green-primary" : ""}`}
+                onClick={() => {
+                    if (selectedUsers.includes(user._id)) {
+                        setSelectedUsers(selectedUsers.filter((id) => id !== user._id));
+                    } else {
+                        setSelectedUsers([...selectedUsers, user._id]);
+                    }
+                }}
+            >
+                <Avatar className='overflow-visible'>
+                    {user.isOnline && (
+                        <div className='absolute top-0 right-0 w-2.5 h-2.5 bg-green-500 rounded-full border-2 border-foreground' />
+                    )}
+                    <AvatarImage
+                        src={user.imageUrl || "https://images.unsplash.com/photo-1606787581180-b40a30072f4d"}
+                        className='rounded-full object-cover'
+                    />
+                    <AvatarFallback>
+                        <div className='animate-pulse bg-gray-tertiary w-full h-full rounded-full'></div>
+                    </AvatarFallback>
+                </Avatar>
+                <div className='w-full '>
+                    <div className='flex items-center justify-between'>
+                        <p className='text-md font-medium'>{user.name || user.email.split("@")[0] || "Unnamed"}</p>
+                    </div>
+                </div>
+            </div>
+        ) : (
+            <AsyncCreateRequest key={`async-create-${index}`} /> // Unique key for fallback
+        )
+    )}
+</div>
 				<div className='flex justify-between'>
 					<Button variant={"outline"}>Cancel</Button>
 					<Button
