@@ -77,6 +77,7 @@ const LeftPanel = ({ clerkId }: LeftPanelProps) => {
                     <Conversation
                         key={conversation._id}
                         conversation={conversation}
+                        clerkId={clerkId}
                     />
                 ))}
 
