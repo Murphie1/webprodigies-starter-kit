@@ -87,9 +87,6 @@ const users = friends?.map((friend) => friend.friendDetails) || [];
 					groupImage: storageId,
 				});
 			}
-			setSelectedUsers([]);
-			setGroupName("");
-			setSelectedImage(null);
 
 			// TODO => Update a global state called "selectedConversation"
 			const conversationName = isGroup ? groupName : "Untitled Covno";//users?.find((user) => user._id === selectedUsers[0])?.name! ?? "Untitled Convo";
@@ -103,6 +100,9 @@ const users = friends?.map((friend) => friend.friendDetails) || [];
 				admin: me?._id!,
 			});
 			dialogCloseRef.current?.click();
+			setSelectedUsers([]);
+			setGroupName("");
+			setSelectedImage(null);
 			setIsLoading(false);
 		} catch (err) {
 			toast.error("Failed to create conversation");
