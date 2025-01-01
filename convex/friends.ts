@@ -75,9 +75,40 @@ export const getMyFriends = query({
       .filter((q) => q.eq(q.field("creatorClerkId"), clerkId))
       .collect();
 
-    return friends;
+    // Fetch detailed info about each friend
+    const friendDetails = await Promise.all(
+      friends.map(async (friend) => {
+        const friendUser = await ctx.db.get(friend.friend); // Fetch friend data by ID
+        return { ...friend, friendDetails: friendUser };
+      })
+    );
+
+    return friendDetails;
   },
 });
+
+//export const getMyFriends = query({
+  //args: { clerkId: v.string() },
+  //handler: async (ctx, args) => {
+    //const { clerkId } = args;
+
+    // Find the user by clerkId
+   // const user = await ctx.db
+     // .query("users")
+     // .filter((q) => q.eq(q.field("clerkId"), clerkId))
+     // .unique();
+
+    //if (!user) throw new ConvexError("User not found");
+
+    // Fetch all friends where creatorClerkId matches
+    //const friends = await ctx.db
+     // .query("friends")
+      //.filter((q) => q.eq(q.field("creatorClerkId"), clerkId))
+      //.collect();
+
+   // return friends;
+  //},
+//});
 
 //export const createFriend = mutation({
   //args: {
