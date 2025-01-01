@@ -8,8 +8,15 @@ import { api } from "~/convex/_generated/api"
 import { useConversationStore } from "@/store/chat-store"
 import { onAuthenticatedUser } from "@/actions/auth"
 import { redirect } from "next/navigation"
+	
 
-const Conversation = async ({ conversation }: { conversation: any }) => {
+type Props = {
+	conversation: any;
+	clerkId: string;
+	}
+
+
+const Conversation = async ({ conversation, clerkId }: Props) => {
     const conversationImage = conversation.groupImage || conversation.image
     const conversationName = conversation.groupName || conversation.name
     const convoId = conversation._id || ""
@@ -17,8 +24,8 @@ const Conversation = async ({ conversation }: { conversation: any }) => {
    const clerk = await onAuthenticatedUser()
 	if (!clerk || !clerk.clerkId) redirect("/")
     const lastMessageType = lastMessage?.messageType
-    const me = useQuery(api.users.getMe, {
-	    clerkId: clerk.clerkId,
+    const me = useQuery(api.users.getUserById, {
+	    clerkId: clerkId,
     })
     
 	
