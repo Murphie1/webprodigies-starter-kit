@@ -10,52 +10,39 @@ export const createConversation = mutation({
 		admin: v.optional(v.id("users")),
 	},
 	handler: async (ctx, args) => {
-		try {
-			console.log("Searching for existing conversation...");
-			const existingConversation = await ctx.db
-				.query("conversations")
-				.filter((q) =>
-					q.or(
-						q.eq(q.field("participants"), args.participants),
-						q.eq(q.field("participants"), args.participants.slice().reverse())
-					)
+		// jane and john
+		// [jane, john]
+		// [john, jane]
+
+		const existingConversation = await ctx.db
+			.query("conversations")
+			.filter((q) =>
+				q.or(
+					q.eq(q.field("participants"), args.participants),
+					q.eq(q.field("participants"), args.participants.reverse())
 				)
-				.first();
+			)
+			.first();
 
-			if (existingConversation) {
-				console.log("Existing conversation found:", existingConversation._id);
-				return existingConversation._id;
-			}
-
-			let groupImage;
-			if (args.groupImage) {
-				try {
-					groupImage = await ctx.storage.getUrl(args.groupImage);
-				} catch (err) {
-					console.error("Error retrieving group image URL:", err);
-					throw new Error("Failed to retrieve group image URL.");
-				}
-			}
-
-			console.log("Inserting new conversation...");
-			const conversationId = await ctx.db.insert("conversations", {
-				participants: args.participants,
-				isGroup: args.isGroup,
-				groupName: args.groupName,
-				groupImage,
-				admin: args.admin,
-			});
-
-			if (!conversationId) {
-				throw new Error("Failed to create a new conversation.");
-			}
-
-			console.log("New conversation created:", conversationId);
-			return conversationId;
-		} catch (err) {
-			console.error("Error in createConversation mutation:", err);
-			throw new Error("Failed to create conversation.");
+		if (existingConversation) {
+			return existingConversation._id;
 		}
+
+		let groupImage;
+
+		if (args.groupImage) {
+			groupImage = (await ctx.storage.getUrl(args.groupImage)) as string;
+		}
+
+		const conversationId = await ctx.db.insert("conversations", {
+			participants: args.participants,
+			isGroup: args.isGroup,
+			groupName: args.groupName,
+			groupImage,
+			admin: args.admin,
+		});
+
+		return conversationId;
 	},
 });
 
