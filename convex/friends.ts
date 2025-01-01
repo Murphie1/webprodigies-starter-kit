@@ -2,62 +2,74 @@ import { ConvexError, v } from "convex/values";
 import { mutation, query } from "./_generated/server";
 
 export const createFriend = mutation({
-	args: {
-		email: v.string(),
+  args: {
+    email: v.string(),
     clerkId: v.string(),
-	},
-	handler: async (ctx, args) => {
+  },
+  handler: async (ctx, args) => {
+    const { email, clerkId } = args;
 
-    const current = await ctx.db
-    .query("users")
-    	.filter((q) => q.eq(q.field("clerkId"), args.clerkId)
+    // Find the current user by clerkId
+    const currentUser = await ctx.db
+      .query("users")
+      .filter((q) => q.eq(q.field("clerkId"), clerkId))
       .unique();
 
-    if (!current) throw new ConvexError("User not found");
+    if (!currentUser) throw new ConvexError("User not found");
 
-    const otheruser = await ctx.db
-			.query("users")
-			.filter((q) => q.eq(q.field("email"), args.email))
-			.unique();
+    // Find the other user by email
+    const otherUser = await ctx.db
+      .query("users")
+      .filter((q) => q.eq(q.field("email"), email))
+      .unique();
 
-		if (!otheruser) throw new ConvexError("User not found");
+    if (!otherUser) throw new ConvexError("User with provided email not found");
 
-		const existingFriend = await ctx.db
-			.query("friends")
-			.filter(
-				q.and(
-					q.eq(q.field("friend"), otheruser),
-					q.eq(q.field("user"), current)
-				)
-			)
-			.first();
+    // Check if the friendship already exists
+    const existingFriend = await ctx.db
+      .query("friends")
+      .filter(
+        q.and(
+          q.eq(q.field("friend"), otherUser._id),
+          q.eq(q.field("user"), currentUser._id)
+        )
+      )
+      .first();
 
-		if (existingFriend) {
-			return existingFriend._id;
-		}
+    if (existingFriend) {
+      return existingFriend._id;
+    }
 
-		const FriendId = await ctx.db.insert("friends", {
-			user: current,
-			friend: otheruser,
-			creatorClerkId: args.clerkId,
-		});
+    // Create a new friendship
+    const friendId = await ctx.db.insert("friends", {
+      user: currentUser._id,
+      friend: otherUser._id,
+      creatorClerkId: clerkId,
+    });
 
-		return FriendId;
-	},
+    return friendId;
+  },
 });
 
 export const getMyFriends = query({
-	args: { clerkId: v.string() },
-	handler: async (ctx, args) => {
-		const user = await ctx.db
-			.query("users")
-			.filter((q) => q.eq(q.field("clerkId"), args.clerkId))
-			.unique();
+  args: { clerkId: v.string() },
+  handler: async (ctx, args) => {
+    const { clerkId } = args;
 
-		if (!user) throw new ConvexError("User not found");
+    // Find the user by clerkId
+    const user = await ctx.db
+      .query("users")
+      .filter((q) => q.eq(q.field("clerkId"), clerkId))
+      .unique();
 
-		const friends = await ctx.db.query("friends").collect();
+    if (!user) throw new ConvexError("User not found");
 
-		const myConversations = conversations.filter((conversation) => {
-			return friend.creatorClerkId === (args.clerkId);
-		});
+    // Fetch all friends where creatorClerkId matches
+    const friends = await ctx.db
+      .query("friends")
+      .filter((q) => q.eq(q.field("creatorClerkId"), clerkId))
+      .collect();
+
+    return friends;
+  },
+});
