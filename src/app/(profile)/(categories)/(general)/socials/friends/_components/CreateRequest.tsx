@@ -93,7 +93,7 @@ export const CreateRequest = ({ clerkstring } : Props) => {
     <Dialog>
       <DialogTrigger>
         <span>
-          <CirclePlus /> <p>Send a request</p>
+          ±🤝
         </span>
       </DialogTrigger>
       <DialogContent className="bg-white text-black p-0 overflow-hidden dark:bg-black dark:text-white">
