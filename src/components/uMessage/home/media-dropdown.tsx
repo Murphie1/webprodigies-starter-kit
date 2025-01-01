@@ -1,4 +1,4 @@
-import { onAuthenticatedUser } from "@/actions/auth"
+//import { onAuthenticatedUser } from "@/actions/auth"
 import { useEffect, useRef, useState } from "react"
 import {
     DropdownMenu,
@@ -20,20 +20,25 @@ import { useMutation, useQuery } from "convex/react"
 import { api } from "~/convex/_generated/api"
 import { useConversationStore } from "@/store/chat-store"
 
-const MediaDropdown = async () => {
+
+type Props = {
+    clerkId: string;
+}
+
+const MediaDropdown = ({ clerkId }: Props) => {
     const imageInput = useRef<HTMLInputElement>(null)
     const videoInput = useRef<HTMLInputElement>(null)
     const [selectedImage, setSelectedImage] = useState<File | null>(null)
     const [selectedVideo, setSelectedVideo] = useState<File | null>(null)
 
-    const clerk = await onAuthenticatedUser()
+   // const clerk = await onAuthenticatedUser()
     const [isLoading, setIsLoading] = useState(false)
 
     const generateUploadUrl = useMutation(api.conversations.generateUploadUrl)
     const sendImage = useMutation(api.messages.sendImage)
     const sendVideo = useMutation(api.messages.sendVideo)
-    const me = useQuery(api.users.getMe, {
-        clerkId: clerk.clerkId!,
+    const me = useQuery(api.users.getUserById, {
+        clerkId: clerkId!,
     })
 
     const { selectedConversation } = useConversationStore()
