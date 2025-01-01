@@ -31,19 +31,19 @@ export const createFriend = mutation({
     }
 
     // Check if the friendship already exists
-   //const existingFriend = await ctx.db
-      //.query("friends")
-     // .filter(
-       // q.and(
-        //  q.eq(q.field("friend"), otherUser._id),
-        //  q.eq(q.field("user"), currentUser._id)
-       // )
-     // )
-     // .first();
+   const existingFriend = await ctx.db
+      .query("friends")
+     .filter((q) =>
+       q.and(
+          q.eq(q.field("friend"), otherUser._id),
+          q.eq(q.field("user"), currentUser._id)
+        )
+     )
+     .first();
 
-   // if (existingFriend) {
-      //return { success: true, message: "Friendship already exists", friendId: existingFriend._id };
-   // }
+   if (existingFriend) {
+      return { success: true, message: "Friendship already exists", friendId: existingFriend._id };
+    }
 
     // Create a new friendship
     const friendId = await ctx.db.insert("friends", {
