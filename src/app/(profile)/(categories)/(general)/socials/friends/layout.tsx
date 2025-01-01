@@ -1,6 +1,6 @@
 import { FriendRequests } from "./_components/FriendRequests"
 
-export default async function FriendsLayout({
+export default function FriendsLayout({
     children,
 }: {
     children: React.ReactNode
