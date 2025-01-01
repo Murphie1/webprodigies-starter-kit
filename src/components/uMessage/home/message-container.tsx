@@ -3,17 +3,21 @@ import { useQuery } from "convex/react"
 import { api } from "~/convex/_generated/api"
 import { useConversationStore } from "@/store/chat-store"
 import { useEffect, useRef } from "react"
-import { onAuthenticatedUser } from "@/actions/auth"
+//import { onAuthenticatedUser } from "@/actions/auth"
 
-const MessageContainer = async () => {
+type Props = {
+    clerkId: string;
+}
+
+const MessageContainer = ({ clerkId }: Props) => {
     const { selectedConversation } = useConversationStore()
-    const clerk = await onAuthenticatedUser()
+    //const clerk = await onAuthenticatedUser()
     const messages = useQuery(api.messages.getMessages, {
         conversation: selectedConversation!._id,
-        clerkId: clerk.clerkId!,
+        clerkId: clerkId!,
     })
-    const me = useQuery(api.users.getMe, {
-        clerkId: clerk.clerkId!,
+    const me = useQuery(api.users.getUserById, {
+        clerkId: clerkId!,
     })
     const lastMessageRef = useRef<HTMLDivElement>(null)
 
