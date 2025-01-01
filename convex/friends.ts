@@ -16,7 +16,7 @@ export const createFriend = mutation({
       .unique();
 
     if (!currentUser) {
-      return { success: false, message: "Current user not found" };
+      return { error: "Current user not found" };
     }
 
     // Find the other user by email
@@ -42,7 +42,7 @@ export const createFriend = mutation({
      .first();
 
    if (existingFriend) {
-      return { success: true, message: "Friendship already exists", friendId: existingFriend._id };
+      return { error: "Friendship already exists", friendId: existingFriend._id };
     }
 
     // Create a new friendship
