@@ -39,6 +39,12 @@ export default defineSchema({
         admin: v.optional(v.id("users")),
     }),
 
+    friends: defineTable({
+        user: v.id("users"),
+        friend: v.id("users"), // should be string so that it doesn't throw errors in openai part ("ChatGPT")
+        creatorClerkId: v.string(),
+    }),
+
     messages: defineTable({
         conversation: v.id("conversations"),
         sender: v.string(), // should be string so that it doesn't throw errors in openai part ("ChatGPT")
