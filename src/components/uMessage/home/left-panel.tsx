@@ -79,11 +79,6 @@ const LeftPanel = ({ clerkId }: LeftPanelProps) => {
                       >
                   Convos go here
                   </div>
-            {/*<Conversation
-                        key={conversation._id}
-                        conversation={conversation}
-                        clerkId={clerkId}
-                    />*/}
                 ))}
 
                 {conversations?.length === 0 && (
