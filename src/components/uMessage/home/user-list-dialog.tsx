@@ -157,7 +157,8 @@ const users = friends?.map((friend) => friend.friendDetails) || [];
 					</>
 				)}
 				<div className='flex flex-col gap-3 overflow-auto max-h-60'>
-					{users?.map((user) => (
+					{users?.map((user) =>
+			                           user! ? (
 						<div
 							key={user._id!}
 							className={`flex gap-3 items-center p-2 rounded cursor-pointer active:scale-95 
@@ -188,7 +189,7 @@ const users = friends?.map((friend) => friend.friendDetails) || [];
 								</div>
 							</div>
 						</div>
-					))}
+					) : null )}
 				</div>
 				<div className='flex justify-between'>
 					<Button variant={"outline"}>Cancel</Button>
