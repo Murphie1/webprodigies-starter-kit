@@ -87,8 +87,6 @@ const users = friends?.map((friend) => friend.friendDetails) || [];
 					groupImage: storageId,
 				});
 			}
-
-			dialogCloseRef.current?.click();
 			setSelectedUsers([]);
 			setGroupName("");
 			setSelectedImage(null);
@@ -98,12 +96,13 @@ const users = friends?.map((friend) => friend.friendDetails) || [];
 
 			setSelectedConversation({
 				_id: conversationId,
-				participants: selectedUsers,
+				participants: [...selectedUsers, me?._id],
 				isGroup,
 				image: isGroup ? renderedImage : "https://images.unsplash.com/photo-1606787581180-b40a30072f4d",//users?.find((user) => user._id === selectedUsers[0])?.imageUrl! ?? "https://images.unsplash.com/photo-1606787581180-b40a30072f4d",
 				name: conversationName,
 				admin: me?._id!,
 			});
+			dialogCloseRef.current?.click();
 			setIsLoading(false);
 		} catch (err) {
 			toast.error("Failed to create conversation");
