@@ -20,7 +20,13 @@ import toast from "react-hot-toast";
 import { onAuthenticatedUser } from "@/actions/auth"
 import { useConversationStore } from "@/store/chat-store";
 
-const UserListDialog = async () => {
+
+type Props = {
+	clerkid: string;
+}
+
+
+const UserListDialog = async ({ clerkid }: Props) => {
 	const clerk = await onAuthenticatedUser()
 	const [selectedUsers, setSelectedUsers] = useState<Id<"users">[]>([]);
 	const [groupName, setGroupName] = useState("");
@@ -33,16 +39,18 @@ const UserListDialog = async () => {
 
 	const createConversation = useMutation(api.conversations.createConversation);
 	const generateUploadUrl = useMutation(api.conversations.generateUploadUrl);
-	const me = useQuery(api.users.getUserById, {
+	const me = useQuery(api.users.getUserById, clerkid ? {
 		clerkId: clerkid!,
-	});
-	const friends = useQuery(api.friends.getMyFriends, {
-		clerkId: clerkid!,
-	});
-	
-	const users = friends?.map((friend) => friend.friend) || [];
-				 
+	} : "skip"
+	 );
+	const friends = useQuery(api.friends.getMyFriends, clerkid ? {
+  clerkId: clerkid!,
+} : "skip"
+ );
 
+// Extract the full user details from friendDetails
+const users = friends?.map((friend) => friend.friendDetails) || [];
+	
 	const { setSelectedConversation } = useConversationStore();
 
 	const handleCreateConversation = async () => {
@@ -51,7 +59,7 @@ const UserListDialog = async () => {
 		try {
 			const isGroup = selectedUsers.length > 1;
 
-			let conversationId;
+		let conversationId;
 			if (!isGroup) {
 				conversationId = await createConversation({
 					participants: [...selectedUsers, me?._id!],
