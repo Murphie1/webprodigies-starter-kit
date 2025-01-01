@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/drawer"
 import AsyncRequestBox from "./AsyncRequestBox"
 import { getRequests } from "@/actions/uMessage"
-import { CreateRequest } from "./CreateRequest"
+import  AsyncCreateRequest from "./AsyncCreateRequest"
 
 // Component accepts requests as a prop (server-side fetched)
 export const FriendRequests = async () => {
@@ -44,7 +44,7 @@ export const FriendRequests = async () => {
                     </div>
                 )}
                 <DrawerFooter className="p-4 border-t border-gray-200 dark:border-gray-700">
-                    <CreateRequest />
+                    <AsyncCreateRequest />
                 </DrawerFooter>
             </DrawerContent>
         </Drawer>
