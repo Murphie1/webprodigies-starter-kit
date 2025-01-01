@@ -1,9 +1,11 @@
 "use client"
+
 import { ListFilter, Search } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import ThemeSwitch from "./theme-switch"
 import Conversation from "./conversation"
 import { UserButton } from "@clerk/nextjs"
+import AsyncCreateRequest from "@/app/(profile)/(categories)/(general)/socials/friends/_components/AsyncCreateRequest"
 
 import UserListDialog from "./user-list-dialog"
 import { useQuery } from "convex/react"
@@ -46,7 +48,10 @@ const LeftPanel = ({ clerkId }: LeftPanelProps) => {
             <div className="sticky top-0 bg-left-panel z-10">
                 {/* Header */}
                 <div className="flex justify-between bg-gray-primary p-3 items-center">
-                    <UserButton />
+                    <div className="flex items-center gap-3">
+                        <UserButton />
+                        <AsyncCreateRequest />
+                        </div>
 
                     <div className="flex items-center gap-3">
                          <UserListDialog clerkid={clerkId} />
