@@ -19,6 +19,7 @@ import { api } from "~/convex/_generated/api";
 import toast from "react-hot-toast";
 import { onAuthenticatedUser } from "@/actions/auth"
 import { useConversationStore } from "@/store/chat-store";
+import AsyncCreateRequest from "@/app/(profile)/(categories)/(general)/socials/friends/_components/AsyncCreateRequest"
 
 
 type Props = {
@@ -116,7 +117,6 @@ const users = friends?.map((friend) => friend.friendDetails) || [];
 		reader.readAsDataURL(selectedImage);
 	}, [selectedImage]);
 
-	if (!users) return <h1>You Dont Have Any Friends Yet. Go create some</h1>;
 	return (
 		<Dialog>
 			<DialogTrigger>
@@ -140,7 +140,7 @@ const users = friends?.map((friend) => friend.friendDetails) || [];
 					type='file'
 					accept='image/*'
 					ref={imgRef}
-					hidden
+					//hidden
 					onChange={(e) => setSelectedImage(e.target.files![0])}
 				/>
 				{selectedUsers.length > 1 && (
@@ -189,7 +189,9 @@ const users = friends?.map((friend) => friend.friendDetails) || [];
 								</div>
 							</div>
 						</div>
-					) : null )}
+					) : 
+			<AsyncCreateRequest />
+						   )}
 				</div>
 				<div className='flex justify-between'>
 					<Button variant={"outline"}>Cancel</Button>
