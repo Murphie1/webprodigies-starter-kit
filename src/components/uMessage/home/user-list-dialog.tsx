@@ -1,14 +1,4 @@
-import { ImageIcon } from "lucide-react"
-const UserListDialog = () => {
-	return (
-		<div>
-			<ImageIcon />
-		</div>
-		)
-}
-export default UserListDialog
-
-{/*import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -43,12 +33,15 @@ const UserListDialog = async () => {
 
 	const createConversation = useMutation(api.conversations.createConversation);
 	const generateUploadUrl = useMutation(api.conversations.generateUploadUrl);
-	const me = useQuery(api.users.getMe, {
-		clerkId: clerk.clerkId!,
+	const me = useQuery(api.users.getUserById, {
+		clerkId: clerkid!,
 	});
-	const users = useQuery(api.users.getUsers, {
-		clerkId: clerk.clerkId!,
+	const friends = useQuery(api.friends.getMyFriends, {
+		clerkId: clerkid!,
 	});
+	
+	const users = friends?.map((friend) => friend.friend) || [];
+				 
 
 	const { setSelectedConversation } = useConversationStore();
 
@@ -125,7 +118,7 @@ const UserListDialog = async () => {
 			</DialogTrigger>
 			<DialogContent>
 				<DialogHeader>
-					{/* TODO: <DialogClose /> will be here *
+					{/* TODO: <DialogClose /> will be here */}
 					<DialogClose ref={dialogCloseRef} />
 					<DialogTitle>Friends</DialogTitle>
 				</DialogHeader>
@@ -136,7 +129,7 @@ const UserListDialog = async () => {
 						<Image src={renderedImage} fill alt='user image' className='rounded-full object-cover' />
 					</div>
 				)}
-				{/* TODO: input file *
+				{/* TODO: input file */}
 				<input
 					type='file'
 					accept='image/*'
@@ -198,7 +191,7 @@ const UserListDialog = async () => {
 						onClick={handleCreateConversation}
 						disabled={selectedUsers.length === 0 || (selectedUsers.length > 1 && !groupName) || isLoading}
 					>
-						{/* spinner *
+						{/* spinner */}
 						{isLoading ? (
 							<div className='w-5 h-5 border-t-2 border-b-2  rounded-full animate-spin' />
 						) : (
@@ -210,5 +203,5 @@ const UserListDialog = async () => {
 		</Dialog>
 	);
 };
-export default UserListDialog;*/}
+export default UserListDialog;
 										
