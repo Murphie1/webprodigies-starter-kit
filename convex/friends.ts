@@ -27,7 +27,7 @@ export const createFriend = mutation({
 
     if (!otherUser) {
       // Return a controlled response for non-existent otherUser
-      return { success: false, error: "User with the provided email not found" };
+      return { error: "User with the provided email not found" };
     }
 
     // Check if the friendship already exists
