@@ -27,7 +27,7 @@ export const createConversation = mutation({
 				return existingConversation._id;
 			}
 
-			let groupImageUrl;
+			let groupImage;
 			if (args.groupImage) {
 				try {
 					groupImage = await ctx.storage.getUrl(args.groupImage);
