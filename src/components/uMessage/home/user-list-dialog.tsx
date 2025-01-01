@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+{/*import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -11,18 +11,18 @@ import {
 	DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";*/}
 import { ImageIcon, MessageSquareDiff } from "lucide-react";
-import { Id } from "~/convex/_generated/dataModel";
+{/*import { Id } from "~/convex/_generated/dataModel";
 import { useMutation, useQuery } from "convex/react";
 import { api } from "~/convex/_generated/api";
 import toast from "react-hot-toast";
 import { onAuthenticatedUser } from "@/actions/auth"
-import { useConversationStore } from "@/store/chat-store";
+import { useConversationStore } from "@/store/chat-store";*/}
 
 const UserListDialog = async () => {
-	const clerk = await onAuthenticatedUser()
-	const [selectedUsers, setSelectedUsers] = useState([]);//<Id<"users">[]>([]);
+	{/*const clerk = await onAuthenticatedUser()
+	const [selectedUsers, setSelectedUsers] = useState<Id<"users">[]>([]);
 	const [groupName, setGroupName] = useState("");
 	const [isLoading, setIsLoading] = useState(false);
 	const [selectedImage, setSelectedImage] = useState<File | null>(null);
@@ -36,9 +36,9 @@ const UserListDialog = async () => {
 	const me = useQuery(api.users.getMe, {
 		clerkId: clerk.clerkId!,
 	});
-	//const users = useQuery(api.users.getUsers, {
+	const users = useQuery(api.users.getUsers, {
 		//clerkId: clerk.clerkId!,
-	//});
+	});
 
 	const { setSelectedConversation } = useConversationStore();
 
@@ -80,13 +80,13 @@ const UserListDialog = async () => {
 			setSelectedImage(null);
 
 			// TODO => Update a global state called "selectedConversation"
-			const conversationName = isGroup ? groupName : clerk.username!; //users?.find((user) => user._id === selectedUsers[0])?.name;
+			const conversationName = isGroup ? groupName : users?.find((user) => user._id === selectedUsers[0])?.name;
 
 			setSelectedConversation({
 				_id: conversationId,
 				participants: selectedUsers,
 				isGroup,
-				image: isGroup ? renderedImage : clerk.image!,//users?.find((user) => user._id === selectedUsers[0])?.imageUrl,
+				image: isGroup ? renderedImage : users?.find((user) => user._id === selectedUsers[0])?.imageUrl,
 				name: conversationName,
 				admin: me?._id!,
 			});
@@ -103,16 +103,19 @@ const UserListDialog = async () => {
 		const reader = new FileReader();
 		reader.onload = (e) => setRenderedImage(e.target?.result as string);
 		reader.readAsDataURL(selectedImage);
-	}, [selectedImage]);
+	}, [selectedImage]);*/}
 
 	return (
-		<Dialog>
+		<div>
+		<ImageIcon />
+		</div>
+		{/*<Dialog>
 			<DialogTrigger>
 				<MessageSquareDiff size={20} />
 			</DialogTrigger>
 			<DialogContent>
 				<DialogHeader>
-					{/* TODO: <DialogClose /> will be here */}
+					{/* TODO: <DialogClose /> will be here *
 					<DialogClose ref={dialogCloseRef} />
 					<DialogTitle>Friends</DialogTitle>
 				</DialogHeader>
@@ -123,7 +126,7 @@ const UserListDialog = async () => {
 						<Image src={renderedImage} fill alt='user image' className='rounded-full object-cover' />
 					</div>
 				)}
-				{/* TODO: input file */}
+				{/* TODO: input file *
 				<input
 					type='file'
 					accept='image/*'
@@ -146,7 +149,7 @@ const UserListDialog = async () => {
 				)}
 				<div className='flex flex-col gap-3 overflow-auto max-h-60'>
 					Users go here
-					{/*{users?.map((user) => (
+					{users?.map((user) => (
 						<div
 							key={user._id}
 							className={`flex gap-3 items-center p-2 rounded cursor-pointer active:scale-95 
@@ -177,7 +180,7 @@ const UserListDialog = async () => {
 								</div>
 							</div>
 						</div>
-					))}*/}
+					))}
 				</div>
 				<div className='flex justify-between'>
 					<Button variant={"outline"}>Cancel</Button>
@@ -185,7 +188,7 @@ const UserListDialog = async () => {
 						onClick={handleCreateConversation}
 						disabled={selectedUsers.length === 0 || (selectedUsers.length > 1 && !groupName) || isLoading}
 					>
-						{/* spinner */}
+						{/* spinner *
 						{isLoading ? (
 							<div className='w-5 h-5 border-t-2 border-b-2  rounded-full animate-spin' />
 						) : (
@@ -194,7 +197,7 @@ const UserListDialog = async () => {
 					</Button>
 				</div>
 			</DialogContent>
-		</Dialog>
+		</Dialog>*/}
 	);
 };
 export default UserListDialog;
