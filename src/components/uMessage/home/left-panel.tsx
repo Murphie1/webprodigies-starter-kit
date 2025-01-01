@@ -49,7 +49,7 @@ const LeftPanel = ({ clerkId }: LeftPanelProps) => {
                     <UserButton />
 
                     <div className="flex items-center gap-3">
-                         <UserListDialog />
+                         <UserListDialog clerkid={clerkId} />
                         <ThemeSwitch />
                     </div>
                 </div>
