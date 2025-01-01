@@ -1,6 +1,12 @@
 import Grids from "./_components/grids"
+import UserListDialog from "@/components/uMessage/home/user-list-dialog"
+import { onAuthenticatedUser } from "@/actions/auth"
+import { redirect } from "next/navigation"
 
-const Homepage = () => {
+const Homepage = async () => {
+    const user = await onAuthenticatedUser()
+    if (!user || !user.clerkId) redirect("/")
+    
     return (
         <div className="flex flex-col pt-6 space-y-2 items-center justify-center md:grid md:grid-cols-2 md:space-y-0 md:space-x-8">
             {/* Card 1 */}
@@ -13,6 +19,7 @@ const Homepage = () => {
                 <p className="text-2xl text-center">Text</p>
             </div>
             <Grids />
+            <UserListDialog clerkid={user.clerkId} />
         </div>
     )
 }
