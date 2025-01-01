@@ -157,10 +157,9 @@ const users = friends?.map((friend) => friend.friendDetails) || [];
 					</>
 				)}
 				<div className='flex flex-col gap-3 overflow-auto max-h-60'>
-					Users go here
 					{users?.map((user) => (
 						<div
-							key={user._id}
+							key={user._id!}
 							className={`flex gap-3 items-center p-2 rounded cursor-pointer active:scale-95 
 								transition-all ease-in-out duration-300
 							${selectedUsers.includes(user._id) ? "bg-green-primary" : ""}`}
@@ -177,7 +176,7 @@ const users = friends?.map((friend) => friend.friendDetails) || [];
 									<div className='absolute top-0 right-0 w-2.5 h-2.5 bg-green-500 rounded-full border-2 border-foreground' />
 								)}
 
-								<AvatarImage src={user.imageUrl} className='rounded-full object-cover' />
+								<AvatarImage src={user.imageUrl || "https://images.unsplash.com/photo-1606787581180-b40a30072f4d"} className='rounded-full object-cover' />
 								<AvatarFallback>
 									<div className='animate-pulse bg-gray-tertiary w-full h-full rounded-full'></div>
 								</AvatarFallback>
@@ -185,7 +184,7 @@ const users = friends?.map((friend) => friend.friendDetails) || [];
 
 							<div className='w-full '>
 								<div className='flex items-center justify-between'>
-									<p className='text-md font-medium'>{user.name || user.email.split("@")[0]}</p>
+									<p className='text-md font-medium'>{user.name || user.email.split("@")[0] || "Unnamed"}</p>
 								</div>
 							</div>
 						</div>
