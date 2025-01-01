@@ -102,6 +102,7 @@ const users = friends?.map((friend) => friend.friendDetails) || [];
 				name: conversationName,
 				admin: me?._id!,
 			});
+			setIsLoading(false);
 		} catch (err) {
 			toast.error("Failed to create conversation");
 			console.error(err);
