@@ -30,22 +30,19 @@ export const createConversation = mutation({
 			let groupImageUrl;
 			if (args.groupImage) {
 				try {
-					groupImageUrl = await ctx.storage.getUrl(args.groupImage);
+					groupImage = await ctx.storage.getUrl(args.groupImage);
 				} catch (err) {
 					console.error("Error retrieving group image URL:", err);
 					throw new Error("Failed to retrieve group image URL.");
 				}
 			}
 
-			if (args.groupImage && !groupImageUrl) {
-				throw new Error("No Image")
-			}
 			console.log("Inserting new conversation...");
 			const conversationId = await ctx.db.insert("conversations", {
 				participants: args.participants,
 				isGroup: args.isGroup,
 				groupName: args.groupName,
-				groupImage: groupImageUrl,
+				groupImage,
 				admin: args.admin,
 			});
 
