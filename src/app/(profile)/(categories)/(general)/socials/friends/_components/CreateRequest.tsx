@@ -73,7 +73,7 @@ export const CreateRequest = ({ clerkstring } : Props) => {
         toast({
           title: "Success",
           description: "Friend request sent successfully.",
-          variant: "success",
+          variant: "default",
         });
         form.reset();
       }
