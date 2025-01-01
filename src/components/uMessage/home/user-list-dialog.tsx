@@ -91,13 +91,13 @@ const users = friends?.map((friend) => friend.friendDetails) || [];
 			setSelectedImage(null);
 
 			// TODO => Update a global state called "selectedConversation"
-			const conversationName = isGroup ? groupName : users?.find((user) => user._id === selectedUsers[0])?.name;
+			const conversationName = isGroup ? groupName : users?.find((user) => user._id! === selectedUsers[0])?.name;
 
 			setSelectedConversation({
 				_id: conversationId,
 				participants: selectedUsers,
 				isGroup,
-				image: isGroup ? renderedImage : users?.find((user) => user._id === selectedUsers[0])?.imageUrl,
+				image: isGroup ? renderedImage : users?.find((user) => user._id! === selectedUsers[0])?.imageUrl,
 				name: conversationName,
 				admin: me?._id!,
 			});
@@ -116,6 +116,7 @@ const users = friends?.map((friend) => friend.friendDetails) || [];
 		reader.readAsDataURL(selectedImage);
 	}, [selectedImage]);
 
+	if (!users) return <h1>You Dont Have Any Friends Yet. Go create some</h1>;
 	return (
 		<Dialog>
 			<DialogTrigger>
