@@ -1,4 +1,5 @@
 "use client"
+
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Video, X } from "lucide-react"
 import MessageInput from "./message-input"
@@ -9,7 +10,7 @@ import GroupMembersDialog from "./group-members-dialog"
 import { useConversationStore } from "@/store/chat-store"
 //import { useConvexAuth } from "convex/react"
 
-const RightPanel = () => {
+const RightPanel = ({ clerkId }: { clerkId: string; }) => {
     const { selectedConversation, setSelectedConversation } =
         useConversationStore()
    // const { isLoading } = useConvexAuth()
@@ -42,6 +43,7 @@ const RightPanel = () => {
                             {selectedConversation.isGroup && (
                                 <GroupMembersDialog
                                     selectedConversation={selectedConversation}
+                                    clerkId={clerkId}
                                 />
                             )}
                         </div>
@@ -60,10 +62,10 @@ const RightPanel = () => {
                 </div>
             </div>
             {/* CHAT MESSAGES */}
-            <MessageContainer />
+            <MessageContainer clerkId={clerkId} />
 
             {/* INPUT */}
-            <MessageInput />
+            <MessageInput clerkId={clerkId} />
         </div>
     )
 }
