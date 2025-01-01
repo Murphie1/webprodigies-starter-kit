@@ -56,7 +56,7 @@ const users = friends?.map((friend) => friend.friendDetails) || [];
 
 	const handleCreateConversation = async () => {
 		if (selectedUsers.length === 0) return;
-		setIsLoading(true);
+		//setIsLoading(true);
 		try {
 			const isGroup = selectedUsers.length > 1;
 
@@ -92,7 +92,7 @@ const users = friends?.map((friend) => friend.friendDetails) || [];
 			setSelectedImage(null);
 
 			// TODO => Update a global state called "selectedConversation"
-			const conversationName = isGroup ? groupName : "Untitled Covno";//users?.find((user) => user._id === selectedUsers[0])?.name! ?? "Untitled Convo";
+			//const conversationName = isGroup ? groupName : "Untitled Covno";//users?.find((user) => user._id === selectedUsers[0])?.name! ?? "Untitled Convo";
 
 			//setSelectedConversation({
 				//_id: conversationId,
@@ -142,7 +142,7 @@ const users = friends?.map((friend) => friend.friendDetails) || [];
 					type='file'
 					accept='image/*'
 					ref={imgRef}
-					//hidden
+					hidden
 					onChange={(e) => setSelectedImage(e.target.files![0])}
 				/>
 				{selectedUsers.length > 1 && (
