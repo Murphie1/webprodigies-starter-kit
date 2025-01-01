@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input"
 import ThemeSwitch from "./theme-switch"
 import Conversation from "./conversation"
 import { UserButton } from "@clerk/nextjs"
-import AsyncCreateRequest from "@/app/(profile)/(categories)/(general)/socials/friends/_components/AsyncCreateRequest"
+import { CreateRequest } from "@/app/(profile)/(categories)/(general)/socials/friends/_components/CreateRequest"
 
 import UserListDialog from "./user-list-dialog"
 import { useQuery } from "convex/react"
@@ -50,7 +50,7 @@ const LeftPanel = ({ clerkId }: LeftPanelProps) => {
                 <div className="flex justify-between bg-gray-primary p-3 items-center">
                     <div className="flex items-center gap-3">
                         <UserButton />
-                        <AsyncCreateRequest />
+                        <CreateRequest clerkstring={clerkId} />
                         </div>
 
                     <div className="flex items-center gap-3">
