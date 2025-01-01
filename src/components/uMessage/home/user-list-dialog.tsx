@@ -56,7 +56,7 @@ const users = friends?.map((friend) => friend.friendDetails) || [];
 
 	const handleCreateConversation = async () => {
 		if (selectedUsers.length === 0) return;
-		//setIsLoading(true);
+		setIsLoading(true);
 		try {
 			const isGroup = selectedUsers.length > 1;
 
