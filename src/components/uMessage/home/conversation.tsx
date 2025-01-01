@@ -6,8 +6,8 @@ import { ImageIcon, Users, VideoIcon } from "lucide-react"
 import { useQuery } from "convex/react"
 import { api } from "~/convex/_generated/api"
 import { useConversationStore } from "@/store/chat-store"
-import { onAuthenticatedUser } from "@/actions/auth"
-import { redirect } from "next/navigation"
+//import { onAuthenticatedUser } from "@/actions/auth"
+//import { redirect } from "next/navigation"
 	
 
 type Props = {
@@ -16,13 +16,13 @@ type Props = {
 	}
 
 
-const Conversation = async ({ conversation, clerkId }: Props) => {
+const Conversation = ({ conversation, clerkId }: Props) => {
     const conversationImage = conversation.groupImage || conversation.image
     const conversationName = conversation.groupName || conversation.name
     const convoId = conversation._id || ""
     const lastMessage = conversation.lastMessage
-   const clerk = await onAuthenticatedUser()
-	if (!clerk || !clerk.clerkId) redirect("/")
+  // const clerk = await onAuthenticatedUser()
+	//if (!clerk || !clerk.clerkId) redirect("/")
     const lastMessageType = lastMessage?.messageType
     const me = useQuery(api.users.getUserById, {
 	    clerkId: clerkId,
