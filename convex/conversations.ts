@@ -37,6 +37,9 @@ export const createConversation = mutation({
 				}
 			}
 
+			if (args.groupImage && !groupImageUrl) {
+				throw new Error("No Image")
+			}
 			console.log("Inserting new conversation...");
 			const conversationId = await ctx.db.insert("conversations", {
 				participants: args.participants,
