@@ -26,8 +26,8 @@ type Props = {
 }
 
 
-const UserListDialog = async ({ clerkid }: Props) => {
-	const clerk = await onAuthenticatedUser()
+const UserListDialog = ({ clerkid }: Props) => {
+	//const clerk = await onAuthenticatedUser()
 	const [selectedUsers, setSelectedUsers] = useState<Id<"users">[]>([]);
 	const [groupName, setGroupName] = useState("");
 	const [isLoading, setIsLoading] = useState(false);
@@ -117,9 +117,6 @@ const users = friends?.map((friend) => friend.friendDetails) || [];
 	}, [selectedImage]);
 
 	return (
-		<div>
-		<ImageIcon />
-		</div>
 		<Dialog>
 			<DialogTrigger>
 				<MessageSquareDiff size={20} />
