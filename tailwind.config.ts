@@ -80,6 +80,7 @@ const config = {
                     400: "#27344D",
                     500: "#2E3D5B",
                 },
+                themeWhite: "#F7ECE9",
                 themeBlack: "#09090B",
                 themeGray: "#27272A",
                 themeDarkGray: "#27272A",
