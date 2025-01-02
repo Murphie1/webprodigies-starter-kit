@@ -96,7 +96,7 @@ const MeetingTypeList = () => {
         title="View Recordings"
         description="Meeting Recordings"
         className="bg-yellow-1"
-        handleClick={() => router.push('/socials/conferencing')}
+        handleClick={() => router.push('/socials/conferencing/calls')}
       />
 
       {!callDetail ? (
