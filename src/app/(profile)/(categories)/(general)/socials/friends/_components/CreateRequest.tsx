@@ -93,7 +93,7 @@ export const CreateRequest = ({ clerkstring }: { clerkstring: string }) => {
     <Dialog>
       <DialogTrigger>
         <span>
-          <CirclePlus /> <p>Send a request</p>
+          +🤝
         </span>
       </DialogTrigger>
       <DialogContent className="bg-white text-black p-0 overflow-hidden dark:bg-black dark:text-white">
@@ -116,7 +116,7 @@ export const CreateRequest = ({ clerkstring }: { clerkstring: string }) => {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className="uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70">
-                    User's Email
+                    User&apos;s Email
                   </FormLabel>
                   <FormControl>
                     <Input
