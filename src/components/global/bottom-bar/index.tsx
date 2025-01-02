@@ -1,32 +1,76 @@
+"use client";
+
+import { usePathname } from "next/navigation";
 import {
-    SquareLibrary,
-    MessageCircle,
-    Lightbulb,
-    Telescope,
-} from "lucide-react"
-import Link from "next/link"
+  SquareLibrary,
+  MessageCircle,
+  Lightbulb,
+  Telescope,
+  LucideIcon,
+} from "lucide-react";
+import Link from "next/link";
+
+type Route = {
+  label: string;
+  icon: LucideIcon;
+  href: string;
+};
+
+// Define route groups
+const routeGroups: Record<string, Route[]> = {
+  home: [
+    { label: "Home", icon: Telescope, href: "/home" },
+    { label: "Updates", icon: Lightbulb, href: "/updates" },
+    { label: "Library", icon: SquareLibrary, href: "/library" },
+    { label: "Socials", icon: MessageCircle, href: "/socials" },
+  ],
+  teacher: [
+    { label: "Dashboard", icon: Lightbulb, href: "/dashboard" },
+    { label: "Classes", icon: Telescope, href: "/classes" },
+    { label: "Library", icon: SquareLibrary, href: "/teacher-library" },
+    { label: "Messages", icon: MessageCircle, href: "/teacher-messages" },
+  ],
+  socials: [
+    { label: "Home", icon: Telescope, href: "/home" },
+    { label: "uMessages", icon: MessageCircle, href: "/socials" },
+    { label: "catchUp", icon: Lightbulb, href: "/socials/catchup" },
+    { label: "Friends", icon: SquareLibrary, href: "/socials/friends" },
+    { label: "Conferencing", icon: Telescope, href: "/socials/conferencing" },
+  ],
+  // Add more route groups here.
+};
 
 const BottomBar = () => {
-    return (
-        <div className="bg-gray-100 space-x-1 h-[60px] w-[calc(100vw-20px)] shadow-lg fixed bottom-[10px] left-[10px] z-50 justify-between items-center flex dark:bg-themeBlack rounded-xl">
-            <Link href={`/home`}>
-                <Telescope size={20} className="justify-center" />
-                <p className="text-bold text-sm">Home</p>
-            </Link>
-            <Link href={`/updates`}>
-                <Lightbulb size={20} className="justify-center" />
-                <p className="text-sm text-bold">Updates</p>
-            </Link>
-            <Link href={`/library`}>
-                <SquareLibrary size={20} className="justify-center" />
-                <p className="text-sm text-bold">Library</p>
-            </Link>
-            <Link href={`/socials`}>
-                <MessageCircle size={20} className="justify-center" />
-                <p className="text-sm text-bold">Socials</p>
-            </Link>
-        </div>
-    )
-}
+  const pathname = usePathname();
 
-export default BottomBar
+  // Dynamically determine which routes to use based on the pathname
+  const routes =
+    Object.keys(routeGroups).find((key) =>
+      pathname.startsWith(`/${key}`)
+    )
+      ? routeGroups[pathname.split("/")[1]]
+      : routeGroups["home"]; // Default to 'home' routes
+
+  return (
+    <div className="bg-gray-100 space-x-1 h-[60px] w-[calc(100vw-20px)] shadow-lg fixed bottom-[10px] left-[10px] z-50 justify-between items-center flex dark:bg-themeBlack rounded-xl">
+      {routes.map((route) => {
+        const isActive = pathname === route.href; // || pathname?.includes(route.href);
+
+        return (
+          <Link key={route.href} href={route.href}>
+            <div
+              className={`flex flex-col items-center justify-center space-y-1 ${
+                isActive ? "bg-green-200 dark:bg-green-600 rounded-lg px-2 py-1" : ""
+              }`}
+            >
+              <route.icon size={20} className="justify-center" />
+              <p className="text-sm text-bold">{route.label}</p>
+            </div>
+          </Link>
+        );
+      })}
+    </div>
+  );
+};
+
+export default BottomBar;
