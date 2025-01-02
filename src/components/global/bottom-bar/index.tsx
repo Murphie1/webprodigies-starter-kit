@@ -52,7 +52,7 @@ const BottomBar = () => {
       : routeGroups["home"]; // Default to 'home' routes
 
   return (
-    <div className="bg-gray-100 space-x-1 h-[60px] w-[calc(100vw-20px)] shadow-lg fixed bottom-[10px] left-[10px] z-50 justify-between items-center flex dark:bg-themeBlack rounded-xl">
+    <div className="bg-gray-100 space-x-4 h-[60px] w-[calc(100vw-20px)] shadow-lg fixed bottom-[10px] left-[10px] z-50 justify-between items-center flex dark:bg-themeBlack rounded-xl overflow-x-auto">
       {routes.map((route) => {
         const isActive = pathname === route.href; // || pathname?.includes(route.href);
 
@@ -60,11 +60,21 @@ const BottomBar = () => {
           <Link key={route.href} href={route.href}>
             <div
               className={`flex flex-col items-center justify-center space-y-1 ${
-                isActive ? "bg-green-200 dark:bg-green-600 rounded-lg px-2 py-1" : ""
+                isActive ? "rounded-lg px-2 py-1" : ""
               }`}
             >
+              <div className={`w-full rounded-4xl h-auto ${
+              isActive ? "bg-green-200 dark:bg-sky-500" : ""
+                }`}
+                >
               <route.icon size={20} className="justify-center" />
+                </div>
+              <div className={`w-full rounded-4xl ${
+              isActive ? "bg-sky-500" : ""
+              }`}
+                >
               <p className="text-sm text-bold">{route.label}</p>
+                </div>
             </div>
           </Link>
         );
