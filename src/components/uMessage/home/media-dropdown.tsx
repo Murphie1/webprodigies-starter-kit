@@ -190,7 +190,7 @@ const MediaImageDialog = ({
             }}
         >
             <DialogContent>
-                <DialogDescription className="flex flex-col gap-10 justify-center items-center">
+                <DialogDescription className="flex flex-col gap-10 justify-center items-center max-h-screen max-w-screen overflow-y-auto">
                     {renderedImage && (
                         <Image
                             src={renderedImage}
