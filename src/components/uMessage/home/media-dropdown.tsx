@@ -1,4 +1,4 @@
-//import { onAuthenticatedUser } from "@/actions/auth"
+
 import { useEffect, useRef, useState } from "react"
 import {
     DropdownMenu,
@@ -31,7 +31,7 @@ const MediaDropdown = ({ clerkId }: Props) => {
     const [selectedImage, setSelectedImage] = useState<File | null>(null)
     const [selectedVideo, setSelectedVideo] = useState<File | null>(null)
 
-   // const clerk = await onAuthenticatedUser()
+   
     const [isLoading, setIsLoading] = useState(false)
 
     const generateUploadUrl = useMutation(api.conversations.generateUploadUrl)
@@ -139,7 +139,7 @@ const MediaDropdown = ({ clerkId }: Props) => {
                     <Plus className="text-gray-600 dark:text-gray-400" />
                 </DropdownMenuTrigger>
 
-                <DropdownMenuContent>
+                <DropdownMenuContent side="top">
                     <DropdownMenuItem
                         onClick={() => imageInput.current!.click()}
                     >
@@ -190,7 +190,7 @@ const MediaImageDialog = ({
             }}
         >
             <DialogContent>
-                <DialogDescription className="flex flex-col gap-10 justify-center items-center max-h-screen max-w-screen overflow-y-auto">
+                <DialogDescription className="flex flex-col gap-10 justify-center items-center max-h-[700px] md:max-h-[1000px] max-w-screen overflow-y-auto">
                     {renderedImage && (
                         <Image
                             src={renderedImage}
