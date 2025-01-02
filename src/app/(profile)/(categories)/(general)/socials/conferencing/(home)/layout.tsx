@@ -21,7 +21,7 @@ const ConferenceLayout = ({ children }: Props) => {
 
             {/* Main Content */}
             <main className="h-full flex flex-col md:pl-64 pt-[50px] md:pt-[75px]">
-                <div className="flex justify-center space-x-4 pb-6">
+                <div className="flex justify-center space-x-4 pt-3 pb-6">
                     <a
                         href="/socials/conferencing/calls"
                         className="px-4 py-2 flex flex-1 text-white bg-blue-600 rounded-lg hover:bg-blue-700"
@@ -35,7 +35,9 @@ const ConferenceLayout = ({ children }: Props) => {
                         <Plus size={25} /> Create a Call
                     </a>
                 </div>
+                <div className="px-6 pb-6 flex max-md:pb-14 sm:px-14">
                 {children}
+                </div>
             </main>
         </div>
     )
