@@ -3,7 +3,7 @@ import { useQuery } from "convex/react"
 import { api } from "~/convex/_generated/api"
 import { useConversationStore } from "@/store/chat-store"
 import { useEffect, useRef } from "react"
-//import { onAuthenticatedUser } from "@/actions/auth"
+
 
 type Props = {
     clerkId: string;
@@ -11,7 +11,6 @@ type Props = {
 
 const MessageContainer = ({ clerkId }: Props) => {
     const { selectedConversation } = useConversationStore()
-    //const clerk = await onAuthenticatedUser()
     const messages = useQuery(api.messages.getMessages, {
         conversation: selectedConversation!._id,
         clerkId: clerkId!,
@@ -29,7 +28,7 @@ const MessageContainer = ({ clerkId }: Props) => {
 
     return (
         <div className="relative p-3 flex-1 w-screen md:w-full overflow-y-auto h-full min-h-[650px] bg-chat-tile-light dark:bg-chat-tile-dark">
-            <div className="mx-12 flex flex-col gap-3">
+            <div className="mx-12 pb-[1300px] flex flex-col gap-3">
                 {messages?.map((msg, idx) => (
                     <div key={msg._id} ref={lastMessageRef}>
                         <ChatBubble
