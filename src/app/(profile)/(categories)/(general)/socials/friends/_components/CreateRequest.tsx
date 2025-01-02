@@ -26,7 +26,7 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { useToast } from "@/components/ui/use-toast"; // Assuming you use a toast component
-import { api } from "@/convex/_generated/client"; // Adjust path as needed
+import { api } from "~/convex/_generated/api"; // Adjust path as needed
 import { useMutation } from "convex/react"; // For calling the Convex API
 
 // Validation schema
