@@ -64,7 +64,7 @@ const BottomBar = () => {
               }`}
             >
               <div className={`w-full rounded-2xl items-center justify-center h-auto ${
-              isActive ? "bg-green-200" : ""
+              isActive ? "bg-green-200 dark:bg-green-600" : ""
                 }`}
                 >
               <route.icon size={20} className="justify-center pl-[15px]" />
