@@ -19,10 +19,9 @@ interface LeftPanelProps {
 
 const LeftPanel = ({ clerkId }: LeftPanelProps) => {
  const conversations = useQuery(
-        api.conversations.getMyConversations,// clerkId ? { 
-     {
+        api.conversations.getMyConversations, clerkId ? { 
          clerkId: clerkId 
-        } //: "skip"
+        } : "skip"
  )
 
     const { selectedConversation, setSelectedConversation } =
