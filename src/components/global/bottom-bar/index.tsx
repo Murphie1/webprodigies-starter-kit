@@ -8,22 +8,22 @@ import Link from "next/link"
 
 const BottomBar = () => {
     return (
-        <div className="bg-white space-x-2 h-[70px] w-[calc(100vw-20px)] shadow-md fixed bottom-[10px] left-[10px] z-50 justify-between items-center flex dark:bg-gray-900 rounded-2xl">
+        <div className="bg-gray-100 space-x-1 h-[70px] w-[calc(100vw-20px)] shadow-lg fixed bottom-[10px] left-[10px] z-50 justify-between items-center flex dark:bg-gray-900 rounded-2xl">
             <Link href={`/home`}>
-                <Telescope size={20} />
-                <p className="text-bold text-md">Home</p>
+                <Telescope size={20} className="justify-center" />
+                <p className="text-bold text-sm">Home</p>
             </Link>
             <Link href={`/updates`}>
-                <Lightbulb size={20} />
-                <p className="text-md text-bold">Updates</p>
+                <Lightbulb size={20} className="justify-center" />
+                <p className="text-sm text-bold">Updates</p>
             </Link>
             <Link href={`/library`}>
-                <SquareLibrary size={20} />
-                <p className="text-md text-bold">Library</p>
+                <SquareLibrary size={20} className="justify-center" />
+                <p className="text-sm text-bold">Library</p>
             </Link>
             <Link href={`/socials`}>
-                <MessageCircle size={20} />
-                <p className="text-md text-bold">Socials</p>
+                <MessageCircle size={20} className="justify-center" />
+                <p className="text-sm text-bold">Socials</p>
             </Link>
         </div>
     )
