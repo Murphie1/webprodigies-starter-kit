@@ -20,7 +20,7 @@ import { api } from "~/convex/_generated/api";
 import toast from "react-hot-toast";
 import { onAuthenticatedUser } from "@/actions/auth"
 import { useConversationStore } from "@/store/chat-store";
-import AsyncCreateRequest from "@/app/(profile)/(categories)/(general)/socials/friends/_components/AsyncCreateRequest"
+import { CreateRequest } from "@/app/(profile)/(categories)/(general)/socials/friends/_components/CreateRequest"
 
 
 type Props = {
@@ -197,7 +197,7 @@ const users = friends?.map((friend) => friend.friendDetails) || [];
 			key={`async-create-${index}`}
 			className="flex flex-1 gap-x-2 text-semibold"
 			>
-            <AsyncCreateRequest />
+            <CreateRequest clerkstring={clerkid} />
 			Add a Friend to Continue
 			</div>
         )
