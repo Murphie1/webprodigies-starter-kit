@@ -48,15 +48,31 @@ const config = {
                     1: "#71788B",
                 },
                 blue: {
+                    1: '#0E78F9',
                     100: "#B4C6EE",
                     400: "#417BFF",
                     500: "#3371FF",
                 },
+                sky: {
+                    1: '#C9DDFF',
+                    2: '#ECF0FF',
+                    3: '#F5FCFF',
+                     },
                 red: {
                     400: "#DD4F56",
                     500: "#DC4349",
                 },
+                purple: {
+                    1: '#830EF9',
+                        },
+                yellow: {
+                   1: '#F9A90E',
+                         },
                 dark: {
+                    1: '#1C1F2E',
+                    2: '#161925',
+                    3: '#252A41',
+                    4: '#1E2757',
                     100: "#09111F",
                     200: "#0B1527",
                     300: "#0F1C34",
@@ -120,12 +136,11 @@ const config = {
             },
             // extend: {
             backgroundImage: {
+                hero: "url('/images/hero-background.png')",
                 "chat-tile-light": "url('/bg-light.png')",
                 "chat-tile-dark": "url('/bg-dark.png')",
-                "nav-focus":
-                    "linear-gradient(270deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.00) 100%)",
-                "radial-gradient":
-                    "radial-gradient(circle at 50% 40%, white, black)",
+                "nav-focus": "linear-gradient(270deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.00) 100%)",
+                "radial-gradient": "radial-gradient(circle at 50% 40%, white, black)",
                 doc: "url(/assets/images/doc.png)",
                 modal: "url(/assets/images/modal.png)",
             },
