@@ -33,9 +33,9 @@ const ChatBubble = ({ me, message, previousMessage }: ChatBubbleProps) => {
     const fromMe = message.sender?._id === me._id
     const fromAI = message.sender?.name === "Hakima"
     const bgClass = fromMe
-        ? "bg-green-chat"
+        ? "bg-black"
         : !fromAI
-          ? "bg-white dark:bg-gray-primary"
+          ? "bg-white"
           : "bg-blue-500 text-white"
 
     console.log(message.sender)
@@ -147,7 +147,7 @@ const ImageMessage = ({
     handleClick: () => void
 }) => {
     return (
-        <div className="w-[100px] h-[100px] md:w-[250px] md:h-[250px] m-2 relative">
+        <div className="w-[200px] h-[200px] md:w-[250px] md:h-[250px] m-2 relative">
             <Image
                 src={message.content}
                 fill
@@ -175,7 +175,7 @@ const ImageDialog = ({
                 if (!isOpen) onClose()
             }}
         >
-            <DialogContent className="w-full max-w-[calc(100vw-50px)] justify-center md:min-w-[750px]">
+            <DialogContent className="w-full md:min-w-[750px]">
                 <DialogDescription className="relative h-[450px] flex justify-center">
                     <Image
                         src={src}
