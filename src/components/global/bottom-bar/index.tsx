@@ -52,7 +52,7 @@ const BottomBar = () => {
       : routeGroups["home"]; // Default to 'home' routes
 
   return (
-    <div className="bg-gray-100 space-x-4 h-[60px] w-[calc(100vw-20px)] shadow-lg fixed bottom-[10px] left-[10px] z-50 justify-between items-center flex dark:bg-themeBlack rounded-xl overflow-x-auto md:h-[calc(100vh-20px)] md:w-[60px] md:space-x-0 md:space-y-4 md:justify-center md:flex-col-1 md:overflow-hidden">
+    <div className="bg-gray-100 space-x-4 h-[60px] w-[calc(100vw-20px)] shadow-lg fixed bottom-[10px] left-[10px] z-50 justify-between items-center flex dark:bg-themeBlack rounded-xl overflow-x-auto md:h-[calc(100vh-20px)] md:w-[60px] md:justify-align md:space-x-0 md:gap-y-4 md:grid-col-1 md:overflow-hidden">
       {routes.map((route) => {
         const isActive = pathname === route.href; // || pathname?.includes(route.href);
 
@@ -69,12 +69,12 @@ const BottomBar = () => {
                 >
               <route.icon size={20} className="justify-center" />
                 </div>
-              <div className={`w-full rounded-2xl h-[30px] md:hidden ${
-              isActive ? "bg-green-200" : ""
+              <p className={`text-sm text-bold truncate md:hidden ${
+              isActive ? "underline" : ""
               }`}
                 >
-              <p className="text-sm text-bold truncate">{route.label}</p>
-                </div>
+            {route.label}
+                </p>
             </div>
           </Link>
         );
@@ -83,4 +83,4 @@ const BottomBar = () => {
   );
 };
 
-export default BottomBar;
+export default BottomBar
