@@ -42,7 +42,7 @@ const MessageInput = ({ clerkId }: Props) => {
     }
 
     return (
-        <div className="fixed bottom-15 z-40 bg-gray-primary p-2 flex gap-4 items-center">
+        <div className="fixed bottom-[90px] z-40 bg-gray-primary p-2 flex gap-4 items-center">
             <div className="relative flex gap-2 ml-2">
                 {/* EMOJI PICKER WILL GO HERE */}
                 <div ref={ref} onClick={() => setIsComponentVisible(true)}>
