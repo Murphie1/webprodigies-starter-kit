@@ -63,13 +63,13 @@ const BottomBar = () => {
                 isActive ? "rounded-lg px-2 py-1" : ""
               }`}
             >
-              <div className={`w-full rounded-4xl h-auto ${
+              <div className={`w-full rounded-2xl items-center justify-center h-auto ${
               isActive ? "bg-green-200 dark:bg-sky-500" : ""
                 }`}
                 >
               <route.icon size={20} className="justify-center" />
                 </div>
-              <div className={`w-full rounded-4xl md:hidden ${
+              <div className={`w-full rounded-2xl h-[30px] md:hidden ${
               isActive ? "bg-sky-500" : ""
               }`}
                 >
