@@ -8,7 +8,7 @@ import Link from "next/link"
 
 const BottomBar = () => {
     return (
-        <div className="bg-white space-x-2 h-[70px] w-[calc(100vw-20px)] pl-[10px] overflow-hidden fixed bottom-2 z-50 justify-between items-center flex dark:bg-gray-900 rounded-2xl">
+        <div className="bg-white space-x-2 h-[70px] w-[calc(100vw-20px)] shadow-md fixed bottom-[10px] left-[10px] z-50 justify-between items-center flex dark:bg-gray-900 rounded-2xl">
             <Link href={`/home`}>
                 <Telescope size={20} />
                 <p className="text-bold text-md">Home</p>
