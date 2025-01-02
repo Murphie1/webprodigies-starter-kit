@@ -1,6 +1,6 @@
 "use client"
 
-import CallList from '@/components/CallList';
+import CallList from '@/components/conference/CallList';
 import { useState } from "react"
 
 type Variant = 'upcoming' | 'recordings' | 'ended';
