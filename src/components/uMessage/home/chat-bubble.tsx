@@ -131,7 +131,7 @@ const VideoMessage = ({ message }: { message: IMessage }) => {
     return (
         <ReactPlayer
             url={message.content}
-            width="250px"
+            width="150px"
             height="250px"
             controls={true}
             light={true}
@@ -147,7 +147,7 @@ const ImageMessage = ({
     handleClick: () => void
 }) => {
     return (
-        <div className="w-[200px] h-[200px] md:w-[250px] md:h-[250px] m-2 relative">
+        <div className="w-[150px] h-[200px] md:w-[250px] md:h-[250px] m-2 relative">
             <Image
                 src={message.content}
                 fill
@@ -176,7 +176,7 @@ const ImageDialog = ({
             }}
         >
             <DialogContent className="w-full md:min-w-[750px]">
-                <DialogDescription className="relative h-[450px] flex justify-center">
+                <DialogDescription className="relative h-[550px] flex justify-center">
                     <Image
                         src={src}
                         fill
