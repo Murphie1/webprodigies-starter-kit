@@ -30,7 +30,7 @@ const Conversation = ({ conversation, clerkId }: Props) => {
 
   const handleConversationClick = () => {
     setSelectedConversation(conversation);
-    router.push(`/socials/new/${convoId}`);
+    router.push(`/socials/${convoId}`);
   };
 
   return (
