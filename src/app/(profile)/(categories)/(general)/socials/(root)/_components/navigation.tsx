@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation"
 
 export const MobileLeftPanel = ({ clerkId }: { clerkId: string}) => {
     const pathname = usePathname()
-    const isHome = pathname === "/socials/new"
+    const isHome = pathname === "/socials"
 
     return (
         <section>
