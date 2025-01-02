@@ -67,7 +67,7 @@ const BottomBar = () => {
               isActive ? "bg-green-200" : ""
                 }`}
                 >
-              <route.icon size={20} className="justify-center" />
+              <route.icon size={20} className="justify-center pl-[15px]" />
                 </div>
               <p className={`text-sm text-bold truncate md:hidden ${
               isActive ? "underline" : ""
