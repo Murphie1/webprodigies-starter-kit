@@ -12,6 +12,50 @@ html {
     scroll-behavior: smooth !important;
     font-family: var(--font-inter);
 }
+/* ======== stream css overrides ======== */
+.str-video__call-stats {
+  max-width: 500px;
+  position: relative;
+}
+
+.str-video__speaker-layout__wrapper {
+  max-height: 700px;
+}
+
+.str-video__participant-details {
+  color: white;
+}
+
+.str-video__menu-container {
+  color: white;
+}
+
+.str-video__notification {
+  color: white;
+}
+
+.str-video__participant-list {
+  background-color: #1c1f2e;
+  padding: 10px;
+  border-radius: 10px;
+  color: white;
+  height: 100%;
+}
+
+.str-video__call-controls__button {
+  height: 40px;
+}
+
+.glassmorphism {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+.glassmorphism2 {
+  background: rgba(18, 17, 17, 0.25);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+    }
 
 @layer base {
     :root {
@@ -285,6 +329,9 @@ html {
 }
 
 @layer utilities {
+      .flex-between {
+    @apply flex justify-between items-center;
+      }
     .input-class {
         @apply text-16 placeholder:text-16 bg-white dark:bg-black rounded-[6px] placeholder:text-gray-1 border-none text-gray-1;
     }
@@ -292,16 +339,16 @@ html {
         @apply grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4;
     }
     .right_sidebar {
-        @apply sticky right-0 top-0 flex w-[310px] flex-col overflow-y-hidden border-none bg-white dark:bg-black px-[30px] pt-8;
+        @apply sticky right-0 top-0 flex w-[310px] flex-col overflow-y-hidden border-none bg-themeWhite dark:bg-black px-[30px] pt-8;
     }
     .left_sidebar {
         @apply sticky left-0 top-0 flex w-fit flex-col  justify-between  border-none  bg-white text-black dark:bg-black pt-8 dark:text-white lg:w-[270px] lg:pl-8;
     }
     .generate_thumbnail {
-        @apply mt-[30px] flex w-full max-w-[520px] flex-col justify-between gap-2 rounded-lg border border-black-6 bg-black-1 px-2.5 py-2 md:flex-row md:gap-0;
+        @apply mt-[30px] flex w-full max-w-[520px] flex-col justify-between gap-2 rounded-lg border border-gray-100 dark:border-black-6 bg-white dark:bg-black-1 px-2.5 py-2 md:flex-row md:gap-0;
     }
     .image_div {
-        @apply flex-center mt-5 h-[142px] w-full cursor-pointer flex-col gap-3 rounded-xl border-[3.2px] border-dashed border-black-6 bg-white dark:bg-black;
+        @apply flex-center mt-5 h-[142px] w-full cursor-pointer flex-col gap-3 rounded-xl border-[3.2px] border-dashed border-gray-100 dark:border-black-6 bg-white dark:bg-black;
     }
     .carousel_box {
         @apply relative flex h-fit aspect-square w-full flex-none cursor-pointer flex-col justify-end rounded-xl border-none;
@@ -372,7 +419,7 @@ html {
     }
 
     .floating-toolbar {
-        @apply flex w-full min-w-max items-center justify-center gap-2 rounded-lg bg-dark-350 p-1.5 shadow-xl;
+        @apply flex w-full min-w-max items-center justify-center gap-2 rounded-lg bg-themeWhite dark:bg-dark-350 p-1.5 shadow-xl;
     }
 
     .floating-toolbar-btn {
@@ -380,7 +427,7 @@ html {
     }
 
     .toolbar-wrapper {
-        @apply z-50 custom-scrollbar w-screen overflow-auto border-y border-dark-300 bg-dark-100 pl-3 pr-4 shadow-sm;
+        @apply z-50 custom-scrollbar w-screen overflow-auto border-y border-gray-100 dark:border-dark-300 bg-themeWhite dark:bg-dark-100 pl-3 pr-4 shadow-sm;
     }
 
     .editor-wrapper {
@@ -388,7 +435,7 @@ html {
     }
 
     .header {
-        @apply min-h-[92px] min-w-full flex-nowrap bg-dark-100 flex w-full items-center justify-between gap-2 px-4;
+        @apply min-h-[92px] min-w-full flex-nowrap bg-themeWhite dark:bg-dark-100 flex w-full items-center justify-between gap-2 px-4;
     }
 
     .document-list-container {
@@ -404,19 +451,19 @@ html {
     }
 
     .document-list-empty {
-        @apply flex w-full max-w-[730px] flex-col items-center justify-center gap-5 rounded-lg bg-dark-200 px-10 py-8;
+        @apply flex w-full max-w-[730px] flex-col items-center justify-center gap-5 rounded-lg bg-themeWhite dark:bg-dark-200 px-10 py-8;
     }
 
     .document-title-input {
-        @apply min-w-[78px] flex-1 border-none bg-transparent px-0 text-left text-base font-semibold leading-[24px] focus-visible:ring-0 focus-visible:ring-offset-0 sm:text-xl md:text-center !important;
+        @apply min-w-[78px] flex-1 border-none bg-transparent px-0 text-left text-base font-semibold leading-[24px] focus-visible:ring-0 focus-visible:ring-offset-0 sm:text-xl md:text-center disabled:text-black !important;
     }
 
     .document-title {
-        @apply line-clamp-1 border-dark-400 text-base font-semibold leading-[24px] sm:pl-0 sm:text-xl;
+        @apply line-clamp-1 border-gray-100 dark:border-dark-400 text-base font-semibold leading-[24px] sm:pl-0 sm:text-xl;
     }
 
     .view-only-tag {
-        @apply rounded-md bg-dark-400/50 px-2 py-0.5 text-xs text-blue-100/50;
+        @apply rounded-md bg-white dark:bg-dark-400/50 px-2 py-0.5 text-xs text-blue-100/50;
     }
 
     .collaborators-list {
@@ -424,7 +471,7 @@ html {
     }
 
     .share-input {
-        @apply h-11 flex-1 border-none bg-dark-400 focus-visible:ring-0 focus-visible:ring-offset-0 !important;
+        @apply h-11 flex-1 border-none bg-white dark:bg-dark-400 focus-visible:ring-0 focus-visible:ring-offset-0 !important;
     }
 
     .remove-btn {
@@ -436,11 +483,11 @@ html {
     }
 
     .comment-composer {
-        @apply w-full max-w-[800px] border border-dark-300 bg-dark-200 shadow-sm lg:w-[350px];
+        @apply w-full max-w-[800px] border border-gray-200 dark:border-dark-300 bg-white dark:bg-dark-200 shadow-sm lg:w-[350px];
     }
 
     .comment-thread {
-        @apply w-full max-w-[800px] border border-dark-300 bg-dark-200 shadow-sm lg:w-[350px] transition-all;
+        @apply w-full max-w-[800px] border border-gray-200 dark:border-dark-300 bg-white dark:bg-dark-200 shadow-sm lg:w-[350px] transition-all;
     }
 
     .loader {
@@ -466,6 +513,27 @@ html {
         @apply flex size-full max-h-screen flex-1 flex-col items-center overflow-hidden;
     }
 }
+
+/* animation */
+
+.show-block {
+  width: 100%;
+  max-width: 350px;
+  display: block;
+  animation: show 0.7s forwards linear;
+}
+
+@keyframes show {
+  0% {
+    animation-timing-function: ease-in;
+    width: 0%;
+  }
+
+  100% {
+    animation-timing-function: ease-in;
+    width: 100%;
+  }
+    }
 
 /* ======================== Clerk Override */
 .cl-avatarBox {
