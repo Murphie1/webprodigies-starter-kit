@@ -147,7 +147,7 @@ const ImageMessage = ({
     handleClick: () => void
 }) => {
     return (
-        <div className="w-[250px] h-[250px] m-2 relative">
+        <div className="w-[100px] h-[100px] md:w-[250px] md:h-[250px] m-2 relative">
             <Image
                 src={message.content}
                 fill
@@ -175,7 +175,7 @@ const ImageDialog = ({
                 if (!isOpen) onClose()
             }}
         >
-            <DialogContent className="min-w-[750px]">
+            <DialogContent className="w-full max-w-[calc(100vw-50px)] justify-center md:min-w-[750px]">
                 <DialogDescription className="relative h-[450px] flex justify-center">
                     <Image
                         src={src}
@@ -198,11 +198,11 @@ const MessageTime = ({ time, fromMe }: { time: string; fromMe: boolean }) => {
 }
 
 const OtherMessageIndicator = () => (
-    <div className="absolute bg-white dark:bg-gray-primary top-0 -left-[4px] w-3 h-3 rounded-bl-full" />
+    <div className="absolute bg-white top-0 -left-[4px] w-3 h-3 rounded-bl-full" />
 )
 
 const SelfMessageIndicator = () => (
-    <div className="absolute bg-green-chat top-0 -right-[3px] w-3 h-3 rounded-br-full overflow-hidden" />
+    <div className="absolute bg-black top-0 -right-[3px] w-3 h-3 rounded-br-full overflow-hidden" />
 )
 
 const TextMessage = ({ message }: { message: IMessage }) => {
