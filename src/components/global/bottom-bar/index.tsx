@@ -64,13 +64,13 @@ const BottomBar = () => {
               }`}
             >
               <div className={`w-full rounded-2xl items-center justify-center h-auto ${
-              isActive ? "bg-green-200 dark:bg-sky-500" : ""
+              isActive ? "bg-green-200" : ""
                 }`}
                 >
               <route.icon size={20} className="justify-center" />
                 </div>
               <div className={`w-full rounded-2xl h-[30px] md:hidden ${
-              isActive ? "bg-sky-500" : ""
+              isActive ? "bg-green-200" : ""
               }`}
                 >
               <p className="text-sm text-bold truncate">{route.label}</p>
