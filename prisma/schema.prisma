@@ -133,6 +133,8 @@ model Post {
   htmlContent String?
   jsonContent String?
   content     String
+  image       String?
+  video       String?
   author      User      @relation(fields: [authorId], references: [id], onDelete: Cascade)
   authorId    String    @db.Uuid
   likes       Like[]
