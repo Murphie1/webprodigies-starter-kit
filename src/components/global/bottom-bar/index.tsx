@@ -73,7 +73,7 @@ const BottomBar = () => {
               isActive ? "bg-sky-500" : ""
               }`}
                 >
-              <p className="text-sm text-bold">{route.label}</p>
+              <p className="text-sm text-bold truncate">{route.label}</p>
                 </div>
             </div>
           </Link>
