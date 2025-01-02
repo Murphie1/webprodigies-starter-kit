@@ -13,7 +13,7 @@ const CallsPage = () => {
   
   return (
     <section className="flex size-full flex-col gap-10">
-      <div className="flex flex-1 overflow-x-auto h-[45px] w-[calc(100vw-80px)] pl-[16px] items-center justify-between gap-x-4">
+      <div className="flex flex-1 overflow-x-auto h-[45px] w-[calc(100vw-30px)] pl-[15px] md:w-[calc(100vw-80px)] md:pl-[16px] items-center justify-between gap-x-4">
         <div onClick={setVariant('upcoming')}>
         <p>Upcoming Meetings</p>
         </div>
