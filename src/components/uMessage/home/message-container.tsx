@@ -28,7 +28,7 @@ const MessageContainer = ({ clerkId }: Props) => {
 
     return (
         <div className="relative p-3 flex-1 w-screen md:w-full overflow-y-auto h-full min-h-[650px] bg-chat-tile-light dark:bg-chat-tile-dark">
-            <div className="mx-12 pb-[1300px] flex flex-col gap-3">
+            <div className="mx-12 pb-[110px] flex flex-col gap-3">
                 {messages?.map((msg, idx) => (
                     <div key={msg._id} ref={lastMessageRef}>
                         <ChatBubble
