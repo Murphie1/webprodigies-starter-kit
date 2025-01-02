@@ -7,7 +7,7 @@ type Props = {
 const GenLayout = ({ children }: Props) => {
     return (
         <div>
-            <div style={{ paddingBottom: "70px" }}>{children}</div>
+            <div className="pb-[75px]">{children}</div>
             <BottomBar />
         </div>
     )
