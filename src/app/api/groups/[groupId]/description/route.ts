@@ -19,7 +19,7 @@ export async function PATCH(
       where: { id: groupId, userId },
     });
 
-    if (!ownCourse) return new NextResponse("Unauthorized", { status: 401 });
+    if (!ownGroup) return new NextResponse("Unauthorized", { status: 401 });
 
     const groupUpdate = await client.group.update({
       where: { id: groupId },
