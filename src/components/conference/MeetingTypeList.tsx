@@ -65,8 +65,8 @@ const MeetingTypeList = () => {
     }
   };
 
- // if (!client || !user) return <Loader />;
-if  (!user) return <Loader />
+  if (!client || !user) return <Loader />;
+//if  (!user) return <Loader />
   const meetingLink = `${process.env.NEXT_PUBLIC_BASE_URL}/socials/conferencing/${callDetail?.id}`;
 
   return (
