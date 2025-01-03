@@ -1,6 +1,7 @@
 "use client";
 
 import * as z from "zod";
+import axios from "axios";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -24,10 +25,10 @@ const formSchema = z.object({
 
 interface GroupDescriptionFormProps {
   initialData: string;
-  submitFunction: (data: z.infer<typeof formSchema>) => void;
+  groupId: string;
 }
 
-const GroupDescriptionForm = ({ initialData, submitFunction }: GroupDescriptionFormProps) => {
+const GroupDescriptionForm = ({ initialData, groupId }: GroupDescriptionFormProps) => {
   const [isEditing, setIsEditing] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -43,7 +44,19 @@ const GroupDescriptionForm = ({ initialData, submitFunction }: GroupDescriptionF
     }
     setIsEditing((current) => !current);
   };
-
+const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    try {
+      await axios.patch(
+        `/api/groups/${groupId}/description`,
+        values
+      );
+      toast.success("Chapter updated");
+      toggleEdit();
+      router.refresh();
+    } catch {
+      toast.error("Something went wrong");
+    }
+  };
   return (
     <div className="mt-6 border bg-slate-100 rounded-md p-4">
       <div className="font-medium flex items-center justify-between">
@@ -71,7 +84,7 @@ const GroupDescriptionForm = ({ initialData, submitFunction }: GroupDescriptionF
       {isEditing && (
         <Form {...form}>
           <form
-            onSubmit={form.handleSubmit(submitFunction)}
+            onSubmit={form.handleSubmit(onSubmit)}
             className="space-y-4 mt-4"
           >
             <FormField
