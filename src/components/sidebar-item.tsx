@@ -41,7 +41,7 @@ export const SidebarItem = ({ icon: Icon, label, href }: SidebarItemProps) => {
                         isActive && "text-sky-700",
                     )}
                 />
-                <p className="relative line-clamp-1">{label}</p>
+                <p className="line-clamp-1">{label}</p>
             </div>
             <div
                 className={cn(
