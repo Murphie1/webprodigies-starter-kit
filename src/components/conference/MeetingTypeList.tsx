@@ -54,7 +54,7 @@ const MeetingTypeList = () => {
   const { toast } = useToast();
 
   const createMeeting = async () => {
-    if (client || !user) return;
+    if (!client || !user) return;
     try {
       if (!values.dateTime) {
         toast({ title: 'Please select a date and time' });
