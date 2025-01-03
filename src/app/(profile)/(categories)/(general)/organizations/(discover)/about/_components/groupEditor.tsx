@@ -1,6 +1,7 @@
 "use client";
 
 import * as z from "zod";
+import { useRouter } from "next/navigation";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -30,7 +31,7 @@ interface GroupDescriptionFormProps {
 
 const GroupDescriptionForm = ({ initialData, groupId }: GroupDescriptionFormProps) => {
   const [isEditing, setIsEditing] = useState(false);
-
+const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: { description: initialData || "" },
