@@ -1,39 +1,17 @@
 import { useEffect, useState } from 'react';
+import { useStreamClient } from "@/providers/StreamProvider";
 import { Call, useStreamVideoClient } from '@stream-io/video-react-sdk';
 import { useUser } from '@clerk/nextjs';
-import { tokenProvider } from '@/actions/stream.actions';
+
 
 export const useGetCallById = (id: string | string[]) => {
   const { user, isLoaded } = useUser();
-  const client = useStreamVideoClient();
+  const { client, isUserConnected } = useStreamClient();
   const [call, setCall] = useState<Call>();
   const [isCallLoading, setIsCallLoading] = useState(true);
-  const [isUserConnected, setIsUserConnected] = useState(false); // Track if the user is connected
-
+  
   useEffect(() => {
-    if (!isLoaded || !user || !client || isUserConnected) return;
-
-    const initializeClient = async () => {
-      try {
-        await client.connectUser(
-          {
-            id: user.id,
-            name: user.firstName || user.lastName || user.username || user.id,
-            image: user.imageUrl,
-          },
-          tokenProvider
-        );
-        setIsUserConnected(true); // Mark the user as connected
-      } catch (error) {
-        console.error('Error connecting user:', error);
-      }
-    };
-
-    initializeClient();
-  }, [user, isLoaded, client, isUserConnected]);
-
-  useEffect(() => {
-    if (!client || !id || !isUserConnected) return;
+    if (!client || !id || user || !isUserConnected) return;
 
     const loadCall = async () => {
       try {
@@ -48,7 +26,7 @@ export const useGetCallById = (id: string | string[]) => {
     };
 
     loadCall();
-  }, [client, id, isUserConnected]);
+  }, [client, id, user, isUserConnected]);
 
   return { call, isCallLoading };
 };
