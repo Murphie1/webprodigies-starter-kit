@@ -9,17 +9,17 @@ export async function PATCH(
   { params }: { params: { groupId: string; } }
 ) {
   try {
-    const { userId } = auth();
+   // const { userId } = auth();
     const { groupId } = params;
     const { ...values } = await req.json();
 
-    if (!userId) return new NextResponse("Unauthorized", { status: 401 });
+    //if (!userId) return new NextResponse("Unauthorized", { status: 401 });
 
-    const ownGroup = await client.group.findUnique({
-      where: { id: groupId, userId, },
-    });
+   // const ownGroup = await client.group.findUnique({
+    //  where: { id: groupId, userId, },
+   // });
 
-    if (!ownGroup) return new NextResponse("Unauthorized", { status: 401 });
+   // if (!ownGroup) return new NextResponse("Unauthorized", { status: 401 });
 
     const groupUpdate = await client.group.update({
       where: { id: groupId },
