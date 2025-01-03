@@ -53,8 +53,7 @@ const MeetingRoom = () => {
     <section className="relative h-screen pb-[75px] md:pb-0 w-full overflow-hidden pt-4">
       <div className="relative flex size-full items-center justify-center">
         <div className=" flex size-full max-w-[1000px] items-center">
-          {/* <CallLayout />*/}
-          Stuff
+          <CallLayout />
         </div>
         <div
           className={cn('h-[calc(100vh-86px)] hidden ml-2', {
@@ -66,9 +65,7 @@ const MeetingRoom = () => {
       </div>
       {/* video layout and call controls */}
       <div className="fixed bottom-0 flex w-full items-center justify-center gap-5">
-        {/* <CallControls onLeave={() => router.push(`/socials/conferencing`)} />*/}
-        <CallControls onLeave={() => setShowParticipants(false)} />
-
+        <CallControls onLeave={() => router.push(`/socials/conferencing`)} />
         <DropdownMenu>
           <div className="flex items-center">
             <DropdownMenuTrigger className="cursor-pointer rounded-2xl bg-themeWhite dark:bg-[#19232d] px-4 py-2 dark:hover:bg-[#4c535b]">
