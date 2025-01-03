@@ -33,7 +33,7 @@ const Page = async ({ params }: Props) => {
     return (
         <HydrationBoundary state={dehydrate(query)}>
             <div className="pt-36 pb-10 container grid grid-cols-1 lg:grid-cols-3 gap-x-10">
-                <div className="max-w-screen overflow-x-auto whitespace-nowrap col-span-1 lg:col-span-2">
+                <div className="max-w-screen col-span-1 lg:col-span-2">
                     <AboutGroup userid={userid.id!} groupid={params.groupid} />
                 </div>
                 <div className="col-span-1 relative">
