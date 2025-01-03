@@ -87,7 +87,7 @@ const AboutGroup = ({ groupid, userid }: Props) => {
                 groupUserid={group.userId}
             />
             {userid !== group.userId ? (
-            <Preview value={group.description} />
+            <Preview value={group.description || ""} />
             ) : (
             <GroupDescritpionForm
                 initialData={group.description}
