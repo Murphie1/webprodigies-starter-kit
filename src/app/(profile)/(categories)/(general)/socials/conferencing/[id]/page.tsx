@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useUser } from '@clerk/nextjs';
 import { StreamCall, StreamTheme } from '@stream-io/video-react-sdk';
 import { useParams } from 'next/navigation';
-import { Loader } from 'lucide-react';
+import Loader  from '@/components/conference/Loader;
 
 import { useGetCallById } from '@/hooks/stream/useGetCallById';
 import Alert from '@/components/conference/Alert';
@@ -12,17 +12,16 @@ import MeetingSetup from '@/components/conference/MeetingSetup';
 import MeetingRoom from '@/components/conference/MeetingRoom';
 
 // Define the IParams interface
-interface IParams {
+type Props = {
+  params: {
   id: string;
 }
+}
 
-const MeetingPage = () => {
-  // Type the params with IParams
-  const params = useParams() as unknown as IParams; // Explicitly cast useParams() to IParams
-  const { id } = params;
+const MeetingPage = ({ params }: Props) => {
   
   const { isLoaded, user } = useUser();
-  const { call, isCallLoading } = useGetCallById(id);
+  const { call, isCallLoading } = useGetCallById(params.id);
   const [isSetupComplete, setIsSetupComplete] = useState(false);
 
   if (!isLoaded || isCallLoading) return <Loader />;
