@@ -3,7 +3,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { tokenProvider } from '@/actions/stream.actions';
+import { useStreamClient } from '@/providers/StreamProvider';
 
 import HomeCard from './HomeCard';
 import MeetingModal from './MeetingModal';
@@ -22,17 +22,17 @@ const initialValues = {
 };
 
 const MeetingTypeList = () => {
-  const API_KEY = process.env.NEXT_PUBLIC_STREAM_API_KEY;
+  //const API_KEY = process.env.NEXT_PUBLIC_STREAM_API_KEY;
   const router = useRouter();
   const [meetingState, setMeetingState] = useState<
     'isScheduleMeeting' | 'isJoiningMeeting' | 'isInstantMeeting' | undefined
   >(undefined);
   const [values, setValues] = useState(initialValues);
   const [callDetail, setCallDetail] = useState<Call>();
-  const [videoClient, setVideoClient] = useState<StreamVideoClient>();
+//  const [videoClient, setVideoClient] = useState<StreamVideoClient>();
   const { user, isLoaded } = useUser();
   
-  useEffect(() => {
+  {/* useEffect(() => {
     if (!isLoaded || !user) return;
     if (!API_KEY) throw new Error('Stream API key is missing');
 
@@ -48,20 +48,20 @@ const MeetingTypeList = () => {
 
     setVideoClient(client);
   }, [user, isLoaded]);
-  
-  //const client = useStreamVideoClient();
+  */}
+  const { client } = useStreamClient();
   
   const { toast } = useToast();
 
   const createMeeting = async () => {
-    if (!videoClient || !user) return;
+    if (client || !user) return;
     try {
       if (!values.dateTime) {
         toast({ title: 'Please select a date and time' });
         return;
       }
       const id = crypto.randomUUID();
-      const call = videoClient.call('default', id);
+      const call = client.call('default', id);
       //const call = client.call('default', id);
       if (!call) throw new Error('Failed to create meeting');
       const startsAt =
@@ -88,8 +88,8 @@ const MeetingTypeList = () => {
     }
   };
 
-  if (!videoClient || !user) return <Loader />;
-//if  (!user) return <Loader />
+  if (!client || !user) return <Loader />;
+
   const meetingLink = `${process.env.NEXT_PUBLIC_BASE_URL}/socials/conferencing/${callDetail?.id}`;
 
   return (
