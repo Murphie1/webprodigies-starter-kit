@@ -42,7 +42,7 @@ const MeetingPage = ({ params }: Props) => {
     return <Alert title="You are not allowed to join this meeting" />;
 
   return (
-    <main className="h-screen w-full">
+    <main className="h-screen pb-[75px] md:pb-2 w-full">
       <StreamCall call={call}>
         <StreamTheme>
           {!isSetupComplete ? (
