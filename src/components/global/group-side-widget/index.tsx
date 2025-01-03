@@ -18,7 +18,7 @@ const GroupSideWidget = ({ groupid, light, userid }: Props) => {
         <Card
             className={cn(
                 "border-black dark:border-themeGray max-w-xs lg:sticky lg:top-0 mt-10 lg:mt-0 rounded-xl overflow-hidden",
-                light ? "border-themeGray bg-[#1A1A1D]" : "bg-themeBlack",
+                light ? "border-themeGray bg-[#1A1A1D]" : "bg-gray-200 dark:bg-themeBlack",
             )}
         >
             <img
