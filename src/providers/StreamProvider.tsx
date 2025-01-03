@@ -1,4 +1,6 @@
 // providers/StreamClientProvider.tsx
+"use client"
+
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { StreamVideoClient } from '@stream-io/video-react-sdk';
 import { useUser } from '@clerk/nextjs';
