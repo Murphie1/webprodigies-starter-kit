@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useUser } from '@clerk/nextjs';
 import { StreamCall, StreamTheme } from '@stream-io/video-react-sdk';
 //import { useParams } from 'next/navigation';
-import Loader  from '@/components/conference/Loader;
+import Loader  from '@/components/conference/Loader';
 
 import { useGetCallById } from '@/hooks/stream/useGetCallById';
 import Alert from '@/components/conference/Alert';
