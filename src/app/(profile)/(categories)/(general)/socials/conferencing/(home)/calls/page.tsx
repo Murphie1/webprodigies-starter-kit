@@ -13,7 +13,7 @@ const CallsPage = () => {
   };
 
   return (
-    <section className="flex flex-col items-center gap-10 p-5">
+    <section className="flex flex-col items-center gap-y-10 p-5 sm:max-w-screen">
       {/* Navigation Bar */}
       <nav className="flex w-full max-w-4xl overflow-x-auto rounded-md bg-gray-100 dark:bg-gray-800 shadow-lg">
         {[
