@@ -1,7 +1,6 @@
 "use client";
 
 import * as z from "zod";
-//import axios from "axios";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -15,10 +14,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Pencil } from "lucide-react";
 import { useState } from "react";
-import toast from "react-hot-toast";
-import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { Group } from "@prisma/client";
 import { Editor } from "@/components/global/editor";
 import { Preview } from "@/components/global/preview";
 
@@ -27,73 +23,55 @@ const formSchema = z.object({
 });
 
 interface GroupDescriptionFormProps {
-  initialData: Group;
-  sumbitFunction: () => void
+  initialData: string;
+  submitFunction: (data: z.infer<typeof formSchema>) => void;
 }
 
-const GroupDescriptionForm = ({
-  initialData,
-  courseId,
-  chapterId,
-}: GroupDescriptionFormProps) => {
+const GroupDescriptionForm = ({ initialData, submitFunction }: GroupDescriptionFormProps) => {
   const [isEditing, setIsEditing] = useState(false);
-  const router = useRouter();
 
-  const toggleEdit = () => {
-    setIsEditing((current) => !current);
-  };
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: { description: initialData?.description || "" },
+    defaultValues: { description: initialData || "" },
   });
+
   const { isSubmitting, isValid } = form.formState;
-  const onSubmit = {submitFunction}
-  {/*async (values: z.infer<typeof formSchema>) => {
-    try {
-      await axios.patch(
-        `/api/courses/${courseId}/chapters/${chapterId}`,
-        values
-      );
-      toast.success("Chapter updated");
-      toggleEdit();
-      router.refresh();
-    } catch {
-      toast.error("Something went wrong");
+
+  const toggleEdit = () => {
+    if (isEditing) {
+      form.reset({ description: initialData || "" });
     }
+    setIsEditing((current) => !current);
   };
-  */}
+
   return (
     <div className="mt-6 border bg-slate-100 rounded-md p-4">
       <div className="font-medium flex items-center justify-between">
         Group Description
         <Button onClick={toggleEdit} variant="ghost">
-          {isEditing ? (
-            <>Cancel</>
-          ) : (
-            <>
-              <Pencil className="h-4 w-4 mr-2" />
-              Edit description
-            </>
-          )}
+          {isEditing ? <>Cancel</> : <>
+            <Pencil className="h-4 w-4 mr-2" />
+            Edit description
+          </>}
         </Button>
       </div>
       {!isEditing && (
         <p
           className={cn(
             "text-sm mt-2",
-            !initialData?.description && "italic text-slate-500"
+            !initialData && "italic text-slate-500"
           )}
         >
-          {!initialData?.description && "No description"}
-          {initialData?.description && (
-            <Preview value={initialData?.description} />
+          {!initialData && "No description"}
+          {initialData && (
+            <Preview value={initialData} />
           )}
         </p>
       )}
       {isEditing && (
         <Form {...form}>
           <form
-            onSubmit={form.handleSubmit(onSubmit)}
+            onSubmit={form.handleSubmit(submitFunction)}
             className="space-y-4 mt-4"
           >
             <FormField
