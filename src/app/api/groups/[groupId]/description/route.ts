@@ -1,6 +1,6 @@
 
 import { client } from "@/lib/prisma";
-import { auth } from "@clerk/nextjs/server";
+import { useUser } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
 
 
@@ -9,14 +9,14 @@ export async function PATCH(
   { params }: { params: { groupId: string; } }
 ) {
   try {
-    const { userId } = auth();
+    const { user } = useUser();
     const { groupId } = params;
-    const {  ...values } = await req.json();
+    const { ...values } = await req.json();
 
-    if (!userId) return new NextResponse("Unauthorized", { status: 401 });
+    if (!user) return new NextResponse("Unauthorized", { status: 401 });
 
     const ownGroup = await client.group.findUnique({
-      where: { id: groupId, userId },
+      where: { id: groupId, userId: user?.id },
     });
 
     if (!ownGroup) return new NextResponse("Unauthorized", { status: 401 });
