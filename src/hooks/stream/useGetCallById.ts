@@ -11,7 +11,7 @@ export const useGetCallById = (id: string | string[]) => {
   const [isCallLoading, setIsCallLoading] = useState(true);
   
   useEffect(() => {
-    if (!client || !id || user || !isUserConnected) return;
+    if (!client || !id) return;
 
     const loadCall = async () => {
       try {
