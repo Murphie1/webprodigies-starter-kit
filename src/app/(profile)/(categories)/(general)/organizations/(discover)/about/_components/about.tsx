@@ -91,7 +91,7 @@ const AboutGroup = ({ groupid, userid }: Props) => {
             ) : (
             <GroupDescritpionForm
                 initialData={group?.description || ""}
-                submitFunction={onUpdateGroupDescription}
+                submitFunction={onUpdateDescription}
                 />
             )}
             {/* {userid !== group.userId ? (
