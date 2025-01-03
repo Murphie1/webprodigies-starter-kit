@@ -1,7 +1,9 @@
 "use client"
 import { HtmlParser } from "@/components/global/html-parser"
 import { Loader } from "@/components/global/loader"
-import BlockTextEditor from "@/components/global/rich-text-editor"
+//import BlockTextEditor from "@/components/global/rich-text-editor"
+import { Preview } from "@/components/global/preview"
+import GroupDescritpionForm from "./groupEditor"
 import { NoResult } from "@/components/global/search/no-results"
 import { Button } from "@/components/ui/button"
 import { useGroupAbout, useGroupInfo } from "@/hooks/groups"
@@ -85,6 +87,14 @@ const AboutGroup = ({ groupid, userid }: Props) => {
                 groupUserid={group.userId}
             />
             {userid !== group.userId ? (
+            <Preview value={group.description} />
+            ) : (
+            <GroupDescritpionForm
+                initialData={group.description}
+                submitFunction={onUpdateGroupDescription}
+                />
+            )}
+            {/* {userid !== group.userId ? (
                 <HtmlParser html={group.htmlDescription || "<></>"} />
             ) : (
                 <form
@@ -120,7 +130,7 @@ const AboutGroup = ({ groupid, userid }: Props) => {
                         </Button>
                     )}
                 </form>
-            )}
+            )}*/}
         </div>
     )
 }
