@@ -13,7 +13,7 @@ const CallsPage = () => {
   };
 
   return (
-    <section className="flex flex-col items-center gap-y-10 p-5 sm:max-w-screen">
+    <section className="flex flex-col items-center gap-y-10 sm:max-w-screen">
       {/* Navigation Bar */}
       <nav className="flex w-full max-w-4xl overflow-x-auto rounded-md bg-gray-100 dark:bg-gray-800 shadow-lg">
         {[
@@ -24,7 +24,7 @@ const CallsPage = () => {
           <button
             key={tab.value}
             onClick={handleClick(tab.value as Variant)}
-            className={`flex-1 px-4 py-2 text-center transition-all 
+            className={`flex-1 px-2 py-2 text-center transition-all 
               ${variant === tab.value
                 ? "bg-blue-500 text-white dark:bg-blue-600"
                 : "text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700"}
