@@ -8,8 +8,8 @@ import { Interactions } from "./interactions"
 
 type PostCardProps = {
     userimage?: string
-    image?: string
-    video?: string
+    image?: string | null
+    video?: string | null
     content: string
     username?: string
     html: string
