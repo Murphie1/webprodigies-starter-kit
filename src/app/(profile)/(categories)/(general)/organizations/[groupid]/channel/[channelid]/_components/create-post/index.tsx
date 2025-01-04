@@ -49,7 +49,9 @@ const CreateNewPost = ({ channelid, userImage, username }: Props) => {
                         </p>
                     </div>
                 </div>
+                <div className="h-full max-h-[calc(100vh-100px)] overflow-y-auto">
                 <PostContent channelid={channelid} />
+                    </div>
             </SimpleModal>
             {mutation.length > 0 &&
                 mutation[0].status === "pending" &&
