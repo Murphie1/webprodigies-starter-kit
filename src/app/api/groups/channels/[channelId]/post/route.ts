@@ -23,7 +23,7 @@ export async function POST(
 
         const post = await client.post.create({
             data: {
-                channeld,
+                channelId,
                 title,
                 content,
                 video,
