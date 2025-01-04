@@ -17,7 +17,7 @@ export async function POST(
         const { title, image, content, video } = await req.json()
         const user = await onAuthenticatedUser()
 
-        if (!user) {
+        if (!user || user.id ) {
             return new NextResponse("userless", { status: 401 })
         }
 
@@ -28,7 +28,7 @@ export async function POST(
                 content,
                 video,
                 image,
-                authorId: user.id,
+                authorId: user?.id,
                 htmlContent: content,
             },
         })
