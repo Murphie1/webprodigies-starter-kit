@@ -1,3 +1,4 @@
+import { Modal } from "./modal"
 import { HtmlParser } from "@/components/global/html-parser"
 import { Card, CardContent } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
@@ -53,6 +54,9 @@ export const PostCard = ({
                 <Link href={`${pathname}/${postid}`} className="w-full">
                     <div className="flex flex-col gap-y-3">
                         <h2 className="text-2xl">{title}</h2>
+                        {image || video && (
+            <Modal image={image} video={video} />
+            )}
                         <HtmlParser html={html} />
                     </div>
                 </Link>
