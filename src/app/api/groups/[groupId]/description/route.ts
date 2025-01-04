@@ -16,7 +16,7 @@ export async function PATCH(
     if (!user || !user.id) return new NextResponse("Unauthorized", { status: 401 });
 
    const ownGroup = await client.group.findUnique({
-      where: { id: groupId, user.id, },
+      where: { id: groupId, userId: user.id, },
     });
 
     if (!ownGroup) return new NextResponse("Unauthorized", { status: 401 });
