@@ -62,6 +62,9 @@ const CreateNewPost = ({ channelid, userImage, username }: Props) => {
                         username={username}
                         html={mutation[0].state.htmlcontent}
                         title={mutation[0].state.title}
+                        content={mutation[0].state.content}
+                        image={mutation[0].state.image}
+                        video={mutation[0].state.video}
                         likes={0}
                         comments={0}
                         postid={mutation[0].state.postid}
