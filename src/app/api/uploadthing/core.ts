@@ -19,7 +19,15 @@ export const ourFileRouter = {
     profileImage: f({ image: { maxFileSize: "1GB", maxFileCount: 1 } })
         .middleware(() => handleAuth())
         .onUploadComplete(() => {}),
-
+   
+    postImage: f({ image: { maxFileSize: "1GB", maxFileCount: 1 } })
+        .middleware(() => handleAuth())
+        .onUploadComplete(() => {}),
+    
+    postVideo: f({ video: { maxFileSize: "1GB", maxFileCount: 1 } })
+        .middleware(() => handleAuth())
+        .onUploadComplete(() => {}),
+    
     messageFile: f(["image", "pdf", "video"])
         .middleware(() => handleAuth())
         .onUploadComplete(() => {}),
