@@ -51,6 +51,7 @@ export const PostFeed = ({ channelid, userid }: PostFeedProps) => {
                     key={post.id}
                     image={post?.image}
                     video={post?.video}
+                    content={post.content!}
                     channelname={post.channel.name!}
                     title={post.title!}
                     html={post.htmlContent!}
