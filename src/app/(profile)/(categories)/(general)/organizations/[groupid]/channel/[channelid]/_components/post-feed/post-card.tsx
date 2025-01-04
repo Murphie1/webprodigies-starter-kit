@@ -8,6 +8,9 @@ import { Interactions } from "./interactions"
 
 type PostCardProps = {
     userimage?: string
+    image?: string
+    video?: string
+    content: string
     username?: string
     html: string
     channelname: string
@@ -25,6 +28,9 @@ export const PostCard = ({
     userimage,
     username,
     html,
+    image,
+    video,
+    content,
     channelname,
     title,
     likes,
