@@ -38,6 +38,8 @@ export const PostFeed = ({ channelid, userid }: PostFeedProps) => {
             htmlContent: string | null
             jsonContent: string | null
             content: string
+            image: string | null
+            video: string | null
             authorId: string
             channelId: string
         })[]
@@ -47,6 +49,8 @@ export const PostFeed = ({ channelid, userid }: PostFeedProps) => {
             {posts.map((post) => (
                 <PostCard
                     key={post.id}
+                    image={post?.image}
+                    video={post?.video}
                     channelname={post.channel.name!}
                     title={post.title!}
                     html={post.htmlContent!}
