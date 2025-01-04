@@ -28,7 +28,7 @@ export async function POST(
                 content,
                 video,
                 image,
-                authorId: user?.id,
+                authorId: user.id!,
                 htmlContent: content,
             },
         })
