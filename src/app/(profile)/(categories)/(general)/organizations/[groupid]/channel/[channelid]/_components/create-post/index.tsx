@@ -1,25 +1,25 @@
-"use client"
+"use client";
 
-import { PostContent } from "@/components/global/post-content"
-import { SimpleModal } from "@/components/global/simple-modal"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Card, CardContent, CardDescription } from "@/components/ui/card"
-import { useChannelPage } from "@/hooks/channels"
-import { PostCard } from "../post-feed/post-card"
+import { PostContent } from "@/components/global/post-content";
+import { SimpleModal } from "@/components/global/simple-modal";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Card, CardContent, CardDescription } from "@/components/ui/card";
+import { useChannelPage } from "@/hooks/channels";
+import { PostCard } from "../post-feed/post-card";
 
-type Props = { userImage: string; channelid: string; username: string }
+type Props = { userImage: string; channelid: string; username: string };
 
 const CreateNewPost = ({ channelid, userImage, username }: Props) => {
-    const { data, mutation } = useChannelPage(channelid)
-    const { name } = data as { name: string }
+    const { data, mutation } = useChannelPage(channelid);
+    const { name } = data as { name: string };
 
     return (
         <>
             <SimpleModal
                 trigger={
                     <span>
-                        <Card className="border-black dark:border-themeGray cursor-pointer first-letter:rounded-2xl overflow-hidden">
-                            <CardContent className="p-3 bg-white dark:bg-[#1A1A1D] flex gap-x-6 items-center ">
+                        <Card className="border border-black dark:border-themeGray cursor-pointer rounded-2xl overflow-hidden">
+                            <CardContent className="p-3 bg-white dark:bg-[#1A1A1D] flex gap-x-6 items-center">
                                 <Avatar className="cursor-pointer">
                                     <AvatarImage src={userImage} alt="user" />
                                     <AvatarFallback>U</AvatarFallback>
@@ -32,7 +32,8 @@ const CreateNewPost = ({ channelid, userImage, username }: Props) => {
                     </span>
                 }
             >
-                <div className="flex gap-x-3">
+                <div className="flex gap-x-3 items-start p-4">
+                    {/* User Avatar and Name */}
                     <Avatar className="cursor-pointer">
                         <AvatarImage src={userImage} alt="user" />
                         <AvatarFallback>U</AvatarFallback>
@@ -41,7 +42,7 @@ const CreateNewPost = ({ channelid, userImage, username }: Props) => {
                         <p className="text-black dark:text-themeTextGray text-sm capitalize">
                             {username}
                         </p>
-                        <p className="text-sm captialize text-black dark:text-themeTextGray">
+                        <p className="text-sm capitalize text-black dark:text-themeTextGray">
                             Posting in{" "}
                             <span className="font-bold capitalize text-themeTextBlack dark:text-themeTextWhite">
                                 {name}
@@ -49,10 +50,12 @@ const CreateNewPost = ({ channelid, userImage, username }: Props) => {
                         </p>
                     </div>
                 </div>
-                <div className="h-full max-h-[calc(100vh-100px)] overflow-y-auto">
-                <PostContent channelid={channelid} />
-                    </div>
+                <div className="h-full max-h-[calc(100vh-120px)] overflow-y-auto p-4 bg-white dark:bg-[#1A1A1D] rounded-md">
+                    <PostContent channelid={channelid} />
+                </div>
             </SimpleModal>
+
+            {/* Optimistic Post Rendering */}
             {mutation.length > 0 &&
                 mutation[0].status === "pending" &&
                 mutation[0].state && (
@@ -72,7 +75,7 @@ const CreateNewPost = ({ channelid, userImage, username }: Props) => {
                     />
                 )}
         </>
-    )
-}
+    );
+};
 
-export default CreateNewPost
+export default CreateNewPost;
