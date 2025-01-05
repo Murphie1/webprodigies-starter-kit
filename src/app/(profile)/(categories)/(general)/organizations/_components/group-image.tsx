@@ -19,6 +19,9 @@ interface ImageProps {
 const GroupImage = async({ imageUrl }: ImageProps) => {
     const group = await client.group.findUnique({
         where: { id: imageUrl },
+        include: {
+            User: { select: { image: true } },
+        },
     });
     if (!group) {
         return (
