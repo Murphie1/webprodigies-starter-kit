@@ -23,6 +23,16 @@ const config = {
                 sans: ["var(--font-inter)"],
             },
             colors: {
+                brand: {
+  				'100': '#EA6365',
+  				DEFAULT: '#FA7275'
+  			},
+                light: {
+  				'100': '#333F4E',
+  				'200': '#A3B2C7',
+  				'300': '#F2F5F9',
+  				'400': '#F2F4F8'
+  			},
                 white: {
                     DEFAULT: "#FFFFFF",
                     1: "#FFFFFF",
@@ -53,6 +63,9 @@ const config = {
                     400: "#417BFF",
                     500: "#3371FF",
                 },
+                pink: '#EEA8FD',
+                green: '#3DD9B3',
+                error: '#b80000',
                 sky: {
                     1: '#C9DDFF',
                     2: '#ECF0FF',
@@ -119,13 +132,33 @@ const config = {
                     DEFAULT: "hsl(var(--card))",
                     foreground: "hsl(var(--card-foreground))",
                 },
+                chart: {
+  				'1': 'hsl(var(--chart-1))',
+  				'2': 'hsl(var(--chart-2))',
+  				'3': 'hsl(var(--chart-3))',
+  				'4': 'hsl(var(--chart-4))',
+  				'5': 'hsl(var(--chart-5))'
+            },
             },
             borderRadius: {
                 lg: "var(--radius)",
                 md: "calc(var(--radius) - 2px)",
                 sm: "calc(var(--radius) - 4px)",
             },
+            boxShadow: {
+  			'drop-1': '0px 10px 30px 0px rgba(66, 71, 97, 0.1)',
+  			'drop-2': '0 8px 30px 0 rgba(65, 89, 214, 0.3)',
+  			'drop-3': '0 8px 30px 0 rgba(65, 89, 214, 0.1)'
+  		},
             keyframes: {
+                'caret-blink': {
+  				'0%,70%,100%': {
+  					opacity: '1'
+  				},
+  				'20%,50%': {
+  					opacity: '0'
+  				}
+                },
                 "accordion-down": {
                     from: { height: "0" },
                     to: { height: "var(--radix-accordion-content-height)" },
@@ -158,6 +191,7 @@ const config = {
             },
             //}
             animation: {
+                'caret-blink': 'caret-blink 1.25s ease-out infinite',
                 "accordion-down": "accordion-down 0.2s ease-out",
                 "accordion-up": "accordion-up 0.2s ease-out",
             },
