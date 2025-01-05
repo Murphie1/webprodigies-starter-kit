@@ -35,31 +35,6 @@ const GroupImage = async({ imageUrl }: ImageProps) => {
     }
     
     return (
-        <Dialog>
-            <DialogTrigger>
-                    {group.thumbnail ? (
-                        <Image
-                            src={group.thumbnail}
-                            alt="Group Thumbnail"
-                            width={15}
-                            height={15}
-                            className="rounded-full"
-                        />
-                    ) : group.member.length > 3 ? (
-                    <AvatarGroup
-    users={group.member.map((m) => m.User).filter((user) => user !== null) as { image?: string }[]}
-/>
-                    ) : (
-                        <Image
-                            src={group.User?.image || "/default-group-image.png"}
-                            alt="Group Owner Avatar"
-                            width={15}
-                            height={15}
-                            className="rounded-full"
-                        />
-                    )}
-                </DialogTrigger>
-                <DialogContent className="rounded-md h-[350px] w-[350px]">
                         {group.thumbnail ? (
                         <Image
                             src={group.thumbnail}
@@ -81,8 +56,7 @@ const GroupImage = async({ imageUrl }: ImageProps) => {
                             className="rounded-full"
                         />
                     )}
-                </DialogContent>
-        </Dialog>
+                
     )
 }
 export default GroupImage
