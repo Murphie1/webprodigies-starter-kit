@@ -3,7 +3,7 @@
 import Image from "next/image";
 
 interface AvatarGroupProps {
-    users: { image?: string }[];
+    users: { image?: string | null }[];
 }
 
 const AvatarGroup: React.FC<AvatarGroupProps> = ({ users = [] }) => {
