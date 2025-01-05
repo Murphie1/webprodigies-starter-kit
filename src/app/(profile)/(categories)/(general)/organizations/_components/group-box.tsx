@@ -15,6 +15,8 @@ const GroupBox = ({ image, href, name, description }: GBProps) => {
         <div
             className="
         w-full,
+        max-w-screen
+        overflow-hidden
         relative
         flex
         items-center
@@ -51,8 +53,8 @@ const GroupBox = ({ image, href, name, description }: GBProps) => {
                         </div>
                         <p
                             className="
-              truncate
-              text-sm
+            line-clamp-2
+            text-sm
             text-gray-500
             dark:text-gray-100
             "
