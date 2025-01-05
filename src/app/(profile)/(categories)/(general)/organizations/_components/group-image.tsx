@@ -1,3 +1,5 @@
+"use client"
+
 import Image from "next/image";
 import AvatarGroup from "@/components/global/AvatarGroup";
 import { useEffect, useState } from "react";
