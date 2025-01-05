@@ -1,5 +1,6 @@
 import { client } from "@/lib/prisma"; // Adjust path as per your setup
 import Image from "next/image";
+import Link from "next/link";
 import AvatarGroup from "@/components/global/AvatarGroup";
 
 interface GroupPageProps {
