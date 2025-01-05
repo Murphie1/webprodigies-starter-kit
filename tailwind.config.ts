@@ -51,6 +51,7 @@ const config = {
                     6: "#24272C",
                 },
                 orange: {
+                    DEFAULT: '#F9AB72',
                     1: "#F97535",
                 },
                 gray: {
@@ -58,6 +59,7 @@ const config = {
                     1: "#71788B",
                 },
                 blue: {
+                    DEFAULT: '#56B8FF',
                     1: '#0E78F9',
                     100: "#B4C6EE",
                     400: "#417BFF",
@@ -72,6 +74,7 @@ const config = {
                     3: '#F5FCFF',
                      },
                 red: {
+                    DEFAULT: '#FF7474',
                     400: "#DD4F56",
                     500: "#DC4349",
                 },
