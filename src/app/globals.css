@@ -655,9 +655,7 @@ html {
   }
   .thumbnail-image {
     @apply size-full object-cover object-center !important;
-  }
-      }
-      
+  } 
       .flex-between {
     @apply flex justify-between items-center;
       }
