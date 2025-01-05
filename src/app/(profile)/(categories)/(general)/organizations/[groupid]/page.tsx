@@ -42,7 +42,7 @@ export default async function GroupPage({ params }: GroupPageProps) {
                             className="rounded-full"
                         />
                     ) : group.member.length > 3 ? (
-                        <AvatarGroup users={group.member.map((m) => m.user)} />
+                        <AvatarGroup users={group.member.map((m) => m.User)} />
                     ) : (
                         <Image
                             src={group.User?.image || "/default-group-image.png"}
@@ -68,9 +68,11 @@ export default async function GroupPage({ params }: GroupPageProps) {
                                 key={channel.id}
                                 className="p-3 rounded-lg bg-white dark:bg-gray-800 shadow"
                             >
+                                <Link href={`/organizations/${groupId}/${channel.id}`}>
                                 <span className="text-gray-800 dark:text-gray-200">
                                     {channel.name}
                                 </span>
+                                    </Link>
                             </li>
                         ))}
                     </ul>
