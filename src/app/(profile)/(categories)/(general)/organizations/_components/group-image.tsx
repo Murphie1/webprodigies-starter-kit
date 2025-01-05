@@ -57,8 +57,13 @@ const GroupImage = ({ imageUrl }: ImageProps) => {
 
     if (!group) {
         return (
-            <div className="min-h-screen flex justify-center items-center bg-gray-100 dark:bg-gray-900">
-                <h1 className="text-gray-700 dark:text-gray-300 text-xl">Group not found</h1>
+            <div className="h-9 w-9 rounded-full flex items-center bg-gray-100 dark:bg-gray-900">
+                <Image
+                    src="/next.svg"
+                    alt="Group Owner Avatar"
+                    fill
+                    className="rounded-full"
+                />
             </div>
         );
     }
