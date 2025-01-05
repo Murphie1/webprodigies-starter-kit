@@ -35,7 +35,7 @@ export default async function GroupPage({ params }: GroupPageProps) {
 
     return (
         <div className="min-h-screen bg-gray-100 dark:bg-gray-900 p-6">
-            <div className="max-w-4xl mx-auto">
+            <div className="max-w-4xl mx-auto pb-10">
                 {/* Group Header */}
                 <div className="flex items-center gap-4">
                     {group.thumbnail ? (
@@ -89,12 +89,12 @@ export default async function GroupPage({ params }: GroupPageProps) {
                     <h2 className="text-xl font-bold text-gray-700 dark:text-gray-300">
                         Other Resources:
                     </h2>
-                    <ul className="mt-4 space-y-1">
+                    <ul className="mt-4 space-y-3">
                             <li
                                 className="p-3 rounded-lg bg-white dark:bg-gray-800 shadow-md hover:scale-105 transition-all"
                             >
                                 <Link href={`/organizations/${groupId}/groupspaces`}>
-                                <span className="flex flex-1 text-gray-800 dark:text-gray-200 font-semibold text-md">
+                                <span className="flex flex-1 space-x-3 text-gray-800 dark:text-gray-200 font-semibold text-md">
                                    <Heart size={25} /> GroupSpaces 
                                 </span>
                                     </Link>
@@ -103,7 +103,7 @@ export default async function GroupPage({ params }: GroupPageProps) {
                                 className="p-3 rounded-lg bg-white dark:bg-gray-800 shadow-md hover:scale-105 transition-all"
                             >
                                 <Link href={`/organizations/${groupId}/courses`}>
-                                <span className="flex flex-1 text-gray-800 dark:text-gray-200 font-semibold text-md">
+                                <span className="flex flex-1 space-x-3 text-gray-800 dark:text-gray-200 font-semibold text-md">
                                    <Heart size={25} /> Courses
                                 </span>
                                     </Link>
@@ -112,7 +112,7 @@ export default async function GroupPage({ params }: GroupPageProps) {
                                 className="p-3 rounded-lg bg-white dark:bg-gray-800 shadow-md hover:scale-105 transition-all"
                             >
                                 <Link href={`/organizations/${groupId}/library`}>
-                                <span className="flex flex-1 text-gray-800 dark:text-gray-200 font-semibold text-md">
+                                <span className="flex flex-1 space-x-3 text-gray-800 dark:text-gray-200 font-semibold text-md">
                                    <Heart size={25} /> Library
                                 </span>
                                     </Link>
@@ -121,7 +121,7 @@ export default async function GroupPage({ params }: GroupPageProps) {
                                 className="p-3 rounded-lg bg-white dark:bg-gray-800 shadow-md hover:scale-105 transition-all"
                             >
                                 <Link href={`/organizations/${groupId}/events`}>
-                                <span className="flex flex-1 text-gray-800 dark:text-gray-200 font-semibold text-md">
+                                <span className="flex flex-1 space-x-3 text-gray-800 dark:text-gray-200 font-semibold text-md">
                                    <Heart size={25} /> Events
                                 </span>
                                     </Link>
@@ -130,7 +130,7 @@ export default async function GroupPage({ params }: GroupPageProps) {
                                 className="p-3 rounded-lg bg-white dark:bg-gray-800 shadow-md hover:scale-105 transition-all"
                             >
                                 <Link href={`/organizations/${groupId}/chat`}>
-                                <span className="flex flex-1 text-gray-800 dark:text-gray-200 font-semibold text-md">
+                                <span className="flex flex-1 space-x-3 text-gray-800 dark:text-gray-200 font-semibold text-md">
                                    <Heart size={25} /> Chat
                                 </span>
                                     </Link>
@@ -139,7 +139,7 @@ export default async function GroupPage({ params }: GroupPageProps) {
                                 className="p-3 rounded-lg bg-white dark:bg-gray-800 shadow-md hover:scale-105 transition-all"
                             >
                                 <Link href={`/organizations/about/${groupId}/`}>
-                                <span className="flex flex-1 text-gray-800 dark:text-gray-200 font-semibold text-md">
+                                <span className="flex flex-1 space-x-3 text-gray-800 dark:text-gray-200 font-semibold text-md">
                                    <Heart size={25} /> About
                                 </span>
                                     </Link>
@@ -148,7 +148,7 @@ export default async function GroupPage({ params }: GroupPageProps) {
                                 className="p-3 rounded-lg bg-white dark:bg-gray-800 shadow-md hover:scale-105 transition-all"
                             >
                                 <Link href={`/organizations/${groupId}/training`}>
-                                <span className="flex flex-1 text-gray-800 dark:text-gray-200 font-semibold text-md">
+                                <span className="flex flex-1 space-x-3 text-gray-800 dark:text-gray-200 font-semibold text-md">
                                    <Heart size={25} /> Training and Simulations
                                 </span>
                                     </Link>
@@ -157,7 +157,7 @@ export default async function GroupPage({ params }: GroupPageProps) {
                                 className="p-3 rounded-lg bg-white dark:bg-gray-800 shadow-md hover:scale-105 transition-all"
                             >
                                 <Link href={`/organizations/${groupId}/payments`}>
-                                <span className="flex flex-1 text-gray-800 dark:text-gray-200 font-semibold text-md">
+                                <span className="flex flex-1 space-x-3 text-gray-800 dark:text-gray-200 font-semibold text-md">
                                    <Heart size={25} /> Payments 
                                 </span>
                                     </Link>
@@ -174,7 +174,7 @@ export default async function GroupPage({ params }: GroupPageProps) {
                                 className="p-3 rounded-lg bg-white dark:bg-gray-800 shadow-md hover:scale-105 transition-all"
                             >
                                 <Link href={`/organizations/${groupId}/settings`}>
-                                <span className="text-md font-bold text-gray-800 dark:text-gray-200">
+                                <span className="text-md space-x-2 font-bold text-gray-800 dark:text-gray-200">
                                     Settings
                                 </span>
                                     </Link>
@@ -183,7 +183,7 @@ export default async function GroupPage({ params }: GroupPageProps) {
                                 className="p-3 rounded-lg bg-white dark:bg-gray-800 shadow-md hover:scale-105 transition-all"
                             >
                                 <Link href={`/organizations/${groupId}/analysis`}>
-                                <span className="flex flex-1 text-gray-800 dark:text-gray-200 font-semibold text-md">
+                                <span className="flex flex-1 space-x-2 text-gray-800 dark:text-gray-200 font-semibold text-md">
                                    <Heart size={25} /> Members and Group Analysis
                                 </span>
                                     </Link>
@@ -192,7 +192,7 @@ export default async function GroupPage({ params }: GroupPageProps) {
                                 className="p-3 rounded-lg bg-white dark:bg-gray-800 shadow-md hover:scale-105 transition-all"
                             >
                                 <Link href={`/organizations/${groupId}/finance`}>
-                                <span className="flex flex-1 text-gray-800 dark:text-gray-200 font-semibold text-md">
+                                <span className="flex flex-1 space-x-2 text-gray-800 dark:text-gray-200 font-semibold text-md">
                                    <Heart size={25} /> Finance 
                                 </span>
                                     </Link>
@@ -201,7 +201,7 @@ export default async function GroupPage({ params }: GroupPageProps) {
                                 className="p-3 rounded-lg bg-white dark:bg-gray-800 shadow-md hover:scale-105 transition-all"
                             >
                                 <Link href={`/organizations/${groupId}/meetings`}>
-                                <span className="flex flex-1 text-gray-800 dark:text-gray-200 font-semibold text-md">
+                                <span className="flex flex-1 space-x-2 text-gray-800 dark:text-gray-200 font-semibold text-md">
                                    <Heart size={25} /> Meeting Room
                                 </span>
                                     </Link>
@@ -210,7 +210,7 @@ export default async function GroupPage({ params }: GroupPageProps) {
                                 className="p-3 rounded-lg bg-white dark:bg-gray-800 shadow-md hover:scale-105 transition-all"
                             >
                                 <Link href={`/organizations/${groupId}/ai`}>
-                                <span className="flex flex-1 text-gray-800 dark:text-gray-200 font-semibold text-md">
+                                <span className="flex flex-1 space-x-2 text-gray-800 dark:text-gray-200 font-semibold text-md">
                                    <Heart size={25} /> Assistant and AI Tools
                                 </span>
                                     </Link>
