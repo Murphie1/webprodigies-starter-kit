@@ -54,7 +54,7 @@ const Orgs = async () => {
                             <GroupBox
                                 key={group.id}
                                 name={group.name}
-                                image={group.id}
+                                image={group.thumbnail || user.image}
                                 description={group.description || " "}
                                 href={`/organizations/${group.id}`}
                             />
