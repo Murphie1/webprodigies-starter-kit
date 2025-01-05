@@ -36,18 +36,24 @@ export default function GroupPage({ group }: GroupPageProps) {
                 {/* Group Header */}
                 <div className="flex items-center gap-4">
                     {group.thumbnail ? (
-                        <Image
-                            src={group.thumbnail}
-                            alt="Group Thumbnail"
-                            width={80}
-                            height={80}
-                            className="rounded-full"
-                        />
-                    ) : (
-                        <AvatarGroup
-                            users={group.member.map((m) => m.user)}
-                        />
-                    )}
+    <Image
+        src={group.thumbnail}
+        alt="Group Thumbnail"
+        width={80}
+        height={80}
+        className="rounded-full"
+    />
+) : group.member.length > 3 ? (
+    <AvatarGroup users={group.member.map((m) => m.user)} />
+) : (
+    <Image
+        src={group.User.image || "/default-group-image.png"} // Fallback if group.User.image is not available
+        alt="Group Owner Avatar"
+        width={80}
+        height={80}
+        className="rounded-full"
+    />
+)}
                     <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-200">
                         {group.name}
                     </h1>
