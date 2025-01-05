@@ -16,7 +16,7 @@ interface ImageProps {
     imageUrl: string
 }
 
-const GroupImage = ({ imageUrl }: ImageProps) => {
+const GroupImage = async({ imageUrl }: ImageProps) => {
     const group = await client.group.findUnique({
         where: { id: imageUrl },
     });
