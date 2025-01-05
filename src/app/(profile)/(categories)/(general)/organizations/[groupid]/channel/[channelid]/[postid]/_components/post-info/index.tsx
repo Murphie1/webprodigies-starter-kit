@@ -1,7 +1,8 @@
 "use client"
 
 import { HtmlParser } from "@/components/global/html-parser"
-
+import { VideoModal } from "@/app/(profile)/(categories)/(general)/organizations/[groupid]/channel/[channelid]/_components/post-feed/video"
+import { Modal } from "@/app/(profile)/(categories)/(general)/organizations/[groupid]/channel/[channelid]/_components/post-feed/modal"
 import { NoResult } from "@/components/global/search/no-results"
 import { useGetPost } from "@/hooks/channels"
 import { Interactions } from "../../../_components/post-feed/interactions"
@@ -30,6 +31,8 @@ export const PostInfo = ({ id }: PostInfoProps) => {
             />
             <div className="flex flex-col gap-y-3">
                 <h2 className="text-2xl font-bold">{data.post?.title}</h2>
+                {data.post?.image && <Modal image={data.post?.image as string} />}
+                {data.post?.video && <VideoModal video={data.post?.video as string} />}
                 <HtmlParser html={data.post?.htmlContent as string} />
             </div>
             <Interactions
