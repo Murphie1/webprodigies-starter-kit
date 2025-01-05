@@ -21,6 +21,7 @@ const GroupImage = async({ imageUrl }: ImageProps) => {
         where: { id: imageUrl },
         include: {
             User: { select: { image: true } },
+           member: { select: { User: { select: { image: true } } } },
         },
     });
     if (!group) {
