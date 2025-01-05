@@ -1,16 +1,28 @@
-"use client"
-
 import Image from "next/image";
 import AvatarGroup from "@/components/global/AvatarGroup";
 import { useEffect, useState } from "react";
 import { client } from "@/lib/prisma";
+
+interface User {
+    image?: string;
+}
+
+interface GroupMember {
+    User: User | null;
+}
+
+interface Group {
+    thumbnail?: string;
+    User?: User;
+    member: GroupMember[];
+}
 
 interface ImageProps {
     imageUrl: string;
 }
 
 const GroupImage = ({ imageUrl }: ImageProps) => {
-    const [group, setGroup] = useState<any | null>(null); // Replace `any` with the proper type for `group`
+    const [group, setGroup] = useState<Group | null>(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -61,7 +73,9 @@ const GroupImage = ({ imageUrl }: ImageProps) => {
                 />
             ) : group.member.length > 3 ? (
                 <AvatarGroup
-                    users={group.member.map((m) => m.User).filter((user) => user !== null) as { image?: string }[]}
+                    users={group.member
+                        .map((m: GroupMember) => m.User)
+                        .filter((user): user is User => user !== null)}
                 />
             ) : (
                 <Image
