@@ -14,6 +14,7 @@ export default async function GroupPage({ params }: GroupPageProps) {
     const group = await client.group.findUnique({
         where: { id: groupId },
         include: {
+            User: { select: { image: true, firstname: true } },
             member: { select: { User: { select: { image: true } } } },
             channel: { select: { id: true, name: true } },
         },
