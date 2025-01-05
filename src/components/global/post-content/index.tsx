@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
 import {
     Form,
     FormControl,
@@ -8,21 +8,21 @@ import {
     FormItem,
     FormLabel,
     FormMessage,
-} from "@/components/ui/form"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea" // Assuming this exists
-import { useForm } from "react-hook-form"
-import * as z from "zod"
-import { useState } from "react"
-import axios from "axios"
-import { useRouter } from "next/navigation"
-import { FileUpload } from "@/components/file-upload"
-import { Upload } from "lucide-react"
+} from "@/components/ui/form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea"; // Assuming this exists
+import { useForm } from "react-hook-form";
+import * as z from "zod";
+import { useState } from "react";
+import axios from "axios";
+import { useRouter } from "next/navigation";
+import { FileUpload } from "@/components/file-upload";
+import { Upload, X } from "lucide-react";
 
 type PostContentProps = {
-    channelid: string
-}
+    channelid: string;
+};
 
 const formSchema = z.object({
     title: z.string().optional(), // Title is optional
@@ -31,13 +31,13 @@ const formSchema = z.object({
     }),
     image: z.string().optional(),
     video: z.string().optional(),
-})
+});
 
 export const PostContent = ({ channelid }: PostContentProps) => {
-    const [imageOpen, setImageOpen] = useState(false)
-    const [videoOpen, setVideoOpen] = useState(false)
+    const [imageOpen, setImageOpen] = useState(false);
+    const [videoOpen, setVideoOpen] = useState(false);
 
-    const router = useRouter()
+    const router = useRouter();
 
     const form = useForm({
         resolver: zodResolver(formSchema),
@@ -47,25 +47,28 @@ export const PostContent = ({ channelid }: PostContentProps) => {
             image: "",
             video: "",
         },
-    })
+    });
 
-    const isLoading = form.formState.isSubmitting
+    const isLoading = form.formState.isSubmitting;
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         try {
-            await axios.post(`/api/groups/channels/${channelid}/post`, values)
-            form.reset()
-            router.refresh()
-            window.location.reload()
+            await axios.post(`/api/groups/channels/${channelid}/post`, values);
+            form.reset();
+            router.refresh();
+            window.location.reload();
         } catch (error) {
-            console.error(error)
+            console.error(error);
         }
-    }
+    };
 
     return (
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-                <div className="space-y-8 px-6">
+            <form
+                onSubmit={form.handleSubmit(onSubmit)}
+                className="space-y-8 max-h-screen overflow-y-auto p-4 sm:p-6"
+            >
+                <div className="space-y-6">
                     {/* Title Field */}
                     <FormField
                         control={form.control}
@@ -108,26 +111,36 @@ export const PostContent = ({ channelid }: PostContentProps) => {
                     />
                     {/* Image Upload */}
                     {imageOpen ? (
-                        <FormField
-                            control={form.control}
-                            name="image"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormControl>
-                                        <FileUpload
-                                            endpoint="postImage"
-                                            value={field.value}
-                                            onChange={field.onChange}
-                                        />
-                                    </FormControl>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
+                        <div className="relative border rounded-lg p-4 dark:bg-gray-800 bg-white">
+                            <FormField
+                                control={form.control}
+                                name="image"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormControl>
+                                            <FileUpload
+                                                endpoint="postImage"
+                                                value={field.value}
+                                                onChange={field.onChange}
+                                            />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                            <Button
+                                type="button"
+                                variant="ghost"
+                                className="absolute top-2 right-2"
+                                onClick={() => setImageOpen(false)}
+                            >
+                                <X className="h-4 w-4" />
+                            </Button>
+                        </div>
                     ) : (
                         <Button
                             type="button"
-                            className="self-end rounded-2xl bg-themeBlack text-white dark:bg-white dark:text-black flex gap-x-2"
+                            className="rounded-2xl bg-themeBlack text-white dark:bg-white dark:text-black flex gap-x-2"
                             onClick={() => setImageOpen(true)}
                         >
                             <Upload />
@@ -136,26 +149,36 @@ export const PostContent = ({ channelid }: PostContentProps) => {
                     )}
                     {/* Video Upload */}
                     {videoOpen ? (
-                        <FormField
-                            control={form.control}
-                            name="video"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormControl>
-                                        <FileUpload
-                                            endpoint="postVideo"
-                                            value={field.value}
-                                            onChange={field.onChange}
-                                        />
-                                    </FormControl>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
+                        <div className="relative border rounded-lg p-4 dark:bg-gray-800 bg-white">
+                            <FormField
+                                control={form.control}
+                                name="video"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormControl>
+                                            <FileUpload
+                                                endpoint="postVideo"
+                                                value={field.value}
+                                                onChange={field.onChange}
+                                            />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                            <Button
+                                type="button"
+                                variant="ghost"
+                                className="absolute top-2 right-2"
+                                onClick={() => setVideoOpen(false)}
+                            >
+                                <X className="h-4 w-4" />
+                            </Button>
+                        </div>
                     ) : (
                         <Button
                             type="button"
-                            className="self-end rounded-2xl bg-themeBlack text-white dark:bg-white dark:text-black flex gap-x-2"
+                            className="rounded-2xl bg-themeBlack text-white dark:bg-white dark:text-black flex gap-x-2"
                             onClick={() => setVideoOpen(true)}
                         >
                             <Upload />
@@ -163,16 +186,20 @@ export const PostContent = ({ channelid }: PostContentProps) => {
                         </Button>
                     )}
                 </div>
-                <div className="bg-transparent px-6 py-4">
-                    <Button disabled={isLoading} variant="ghost" type="submit">
+                {/* Submit Button */}
+                <div className="px-6 py-4 bg-transparent">
+                    <Button
+                        disabled={isLoading}
+                        type="submit"
+                        className="w-full"
+                    >
                         Post
                     </Button>
                 </div>
             </form>
         </Form>
-    )
-               }
-
+    );
+};
 
 
 
