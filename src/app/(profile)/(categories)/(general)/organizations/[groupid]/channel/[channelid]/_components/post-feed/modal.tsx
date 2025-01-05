@@ -44,7 +44,7 @@ export const Modal = ({
                 fill
                 className="rounded-lg object-contain"
                 alt="Full-size image"
-                heigt={200}
+                height={200}
                 width={300}
                // sizes="(max-width: 768px) 100vw, 50vw"
               />
