@@ -43,7 +43,9 @@ export default async function GroupPage({ params }: GroupPageProps) {
                             className="rounded-full"
                         />
                     ) : group.member.length > 3 ? (
-                        <AvatarGroup users={group.member.map((m) => m.User)} />
+                        <AvatarGroup
+    users={group.member.map((m) => m.User).filter((user) => user !== null) as { image?: string }[]}
+/>
                     ) : (
                         <Image
                             src={group.User?.image || "/default-group-image.png"}
