@@ -1,4 +1,4 @@
-"use client"
+
 
 import Link from "next/link"
 import GroupImage from "./group-image"
