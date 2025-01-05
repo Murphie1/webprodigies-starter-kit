@@ -174,8 +174,8 @@ export default async function GroupPage({ params }: GroupPageProps) {
                                 className="p-3 rounded-lg bg-white dark:bg-gray-800 shadow-md hover:scale-105 transition-all"
                             >
                                 <Link href={`/organizations/${groupId}/settings`}>
-                                <span className="text-md space-x-2 font-bold text-gray-800 dark:text-gray-200">
-                                    Settings
+                                <span className="flex flex-1 text-md space-x-2 font-semibold text-gray-800 dark:text-gray-200">
+                                   <Heart size={25} /> Settings
                                 </span>
                                     </Link>
                             </li>
