@@ -9,7 +9,7 @@ import {
 import ReactPlayer from "react-player";
 
 export const VideoModal = (
-  video,
+  video
 }: {
   video?: string | null;
 }) => {
