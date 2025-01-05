@@ -1,24 +1,22 @@
-// pages/group/[groupid].tsx
-"use client";
-
-import { GetServerSideProps } from "next";
 import { client } from "@/lib/prisma"; // Adjust path as per your setup
 import Image from "next/image";
-import { useTheme } from "next-themes";
 import AvatarGroup from "@/components/global/AvatarGroup";
 
 interface GroupPageProps {
-    group: {
-        id: string;
-        name: string;
-        thumbnail?: string;
-        member: { user: { image: string } }[];
-        channel: { id: string; name: string }[];
-    } | null;
+    params: { groupid: string };
 }
 
-export default function GroupPage({ group }: GroupPageProps) {
-    const { theme } = useTheme();
+export default async function GroupPage({ params }: GroupPageProps) {
+    const groupId = params.groupid;
+
+    // Fetch group data
+    const group = await client.group.findUnique({
+        where: { id: groupId },
+        include: {
+            member: { select: { user: { select: { image: true } } } },
+            channel: { select: { id: true, name: true } },
+        },
+    });
 
     if (!group) {
         return (
@@ -36,24 +34,24 @@ export default function GroupPage({ group }: GroupPageProps) {
                 {/* Group Header */}
                 <div className="flex items-center gap-4">
                     {group.thumbnail ? (
-    <Image
-        src={group.thumbnail}
-        alt="Group Thumbnail"
-        width={80}
-        height={80}
-        className="rounded-full"
-    />
-) : group.member.length > 3 ? (
-    <AvatarGroup users={group.member.map((m) => m.user)} />
-) : (
-    <Image
-        src={group.User.image || "/default-group-image.png"} // Fallback if group.User.image is not available
-        alt="Group Owner Avatar"
-        width={80}
-        height={80}
-        className="rounded-full"
-    />
-)}
+                        <Image
+                            src={group.thumbnail}
+                            alt="Group Thumbnail"
+                            width={80}
+                            height={80}
+                            className="rounded-full"
+                        />
+                    ) : group.member.length > 3 ? (
+                        <AvatarGroup users={group.member.map((m) => m.user)} />
+                    ) : (
+                        <Image
+                            src={group.User?.image || "/default-group-image.png"}
+                            alt="Group Owner Avatar"
+                            width={80}
+                            height={80}
+                            className="rounded-full"
+                        />
+                    )}
                     <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-200">
                         {group.name}
                     </h1>
@@ -80,22 +78,4 @@ export default function GroupPage({ group }: GroupPageProps) {
             </div>
         </div>
     );
-}
-
-export const getServerSideProps: GetServerSideProps = async (context) => {
-    const groupId = context.params?.groupid as string;
-
-    const group = await client.group.findUnique({
-        where: { id: groupId },
-        include: {
-            member: { select: { user: { select: { image: true } } } },
-            channel: { select: { id: true, name: true } },
-        },
-    });
-
-    return {
-        props: {
-            group,
-        },
-    };
-};
+                        }
