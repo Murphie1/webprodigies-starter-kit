@@ -72,7 +72,7 @@ export default async function GroupPage({ params }: GroupPageProps) {
                                 key={channel.id}
                                 className="p-3 rounded-lg bg-white dark:bg-gray-800 shadow"
                             >
-                                <Link href={`/organizations/${groupId}/${channel.id}`}>
+                                <Link href={`/organizations/${groupId}/channel/${channel.id}`}>
                                 <span className="text-gray-800 dark:text-gray-200">
                                     {channel.name}
                                 </span>
