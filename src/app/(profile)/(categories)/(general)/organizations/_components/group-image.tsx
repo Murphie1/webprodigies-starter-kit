@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { client } from "@/lib/prisma";
 
 interface User {
-    image?: string;
+    image?: string | null;
 }
 
 interface GroupMember {
