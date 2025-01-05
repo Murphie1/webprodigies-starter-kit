@@ -4,14 +4,12 @@ import {
   DialogDescription,
   DialogTrigger,
 } from "@/components/ui/dialog";
-//import { Button } from "@/components/ui/button";
 import Image from "next/image";
-//import ReactPlayer from "react-player";
 
 export const Modal = ({
- image
+  image,
 }: {
-  image?: string | null;
+  image?: string | null | undefined;
 }) => {
   return (
     <Dialog>
@@ -28,9 +26,9 @@ export const Modal = ({
             />
           ) : (
             <div className="w-full">
-          <p className="text-center text-gray-500 dark:text-gray-400">
-              No content available
-            </p>
+              <p className="text-center text-gray-500 dark:text-gray-400">
+                No content available
+              </p>
             </div>
           )}
         </div>
@@ -38,15 +36,17 @@ export const Modal = ({
 
       {/* Modal Content */}
       <DialogContent className="w-full max-w-screen-md p-4 dark:bg-gray-800 bg-white rounded-lg shadow-lg">
-        <DialogDescription className="relative flex items-center justify-center h-[350px] sm:h-[550px]">
+        <DialogDescription className="relative w-full h-full flex items-center justify-center">
           {image ? (
-            <Image
-              src={image}
-              fill
-              className="rounded-lg object-contain"
-              alt="Full-size image"
-              sizes="(max-width: 768px) 100vw, 50vw"
-            />
+            <div className="relative w-full h-full">
+              <Image
+                src={image}
+                fill
+                className="rounded-lg object-contain"
+                alt="Full-size image"
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
+            </div>
           ) : (
             <p className="text-center text-gray-500 dark:text-gray-400">
               No content available
