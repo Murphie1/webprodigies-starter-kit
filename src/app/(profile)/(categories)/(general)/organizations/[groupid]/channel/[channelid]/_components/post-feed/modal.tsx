@@ -9,7 +9,7 @@ import Image from "next/image";
 //import ReactPlayer from "react-player";
 
 export const Modal = ({
-  image,
+ image
 }: {
   image?: string | null;
 }) => {
