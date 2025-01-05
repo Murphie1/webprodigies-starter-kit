@@ -4,16 +4,14 @@ import {
   DialogDescription,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
+//import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import ReactPlayer from "react-player";
+//import ReactPlayer from "react-player";
 
 export const Modal = ({
   image,
-  video,
 }: {
   image?: string | null;
-  video?: string | null;
 }) => {
   return (
     <Dialog>
@@ -30,7 +28,9 @@ export const Modal = ({
             />
           ) : (
             <div className="w-full">
-              <ReactPlayer url={video || ""} controls width="100%" />
+          <p className="text-center text-gray-500 dark:text-gray-400">
+              No content available
+            </p>
             </div>
           )}
         </div>
@@ -47,8 +47,6 @@ export const Modal = ({
               alt="Full-size image"
               sizes="(max-width: 768px) 100vw, 50vw"
             />
-          ) : video ? (
-            <ReactPlayer url={video} controls width="100%" height="100%" />
           ) : (
             <p className="text-center text-gray-500 dark:text-gray-400">
               No content available
