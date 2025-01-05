@@ -1,4 +1,5 @@
 import { Modal } from "./modal";
+import { VideoModal } from "./video";
 import { HtmlParser } from "@/components/global/html-parser";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
@@ -54,14 +55,17 @@ export const PostCard = ({
         />
 
         {/* Link to Post */}
-        <Link href={`${pathname}/${postid}`} className="w-full">
+        <div className="w-full">
           <div className="flex flex-col gap-y-3">
             <h2 className="text-2xl font-semibold">{title}</h2>
             {/* Conditional Rendering for Media */}
-            {(image || video) && <Modal image={image} video={video} />}
+            {image && <Modal image={image} />}
+            {video && <VideoModal video={video} />}
+            <Link href={`${pathname}/${postid}`} className="w-full">
             <HtmlParser html={html} />
+              </Link>
           </div>
-        </Link>
+          </div>
       </CardContent>
 
       {/* Separator */}
