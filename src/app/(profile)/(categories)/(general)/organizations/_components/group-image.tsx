@@ -1,100 +1,45 @@
-"use client"
-    
-import Image from "next/image";
-import AvatarGroup from "@/components/global/AvatarGroup";
-import { useEffect, useState } from "react";
-import { client } from "@/lib/prisma";
+// components/AvatarDialog.tsx
+import React from "react";
+import * as Dialog from "@radix-ui/react-dialog";
+import { clsx } from "clsx";
 
-interface User {
-    image?: string | null;
+interface AvatarDialogProps {
+  imageUrl: string;
+  size?: number; // Optional prop for customizing the size of the avatar
 }
 
-interface GroupMember {
-    User: User | null;
-}
-
-interface Group {
-    thumbnail?: string | null;
-    User?: User;
-    member: GroupMember[];
-}
-
-interface ImageProps {
-    imageUrl: string;
-}
-
-const GroupImage = ({ imageUrl }: ImageProps) => {
-    const [group, setGroup] = useState<Group | null>(null);
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        const fetchGroup = async () => {
-            try {
-                const fetchedGroup = await client.group.findUnique({
-                    where: { id: imageUrl },
-                    include: {
-                        User: { select: { image: true } },
-                        member: { select: { User: { select: { image: true } } } },
-                    },
-                });
-                setGroup(fetchedGroup);
-            } catch (error) {
-                console.error("Error fetching group:", error);
-            } finally {
-                setLoading(false);
-            }
-        };
-        fetchGroup();
-    }, [imageUrl]);
-
-    if (loading) {
-        return (
-            <div className="min-h-screen flex justify-center items-center bg-gray-100 dark:bg-gray-900">
-                <h1 className="text-gray-700 dark:text-gray-300 text-xl">Loading...</h1>
-            </div>
-        );
-    }
-
-    if (!group) {
-        return (
-            <div className="h-9 w-9 rounded-full flex items-center bg-gray-100 dark:bg-gray-900">
-                <Image
-                    src="/next.svg"
-                    alt="Group Owner Avatar"
-                    fill
-                    className="rounded-full"
-                />
-            </div>
-        );
-    }
-
-    return (
-        <>
-            {group.thumbnail ? (
-                <Image
-                    src={group.thumbnail}
-                    alt="Group Thumbnail"
-                    width={50}
-                    height={50}
-                    className="rounded-full"
-                />
-            ) : group.member.length > 3 ? (
-                <AvatarGroup
-                    users={group.member
-                        .map((m: GroupMember) => m.User)
-                        .filter((user): user is User => user !== null)}
-                />
-            ) : (
-                <Image
-                    src={group.User?.image || "/default-group-image.png"}
-                    alt="Group Owner Avatar"
-                    width={50}
-                    height={50}
-                    className="rounded-full"
-                />
-            )}
-        </>
-    );
+const GroupImage: React.FC<AvatarDialogProps> = ({ imageUrl, size = 40 }) => {
+  return (
+    <Dialog.Root>
+      <Dialog.Trigger
+        className={clsx(
+          "rounded-full overflow-hidden border-2 border-gray-300 focus:outline-none focus:ring focus:ring-blue-400",
+          `h-[${size}px] w-[${size}px]`
+        )}
+      >
+        <img
+          src={imageUrl}
+          alt="User Avatar"
+          className="w-full h-full object-cover"
+        />
+      </Dialog.Trigger>
+      <Dialog.Portal>
+        <Dialog.Overlay className="bg-black/50 fixed inset-0" />
+        <Dialog.Content
+          className="bg-white p-4 rounded-lg shadow-lg fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 max-w-sm w-full"
+        >
+          <img
+            src={imageUrl}
+            alt="Enlarged Avatar"
+            className="rounded-lg w-full object-contain"
+          />
+          <Dialog.Close className="absolute top-2 right-2 text-gray-500 hover:text-gray-700 focus:outline-none">
+            ✕
+          </Dialog.Close>
+        </Dialog.Content>
+      </Dialog.Portal>
+    </Dialog.Root>
+  );
 };
 
 export default GroupImage;
