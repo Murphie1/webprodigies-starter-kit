@@ -14,7 +14,7 @@ interface GroupMember {
 }
 
 interface Group {
-    thumbnail?: string;
+    thumbnail?: string | null;
     User?: User;
     member: GroupMember[];
 }
