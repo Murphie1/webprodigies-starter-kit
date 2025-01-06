@@ -1,6 +1,6 @@
 "use server";
 
-import { clerkClient } from "@clerk/nextjs/server";
+import { clerkClient, currentUser } from "@clerk/nextjs/server";
 import { parseStringify } from "../utils";
 import { createAdminClient } from "@/lib/appwrite";
 import { appwriteConfig } from "@/lib/appwrite/config";
@@ -87,7 +87,7 @@ export const getCurrentUser = async () => {
     const { databases } = await createAdminClient();
 
     // Retrieve the current user from Clerk
-    const { user } = await clerkClient.users.getUser();
+    const user = await currentUser();
     if (!user || !user.id) return null;
 
     // Find the user in Appwrite database using Clerk ID
