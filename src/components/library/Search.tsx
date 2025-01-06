@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { Input } from "@/components/ui/input";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { getFiles } from "@/lib/actions/file.actions";
+import { getGroupFiles } from "@/lib/actions/file.actions";
 import { Models } from "node-appwrite";
 import Thumbnail from "./Thumbnail";
 import FormattedDateTime from "./FormattedDateTime";
@@ -28,7 +28,7 @@ const Search = () => {
         return router.push(path.replace(searchParams.toString(), ""));
       }
 
-      const files = await getFiles({ types: [], searchText: debouncedQuery });
+      const files = await getGroupFiles({ types: [], groupId: "", searchText: debouncedQuery });
       setResults(files.documents);
       setOpen(true);
     };
