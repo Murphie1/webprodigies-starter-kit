@@ -28,7 +28,7 @@ const createSession = async (accountId: string) => {
   const { account } = await createAdminClient();
 
   try {
-    const session = await account.createSession(accountId, "random-password"); // Replace with a secure method
+    const session = await account.createSession(accountId); // Replace with a secure method
     (await cookies()).set("appwrite-session", session.secret, {
       path: "/",
       httpOnly: true,
