@@ -24,11 +24,17 @@ const getUserByClerkId = async (clerkId: string) => {
   return result.total > 0 ? result.documents[0] : null;
 };
 
-const createSession = async (clerkId: string) => {
+const createSession = async ({
+  clerkId, 
+ accountId,
+}: {
+    clerkId: string;
+  accountId: string;
+}) => {
   const { account } = await createAdminClient();
 
   try {
-    const session = await account.createSession(ID.unique(), clerkId); // Replace with a secure method
+    const session = await account.createSession(accountId, clerkId); // Replace with a secure method
     (await cookies()).set("appwrite-session", session.secret, {
       path: "/",
       httpOnly: true,
@@ -70,7 +76,7 @@ const createAccount = async ({
     }
   );
 
-  return accountId;
+  return parseStringify({ accountId )};
 };
 
 export const authenticateUser = async ({
@@ -88,11 +94,11 @@ export const authenticateUser = async ({
     const existingUser = await getUserByClerkId(clerkId);
 
     if (existingUser) {
-      const sessionId = await createSession(existingUser.clerkId);
+      const sessionId = await createSession(existingUser.accountId, existingUser.clerkId);
       return parseStringify({ sessionId, user: existingUser });
     } else {
       const accountId = await createAccount({ fullName, email, clerkId, avatar });
-      const sessionId = await createSession(clerkId);
+      const sessionId = await createSession(clerkId, accountId);
       return parseStringify({ sessionId, user: { fullName, email, clerkId, accountId } });
     }
   } catch (error) {
