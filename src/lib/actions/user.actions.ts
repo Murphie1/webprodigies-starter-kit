@@ -24,11 +24,11 @@ const getUserByClerkId = async (clerkId: string) => {
   return result.total > 0 ? result.documents[0] : null;
 };
 
-const createSession = async (accountId: string) => {
+const createSession = async (clerkId: string) => {
   const { account } = await createAdminClient();
 
   try {
-    const session = await account.createSession(accountId); // Replace with a secure method
+    const session = await account.createSession(ID.unique(), clerkId); // Replace with a secure method
     (await cookies()).set("appwrite-session", session.secret, {
       path: "/",
       httpOnly: true,
@@ -88,11 +88,11 @@ export const authenticateUser = async ({
     const existingUser = await getUserByClerkId(clerkId);
 
     if (existingUser) {
-      const sessionId = await createSession(existingUser.accountId);
+      const sessionId = await createSession(existingUser.clerkId);
       return parseStringify({ sessionId, user: existingUser });
     } else {
       const accountId = await createAccount({ fullName, email, clerkId, avatar });
-      const sessionId = await createSession(accountId);
+      const sessionId = await createSession(clerkId);
       return parseStringify({ sessionId, user: { fullName, email, clerkId, accountId } });
     }
   } catch (error) {
