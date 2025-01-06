@@ -10,7 +10,7 @@ import { appwriteConfig } from "@/lib/appwrite/config";
 import { Query, ID } from "node-appwrite";
 
 import { cookies } from "next/headers";
-//import { avatarPlaceholderUrl } from "@/constants";
+//import { avatarPlaceholderUrl } from "@/constants"
 
 const getUserByClerkId = async (clerkId: string) => {
   const { databases } = await createAdminClient();
@@ -24,31 +24,6 @@ const getUserByClerkId = async (clerkId: string) => {
   return result.total > 0 ? result.documents[0] : null;
 };
 
-const createSession = async ({
-  clerkId, 
- accountId,
-}: {
-    clerkId: string;
-  accountId: string;
-}) => {
-  const { account } = await createAdminClient();
-
-  try {
-    const session = await account.createSession(accountId, clerkId); // Replace with a secure method
-    (await cookies()).set("appwrite-session", session.secret, {
-      path: "/",
-      httpOnly: true,
-      sameSite: "strict",
-      secure: true,
-    });
-
-    return session.$id;
-  } catch (error) {
-    console.error("Failed to create session:", error);
-    throw error;
-  }
-};
-
 const createAccount = async ({
   fullName,
   email,
@@ -60,9 +35,11 @@ const createAccount = async ({
   clerkId: string;
   avatar: string;
 }) => {
-  const { databases } = await createAdminClient();
+  const { account, databases } = await createAdminClient();
 
   const accountId = ID.unique();
+  await account.create(accountId, email, clerkId, fullName); // Use clerkId as password
+
   await databases.createDocument(
     appwriteConfig.databaseId,
     appwriteConfig.usersCollectionId,
@@ -76,7 +53,32 @@ const createAccount = async ({
     }
   );
 
-  return parseStringify({ accountId )};
+  return accountId;
+};
+
+const createSession = async ({
+  clerkId,
+  accountId,
+}: {
+  clerkId: string;
+  accountId: string;
+}) => {
+  const { account } = await createAdminClient();
+
+  try {
+    const session = await account.createSession(accountId, clerkId); // Use clerkId for session creation
+    (await cookies()).set("appwrite-session", session.secret, {
+      path: "/",
+      httpOnly: true,
+      sameSite: "strict",
+      secure: true,
+    });
+
+    return session.$id;
+  } catch (error) {
+    console.error("Failed to create session:", error);
+    throw error;
+  }
 };
 
 export const authenticateUser = async ({
@@ -94,11 +96,14 @@ export const authenticateUser = async ({
     const existingUser = await getUserByClerkId(clerkId);
 
     if (existingUser) {
-      const sessionId = await createSession(existingUser.accountId, existingUser.clerkId);
+      const sessionId = await createSession({
+        clerkId: existingUser.clerkId,
+        accountId: existingUser.accountId,
+      });
       return parseStringify({ sessionId, user: existingUser });
     } else {
       const accountId = await createAccount({ fullName, email, clerkId, avatar });
-      const sessionId = await createSession(clerkId, accountId);
+      const sessionId = await createSession({ clerkId, accountId });
       return parseStringify({ sessionId, user: { fullName, email, clerkId, accountId } });
     }
   } catch (error) {
@@ -106,6 +111,7 @@ export const authenticateUser = async ({
     throw new Error("Failed to authenticate user");
   }
 };
+
 export const getCurrentUser = async () => {
   try {
     const { databases, account } = await createSessionClient();
@@ -126,6 +132,61 @@ export const getCurrentUser = async () => {
     return null;
   }
 };
+
+{/*export const getClerkUsers = async ({ userIds }: { userIds: string[] }) => {
+  try {
+    const { data } = await clerkClient.users.getUserList({
+      emailAddress: userIds,
+    });
+
+    const users = data.map((user) => ({
+      id: user.id,
+      name: `${user.firstName} ${user.lastName}`,
+      email: user.emailAddresses[0].emailAddress,
+      avatar: user.imageUrl,
+    }));
+
+    const sortedUsers = userIds.map((email) =>
+      users.find((user) => user.email === email)
+    );
+
+    return parseStringify(sortedUsers);
+  } catch (error) {
+    console.log(`Error fetching users: ${error}`);
+  }
+};
+
+export const getDocumentUsers = async ({
+  roomId,
+  currentUser,
+  text,
+}: {
+  roomId: string;
+  currentUser: string;
+  text: string;
+}) => {
+  try {
+    const room = await liveblocks.getRoom(roomId);
+
+    const users = Object.keys(room.usersAccesses).filter(
+      (email) => email !== currentUser
+    );
+
+    if (text.length) {
+      const lowerCaseText = text.toLowerCase();
+
+      const filteredUsers = users.filter((email: string) =>
+        email.toLowerCase().includes(lowerCaseText)
+      );
+
+      return parseStringify(filteredUsers);
+    }
+
+    return parseStringify(users);
+  } catch (error) {
+    console.log(`Error fetching document users: ${error}`);
+  }
+};*/}
 
 export const getClerkUsers = async ({ userIds }: { userIds: string[] }) => {
     try {
@@ -174,7 +235,7 @@ export const getDocumentUsers = async ({
             )
 
             return parseStringify(filteredUsers)
-        }
+       }
 
         return parseStringify(users)
     } catch (error) {
