@@ -13,9 +13,9 @@ const LibraryPage = async () => {
 
   const appwriteUser = await authenticateUser({
     clerkId: user.clerkId || clerk.id,
-    fullName: user.username || `${clerk.firstName + clerk.lastName}`,
-    email: user.email || clerk.emailAddresses[0]?.emailAddress,
-    avatar: user.image || clerk.imageUrl,
+    fullName: user.username || `${clerk.firstName + clerk.lastName}` || clerk.username || "",
+    email: user.email || clerk.emailAddresses[0]?.emailAddress || "",
+    avatar: user.image || clerk.imageUrl || "",
   })
   
     return 
