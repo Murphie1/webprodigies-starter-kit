@@ -9,11 +9,11 @@ const LibraryPage = async () => {
   if (!user) redirect("/")
 
   const clerk = await currentUser()
-  if (!clerk || !clerk.firstName || !clerk.username) redirect("/sign-in")
+  if (!clerk) redirect("/sign-in")
 
   const appwriteUser = await authenticateUser({
     clerkId: user.clerkId || clerk.id,
-    fullName: user.username || `${clerk.firstName + clerk.lastName}` || clerk.username || "",
+    fullName: user.username || clerk.firstName || clerk.username || "",
     email: user.email || clerk.emailAddresses[0]?.emailAddress || "",
     avatar: user.image || clerk.imageUrl || "",
   })
