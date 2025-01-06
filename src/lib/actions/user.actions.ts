@@ -1,17 +1,13 @@
-"use server"
+"use server";
 
-import { clerkClient } from "@clerk/nextjs/server"
-import { parseStringify } from "../utils"
-import { liveblocks } from "../liveblocks"
-
-
-import { createAdminClient, createSessionClient } from "@/lib/appwrite";
+import { clerkClient } from "@clerk/nextjs/server";
+import { parseStringify } from "../utils";
+import { createAdminClient } from "@/lib/appwrite";
 import { appwriteConfig } from "@/lib/appwrite/config";
 import { Query, ID } from "node-appwrite";
+import { liveblocks } from "../liveblocks";
 
-import { cookies } from "next/headers";
-//import { avatarPlaceholderUrl } from "@/constants"
-
+// Function to find a user by Clerk ID in the Appwrite database
 const getUserByClerkId = async (clerkId: string) => {
   const { databases } = await createAdminClient();
 
@@ -24,6 +20,7 @@ const getUserByClerkId = async (clerkId: string) => {
   return result.total > 0 ? result.documents[0] : null;
 };
 
+// Function to create a new user in the Appwrite database
 const createAccount = async ({
   fullName,
   email,
@@ -35,10 +32,9 @@ const createAccount = async ({
   clerkId: string;
   avatar: string;
 }) => {
-  const { account, databases } = await createAdminClient();
+  const { databases } = await createAdminClient();
 
   const accountId = ID.unique();
-  await account.create(accountId, email, clerkId, fullName); // Use clerkId as password
 
   await databases.createDocument(
     appwriteConfig.databaseId,
@@ -56,31 +52,7 @@ const createAccount = async ({
   return accountId;
 };
 
-const createSession = async ({
-  clerkId,
-  accountId,
-}: {
-  clerkId: string;
-  accountId: string;
-}) => {
-  const { account } = await createAdminClient();
-
-  try {
-    const session = await account.createSession(accountId, clerkId); // Use clerkId for session creation
-    (await cookies()).set("appwrite-session", session.secret, {
-      path: "/",
-      httpOnly: true,
-      sameSite: "strict",
-      secure: true,
-    });
-
-    return session.$id;
-  } catch (error) {
-    console.error("Failed to create session:", error);
-    throw error;
-  }
-};
-
+// Function to authenticate or register a user
 export const authenticateUser = async ({
   clerkId,
   fullName,
@@ -96,15 +68,12 @@ export const authenticateUser = async ({
     const existingUser = await getUserByClerkId(clerkId);
 
     if (existingUser) {
-      const sessionId = await createSession({
-        clerkId: existingUser.clerkId,
-        accountId: existingUser.accountId,
-      });
-      return parseStringify({ sessionId, user: existingUser });
+      // User already exists, return user data
+      return parseStringify({ user: existingUser });
     } else {
+      // Create a new user in the database
       const accountId = await createAccount({ fullName, email, clerkId, avatar });
-      const sessionId = await createSession({ clerkId, accountId });
-      return parseStringify({ sessionId, user: { fullName, email, clerkId, accountId } });
+      return parseStringify({ user: { fullName, email, clerkId, accountId } });
     }
   } catch (error) {
     console.error("Authentication failed:", error);
@@ -112,21 +81,19 @@ export const authenticateUser = async ({
   }
 };
 
+// Function to retrieve the current user based on Clerk's session
 export const getCurrentUser = async () => {
   try {
-    const { databases, account } = await createSessionClient();
+    const { databases } = await createAdminClient();
 
-    const sessionCookie = (await cookies()).get("appwrite-session");
-    if (!sessionCookie) return null;
+    // Retrieve the current user from Clerk
+    const { user } = await clerkClient.users.getUser();
+    if (!user || !user.id) return null;
 
-    const session = await account.get();
-    const user = await databases.listDocuments(
-      appwriteConfig.databaseId,
-      appwriteConfig.usersCollectionId,
-      [Query.equal("accountId", session.$id)]
-    );
+    // Find the user in Appwrite database using Clerk ID
+    const result = await getUserByClerkId(user.id);
 
-    return user.total > 0 ? parseStringify(user.documents[0]) : null;
+    return result ? parseStringify(result) : null;
   } catch (error) {
     console.error("Failed to get current user:", error);
     return null;
