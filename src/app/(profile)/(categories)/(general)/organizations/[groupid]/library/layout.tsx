@@ -1,5 +1,5 @@
 import React from "react";
-import Sidebar from "@/components/Sidebar";
+import Sidebar from "@/components/library/Sidebar";
 import MobileNavigation from "@/components/library/MobileNavigation";
 import Header from "@/components/library/Header";
 import { getCurrentUser } from "@/lib/actions/user.actions";
