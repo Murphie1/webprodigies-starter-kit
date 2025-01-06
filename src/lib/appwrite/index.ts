@@ -1,4 +1,4 @@
-"use server";
+{/*"use server";
 
 import { Account, Avatars, Client, Databases, Storage } from "node-appwrite";
 import { appwriteConfig } from "@/lib/appwrite/config";
@@ -21,6 +21,33 @@ export const createSessionClient = async () => {
     },
     get databases() {
       return new Databases(client);
+    },
+  };
+};*/}
+"use server";
+
+import { Account, Avatars, Client, Databases, Storage } from "node-appwrite";
+import { appwriteConfig } from "@/lib/appwrite/config";
+import { currentUser } from "@clerk/nextjs/server";
+
+export const createSessionClient = async () => {
+  const user = await currentUser();
+  if (!user || !user.id) throw new Error("User not authenticated");
+
+  const client = new Client()
+    .setEndpoint(appwriteConfig.endpointUrl)
+    .setProject(appwriteConfig.projectId)
+    .setKey(appwriteConfig.secretKey); // Use the admin key or a user-specific key if applicable
+
+  return {
+    get account() {
+      return new Account(client);
+    },
+    get databases() {
+      return new Databases(client);
+    },
+    get storage() {
+      return new Storage(client);
     },
   };
 };
