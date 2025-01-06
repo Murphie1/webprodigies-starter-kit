@@ -95,15 +95,31 @@ declare interface SearchParamsProps {
 declare interface UploadFileProps {
   file: File;
   ownerId: string;
+  clerkId: string;
   accountId: string;
   path: string;
 }
+declare interface UploadGroupFileProps {
+  file: File;
+  ownerId: string;
+  clerkId: string;
+  groupId: string;
+  accountId: string;
+  path: string;
+    }
 declare interface GetFilesProps {
   types: FileType[];
   searchText?: string;
   sort?: string;
   limit?: number;
 }
+declare interface GetGroupFilesProps {
+  types: FileType[];
+  groupId: string;
+  searchText?: string;
+  sort?: string;
+  limit?: number;
+    }
 declare interface RenameFileProps {
   fileId: string;
   name: string;
@@ -115,6 +131,11 @@ declare interface UpdateFileUsersProps {
   emails: string[];
   path: string;
 }
+declare interface UpdateFileGroupsProps {
+  fileId: string;
+  groupIds: string[];
+  path: string;
+    }
 declare interface DeleteFileProps {
   fileId: string;
   bucketFileId: string;
