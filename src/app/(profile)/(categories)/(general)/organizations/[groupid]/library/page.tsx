@@ -9,7 +9,7 @@ const LibraryPage = async () => {
   if (!user) redirect("/")
 
   const clerk = await currentUser()
-  if (!clerk) redirect("/sign-in")
+  if (!clerk || !clerk.firstName || !clerk.username) redirect("/sign-in")
 
   const appwriteUser = await authenticateUser({
     clerkId: user.clerkId || clerk.id,
