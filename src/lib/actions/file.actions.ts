@@ -72,7 +72,7 @@ export const uploadGroupFile = async ({
   path,
 }: UploadGroupFileProps) => {
   //const { storage, databases } = await createAdminClient();
-const { databases } = await createAdminClient()!
+const { databases } = await createAdminClient();
   try {
     //const inputFile = InputFile.fromBuffer(file, file.name);
 
@@ -83,11 +83,11 @@ const { databases } = await createAdminClient()!
     //);
 
     const fileDocument = {
-      type: image,//getFileType(bucketFile.name).type,
+     // type: image,//getFileType(bucketFile.name).type,
       name: "dummyimage",//bucketFile.name,
-      url: "https;//www.utfs.io/dummyimage.png",//constructFileUrl(bucketFile.$id),
+      url: "https://www.utfs.io/dummyimage.png",//constructFileUrl(bucketFile.$id),
       extension: ".png",//getFileType(bucketFile.name).extension,
-      size: "12",//bucketFile.sizeOriginal,
+      size: 12,//bucketFile.sizeOriginal,
       owner: ownerId,
       accountId,
       clerkId,
