@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useState } from "react";
+{/*import React, { useCallback, useState } from "react";
 
 import { useDropzone } from "react-dropzone";
 import { Button } from "@/components/ui/button";
@@ -129,7 +129,7 @@ const FileUploader = ({ ownerId, accountId, className }: Props) => {
 };
 
 export default FileUploader;
-                   {/*"use client";
+                   "use client";*/}
 
 import React, { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
@@ -197,9 +197,9 @@ const FileUploader = ({ ownerId, accountId, className }: Props) => {
         />{" "}
         <p>Upload</p>
       </Button>
-      {/* Optional: You can display a loading spinner or message here if you want to show upload progress 
+      {/* Optional: You can display a loading spinner or message here if you want to show upload progress*/} 
     </div>
   );
 };
 
-export default FileUploader;*/}
+export default FileUploader;
