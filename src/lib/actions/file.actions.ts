@@ -92,7 +92,7 @@ export const uploadGroupFile = async ({
       accountId,
       clerkId,
       groupId,
-      groupIds: groupId,
+      groupIds: [],
       users: [],
       bucketFileId: bucketFile.$id,
     };
