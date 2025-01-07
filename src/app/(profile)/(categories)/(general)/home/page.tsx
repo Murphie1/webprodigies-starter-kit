@@ -1,9 +1,9 @@
 import Grids from "./_components/grids"
 import { uploadGroupFile } from "@/lib/actions/file.actions";
 
-const Homepage = await () => {
+const file = await uploadGroupFile({ file: "1234", ownerId: "123", clerkId: "123", groupId: "123", accountId: "123", path: "1234" });
     
-    const file = await uploadGroupFile({ file: "1234", ownerId: "123", clerkId: "123", groupId: "123", accountId: "123", path: "1234" });
+const Homepage = await () => {
     
     return (
         <div className="flex flex-col pt-6 space-y-2 items-center justify-center md:grid md:grid-cols-2 md:space-y-0 md:space-x-8">
