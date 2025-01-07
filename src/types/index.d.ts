@@ -100,7 +100,7 @@ declare interface UploadFileProps {
   path: string;
 }
 declare interface UploadGroupFileProps {
-  file: File;
+  file: string;//File;
   ownerId: string;
   clerkId: string;
   groupId: string;
