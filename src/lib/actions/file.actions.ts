@@ -26,9 +26,9 @@ export const uploadFile = async ({
     const inputFile = InputFile.fromBuffer(file, file.name);
 
     const bucketFile = await storage.createFile(
-      appwriteConfig.bucketId,
-      ID.unique(),
-      inputFile,
+     appwriteConfig.bucketId,
+     ID.unique(),
+     inputFile,
     );
 
     const fileDocument = {
@@ -53,7 +53,7 @@ export const uploadFile = async ({
         fileDocument,
       )
       .catch(async (error: unknown) => {
-        await storage.deleteFile(appwriteConfig.bucketId, bucketFile.$id);
+       await storage.deleteFile(appwriteConfig.bucketId, bucketFile.$id);
         handleError(error, "Failed to create file document");
       });
 
@@ -71,30 +71,30 @@ export const uploadGroupFile = async ({
   accountId,
   path,
 }: UploadGroupFileProps) => {
-  const { storage, databases } = await createAdminClient();
-
+  //const { storage, databases } = await createAdminClient();
+const { databases } = await createAdminClient()!
   try {
-    const inputFile = InputFile.fromBuffer(file, file.name);
+    //const inputFile = InputFile.fromBuffer(file, file.name);
 
-    const bucketFile = await storage.createFile(
-      appwriteConfig.bucketId,
-      ID.unique(),
-      inputFile,
-    );
+   // const bucketFile = await storage.createFile(
+    //  appwriteConfig.bucketId,
+     // ID.unique(),
+     // inputFile,
+    //);
 
     const fileDocument = {
-      type: getFileType(bucketFile.name).type,
-      name: bucketFile.name,
-      url: constructFileUrl(bucketFile.$id),
-      extension: getFileType(bucketFile.name).extension,
-      size: bucketFile.sizeOriginal,
+      type: image,//getFileType(bucketFile.name).type,
+      name: "dummyimage",//bucketFile.name,
+      url: "https;//www.utfs.io/dummyimage.png",//constructFileUrl(bucketFile.$id),
+      extension: ".png",//getFileType(bucketFile.name).extension,
+      size: "12",//bucketFile.sizeOriginal,
       owner: ownerId,
       accountId,
       clerkId,
       groupId,
       groupIds: [],
       users: [],
-      bucketFileId: bucketFile.$id,
+      bucketFileId: "12344",//bucketFile.$id,
     };
 
     const newFile = await databases
@@ -105,7 +105,7 @@ export const uploadGroupFile = async ({
         fileDocument,
       )
       .catch(async (error: unknown) => {
-        await storage.deleteFile(appwriteConfig.bucketId, bucketFile.$id);
+       // await storage.deleteFile(appwriteConfig.bucketId, bucketFile.$id);
         handleError(error, "Failed to create file document");
       });
 
