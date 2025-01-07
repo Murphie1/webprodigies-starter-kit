@@ -9,7 +9,7 @@ import Image from "next/image";
 import Thumbnail from "./Thumbnail";
 import { MAX_FILE_SIZE } from "@/constants";
 import { useToast } from "@/hooks/use-toast";
-import { uploadGroupFile } from "@/lib/actions/file.actions";
+import { uploadFile } from "@/lib/actions/file.actions";
 import { usePathname } from "next/navigation";
 
 interface Props {
@@ -44,7 +44,7 @@ const FileUploader = ({ ownerId, accountId, className }: Props) => {
           });
         }
 
-        return uploadGroupFile({ file, ownerId, clerkId: "123", groupId: "123", accountId, path }).then(
+        return uploadFile({ file, ownerId, clerkId: "123", accountId, path }).then(
           (uploadedFile) => {
             if (uploadedFile) {
               setFiles((prevFiles) =>
@@ -129,3 +129,77 @@ const FileUploader = ({ ownerId, accountId, className }: Props) => {
 };
 
 export default FileUploader;
+                   {/*"use client";
+
+import React, { useCallback } from "react";
+import { useDropzone } from "react-dropzone";
+import { Button } from "@/components/ui/button";
+import { cn, convertFileToUrl, getFileType } from "@/lib/utils";
+import Image from "next/image";
+import Thumbnail from "./Thumbnail";
+import { MAX_FILE_SIZE } from "@/constants";
+import { useToast } from "@/hooks/use-toast";
+import { uploadGroupFile } from "@/lib/actions/file.actions";
+import { usePathname } from "next/navigation";
+
+interface Props {
+  ownerId: string;
+  accountId: string;
+  className?: string;
+}
+
+const FileUploader = ({ ownerId, accountId, className }: Props) => {
+  const path = usePathname();
+  const { toast } = useToast();
+
+  const onDrop = useCallback(
+    async (acceptedFiles: File[]) => {
+      const uploadPromises = acceptedFiles.map(async (file) => {
+        // Check if file size exceeds the max limit
+        if (file.size > MAX_FILE_SIZE) {
+          return toast({
+            description: (
+              <p className="body-2 text-white">
+                <span className="font-semibold">{file.name}</span> is too large.
+                Max file size is 50MB.
+              </p>
+            ),
+            className: "error-toast",
+          });
+        }
+
+        // Upload the file directly without saving it to state
+        return uploadGroupFile({ file, ownerId, clerkId: "123", groupId: "123", accountId, path }).then(
+          (uploadedFile) => {
+            if (uploadedFile) {
+              // Optionally handle the uploaded file (e.g., show a success message, trigger another action)
+            }
+          },
+        );
+      });
+
+      await Promise.all(uploadPromises);
+    },
+    [ownerId, accountId, path, toast],
+  );
+
+  const { getRootProps, getInputProps } = useDropzone({ onDrop });
+
+  return (
+    <div {...getRootProps()} className="cursor-pointer">
+      <input {...getInputProps()} />
+      <Button type="button" className={cn("uploader-button", className)}>
+        <Image
+          src="/assets/icons/upload.svg"
+          alt="upload"
+          width={24}
+          height={24}
+        />{" "}
+        <p>Upload</p>
+      </Button>
+      {/* Optional: You can display a loading spinner or message here if you want to show upload progress 
+    </div>
+  );
+};
+
+export default FileUploader;*/}
