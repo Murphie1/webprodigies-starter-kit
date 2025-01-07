@@ -71,6 +71,7 @@ export const uploadGroupFile = async ({
   accountId,
   path,
 }: UploadGroupFileProps) => {
+  console.log("Recieved file:", file);
   //const { storage, databases } = await createAdminClient();
 const { databases } = await createAdminClient();
   try {
@@ -81,7 +82,7 @@ const { databases } = await createAdminClient();
      // ID.unique(),
      // inputFile,
     //);
-
+console.log("Starting Document creation:", file);
     const fileDocument = {
      // type: image,//getFileType(bucketFile.name).type,
       name: "dummyimage",//bucketFile.name,
