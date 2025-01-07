@@ -44,7 +44,7 @@ const FileUploader = ({ ownerId, accountId, className }: Props) => {
           });
         }
 
-        return uploadGroupFile({ file, ownerId: "123", clerkId: "123", groupId: "123", accountId: "123", path }).then(
+        return uploadGroupFile({ file: "123", ownerId: "123", clerkId: "123", groupId: "123", accountId: "123", path }).then(
           (uploadedFile) => {
             if (uploadedFile) {
               setFiles((prevFiles) =>
