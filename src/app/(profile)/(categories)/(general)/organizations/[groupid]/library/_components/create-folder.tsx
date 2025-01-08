@@ -4,6 +4,19 @@ import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, Dialog
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { useRouter } from "next/navigation"
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import * as z from "zod";
+import { useToast } from "@/components/ui/use-toast"; // Assuming you use a toast component
 
 type FolderDialogProps = {
   ownerId: string;
@@ -13,12 +26,27 @@ type FolderDialogProps = {
   folderId?: string;
 };
 
-export const FolderDialog = ({ ownerId, clerkId, authId, groupId, folderId }: FolderDialogProps) => {
-  const [name, setName] = useState("");
-  const [loading, setLoading] = useState(false);
+// Validation schema
+const formSchema = z.object({
+  email: z.string().email("Invalid email address").min(1, {
+    message: "Email is required.",
+  }),
+});
 
-  const handleSubmit = async () => {
-  setLoading(true);
+export const FolderDialog = ({ ownerId, clerkId, authId, groupId, folderId }: FolderDialogProps) => {
+  const { toast } = useToast();
+  const router = useRouter();
+  
+  const isLoading = form.formState.isSubmitting;
+
+  const form = useForm({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      email: "",
+    },
+  });
+  
+  const onSubmit = async () => {
   try {
     if (authId) {
       await fetch("/api/library/folders/createFolder", {
@@ -41,8 +69,6 @@ export const FolderDialog = ({ ownerId, clerkId, authId, groupId, folderId }: Fo
     }
   } catch (error) {
     console.error("Error creating folder:", error);
-  } finally {
-    setLoading(false);
   }
 };
 
@@ -59,7 +85,7 @@ export const FolderDialog = ({ ownerId, clerkId, authId, groupId, folderId }: Fo
             : "Open Dialog"}
         </Button>
       </DialogTrigger>
-      <DialogContent className="rounded-lg sm:w-[calc(100vw-10px)] md:w-full">
+      <DialogContent className="rounded-lg">
         <DialogHeader>
           <DialogTitle>
             {authId
@@ -71,31 +97,42 @@ export const FolderDialog = ({ ownerId, clerkId, authId, groupId, folderId }: Fo
               : "Folder Dialog"}
           </DialogTitle>
         </DialogHeader>
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            handleSubmit();
-          }}
-          className="space-y-6"
-        >
-          <Input
-            type="text"
-            placeholder="Enter folder name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className="rounded-lg"
-            required
-          />
-          {/*<DialogFooter>*/}
+        <Form {...form}>
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="space-y-8"
+          >
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70">
+                    User&apos;s Email
+                  </FormLabel>
+                  <FormControl>
+                    <Input
+                      disabled={isLoading}
+                      className="rounded-lg"
+                      placeholder="Enter folder name"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          <DialogFooter>
             <Button
               type="submit"
               className="rounded-lg bg-green-600 text-white hover:bg-green-700 transition-colors px-4 py-2"
-              disabled={loading}
+              disabled={isLoading}
             >
-              {loading ? "Processing..." : "Create"}
+              {isLoading ? "Processing..." : "Create"}
             </Button>
-            {/*</DialogFooter>*/}
+            </DialogFooter>
         </form>
+          </Form>
       </DialogContent>
     </Dialog>
   );
