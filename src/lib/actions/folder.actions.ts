@@ -119,11 +119,12 @@ const createQueries = (
   authId: string,
   searchText: string,
   limit?: number,
+  email: string,
 ) => {
   const queries = [
     Query.or([
       Query.equal("authId", [authId]),
-      Query.contains("users", [currentUser.email]),
+      Query.contains("users", [email]),
     ]),
   ];
 
@@ -195,6 +196,7 @@ export const getGroupFolders = async ({
 
 export const getFolders = async ({
   searchText = "",
+  email,
   authId,
   limit,
 }: GetFoldersProps) => {
@@ -205,7 +207,7 @@ export const getFolders = async ({
 
     if (!currentUser) throw new Error("User not found");
 
-    const queries = createQueries(authId, searchText, limit);
+    const queries = createQueries(email, authId, searchText, limit);
 
     const folders = await databases.listDocuments(
       appwriteConfig.databaseId,
