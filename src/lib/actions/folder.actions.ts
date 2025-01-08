@@ -61,7 +61,6 @@ export const createGroupFolder = async ({
       groupId,
       groupIds: [],
       users: [],
-      authId,
     };
 
     const newFolder = await databases
