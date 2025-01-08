@@ -161,6 +161,25 @@ const createGroupQueries = (
   return queries;
 };
 
+const createSubQueries = (
+  folderId: string,
+  searchText: string,
+  limit?: number,
+) => {
+  const queries = [
+      Query.equal("folderId", [folderId]),
+  ];
+
+  if (searchText) queries.push(Query.contains("name", searchText));
+  if (limit) queries.push(Query.limit(limit));
+
+    queries.push(
+      orderBy === "asc" ? Query.orderAsc(sortBy) : Query.orderDesc(sortBy),
+    );
+  }
+
+  return queries;
+};
 
 export const getGroupFolders = async ({
   groupId,
@@ -193,7 +212,7 @@ export const getFolders = async ({
   searchText = "",
   authId,
   limit,
-}: GetFilesProps) => {
+}: GetFoldersProps) => {
   const { databases } = await createAdminClient();
 
   try {
@@ -202,6 +221,33 @@ export const getFolders = async ({
     if (!currentUser) throw new Error("User not found");
 
     const queries = createQueries(authId, searchText, limit);
+
+    const folders = await databases.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.foldersCollectionId,
+      queries,
+    );
+
+    console.log({ folders });
+    return parseStringify(folders);
+  } catch (error) {
+    handleError(error, "Failed to get files");
+  }
+};
+
+export const getSubFolders = async ({
+  searchText = "",
+  folderId,
+  limit,
+}: GetSubFoldersProps) => {
+  const { databases } = await createAdminClient();
+
+  try {
+    const currentUser = await getCurrentUser();
+
+    if (!currentUser) throw new Error("User not found");
+
+    const queries = createSubQueries(folderId, searchText, limit);
 
     const folders = await databases.listDocuments(
       appwriteConfig.databaseId,
