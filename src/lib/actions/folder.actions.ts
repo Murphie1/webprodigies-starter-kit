@@ -133,7 +133,6 @@ const createQueries = (
     queries.push(
       orderBy === "asc" ? Query.orderAsc(sortBy) : Query.orderDesc(sortBy),
     );
-  }
 
   return queries;
 };
@@ -156,7 +155,6 @@ const createGroupQueries = (
     queries.push(
       orderBy === "asc" ? Query.orderAsc(sortBy) : Query.orderDesc(sortBy),
     );
-  }
 
   return queries;
 };
@@ -176,7 +174,6 @@ const createSubQueries = (
     queries.push(
       orderBy === "asc" ? Query.orderAsc(sortBy) : Query.orderDesc(sortBy),
     );
-  }
 
   return queries;
 };
