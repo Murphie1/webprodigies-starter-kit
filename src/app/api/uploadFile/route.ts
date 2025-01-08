@@ -1,7 +1,7 @@
 // app/api/uploadFile/route.ts
 
 import { NextResponse } from 'next/server';
-import { uploadFile } from '@/lib/file-upload'; // Import your backend uploadFile function
+import { uploadFile } from '@/lib/actions/file.actions'; // Import your backend uploadFile function
 
 export async function POST(req: Request) {
   try {
