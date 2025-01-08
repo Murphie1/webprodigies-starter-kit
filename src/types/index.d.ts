@@ -99,6 +99,19 @@ declare interface UploadFileProps {
   accountId: string;
   path: string;
 }
+declare interface CreateFolderProps {
+  name: string;
+  ownerId: string;
+  clerkId: string;
+  authId: string;
+    }
+declare interface CreateGroupFolderProps {
+  name: string;
+  ownerId: string;
+  clerkId: string;
+  groupId: string;
+  authId: string;
+}
 declare interface UploadGroupFileProps {
   file: File;
   ownerId: string;
@@ -120,12 +133,25 @@ declare interface GetGroupFilesProps {
   sort?: string;
   limit?: number;
     }
+declare interface GetFoldersProps {
+  searchText?: string;
+  limit?: number;
+    }
+declare interface GetGroupFoldersProps {
+  groupId: string;
+  searchText?: string;
+  limit?: number;
+    }
 declare interface RenameFileProps {
   fileId: string;
   name: string;
   extension: string;
   path: string;
 }
+declare interface RenameFolderProps {
+  folderId: string;
+  name: string;
+    }
 declare interface UpdateFileUsersProps {
   fileId: string;
   emails: string[];
@@ -135,6 +161,15 @@ declare interface UpdateFileGroupsProps {
   fileId: string;
   groupIds: string[];
   path: string;
+    }
+declare interface UpdateFolderUsersProps {
+  fileId: string;
+  emails: string[];
+  path: string;
+    }
+declare interface UpdateFolderGroupsProps {
+  folderId: string;
+  groupIds: string[];
     }
 declare interface DeleteFileProps {
   fileId: string;
