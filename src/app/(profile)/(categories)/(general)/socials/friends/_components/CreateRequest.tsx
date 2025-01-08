@@ -96,7 +96,7 @@ export const CreateRequest = ({ clerkstring }: { clerkstring: string }) => {
           +🤝
         </span>
       </DialogTrigger>
-      <DialogContent className="bg-white text-black p-0 overflow-hidden dark:bg-black dark:text-white">
+      <DialogContent className="rounded-lg bg-white text-black p-0 overflow-hidden dark:bg-black dark:text-white">
         <DialogHeader className="pt-8 px-6">
           <DialogTitle className="text-2xl text-center font-bold">
             Send a Request
