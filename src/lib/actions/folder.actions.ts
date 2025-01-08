@@ -206,7 +206,6 @@ export const renameFolder = async ({
 export const updateFolderGroups = async ({
   folderId,
   groupIds,
-  path,
 }: UpdateFolderGroupsProps) => {
   const { databases } = await createAdminClient();
 
