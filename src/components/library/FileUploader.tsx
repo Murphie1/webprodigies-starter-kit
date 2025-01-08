@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useCallback, useState } from "react";
-
 import { useDropzone } from "react-dropzone";
 import { Button } from "@/components/ui/button";
 import { cn, convertFileToUrl, getFileType } from "@/lib/utils";
@@ -9,7 +8,6 @@ import Image from "next/image";
 import Thumbnail from "./Thumbnail";
 import { MAX_FILE_SIZE } from "@/constants";
 import { useToast } from "@/hooks/use-toast";
-import { uploadFile } from "@/lib/actions/file.actions";
 import { usePathname } from "next/navigation";
 
 interface Props {
@@ -44,20 +42,47 @@ const FileUploader = ({ ownerId, accountId, className }: Props) => {
           });
         }
 
-        return uploadFile({ file, ownerId, clerkId: "123", accountId, path }).then(
-          (uploadedFile) => {
-            if (uploadedFile) {
-              setFiles((prevFiles) =>
-                prevFiles.filter((f) => f.name !== file.name),
-              );
-            }
-          },
-        );
+        // Replace direct function call with API route
+        const formData = new FormData();
+        formData.append("file", file);
+        formData.append("ownerId", ownerId);
+        formData.append("accountId", accountId);
+        formData.append("clerkId", "123");
+        formData.append("path", path);
+
+        try {
+          const response = await fetch("/api/uploadFile", {
+            method: "POST",
+            body: formData,
+          });
+
+          if (!response.ok) {
+            throw new Error("File upload failed");
+          }
+
+          const uploadedFile = await response.json();
+          if (uploadedFile) {
+            setFiles((prevFiles) =>
+              prevFiles.filter((f) => f.name !== file.name),
+            );
+          }
+        } catch (error) {
+          console.error("Error uploading file:", error);
+          toast({
+            description: (
+              <p className="body-2 text-white">
+                <span className="font-semibold">{file.name}</span> failed to
+                upload. Please try again.
+              </p>
+            ),
+            className: "error-toast",
+          });
+        }
       });
 
       await Promise.all(uploadPromises);
     },
-    [ownerId, accountId, path],
+    [ownerId, accountId, path, toast],
   );
 
   const { getRootProps, getInputProps } = useDropzone({ onDrop });
@@ -129,4 +154,3 @@ const FileUploader = ({ ownerId, accountId, className }: Props) => {
 };
 
 export default FileUploader;
-                   "
