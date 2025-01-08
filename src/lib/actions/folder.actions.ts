@@ -81,12 +81,12 @@ export const createGroupFolder = async ({
   }
 };
 
-export const createFolder = async ({
+export const createSubFolder = async ({
   name,
   folderId,
   ownerId,
   clerkId,
-}: CreateFolderProps) => {
+}: CreateSubFolderProps) => {
   const { databases } = await createAdminClient();
 
   try {
