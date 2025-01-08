@@ -115,9 +115,9 @@ export const createSubFolder = async ({
 
 const createQueries = (
   authId: string,
+  email?: string,
   searchText: string,
   limit?: number,
-  email: string,
 ) => {
   const queries = [
     Query.or([
