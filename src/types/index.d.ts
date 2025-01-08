@@ -110,7 +110,6 @@ declare interface CreateGroupFolderProps {
   ownerId: string;
   clerkId: string;
   groupId: string;
-  authId: string;
 }
 declare interface CreateSubFolderProps {
   name: string;
