@@ -130,10 +130,6 @@ const createQueries = (
   if (searchText) queries.push(Query.contains("name", searchText));
   if (limit) queries.push(Query.limit(limit));
 
-    queries.push(
-      orderBy === "asc" ? Query.orderAsc(sortBy) : Query.orderDesc(sortBy),
-    );
-
   return queries;
 };
 
@@ -152,10 +148,6 @@ const createGroupQueries = (
   if (searchText) queries.push(Query.contains("name", searchText));
   if (limit) queries.push(Query.limit(limit));
 
-    queries.push(
-      orderBy === "asc" ? Query.orderAsc(sortBy) : Query.orderDesc(sortBy),
-    );
-
   return queries;
 };
 
@@ -170,10 +162,6 @@ const createSubQueries = (
 
   if (searchText) queries.push(Query.contains("name", searchText));
   if (limit) queries.push(Query.limit(limit));
-
-    queries.push(
-      orderBy === "asc" ? Query.orderAsc(sortBy) : Query.orderDesc(sortBy),
-    );
 
   return queries;
 };
