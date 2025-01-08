@@ -18,33 +18,33 @@ export const FolderDialog = ({ ownerId, clerkId, authId, groupId, folderId }: Fo
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async () => {
-    setLoading(true);
-    try {
-      if (authId) {
-        // Call createFolder function
-        await fetch("/api/folders/createFolder", {
-          method: "POST",
-          body: JSON.stringify({ name, ownerId, authId, clerkId }),
-        });
-      } else if (groupId) {
-        // Call createGroupFolder function
-        await fetch("/api/folders/createGroupFolder", {
-          method: "POST",
-          body: JSON.stringify({ name, ownerId, groupId, clerkId }),
-        });
-      } else if (folderId) {
-        // Call createSubFolder function
-        await fetch("/api/folders/createSubFolder", {
-          method: "POST",
-          body: JSON.stringify({ name, ownerId, folderId, clerkId }),
-        });
-      }
-    } catch (error) {
-      console.error("Error creating folder:", error);
-    } finally {
-      setLoading(false);
+  setLoading(true);
+  try {
+    if (authId) {
+      await fetch("/api/library/folders/createFolder", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, ownerId, authId, clerkId }),
+      });
+    } else if (groupId) {
+      await fetch("/api/library/folders/createGroupFolder", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, ownerId, groupId, clerkId }),
+      });
+    } else if (folderId) {
+      await fetch("/api/library/folders/createSubFolder", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, ownerId, folderId, clerkId }),
+      });
     }
-  };
+  } catch (error) {
+    console.error("Error creating folder:", error);
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <Dialog>
