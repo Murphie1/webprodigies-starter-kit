@@ -17,14 +17,14 @@ export const createFolder = async ({
   ownerId,
   authId,
   clerkId,
-}: UploadFileProps) => {
-  const { storage, databases } = await createAdminClient();
+}: CreateFolderProps) => {
+  const { databases } = await createAdminClient();
 
   try {
     const fileDocument = {
       name,
       authId,
-      owner: ownerId,
+      ownerId,
       clerkId,
       groupIds: [],
       users: [],
@@ -51,7 +51,7 @@ export const createGroupFolder = async ({
   clerkId,
   ownerId,
   authId,
-}: UploadGroupFolderProps) => {
+}: CreateGroupFolderProps) => {
   const { databases } = await createAdminClient();
 
   try {
