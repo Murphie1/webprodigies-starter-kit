@@ -28,23 +28,22 @@ type FolderDialogProps = {
 
 // Validation schema
 const formSchema = z.object({
-  email: z.string().email("Invalid email address").min(1, {
-    message: "Email is required.",
+  name: z.string().min(1, {
+    message: "You cannot create a folder without a name.",
   }),
 });
 
 export const FolderDialog = ({ ownerId, clerkId, authId, groupId, folderId }: FolderDialogProps) => {
   const { toast } = useToast();
   const router = useRouter();
-  
-  const isLoading = form.formState.isSubmitting;
 
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      email: "",
+      name: "",
     },
   });
+  const isLoading = form.formState.isSubmitting;
   
   const onSubmit = async () => {
   try {
@@ -104,12 +103,9 @@ export const FolderDialog = ({ ownerId, clerkId, authId, groupId, folderId }: Fo
           >
             <FormField
               control={form.control}
-              name="email"
+              name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70">
-                    User&apos;s Email
-                  </FormLabel>
                   <FormControl>
                     <Input
                       disabled={isLoading}
