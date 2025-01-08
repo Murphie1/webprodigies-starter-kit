@@ -112,6 +112,12 @@ declare interface CreateGroupFolderProps {
   groupId: string;
   authId: string;
 }
+declare interface CreateSubFolderProps {
+  name: string;
+  ownerId: string;
+  clerkId: string;
+  folderId: string;
+}
 declare interface UploadGroupFileProps {
   file: File;
   ownerId: string;
