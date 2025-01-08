@@ -21,7 +21,7 @@ export const createFolder = async ({
   const { databases } = await createAdminClient();
 
   try {
-    const fileDocument = {
+    const folderDocument = {
       name,
       authId,
       ownerId,
@@ -81,14 +81,48 @@ export const createGroupFolder = async ({
   }
 };
 
+export const createFolder = async ({
+  name,
+  folderId,
+  ownerId,
+  clerkId,
+}: CreateFolderProps) => {
+  const { databases } = await createAdminClient();
+
+  try {
+    const folderDocument = {
+      name,
+      folderId,
+      ownerId,
+      clerkId,
+      groupIds: [],
+      users: [],
+    };
+
+    const newFolder = await databases
+      .createDocument(
+        appwriteConfig.databaseId,
+        appwriteConfig.foldersCollectionId,
+        ID.unique(),
+        folderDocument,
+      )
+      .catch(async (error: unknown) => {
+        handleError(error, "Failed to create file document");
+      });
+    return parseStringify(newFolder);
+  } catch (error) {
+    handleError(error, "Failed to upload file");
+  }
+};
+
 const createQueries = (
-  currentUser: Models.Document,
+  authId: string,
   searchText: string,
   limit?: number,
 ) => {
   const queries = [
     Query.or([
-      Query.equal("owner", [currentUser.$id]),
+      Query.equal("authId", [authId]),
       Query.contains("users", [currentUser.email]),
     ]),
   ];
@@ -105,7 +139,6 @@ const createQueries = (
 };
 
 const createGroupQueries = (
-  currentUser: Models.Document,
   groupId: string,
   searchText: string,
   limit?: number,
@@ -141,7 +174,7 @@ export const getGroupFolders = async ({
 
     if (!currentUser) throw new Error("User not found");
 
-    const queries = createGroupQueries(currentUser, groupId, searchText, limit);
+    const queries = createGroupQueries(groupId, searchText, limit);
 
     const folders = await databases.listDocuments(
       appwriteConfig.databaseId,
@@ -158,6 +191,7 @@ export const getGroupFolders = async ({
 
 export const getFolders = async ({
   searchText = "",
+  authId,
   limit,
 }: GetFilesProps) => {
   const { databases } = await createAdminClient();
@@ -167,7 +201,7 @@ export const getFolders = async ({
 
     if (!currentUser) throw new Error("User not found");
 
-    const queries = createQueries(currentUser, searchText, limit);
+    const queries = createQueries(authId, searchText, limit);
 
     const folders = await databases.listDocuments(
       appwriteConfig.databaseId,
