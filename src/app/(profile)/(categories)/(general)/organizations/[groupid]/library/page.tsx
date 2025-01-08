@@ -5,7 +5,7 @@ import { currentUser } from "@clerk/nextjs/server";
 import React from "react";
 import { getGroupFolders } from "@/lib/actions/folder.actions";
 import { Models } from "node-appwrite";
-
+import { FolderDialog } from "./_components/create-folder";
 type Props = {
   params: {
     groupid: string;
@@ -25,6 +25,7 @@ const LibraryPage = async ({ params }: Props) => {
     email: user.email || clerk.emailAddresses[0]?.emailAddress || "",
     avatar: user.image || clerk.imageUrl || "",
   });
+  if (!appwriteUser) redirect("/");
 
   const folders = await getGroupFolders({ groupId: params.groupid });
 
@@ -60,6 +61,13 @@ const LibraryPage = async ({ params }: Props) => {
           No folders created.
         </p>
       )}
+      <div className="fixed bottom-[80px] right-1">
+      <FolderDialog
+  ownerId={appwriteUser.$id!}
+  clerkId={user.clerkId!}
+  groupId={params.groupid!}
+/>
+        </div>
     </div>
   );
 };
