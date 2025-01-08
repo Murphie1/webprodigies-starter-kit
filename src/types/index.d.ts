@@ -140,12 +140,13 @@ declare interface GetGroupFilesProps {
   limit?: number;
     }
 declare interface GetFoldersProps {
-  authId,
+  authId: string;
+  email: string;
   searchText?: string;
   limit?: number;
     }
 declare interface GetSubFoldersProps {
-  folderId,
+  folderId: string;
   searchText?: string;
   limit?: number;
 }
