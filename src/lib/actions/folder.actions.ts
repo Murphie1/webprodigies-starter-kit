@@ -50,7 +50,6 @@ export const createGroupFolder = async ({
   name,
   clerkId,
   ownerId,
-  authId,
 }: CreateGroupFolderProps) => {
   const { databases } = await createAdminClient();
 
