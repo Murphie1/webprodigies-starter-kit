@@ -175,9 +175,8 @@ declare interface UpdateFileGroupsProps {
   path: string;
     }
 declare interface UpdateFolderUsersProps {
-  fileId: string;
+  folderId: string;
   emails: string[];
-  path: string;
     }
 declare interface UpdateFolderGroupsProps {
   folderId: string;
@@ -187,6 +186,9 @@ declare interface DeleteFileProps {
   fileId: string;
   bucketFileId: string;
   path: string;
+}
+declare interface DeleteFolderProps {
+  folderId: string;
 }
 
 declare interface FileUploaderProps {
