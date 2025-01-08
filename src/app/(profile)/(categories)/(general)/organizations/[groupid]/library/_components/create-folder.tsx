@@ -59,7 +59,7 @@ export const FolderDialog = ({ ownerId, clerkId, authId, groupId, folderId }: Fo
             : "Open Dialog"}
         </Button>
       </DialogTrigger>
-      <DialogContent className="rounded-lg">
+      <DialogContent className="rounded-lg sm:w-[calc(100vw-10px)] md:w-full">
         <DialogHeader>
           <DialogTitle>
             {authId
@@ -76,7 +76,7 @@ export const FolderDialog = ({ ownerId, clerkId, authId, groupId, folderId }: Fo
             e.preventDefault();
             handleSubmit();
           }}
-          className="space-y-4"
+          className="space-y-6"
         >
           <Input
             type="text"
@@ -86,7 +86,7 @@ export const FolderDialog = ({ ownerId, clerkId, authId, groupId, folderId }: Fo
             className="rounded-lg"
             required
           />
-          <DialogFooter>
+          {/*<DialogFooter>*/}
             <Button
               type="submit"
               className="rounded-lg bg-green-600 text-white hover:bg-green-700 transition-colors px-4 py-2"
@@ -94,7 +94,7 @@ export const FolderDialog = ({ ownerId, clerkId, authId, groupId, folderId }: Fo
             >
               {loading ? "Processing..." : "Create"}
             </Button>
-          </DialogFooter>
+            {/*</DialogFooter>*/}
         </form>
       </DialogContent>
     </Dialog>
