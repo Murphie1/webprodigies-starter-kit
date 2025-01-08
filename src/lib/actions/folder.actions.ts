@@ -186,9 +186,9 @@ export const getGroupFolders = async ({
     );
 
     console.log({ folders });
-    return parseStringify(files);
+    return parseStringify(folders);
   } catch (error) {
-    handleError(error, "Failed to get files");
+    handleError(error, "Failed to get folders");
   }
 };
 
@@ -216,7 +216,7 @@ export const getFolders = async ({
     console.log({ folders });
     return parseStringify(folders);
   } catch (error) {
-    handleError(error, "Failed to get files");
+    handleError(error, "Failed to get folders");
   }
 };
 
@@ -243,7 +243,7 @@ export const getSubFolders = async ({
     console.log({ folders });
     return parseStringify(folders);
   } catch (error) {
-    handleError(error, "Failed to get files");
+    handleError(error, "Failed to get folders");
   }
 };
 
