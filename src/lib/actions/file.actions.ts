@@ -16,6 +16,7 @@ const handleError = (error: unknown, message: string) => {
 export const uploadFile = async ({
   file,
   ownerId,
+  folderId,
   accountId,
   clerkId,
   path,
@@ -39,8 +40,10 @@ export const uploadFile = async ({
       size: bucketFile.sizeOriginal,
       owner: ownerId,
       clerkId,
+      folderId,
       accountId,
       groupIds: [],
+      folderIds: [],
       users: [],
       bucketFileId: bucketFile.$id,
     };
@@ -63,72 +66,16 @@ export const uploadFile = async ({
     handleError(error, "Failed to upload file");
   }
 };
-export const uploadGroupFile = async ({
-  file,
-  groupId,
-  clerkId,
-  ownerId,
-  accountId,
-  path,
-}: UploadGroupFileProps) => {
-  console.log("Recieved file:", file);
-  //const { storage, databases } = await createAdminClient();
-const { databases } = await createAdminClient();
-  try {
-    //const inputFile = InputFile.fromBuffer(file, file.name);
-
-   // const bucketFile = await storage.createFile(
-    //  appwriteConfig.bucketId,
-     // ID.unique(),
-     // inputFile,
-    //);
-console.log("Starting Document creation:", file);
-    const fileDocument = {
-     // type: image,//getFileType(bucketFile.name).type,
-      name: "dummyimage",//bucketFile.name,
-      url: "https://www.utfs.io/dummyimage.png",//constructFileUrl(bucketFile.$id),
-      extension: ".png",//getFileType(bucketFile.name).extension,
-      size: 12,//bucketFile.sizeOriginal,
-      owner: ownerId,
-      accountId,
-      clerkId,
-      groupId,
-      groupIds: [],
-      users: [],
-      bucketFileId: "12344",//bucketFile.$id,
-    };
-
-    const newFile = await databases
-      .createDocument(
-        appwriteConfig.databaseId,
-        appwriteConfig.filesCollectionId,
-        ID.unique(),
-        fileDocument,
-      )
-      .catch(async (error: unknown) => {
-       // await storage.deleteFile(appwriteConfig.bucketId, bucketFile.$id);
-        handleError(error, "Failed to create file document");
-      });
-
-    revalidatePath(path);
-    return parseStringify(newFile);
-  } catch (error) {
-    handleError(error, "Failed to upload file");
-  }
-};
-
+  
 const createQueries = (
-  currentUser: Models.Document,
+  folderId: string,
   types: string[],
   searchText: string,
   sort: string,
   limit?: number,
 ) => {
   const queries = [
-    Query.or([
-      Query.equal("owner", [currentUser.$id]),
-      Query.contains("users", [currentUser.email]),
-    ]),
+      Query.equal("folderId", [folderId]),
   ];
 
   if (types.length > 0) queries.push(Query.equal("type", types));
@@ -147,7 +94,6 @@ const createQueries = (
 };
 
 const createGroupQueries = (
-  currentUser: Models.Document,
   groupId: string,
   types: string[],
   searchText: string,
@@ -155,10 +101,33 @@ const createGroupQueries = (
   limit?: number,
 ) => {
   const queries = [
-    Query.or([
-      Query.equal("groupId", [groupId]),
       Query.contains("groupIds", [groupId]),
-    ]),
+  ];
+
+  if (types.length > 0) queries.push(Query.equal("type", types));
+  if (searchText) queries.push(Query.contains("name", searchText));
+  if (limit) queries.push(Query.limit(limit));
+
+  if (sort) {
+    const [sortBy, orderBy] = sort.split("-");
+
+    queries.push(
+      orderBy === "asc" ? Query.orderAsc(sortBy) : Query.orderDesc(sortBy),
+    );
+  }
+
+  return queries;
+};
+
+const createSharedQueries = (
+  currentUser: Models.Document,
+  types: string[],
+  searchText: string,
+  sort: string,
+  limit?: number,
+) => {
+  const queries = [
+      Query.contains("users", [currentUser.$email]),
   ];
 
   if (types.length > 0) queries.push(Query.equal("type", types));
@@ -207,6 +176,7 @@ export const getGroupFiles = async ({
 };
 
 export const getFiles = async ({
+  folderId,
   types = [],
   searchText = "",
   sort = "$createdAt-desc",
@@ -219,7 +189,36 @@ export const getFiles = async ({
 
     if (!currentUser) throw new Error("User not found");
 
-    const queries = createQueries(currentUser, types, searchText, sort, limit);
+    const queries = createQueries(folderId, types, searchText, sort, limit);
+
+    const files = await databases.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.filesCollectionId,
+      queries,
+    );
+
+    console.log({ files });
+    return parseStringify(files);
+  } catch (error) {
+    handleError(error, "Failed to get files");
+  }
+};
+
+
+export const getSharedFiles = async ({
+  types = [],
+  searchText = "",
+  sort = "$createdAt-desc",
+  limit,
+}: GetFilesProps) => {
+  const { databases } = await createAdminClient();
+
+  try {
+    const currentUser = await getCurrentUser();
+
+    if (!currentUser) throw new Error("User not found");
+
+    const queries = createSharedQueries(currentUser, types, searchText, sort, limit);
 
     const files = await databases.listDocuments(
       appwriteConfig.databaseId,
@@ -373,9 +372,9 @@ export async function getTotalSpaceUsed() {
     handleError(error, "Error calculating total space used:, ");
   }
         }
-export async function getTotalGroupSpaceUsed({
-  groupId,
-}: { groupId: string }) {
+export async function getTotalFolderSpaceUsed({
+  folderId,
+}: { folderId: string }) {
   try {
     const { databases } = await createSessionClient();
    // const currentUser = await getCurrentUser();
@@ -384,7 +383,7 @@ export async function getTotalGroupSpaceUsed({
     const files = await databases.listDocuments(
       appwriteConfig.databaseId,
       appwriteConfig.filesCollectionId,
-      [Query.equal("groupId", [groupId])],
+      [Query.equal("folderId", [folderId])],
     );
 
     const totalSpace = {
