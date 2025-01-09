@@ -46,7 +46,7 @@ const LibraryPage = async ({ params }: Props) => {
       </h1>
 
       {folders.total > 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 pb-10">
           {folders.documents.map((folder: Models.Document) => (
             <div
               key={folder.$id}
@@ -105,11 +105,11 @@ const LibraryPage = async ({ params }: Props) => {
             ))}
           </ul>
         ) : (
-          <p className="empty-list">No files uploaded</p>
+          <p className="empty-list">No files recieved</p>
         )}
       </section>
 
-      <div className="flex fixed bottom-[80px] right-3">
+      <div className="flex fixed bottom-[80px] right-3 z-30">
         <FolderDialog
           ownerId={current.$id}
           clerkId={user.clerkId || clerk.id}
