@@ -48,7 +48,7 @@ const FileUploader = ({ ownerId, accountId, folderId, clerkId, className }: Prop
         const formData = new FormData();
         formData.append("file", file);
         formData.append("ownerId", ownerId);
-        form.Data.append("folderId", folderId);
+        formData.append("folderId", folderId);
         formData.append("accountId", accountId);
         formData.append("clerkId", clerkId);
         formData.append("path", path);
