@@ -39,7 +39,7 @@ const LibraryPage = async ({ params }: Props) => {
   
   const folders = await getGroupFolders({ groupId: params.groupid });
 
-  const files = await getGroupFiles({ types: [], groupId: params.groupid, limit: 10 }),
+  const files = await getGroupFiles({ types: [], groupId: params.groupid, limit: 10 });
   
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-10 px-4 sm:px-8 rounded-lg">
