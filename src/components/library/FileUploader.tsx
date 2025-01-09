@@ -18,7 +18,7 @@ interface Props {
   className?: string;
 }
 
-const FileUploader = ({ ownerId, accountId, className }: Props) => {
+const FileUploader = ({ ownerId, accountId, folderId, clerkId, className }: Props) => {
   const path = usePathname();
   const { toast } = useToast();
   const [files, setFiles] = useState<File[]>([]);
@@ -48,7 +48,7 @@ const FileUploader = ({ ownerId, accountId, className }: Props) => {
         const formData = new FormData();
         formData.append("file", file);
         formData.append("ownerId", ownerId);
-        form.Data.append("folderId" folderId);
+        form.Data.append("folderId", folderId);
         formData.append("accountId", accountId);
         formData.append("clerkId", clerkId);
         formData.append("path", path);
