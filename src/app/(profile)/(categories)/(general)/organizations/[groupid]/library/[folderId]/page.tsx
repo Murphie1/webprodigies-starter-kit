@@ -35,7 +35,7 @@ const FolderPage = async ({ params }: Props) => {
   
   const [files, totalSpace] = await Promise.all([
     getFiles({ types: [], folderId: params.folderId, limit: 10 }),
-    getTotalFolderSpaceUsed({ groupId: params.folderId }),
+    getTotalFolderSpaceUsed({ folderId: params.folderId }),
   ]);
 
   // Get usage summary
