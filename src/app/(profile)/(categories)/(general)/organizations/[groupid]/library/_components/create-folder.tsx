@@ -46,8 +46,10 @@ export const FolderDialog = ({ ownerId, clerkId, authId, groupId, folderId }: Fo
   });
   const isLoading = form.formState.isSubmitting;
   
-  const onSubmit = async () => {
+  const onSubmit = async (data: { name: string }) => {
   try {
+    const { name } = data; // Get the name from form data
+
     if (authId) {
       await fetch("/api/library/folders/createFolder", {
         method: "POST",
@@ -55,7 +57,6 @@ export const FolderDialog = ({ ownerId, clerkId, authId, groupId, folderId }: Fo
         body: JSON.stringify({ name, ownerId, authId, clerkId }),
       });
     } else if (groupId) {
-      //await createGroupFolder({ name, ownerId, groupId, clerkId });
       await fetch("/api/library/folders/createGroupFolder", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -68,8 +69,21 @@ export const FolderDialog = ({ ownerId, clerkId, authId, groupId, folderId }: Fo
         body: JSON.stringify({ name, ownerId, folderId, clerkId }),
       });
     }
+
+    toast({
+      title: "Folder created successfully!",
+      variant: "default",
+    });
+
+    router.refresh();
+    window.location.reload();// Refresh the page if needed
   } catch (error) {
     console.error("Error creating folder:", error);
+    toast({
+      title: "Error creating folder",
+      description: error.message || "Something went wrong.",
+      variant: "destructive",
+    });
   }
 };
 
