@@ -10,7 +10,7 @@ import { Separator } from "@/components/ui/separator";
 import { getFiles, getTotalFolderSpaceUsed } from "@/lib/actions/file.actions";
 import { convertFileSize, getUsageSummary } from "@/lib/utils";
 import { FolderDialog } from "../_components/create-folder";
-import { FileUploader } from "@/components/library/FileUploader";
+import FileUploader from "@/components/library/FileUploader";
 import { getCurrentUser } from "@/lib/actions/user.actions";
 import { redirect } from "next/navigation";
   // Parallel requests
