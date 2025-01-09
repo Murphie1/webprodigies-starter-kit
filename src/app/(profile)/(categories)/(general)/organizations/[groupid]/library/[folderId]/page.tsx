@@ -18,6 +18,7 @@ import { redirect } from "next/navigation";
 
 type Props = {
   params: {
+    groupid: string;
     folderId: string;
   };
 };
@@ -49,7 +50,7 @@ const FolderPage = async () => {
         <ul className="dashboard-summary-list">
           {usageSummary.map((summary) => (
             <Link
-              href={summary.url}
+              href={`/organizations/${params.groupid}/library/${params.folderId}/${summary.url}`}
               key={summary.title}
               className="dashboard-summary-card"
             >
