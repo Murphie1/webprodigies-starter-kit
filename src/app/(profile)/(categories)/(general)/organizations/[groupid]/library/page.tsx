@@ -1,6 +1,6 @@
 import { onAuthenticatedUser } from "@/actions/auth";
 import { redirect } from "next/navigation";
-import { authenticateUser } from "@/lib/actions/user.actions";
+import { authenticateUser, getCurrentUser } from "@/lib/actions/user.actions";
 import { currentUser } from "@clerk/nextjs/server";
 import React from "react";
 import { getGroupFolders, createGroupFolder } from "@/lib/actions/folder.actions";
@@ -26,7 +26,10 @@ const LibraryPage = async ({ params }: Props) => {
     avatar: user.image || clerk.imageUrl || "",
   });
   if (!appwriteUser) redirect("/");
-const fold = await createGroupFolder({ name: "folder 1", groupId: params.groupid, ownerId: appwriteUser.$id!, clerkId: user.clerkId || clerk.id, });
+   const current = await getCurrentUser();
+  if (!current) redirect("/")
+  
+const fold = await createGroupFolder({ name: "folder 1", groupId: params.groupid, ownerId: current.$id!, clerkId: user.clerkId || clerk.id, });
   const folders = await getGroupFolders({ groupId: params.groupid });
 
   return (
@@ -63,7 +66,7 @@ const fold = await createGroupFolder({ name: "folder 1", groupId: params.groupid
       )}
       <div className="fixed bottom-[80px] right-1">
       <FolderDialog
-  ownerId={appwriteUser.$id!}
+  ownerId={current.$id!}
   clerkId={user.clerkId!}
   groupId={params.groupid!}
 />
