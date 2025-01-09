@@ -26,7 +26,7 @@ const LibraryPage = async ({ params }: Props) => {
     avatar: user.image || clerk.imageUrl || "",
   });
   if (!appwriteUser) redirect("/");
-const folder = await createGroupFolder({ name: "folder 1", groupId: params.groupid, ownerId: appwriteUser.$id, clerkId: user.clerkId, });
+const fold = await createGroupFolder({ name: "folder 1", groupId: params.groupid, ownerId: appwriteUser.$id!, clerkId: user.clerkId || clerk.id, });
   const folders = await getGroupFolders({ groupId: params.groupid });
 
   return (
