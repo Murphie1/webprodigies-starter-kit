@@ -85,7 +85,7 @@ const FileUploader = ({ ownerId, accountId, folderId, clerkId, className }: Prop
 
       await Promise.all(uploadPromises);
     },
-    [ownerId, accountId, path, toast],
+    [ownerId, accountId, clerkId, folderId, path, toast],
   );
 
   const { getRootProps, getInputProps } = useDropzone({ onDrop });
