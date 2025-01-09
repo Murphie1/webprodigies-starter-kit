@@ -1,6 +1,7 @@
 import { onAuthenticatedUser } from "@/actions/auth";
 import { redirect } from "next/navigation";
 import { authenticateUser, getCurrentUser } from "@/lib/actions/user.actions";
+import Link from "next/link";
 import { currentUser } from "@clerk/nextjs/server";
 import React from "react";
 import { getGroupFolders } from "@/lib/actions/folder.actions";
@@ -44,6 +45,7 @@ const LibraryPage = async ({ params }: Props) => {
               key={folder.$id}
               className="bg-white dark:bg-gray-800 shadow-md rounded-lg p-6 hover:shadow-lg transition-shadow"
             >
+              <Link href={`/organizations/${params.groupid}/library/${folder.$id}`}>
               <h2 className="text-lg font-medium text-gray-800 dark:text-gray-100">
                 {folder.name}
               </h2>
@@ -55,6 +57,7 @@ const LibraryPage = async ({ params }: Props) => {
                   day: "numeric",
                 })}
               </p>
+                </Link>
             </div>
           ))}
         </div>
