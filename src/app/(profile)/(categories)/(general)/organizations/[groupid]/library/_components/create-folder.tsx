@@ -55,12 +55,12 @@ export const FolderDialog = ({ ownerId, clerkId, authId, groupId, folderId }: Fo
         body: JSON.stringify({ name, ownerId, authId, clerkId }),
       });
     } else if (groupId) {
-      await createGroupFolder({ name, ownerId, groupId, clerkId });
-      //await fetch("/api/library/folders/createGroupFolder", {
-       // method: "POST",
-       // headers: { "Content-Type": "application/json" },
-      //  body: JSON.stringify({ name, ownerId, groupId, clerkId }),
-     // });
+      //await createGroupFolder({ name, ownerId, groupId, clerkId });
+      await fetch("/api/library/folders/createGroupFolder", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, ownerId, groupId, clerkId }),
+      });
     } else if (folderId) {
       await fetch("/api/library/folders/createSubFolder", {
         method: "POST",
