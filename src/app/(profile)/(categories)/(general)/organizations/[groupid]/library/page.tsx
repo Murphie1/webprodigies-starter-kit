@@ -4,9 +4,16 @@ import { authenticateUser, getCurrentUser } from "@/lib/actions/user.actions";
 import Link from "next/link";
 import { currentUser } from "@clerk/nextjs/server";
 import React from "react";
+import { Models } from "node-appwrite";
+import ActionDropdown from "@/components/library/ActionDropdown";
+import { Thumbnail } from "@/components/library/Thumbnail";
+import Image from "next/image";
+import { FormattedDateTime } from "@/components/library/FormattedDateTime";
 import { getGroupFolders } from "@/lib/actions/folder.actions";
+import { getGroupFiles } from "@/lib/actions/file.actions";
 import { Models } from "node-appwrite";
 import { FolderDialog } from "./_components/create-folder";
+
 type Props = {
   params: {
     groupid: string;
@@ -32,6 +39,8 @@ const LibraryPage = async ({ params }: Props) => {
   
   const folders = await getGroupFolders({ groupId: params.groupid });
 
+  const files = await getGroupFiles({ types: [], groupId: params.groupid, limit: 10 }),
+  
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-10 px-4 sm:px-8 rounded-lg">
       <h1 className="text-2xl font-semibold text-gray-800 dark:text-gray-200 mb-6">
@@ -51,7 +60,7 @@ const LibraryPage = async ({ params }: Props) => {
               </h2>
               <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
                 Created on:{" "}
-                {new Date(folder.created).toLocaleDateString("en-US", {
+                {new Date(folder.$createdAt).toLocaleDateString("en-US", {
                   year: "numeric",
                   month: "long",
                   day: "numeric",
@@ -66,15 +75,47 @@ const LibraryPage = async ({ params }: Props) => {
           No folders created.
         </p>
       )}
-      <div className="fixed bottom-[80px] right-1">
-      <FolderDialog
-  ownerId={current.$id!}
-  clerkId={user.clerkId || clerk.id}
-  groupId={params.groupid!}
-/>
-        </div>
-    </div>
-  );
-};
+      <section className="dashboard-recent-files">
+        <h2 className="h3 xl:h2 text-light-100">Recieved files</h2>
+        {files.documents.length > 0 ? (
+          <ul className="mt-5 flex flex-col gap-5">
+            {files.documents.map((file: Models.Document) => (
+              <Link
+                href={file.url}
+                target="_blank"
+                className="flex items-center gap-3"
+                key={file.$id}
+              >
+                <Thumbnail
+                  type={file.type}
+                  extension={file.extension}
+                  url={file.url}
+                />
 
+                <div className="recent-file-details">
+                  <div className="flex flex-col gap-1">
+                    <p className="recent-file-name">{file.name}</p>
+                    <FormattedDateTime
+                      date={file.$createdAt}
+                      className="caption"
+                    />
+                  </div>
+                  <ActionDropdown file={file} />
+                </div>
+              </Link>
+            ))}
+          </ul>
+        ) : (
+          <p className="empty-list">No files uploaded</p>
+        )}
+      </section>
+   <div className="flex fixed bottom-[80px] right-3">
+     <FolderDialog
+       ownerId={current.$id}
+       clerkId={user.clerkId || clerk.id}
+       groupId={params.groupid}
+       />
+   </div>  
+              </div>
+      
 export default LibraryPage;
