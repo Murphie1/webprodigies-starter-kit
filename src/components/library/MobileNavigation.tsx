@@ -14,8 +14,8 @@ import { navItems } from "@/constants";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import FileUploader from "./FileUploader";
-import FileUpload from "./FileUpload";
+//import FileUploader from "./FileUploader";
+//import FileUpload from "./FileUpload";
 //import { signOutUser } from "@/lib/actions/user.actions";
 
 interface Props {
@@ -102,8 +102,8 @@ const MobileNavigation = ({
 
           <Separator className="my-5 bg-light-200/20" />
 
-          <div className="flex flex-col justify-between gap-5 pb-5">
-            <FileUploader ownerId={ownerId} accountId={accountId} />
+          {/*<div className="flex flex-col justify-between gap-5 pb-5">
+            //<FileUploader ownerId={ownerId} accountId={accountId} />
             <FileUpload ownerId="123" accountId="123" path="133" clerkId="123" />
             <Button
               className="mobile-sign-out-button"
@@ -116,7 +116,7 @@ const MobileNavigation = ({
               />
               <p>Logout</p>
             </Button>
-          </div>
+          </div>*/}
         </SheetContent>
       </Sheet>
     </header>
