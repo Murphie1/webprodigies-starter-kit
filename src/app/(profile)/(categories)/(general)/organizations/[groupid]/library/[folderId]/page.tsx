@@ -6,18 +6,24 @@ import { Chart } from "@/components/library/Chart";
 import { FormattedDateTime } from "@/components/library/FormattedDateTime";
 import { Thumbnail } from "@/components/library/Thumbnail";
 import { Separator } from "@/components/ui/separator";
-import { getGroupFiles, getTotalGroupSpaceUsed } from "@/lib/actions/file.actions";
+import { getFiles, getTotalFolderSpaceUsed } from "@/lib/actions/file.actions";
 import { convertFileSize, getUsageSummary } from "@/lib/utils";
-
+import { FolderDialog } from "../_components/create-folder";
+import { FileUploader } from "@/components/library/FileUploader";
   // Parallel requests
 
 
+type Props = {
+  params: {
+    folderId: string;
+  };
+};
 
 const FolderPage = async () => {
   
   const [files, totalSpace] = await Promise.all([
-    getGroupFiles({ types: [], groupId: "", limit: 10 }),
-    getTotalGroupSpaceUsed({ groupId: "" }),
+    getFiles({ types: [], folderId: params.folderId, limit: 10 }),
+    getTotalFolderSpaceUsed({ groupId: params.folderId }),
   ]);
 
   // Get usage summary
@@ -97,6 +103,18 @@ const FolderPage = async () => {
           <p className="empty-list">No files uploaded</p>
         )}
       </section>
+      <div className="flex fixed bottom-[80px] justify-between gap-x-2 px-1">
+        <FileUploader
+          ownerId={current.$id}
+  accountId={current.$accountId}
+  folderId={params.folderId}
+          />
+     <FolderDialog
+       ownerId={current.$id}
+       clerkId={user.clerkId || clerk.id}
+       groupId={params.groupid}
+       />
+   </div>
     </div>
   );
 };
