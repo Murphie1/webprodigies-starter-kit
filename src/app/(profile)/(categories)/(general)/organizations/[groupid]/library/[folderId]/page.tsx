@@ -25,7 +25,7 @@ type Props = {
 
 
 
-const FolderPage = async () => {
+const FolderPage = async ({ params }: Props) => {
 
   const user = await onAuthenticatedUser();
   if (!user) redirect("/");
