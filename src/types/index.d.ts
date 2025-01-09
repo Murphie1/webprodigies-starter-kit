@@ -94,6 +94,7 @@ declare interface SearchParamsProps {
 
 declare interface UploadFileProps {
   file: File;
+  folderId: string;
   ownerId: string;
   clerkId: string;
   accountId: string;
@@ -117,15 +118,15 @@ declare interface CreateSubFolderProps {
   clerkId: string;
   folderId: string;
 }
-declare interface UploadGroupFileProps {
-  file: File;
-  ownerId: string;
-  clerkId: string;
-  groupId: string;
-  accountId: string;
-  path: string;
-    }
+
 declare interface GetFilesProps {
+  types: FileType[];
+  folderId: string;
+  searchText?: string;
+  sort?: string;
+  limit?: number;
+}
+declare interface GetSharedFilesProps {
   types: FileType[];
   searchText?: string;
   sort?: string;
