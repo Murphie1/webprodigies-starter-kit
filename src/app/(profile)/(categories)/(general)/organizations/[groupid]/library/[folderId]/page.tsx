@@ -124,7 +124,7 @@ const FolderPage = async ({ params }: Props) => {
           />
      <FolderDialog
        ownerId={current.$id}
-       clerkId={user.clerkId || clerk.id}
+       clerkId={user.clerkId || ""}
        groupId={params.groupid}
        />
    </div>
