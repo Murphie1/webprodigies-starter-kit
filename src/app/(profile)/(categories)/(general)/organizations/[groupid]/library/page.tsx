@@ -26,11 +26,11 @@ const LibraryPage = async ({ params }: Props) => {
     avatar: user.image || clerk.imageUrl || "",
   });
   if (!appwriteUser) redirect("/");
-
+const folder = await createGroupFolder({ name: "folder 1", groupId: params.groupid, ownerId: appwriteUser.$id, clerkId: user.clerkId, });
   const folders = await getGroupFolders({ groupId: params.groupid });
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-10 px-4 sm:px-8">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-10 px-4 sm:px-8 rounded-lg">
       <h1 className="text-2xl font-semibold text-gray-800 dark:text-gray-200 mb-6">
         Library Folders
       </h1>
