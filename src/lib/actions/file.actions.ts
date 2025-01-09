@@ -210,7 +210,7 @@ export const getSharedFiles = async ({
   searchText = "",
   sort = "$createdAt-desc",
   limit,
-}: GetFilesProps) => {
+}: GetSharedFilesProps) => {
   const { databases } = await createAdminClient();
 
   try {
