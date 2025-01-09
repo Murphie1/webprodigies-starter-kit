@@ -115,7 +115,7 @@ const FolderPage = async ({ params }: Props) => {
           <p className="empty-list">No files uploaded</p>
         )}
       </section>
-      <div className="flex fixed bottom-[80px] justify-between gap-x-2 px-1">
+      <div className="flex fixed bottom-[80px] justify-between gap-x-2 px-1 z-50">
         <FileUploader
           ownerId={current.$id}
           accountId={current.$accountId}
