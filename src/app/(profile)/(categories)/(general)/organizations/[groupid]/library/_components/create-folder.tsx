@@ -81,7 +81,7 @@ export const FolderDialog = ({ ownerId, clerkId, authId, groupId, folderId }: Fo
     console.error("Error creating folder:", error);
     toast({
       title: "Error creating folder",
-      description: error.message || "Something went wrong.",
+      description: "Something went wrong. Refresh and try again",
       variant: "destructive",
     });
   }
