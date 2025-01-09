@@ -13,6 +13,7 @@ import { usePathname } from "next/navigation";
 interface Props {
   ownerId: string;
   accountId: string;
+  folderId: string;
   className?: string;
 }
 
