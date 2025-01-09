@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 import { authenticateUser } from "@/lib/actions/user.actions";
 import { currentUser } from "@clerk/nextjs/server";
 import React from "react";
-import { getGroupFolders } from "@/lib/actions/folder.actions";
+import { getGroupFolders, createGroupFolder } from "@/lib/actions/folder.actions";
 import { Models } from "node-appwrite";
 import { FolderDialog } from "./_components/create-folder";
 type Props = {
