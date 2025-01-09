@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { onAuthenticatedUser } from "@/actions/auth";
 import { Models } from "node-appwrite";
 import ActionDropdown from "@/components/library/ActionDropdown";
 import { Chart } from "@/components/library/Chart";
@@ -25,8 +26,10 @@ type Props = {
 
 const FolderPage = async () => {
 
+  const user = await onAuthenticatedUser();
+  if (!user) redirect("/");
+  
   const current = await getCurrentUser();
-
   if (!current) redirect("/");
   
   const [files, totalSpace] = await Promise.all([
@@ -114,8 +117,9 @@ const FolderPage = async () => {
       <div className="flex fixed bottom-[80px] justify-between gap-x-2 px-1">
         <FileUploader
           ownerId={current.$id}
-  accountId={current.$accountId}
-  folderId={params.folderId}
+          accountId={current.$accountId}
+          folderId={params.folderId}
+          clerkId={user.clerkId!}
           />
      <FolderDialog
        ownerId={current.$id}
