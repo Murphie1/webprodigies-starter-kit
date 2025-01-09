@@ -160,7 +160,7 @@ export const getGroupFiles = async ({
 
     if (!currentUser) throw new Error("User not found");
 
-    const queries = createGroupQueries(currentUser, groupId, types, searchText, sort, limit);
+    const queries = createGroupQueries(groupId, types, searchText, sort, limit);
 
     const files = await databases.listDocuments(
       appwriteConfig.databaseId,
