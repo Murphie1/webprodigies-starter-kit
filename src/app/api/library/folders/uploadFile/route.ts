@@ -8,6 +8,7 @@ export async function POST(req: Request) {
     const formData = await req.formData(); // Parse the FormData from the request
     const file = formData.get('file') as File; // Get the file
     const ownerId = formData.get('ownerId') as string;
+    const folderId = form.Data.get('folderId') as string;
     const accountId = formData.get('accountId') as string;
     const clerkId = formData.get('clerkId') as string;
     const path = formData.get('path') as string;
@@ -19,6 +20,7 @@ export async function POST(req: Request) {
     // Call your upload function here
     const result = await uploadFile({
       file: file,
+      folderId,
       ownerId,
       accountId,
       clerkId,
