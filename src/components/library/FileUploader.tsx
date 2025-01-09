@@ -13,6 +13,7 @@ import { usePathname } from "next/navigation";
 interface Props {
   ownerId: string;
   accountId: string;
+  clerkId: string;
   folderId: string;
   className?: string;
 }
@@ -47,12 +48,13 @@ const FileUploader = ({ ownerId, accountId, className }: Props) => {
         const formData = new FormData();
         formData.append("file", file);
         formData.append("ownerId", ownerId);
+        form.Data.append("folderId" folderId);
         formData.append("accountId", accountId);
-        formData.append("clerkId", "123");
+        formData.append("clerkId", clerkId);
         formData.append("path", path);
 
         try {
-          const response = await fetch("/api/uploadFile", {
+          const response = await fetch("/api/library/folders/uploadFile", {
             method: "POST",
             body: formData,
           });
