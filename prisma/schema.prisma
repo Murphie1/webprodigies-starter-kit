@@ -17,29 +17,29 @@ model User {
   id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   firstname String
   lastname  String?
-  email     String? @unique
+  email     String?  @unique
   createdAt DateTime @default(now())
   clerkId   String   @unique
   image     String?
   stripeId  String?
   role      UserRole @default(LEARNER)
 
-  attributes      String[]
-  group           Group[]
-  membership      Members[]
-  posts           Post[]
-  likes           Like[]
-  profile         Profile[]
-  comments        Comment[]
-  message         Message[]
-  groupSpace      Groupspace[]
-  gsMember        GSMember[]
-  session         Session[]
+  attributes String[]
+  group      Group[]
+  membership Members[]
+  posts      Post[]
+  likes      Like[]
+  profile    Profile[]
+  comments   Comment[]
+  message    Message[]
+  groupSpace Groupspace[]
+  gsMember   GSMember[]
+  session    Session[]
 }
 
 model Profile {
   id       String      @id @default(uuid())
-  clerkId  String      
+  clerkId  String
   user     User?       @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId   String      @db.Uuid
   name     String
@@ -184,12 +184,12 @@ model Groupcourse {
 }
 
 model Module {
-  id        String    @id @db.Uuid
-  Course    Groupcourse?   @relation(fields: [courseId], references: [id], onDelete: Cascade)
-  courseId  String?   @db.Uuid
+  id        String       @id @db.Uuid
+  Course    Groupcourse? @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  courseId  String?      @db.Uuid
   title     String
   section   Section[]
-  createdAt DateTime  @default(now())
+  createdAt DateTime     @default(now())
 }
 
 model Section {
@@ -290,28 +290,28 @@ enum UserRole {
 }
 
 model Course {
-  id          String       @id @default(uuid())
-  userId      String
-  title       String       @db.Text
-  description String?      @db.Text
-  imgUrl      String?      @db.Text
-  price       Float?
-  preview     String?
-  isPublished Boolean      @default(false)
-  categoryId  String?
-  category    Category?    @relation(fields: [categoryId], references: [id])
-  chapters    Chapter[]
-  attachments Attachment[]
-  certificates Certificate[]
-  outComes    String?
-  waivers     Waiver[]
+  id              String           @id @default(uuid())
+  userId          String
+  title           String           @db.Text
+  description     String?          @db.Text
+  imgUrl          String?          @db.Text
+  price           Float?
+  preview         String?
+  isPublished     Boolean          @default(false)
+  categoryId      String?
+  category        Category?        @relation(fields: [categoryId], references: [id])
+  chapters        Chapter[]
+  attachments     Attachment[]
+  certificates    Certificate[]
+  outComes        String?
+  waivers         Waiver[]
   discussionboxes Discussionbox[]
-  purchases   Purchase[]
-  createdAt   DateTime     @default(now())
-  updatedAt   DateTime     @updatedAt
+  purchases       Coursepurchase[]
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  // @@fulltext([title])  Remove if not supported in your case
 
   @@index([categoryId])
-  // @@fulltext([title])  Remove if not supported in your case
 }
 
 model Category {
@@ -325,14 +325,14 @@ model Attachment {
   name String
   url  String @db.Text
 
-  courseId String?
-  Course   Course? @relation(fields: [courseId], references: [id], onDelete: Cascade)
-  chaptetId String?
+  courseId  String?
+  Course    Course?  @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  chapterId String?
   Chapter   Chapter? @relation(fields: [chapterId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-
 }
+
 model Certificate {
   id   String @id @default(uuid())
   name String
@@ -340,7 +340,7 @@ model Certificate {
 
   courseId String
   Course   Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
-   
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -356,9 +356,9 @@ model Chapter {
   imageUrl     String?
   fileUrl      String?
   position     Int
-  content      String?       @db.Text
-  transcript   String?      @db.Text
-  type         ChapterType  @default(Video)
+  content      String?        @db.Text
+  transcript   String?        @db.Text
+  type         ChapterType    @default(Video)
   isPublished  Boolean        @default(false)
   isFree       Boolean        @default(false)
   muxData      MuxData?
@@ -418,19 +418,20 @@ model StripeCustomer {
 }
 
 model Discussionbox {
-  id               String @id @default(uuid())
-  courseId           String
+  id       String @id @default(uuid())
+  courseId String
   course   Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+
 model Waiver {
-  id               String @id @default(uuid())
-  userId           String @unique
-  courseId           String
-  course   Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
-  message   String?
+  id       String  @id @default(uuid())
+  userId   String  @unique
+  courseId String
+  course   Course  @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  message  String?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
