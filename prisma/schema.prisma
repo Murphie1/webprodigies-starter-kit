@@ -35,18 +35,11 @@ model User {
   groupSpace      Groupspace[]
   gsMember        GSMember[]
   session         Session[]
-  conversations   Conversation[]  @relation("UserConversations")
-  seenChats       Chat[]          @relation("SeenChats")
-  chats           Chat[]          @relation("SentChats")
-  conversationIds String[]
-  seenChatIds     String[]
-  friends         Friend[]        @relation("UserFriends")
-  friendRequests  Friendrequest[] @relation("UserFriendRequests")
 }
 
 model Profile {
   id       String      @id @default(uuid())
-  clerkId  String      @unique
+  clerkId  String      
   user     User?       @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId   String      @db.Uuid
   name     String
@@ -296,50 +289,157 @@ enum UserRole {
   LEARNER
 }
 
-model Conversation {
-  id            String   @id @default(uuid())
-  createdAt     DateTime @default(now())
-  lastMessageAt DateTime @default(now())
-  name          String?
-  isGroup       Boolean?
-  imageUrl      String?
+model Course {
+  id          String       @id @default(uuid())
+  userId      String
+  title       String       @db.Text
+  description String?      @db.Text
+  imgUrl      String?      @db.Text
+  price       Float?
+  preview     String?
+  isPublished Boolean      @default(false)
+  categoryId  String?
+  category    Category?    @relation(fields: [categoryId], references: [id])
+  chapters    Chapter[]
+  attachments Attachment[]
+  certificates Certificate[]
+  outComes    String?
+  waivers     Waiver[]
+  discussionboxes Discussionbox[]
+  purchases   Purchase[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
 
-  chats   Chat[]
-  userIds String[]
-  users   User[]   @relation("UserConversations")
+  @@index([categoryId])
+  // @@fulltext([title])  Remove if not supported in your case
 }
 
-model Chat {
-  id        String   @id @default(uuid())
-  body      String?
-  image     String?
-  video     String?
+model Category {
+  id      String   @id @default(uuid())
+  name    String   @unique
+  courses Course[]
+}
+
+model Attachment {
+  id   String @id @default(uuid())
+  name String
+  url  String @db.Text
+
+  courseId String?
+  Course   Course? @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  chaptetId String?
+  Chapter   Chapter? @relation(fields: [chapterId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  seenIds        String[]
-  seen           User[]       @relation("SeenChats")
-  conversation   Conversation @relation(fields: [conversationId], references: [id])
-  conversationId String
+}
+model Certificate {
+  id   String @id @default(uuid())
+  name String
+  url  String @db.Text
 
-  sender   User   @relation("SentChats", fields: [senderId], references: [id])
-  senderId String @db.Uuid
+  courseId String
+  Course   Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+   
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([courseId])
 }
 
-model Friend {
-  id        String   @id @default(uuid())
-  userIds   String[]
-  users     User[]   @relation("UserFriends")
+model Chapter {
+  id           String         @id @default(uuid())
+  title        String
+  description  String?        @db.Text
+  videoUrl     String?        @db.Text
+  audioUrl     String?
+  imageUrl     String?
+  fileUrl      String?
+  position     Int
+  content      String?       @db.Text
+  transcript   String?      @db.Text
+  type         ChapterType  @default(Video)
+  isPublished  Boolean        @default(false)
+  isFree       Boolean        @default(false)
+  muxData      MuxData?
+  courseId     String
+  course       Course         @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  userProgress UserProgress[]
+  notes        String?
+  attachments  Attachment[]
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+
+  @@index([courseId])
+}
+
+model MuxData {
+  id         String  @id @default(uuid())
+  assetId    String
+  playbackId String?
+  chapterId  String  @unique
+  chapter    Chapter @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+}
+
+model UserProgress {
+  id          String   @id @default(uuid())
+  userId      String?
+  chapterId   String
+  chapter     Chapter  @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+  isCompleted Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@unique([userId, chapterId])
+  @@index([chapterId])
+}
+
+model Coursepurchase {
+  id     String  @id @default(uuid())
+  userId String?
+
+  courseId String
+  course   Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, courseId])
+  @@index([courseId])
+}
+
+model StripeCustomer {
+  id               String @id @default(uuid())
+  userId           String @unique
+  stripeCustomerId String @unique
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
-model Friendrequest {
-  id         String   @id @default(uuid())
-  userIds    String[]
-  message    String?
-  senderId   String   @db.Uuid
-  isAccepted Boolean  @default(false)
-  users      User[]   @relation("UserFriendRequests")
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+model Discussionbox {
+  id               String @id @default(uuid())
+  courseId           String
+  course   Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+model Waiver {
+  id               String @id @default(uuid())
+  userId           String @unique
+  courseId           String
+  course   Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  message   String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum ChapterType {
+  Video
+  Audio
+  Image
+  Text
+  Doc
 }
