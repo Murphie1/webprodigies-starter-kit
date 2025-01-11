@@ -7,7 +7,7 @@ interface FileUploadProps {
 }
 const FileUpload = ({ onChange, endpoint }: FileUploadProps) => {
   return (
-    <UploadDropzone
+    <UploadDropZone
       endpoint={endpoint}
       onClientUploadComplete={(res) => onChange(res?.[0].url)}
       onUploadError={(error: Error) => toast.error(`${error?.message}`)}
