@@ -17,14 +17,13 @@ import { Pencil } from "lucide-react";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import { cn } from "@/lib/utils";
 import { Combobox } from "@/components/ui/combobox";
 import { Course } from "@prisma/client";
 
 interface CategoryFormProps {
   initialData: Course;
   courseId: string;
-  options: { label: string; value: string; }[];
+  options: { label: string; value: string }[];
 }
 const formSchema = z.object({
   categoryId: z.string().min(1),
@@ -39,13 +38,17 @@ const CategoryForm = ({
   const router = useRouter();
 
   const toggleEdit = () => {
+    if (isEditing) form.reset(); // Reset the form on cancel
     setIsEditing((current) => !current);
   };
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: { categoryId: initialData?.categoryId || "" },
   });
+
   const { isSubmitting, isValid } = form.formState;
+
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       await axios.patch(`/api/courses/${courseId}`, values);
@@ -56,10 +59,11 @@ const CategoryForm = ({
       toast.error("Something went wrong");
     }
   };
+
   const selectedOption = options.find(
     (option) => option.value === initialData?.categoryId
   )?.label;
-  
+
   return (
     <div className="mt-6 border bg-slate-100 rounded-md p-4">
       <div className="font-medium flex items-center justify-between">
@@ -77,10 +81,9 @@ const CategoryForm = ({
       </div>
       {!isEditing && (
         <p
-          className={cn(
-            "text-sm mt-2",
-            !initialData?.categoryId && "italic text-slate-500"
-          )}
+          className={`text-sm mt-2 ${
+            !initialData?.categoryId ? "italic text-slate-500" : ""
+          }`}
         >
           {selectedOption || "No category"}
         </p>
@@ -97,7 +100,7 @@ const CategoryForm = ({
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Combobox options={...options}  {...field}/>
+                    <Combobox options={options} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
