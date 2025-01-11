@@ -20,6 +20,8 @@ import Actions from "./_components/actions";
 
 const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
   const { userId } = auth();
+  if (!userId) redirect("/");
+  
   const course = await client.course.findUnique({
     where: { id: params.courseId, userId },
     include: {
@@ -29,7 +31,7 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
   });
   const categories = await client.category.findMany({ orderBy: { name: "asc" } });
 
-  if (!userId) redirect("/");
+  
   if (!course) redirect("/");
 
   const requiredFields = [
