@@ -8,7 +8,7 @@ import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { Course } from "@prisma/client";
 import Image from "next/image";
-import FileUpload from "@/components/file-upload";
+import FileUpload from "@/components/global/file-upload";
 
 const formSchema = z.object({
   imgUrl: z.string().min(1, "ImageUrl is required"),
