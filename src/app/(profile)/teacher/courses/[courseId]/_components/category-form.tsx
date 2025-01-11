@@ -24,7 +24,7 @@ import { Course } from "@prisma/client";
 interface CategoryFormProps {
   initialData: Course;
   courseId: string;
-  options: { label: string; value: string }[];
+  options: { label: string; value: string; }[];
 }
 const formSchema = z.object({
   categoryId: z.string().min(1),
@@ -59,6 +59,7 @@ const CategoryForm = ({
   const selectedOption = options.find(
     (option) => option.value === initialData?.categoryId
   )?.label;
+  
   return (
     <div className="mt-6 border bg-slate-100 rounded-md p-4">
       <div className="font-medium flex items-center justify-between">
