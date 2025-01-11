@@ -9,17 +9,27 @@ export async function POST(
   { params }: { params: { courseId: string } }
 ) {
   try {
-    const user = await currentUser();
+    if (!params.courseId || typeof params.courseId !== "string") {
+      return new NextResponse("Invalid course ID", { status: 400 });
+    }
 
-    if (!user || !user.id || !user.emailAddresses?.[0]?.emailAddress) {
+    const user = await currentUser();
+    const email = user?.emailAddresses?.[0]?.emailAddress;
+
+    if (!user || !user.id || !email) {
       return new NextResponse("Unauthorized", { status: 401 });
     }
-    const course = await client.course.findUnique({
+
+    const course = await client.course.findFirst({
       where: {
         id: params.courseId,
         isPublished: true,
       },
     });
+
+    if (!course || !course.description || !course.price) {
+      return new NextResponse("Invalid or missing course data", { status: 400 });
+    }
 
     const purchase = await client.coursepurchase.findUnique({
       where: {
@@ -33,9 +43,7 @@ export async function POST(
     if (purchase) {
       return new NextResponse("Already purchased", { status: 400 });
     }
-    if (!course) {
-      return new NextResponse("Not found", { status: 404 });
-    }
+
     const line_items: Stripe.Checkout.SessionCreateParams.LineItem[] = [
       {
         quantity: 1,
@@ -43,25 +51,20 @@ export async function POST(
           currency: "USD",
           product_data: {
             name: course.title,
-            description: course.description!,
+            description: course.description,
           },
-          unit_amount: Math.round(course.price! * 100),
+          unit_amount: Math.round(course.price * 100),
         },
       },
     ];
 
     let stripeCustomer = await client.stripeCustomer.findUnique({
-      where: {
-        userId: user.id,
-      },
-      select: {
-        stripeCustomerId: true,
-      },
+      where: { userId: user.id },
+      select: { stripeCustomerId: true },
     });
+
     if (!stripeCustomer) {
-      const customer = await stripe.customers.create({
-        email: user.emailAddresses[0].emailAddress,
-      });
+      const customer = await stripe.customers.create({ email });
 
       stripeCustomer = await client.stripeCustomer.create({
         data: {
@@ -71,20 +74,26 @@ export async function POST(
       });
     }
 
+    const appUrl = process.env.NEXT_PUBLIC_APP_URL;
+    if (!appUrl) {
+      throw new Error("NEXT_PUBLIC_APP_URL is not defined");
+    }
+
     const session = await stripe.checkout.sessions.create({
       customer: stripeCustomer.stripeCustomerId,
       line_items,
       mode: "payment",
-      success_url: `${process.env.NEXT_PUBLIC_APP_URL}/courses/${course.id}?success=1`,
-      cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/courses/${course.id}?canceled=1`,
+      success_url: `${appUrl}/courses/${course.id}?success=1`,
+      cancel_url: `${appUrl}/courses/${course.id}?canceled=1`,
       metadata: {
         courseId: course.id,
         userId: user.id,
       },
     });
+
     return NextResponse.json({ url: session.url });
   } catch (error) {
-    console.log("[COURSE_ID_CHECKOUT]", error);
+    console.error("[COURSE_ID_CHECKOUT]", error);
     return new NextResponse("Internal Error", { status: 500 });
   }
-}
+        }
