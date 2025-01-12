@@ -4,11 +4,11 @@ import { StreamClientProvider } from '@/providers/StreamProvider';
 export default function ConferenceLayout({ children }: { children: React.ReactNode }) {
   return (
       <body>
-        <StreamClientProvider>
-          {/*<StreamVideoProvider>*/}
+        {/*   <StreamClientProvider>
+          <StreamVideoProvider>*/}
           {children}
-          {/* </StreamVideoProvider>*/}
-        </StreamClientProvider>
+          {/* </StreamVideoProvider>
+        </StreamClientProvider>*/}
       </body>
   );
           }
