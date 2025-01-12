@@ -5,9 +5,9 @@ export default function ConferenceLayout({ children }: { children: React.ReactNo
   return (
       <body>
         <StreamClientProvider>
-          <StreamVideoProvider>
+          {/*<StreamVideoProvider>*/}
           {children}
-            </StreamVideoProvider>
+          {/* </StreamVideoProvider>*/}
         </StreamClientProvider>
       </body>
   );
