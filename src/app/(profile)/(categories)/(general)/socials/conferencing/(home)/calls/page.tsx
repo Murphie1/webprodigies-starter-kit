@@ -39,7 +39,7 @@ const CallsPage = () => {
       <h1 className="text-3xl font-bold dark:text-gray-100">Your Meetings</h1>
 
       {/* Call List */}
-      {/*    <CallList type={variant} />*/}
+        <CallList type={variant} />
     </section>
   );
 };
