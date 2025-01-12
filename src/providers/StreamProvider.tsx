@@ -1,11 +1,12 @@
 // providers/StreamClientProvider.tsx
-"use client"
+"use client";
 
-import React, { createContext, useContext, useEffect, useState } from 'react';
-import { StreamVideoClient } from '@stream-io/video-react-sdk';
-import { useUser } from '@clerk/nextjs';
-import { tokenProvider } from '@/actions/stream.actions';
+import React, { createContext, useContext, useEffect, useState } from "react";
+import { StreamVideoClient } from "@stream-io/video-react-sdk";
+import { useUser } from "@clerk/nextjs";
+import { tokenProvider } from "@/actions/stream.actions";
 
+// Context definition
 const StreamClientContext = createContext<{
   client: StreamVideoClient | null;
   isUserConnected: boolean;
@@ -24,18 +25,20 @@ export const StreamClientProvider = ({ children }: { children: React.ReactNode }
 
     const initializeClient = async () => {
       try {
-        // Check if a client already exists
+        let newClient = client;
+
         if (!client) {
-          const newClient = new StreamVideoClient({
+          // Create a new StreamVideoClient if none exists
+          newClient = new StreamVideoClient({
             apiKey: process.env.NEXT_PUBLIC_STREAM_API_KEY!,
             tokenProvider,
           });
-          setClient(newClient); // Save the client instance
+          setClient(newClient);
         }
 
-        // Connect the user
-        if (client) {
-          await client.connectUser(
+        // Connect the user to the Stream client
+        if (newClient) {
+          await newClient.connectUser(
             {
               id: user.id,
               name: user.firstName || user.lastName || user.username || user.id,
@@ -46,12 +49,20 @@ export const StreamClientProvider = ({ children }: { children: React.ReactNode }
           setIsUserConnected(true);
         }
       } catch (error) {
-        console.error('Error initializing Stream client:', error);
+        console.error("Error initializing Stream client:", error);
       }
     };
 
     initializeClient();
-  }, [user, isLoaded, client, isUserConnected]);
+
+    // Cleanup to disconnect user on unmount
+    return () => {
+      if (client) {
+        client.disconnectUser();
+        setIsUserConnected(false);
+      }
+    };
+  }, [user, isLoaded, isUserConnected]); // Removed `client` from dependencies to prevent unnecessary re-runs
 
   return (
     <StreamClientContext.Provider value={{ client, isUserConnected }}>
