@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
 import Markdown from "marked-react";
 
-import { CodeBlock } from "@/components/codeblock";
-import { LinkBlock } from "@/components/ui/link-block";
+import { CodeBlock } from "@/components/hakima/codeblock";
+//import { LinkBlock } from "@/components/ui/link-block";
 import { cn } from "@/lib/utils";
 import {
   HoverCard,
