@@ -16,7 +16,7 @@ import {
   useModelList,
   useTextSelection,
   useTools,
-} from "@/hooks";
+} from "@/hooks/hakima";
 import { RegenerateWithModelSelect } from "../regenerate-model-select";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
