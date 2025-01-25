@@ -1,4 +1,4 @@
-import { TToolArg } from "@/hooks";
+import { TToolArg } from "@/hooks/hakima";
 import { DynamicStructuredTool } from "@langchain/core/tools";
 import axios from "axios";
 import { z } from "zod";
