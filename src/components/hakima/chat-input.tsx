@@ -21,7 +21,7 @@ import {
   useModelList,
   useRecordVoice,
   useScrollToBottom,
-} from "@/hooks";
+} from "@/hooks/hakima";
 //import { ArrowDown02Icon, Navigation03Icon } from "@hugeicons/react";
 import { TAssistant } from "@/hooks/hakima/use-chat-session";
 import { slideUpVariant } from "@/lib/framer-motion";
@@ -31,7 +31,7 @@ import { ChatGreeting } from "./chat-greeting";
 import { PluginSelect } from "./plugin-select";
 import { PromptsBotsCombo } from "./prompts-bots-combo";
 import { QuickSettings } from "./quick-settings";
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
 
 export type TAttachment = {
   file?: File;
