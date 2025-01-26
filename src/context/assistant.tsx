@@ -26,7 +26,7 @@ import { Type } from "@/components/hakima/text";
 import { Button } from "@/components/ui/button";
 import { CreateAssistant } from "@/components/hakima/assistants/create-assistant";
 import { AssistantItem } from "@/components/hakima/assistants/assistant-item";
-import { defaultPreferences } from "@/hooks";
+import { defaultPreferences } from "@/hooks/hakima";
 
 export type TAssistantsProvider = {
   children: React.ReactNode;
