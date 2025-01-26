@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 import { useClipboard } from "@/hooks/hakima/use-clipboard";
 //import { Copy01Icon, Tick01Icon } from "@hugeicons/react";
 import { Button } from "../ui/button";
-import { Tooltip } from "../ui/tooltip";
+import { Tooltip } from "./tooltip";
 import { Check, Copy } from "@phosphor-icons/react";
 import { ibmPlex } from "./fonts";
 
