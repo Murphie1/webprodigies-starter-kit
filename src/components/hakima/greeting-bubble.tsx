@@ -1,4 +1,4 @@
-import { TBot } from "@/hooks/hakima/use-bots";
+import { TModel } from "@/hooks/hakima/use-model-list";
 import { BotAvatar } from "./bot-avatar";
 import { motion } from "framer-motion";
 import { REVEAL_ANIMATION_VARIANTS } from "@/hooks/hakima/use-mdx";
