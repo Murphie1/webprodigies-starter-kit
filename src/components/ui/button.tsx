@@ -23,18 +23,30 @@ const buttonVariants = cva(
 
                 link: "text-primary underline-offset-4 hover:underline",
                 sky: "bg-sky-700",
-        success: "bg-emerald-600 text-white hover:bg-emerald-600/80",
+                success: "bg-emerald-600 text-white hover:bg-emerald-600/80",
+                text: "p-0 text-sm",
             },
             size: {
                 default: "h-10 px-4 py-2",
                 sm: "h-9 rounded-md px-3",
                 lg: "h-11 rounded-md px-8",
                 icon: "h-10 w-10",
+                iconSm: "h-8 min-w-8 text-xs md:text-sm",
+                iconXS: "h-6 min-w-6 text-xs md:text-sm",
+                link: "p-0",
+                linkSm: "p-0 text-xs",
             },
+            rounded: {
+        default: "rounded-md",
+        lg: "rounded-xl",
+
+        full: "rounded-full",
+      },
         },
         defaultVariants: {
             variant: "default",
             size: "default",
+            rounded: "default",
         },
     },
 )
