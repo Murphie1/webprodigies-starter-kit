@@ -85,7 +85,7 @@ export const ChatInput = () => {
     if (editor?.isActive) {
       editor.commands.focus("end");
     }
-  }, [editor?.isActive]);
+  }, [editor]);
 
   useEffect(() => {
     if (sessionId) {
