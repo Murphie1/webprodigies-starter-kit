@@ -9,7 +9,7 @@ AssistantsProvider,
   PromptsProvider,
   ConfirmProvider,
   PreferenceProvider,
-  ReactQueryProvider,
+  //ReactQueryProvider,
   SessionsProvider,
   SettingsProvider,
 } from "@/context";
