@@ -8,15 +8,15 @@ import { VoiceInput } from "@/components/hakima/settings/voice-input";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { cn } from "@/lib/utils";
-import {
+{/*import {
  BrainIcon,
   DashboardCircleIcon,
   Database02Icon,
   Settings03Icon,
   SparklesIcon,
  VoiceIcon,
-} from "@hugeicons/react";
-import { Heart } from "lucide-react";
+} from "@hugeicons/react";*/}
+import { Heart, BookOpen, Lightbulb } from "lucide-react";
 import { useState } from "react";
 
 import { createContext, useContext } from "react";
@@ -61,37 +61,37 @@ export const SettingsProvider = ({ children }: TSettingsProvider) => {
   const settingMenu: TSettingMenuItem[] = [
     {
       name: "Common",
-      icon: () => <Settings03Icon size={18} strokeWidth="2" />,
+      icon: () => <Heart />,//<Settings03Icon size={18} strokeWidth="2" />,
       key: "common",
       component: <CommonSettings />,
     },
     {
       name: "Models",
-      icon: () => <SparklesIcon size={18} strokeWidth="2" />,
+      icon: () => <BookOpen />, //<SparklesIcon size={18} strokeWidth="2" />,
       key: "models",
       component: <ModelSettings />,
     },
     {
       name: "Plugins",
-      icon: () => <DashboardCircleIcon size={18} strokeWidth="2" />,
+      icon: () => <Lightbulb />, //<DashboardCircleIcon size={18} strokeWidth="2" />,
       key: "plugins",
       component: <PluginSettings />,
     },
     {
       name: "Memory",
-      icon: () => <BrainIcon size={18} strokeWidth="2" />,
+      icon: () => <Heart />,// <BrainIcon size={18} strokeWidth="2" />,
       key: "memory",
       component: <MemorySettings />,
     },
     {
       name: "Voice Input",
-      icon: () => <VoiceIcon size={18} strokeWidth="2" />,
+      icon: () => <Heart />, //<VoiceIcon size={18} strokeWidth="2" />,
       key: "voice-input",
       component: <VoiceInput />,
     },
     {
       name: "Data",
-      icon: () => <Database02Icon size={18} strokeWidth="2" />,
+      icon: () => <BookOpen />, //<Database02Icon size={18} strokeWidth="2" />,
       key: "Your Data",
       component: <Data />,
     },
