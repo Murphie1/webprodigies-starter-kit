@@ -10,12 +10,12 @@ import { googleSearchTool } from "@/tools/google";
 import { duckduckGoTool } from "@/tools/duckduckgo";
 import { dalleTool } from "@/tools/dalle";
 import { useSettingsContext } from "@/context";
-import {
-  GlobalSearchIcon,
-  HugeiconsProps,
-  Image01Icon,
-  BrainIcon,
-} from "@hugeicons/react";
+//import {
+  //GlobalSearchIcon,
+ // HugeiconsProps,
+ // Image01Icon,
+  //BrainIcon,
+//} from "@hugeicons/react";
 import { TToolResponse } from ".";
 import { memoryTool } from "@/tools/memory";
 
@@ -68,8 +68,8 @@ export const useTools = () => {
         preferences?.defaultWebSearchEngine === "google"
           ? "Results from Google Search"
           : "Result from DuckDuckGo Search",
-      icon: GlobalSearchIcon,
-      smallIcon: GlobalSearchIcon,
+      icon: Globe,
+      smallIcon: Globe,
       validate: async () => {
         if (
           preferences?.defaultWebSearchEngine === "google" &&
@@ -92,8 +92,8 @@ export const useTools = () => {
       name: "Image Generation",
       loadingMessage: "Generating Image",
       resultMessage: "Generated Image",
-      icon: Image01Icon,
-      smallIcon: Image01Icon,
+      icon: Browser,
+      smallIcon: Browser,
       validationFailedAction: () => {
         open("web-search");
       },
@@ -133,8 +133,8 @@ export const useTools = () => {
       },
       loadingMessage: "Saving to the memory...",
       resultMessage: "Updated memory",
-      icon: BrainIcon,
-      smallIcon: BrainIcon,
+      icon: Calculator,
+      smallIcon: Calculator,
     },
   ];
 
