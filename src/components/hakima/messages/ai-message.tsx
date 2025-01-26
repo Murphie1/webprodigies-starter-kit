@@ -225,7 +225,7 @@ export const AIMessage = ({ chatMessage, isLast }: TAIMessage) => {
                   rounded={"lg"}
                   onClick={handleCopyContent}
                 >
-                  <Quote
+                  <Quotes
                     size={18}
                   />
                 </Button>
