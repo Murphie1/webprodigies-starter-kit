@@ -1,6 +1,6 @@
 "use client";
 import { useToast } from "@/components/ui/use-toast";
-import { TToolResponse, defaultPreferences, useTools } from "@/hooks";
+import { TToolResponse, defaultPreferences, useTools } from "@/hooks/hakima";
 import {
   TAssistant,
   TChatMessage,
