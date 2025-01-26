@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/accordion";
 import { ModelIcon, ModelIconType } from "@/components/hakima/model-icon";
 import { Heart, BookOpen } from "lucide-react";
-import { CheckmarkCircle02Icon, AlertCircleIcon } from "@hugeicons/react";
+//import { CheckmarkCircle02Icon, AlertCircleIcon } from "@hugeicons/react";
 import { cn } from "@/lib/utils";
 
 export const ModelSettings = () => {
@@ -66,16 +66,12 @@ export const ModelSettings = () => {
                 )}
               >
                 {model.connected ? (
-                  <CheckmarkCircle02Icon
+                  <Heart
                     size={20}
-                    strokeWidth={1.5}
-                    variant="solid"
                   />
                 ) : (
-                  <AlertCircleIcon
+                  <BookOpen
                     size={20}
-                    strokeWidth={1.5}
-                    variant="solid"
                   />
                 )}
               </div>
