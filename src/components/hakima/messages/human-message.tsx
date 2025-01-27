@@ -1,4 +1,4 @@
-import { TChatMessage } from "@/hooks";
+import { TChatMessage } from "@/hooks/hakima";
 import { Quotes } from "@phosphor-icons/react";
 import Image from "next/image";
 export type THumanMessage = {
