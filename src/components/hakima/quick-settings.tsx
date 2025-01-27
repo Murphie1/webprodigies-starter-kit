@@ -4,7 +4,7 @@ import { Button } from "../ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { ArrowClockwise, Info, SlidersHorizontal } from "@phosphor-icons/react";
 import { ModelInfo } from "./model-info";
-import { Tooltip } from "../ui/tooltip";
+import { Tooltip } from "./tooltip";
 import { Slider } from "../ui/slider";
 import { usePreferenceContext } from "@/context/preferences";
 import { useModelList } from "@/hooks/hakima/use-model-list";
