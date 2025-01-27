@@ -23,7 +23,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Flex } from "../flex";
-import { Tooltip } from "@/components/ui/tooltip";
+import { Tooltip } from "@/components/hakima/tooltip";
 
 export const Navbar = () => {
   const { theme, setTheme } = useTheme();
