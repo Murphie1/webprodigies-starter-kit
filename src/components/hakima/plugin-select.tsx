@@ -7,7 +7,7 @@ import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Switch } from "../ui/switch";
-import { Tooltip } from "../ui/tooltip";
+import { Tooltip } from "./tooltip";
 import { Flex } from "./flex";
 import { Type } from "./text";
 //import { ConnectIcon } from "@hugeicons/react";
