@@ -6,12 +6,12 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Tooltip } from "@/components/ui/tooltip";
+import { Tooltip } from "./tooltip";
 import { Button } from "@/components/ui/button";
 //import { ArrowDown01Icon, SparklesIcon } from "@hugeicons/react";
 import { Heart } from "lucide-react";
 import { Badge } from "../ui/badge";
-import { TAssistant } from "@/hooks";
+import { TAssistant } from "@/hooks/hakima";
 
 export type TRegenerateModelSelect = {
   assistant: TAssistant;
