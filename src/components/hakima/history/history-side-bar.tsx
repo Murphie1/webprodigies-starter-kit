@@ -8,7 +8,7 @@ import { useState } from "react";
 import { Drawer } from "vaul";
 import { Button } from "@/components/ui/button";
 import { Flex } from "../flex";
-import { Tooltip } from "@/components/ui/tooltip";
+import { Tooltip } from "@/components/hakima/tooltip";
 import { HistoryItem } from "./history-item";
 
 export const HistorySidebar = () => {
