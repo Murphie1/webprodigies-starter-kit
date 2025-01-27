@@ -24,7 +24,7 @@ import { Flex } from "../flex";
 import Spinner from "../loading-spinner";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Type } from "../text";
-import { Tooltip } from "@/components/ui/tooltip";
+import { Tooltip } from "@/components/hakima/tooltip";
 //import {
   //Copy01Icon,
   //Delete01Icon,
