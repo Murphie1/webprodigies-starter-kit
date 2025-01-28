@@ -7,18 +7,13 @@ import { useEffect } from "react";
 
 export default function Home() {
   const { createSession } = useSessionsContext();
-  const handleClick = () => {
+  useEffect(() => {
     createSession({ redirect: true });
-  };
-  
-  {/*useEffect(() => {
-    createSession({ redirect: true });
-  }, []);*/}
+  }, []);
   
   return (
     <main className="flex flex-col gap-2 h-[100dvh] w-screen items-center justify-center">
-   <div onClick={handleClick} >
-   Click Me </div>   {/* <Spinner />*/}
+    <Spinner />
     </main>
   );
     }
