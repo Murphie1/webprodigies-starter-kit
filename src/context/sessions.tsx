@@ -89,7 +89,7 @@ export const SessionsProvider = ({ children }: TSessionsProvider) => {
         if (redirect) {
           // push(`/chat/${data.id}`);
           // refresh();
-          window.open(`/chat/${data.id}`, "_self");
+          window.open(`/hakima/${data.id}`, "_self");
         }
       },
     });
