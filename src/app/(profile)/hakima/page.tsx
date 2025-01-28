@@ -7,7 +7,7 @@ import { useEffect } from "react";
 
 export default function Home() {
   const { createSession } = useSessionsContext();
-  const handleClick () => {
+  const handleClick = () => {
     createSession({ redirect: true });
   };
   
