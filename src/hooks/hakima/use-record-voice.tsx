@@ -7,7 +7,7 @@ import { usePreferenceContext } from "@/context";
 import { useSettingsContext } from "@/context";
 import { Button } from "@/components/ui/button";
 import { Microphone, StopCircle } from "@phosphor-icons/react";
-import { Tooltip } from "@/components/ui/tooltip";
+import { Tooltip } from "@/components/hakima/tooltip";
 import { AudioWaveSpinner } from "@/components/hakima/audio-wave";
 //import { RecordIcon, StopIcon } from "@hugeicons/react";
 import { Heart } from "lucide-react"
@@ -145,9 +145,6 @@ export const useRecordVoice = () => {
           >
             <StopCircle
               size={18}
-              variant="solid"
-              strokeWidth="2"
-              className="text-red-300"
             />{" "}
           </Button>
         </>
@@ -157,7 +154,7 @@ export const useRecordVoice = () => {
     return (
       <Tooltip content="Record">
         <Button size="iconSm" variant="ghost" onClick={startVoiceRecording}>
-          <Microphone size={18} variant="stroke" strokeWidth="2" />
+          <Microphone size={18} />
         </Button>
       </Tooltip>
     );
