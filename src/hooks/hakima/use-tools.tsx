@@ -1,6 +1,6 @@
 import { TavilySearchResults } from "@langchain/community/tools/tavily_search";
 
-import { FC, ReactNode, RefAttributes } from "react";
+import { FC, ReactNode, RefAttributes, SVGProps } from "react";
 import { ModelIcon } from "@/components/hakima/model-icon";
 import { Browser, Calculator, Globe } from "@phosphor-icons/react";
 import { TApiKeys, TPreferences, usePreferences } from "./use-preferences";
@@ -19,6 +19,14 @@ import { useSettingsContext } from "@/context";
 import { TToolResponse } from ".";
 import { memoryTool } from "@/tools/memory";
 
+
+type PhosphorIconProps = {
+  size?: number | string;
+  weight?: "thin" | "light" | "regular" | "bold" | "fill" | "duotone";
+  color?: string;
+} & SVGProps<SVGSVGElement>;
+
+
 export const toolKeys = ["calculator", "web_search"];
 export type TToolKey = (typeof toolKeys)[number];
 export type IconSize = "sm" | "md" | "lg";
@@ -35,13 +43,13 @@ export type TToolArg = {
 export type TTool = {
   key: TToolKey;
   description: string;
-  renderUI?: (args: any) => ReactNode;
+  renderUI?: (args: any) => React.ReactNode;
   name: string;
   loadingMessage?: string;
   resultMessage?: string;
   tool: (args: TToolArg) => any;
-  icon: FC<Omit<HugeiconsProps, "ref"> & RefAttributes<SVGSVGElement>>;
-  smallIcon: FC<Omit<HugeiconsProps, "ref"> & RefAttributes<SVGSVGElement>>;
+  icon: FC<Omit<PhosphorIconProps, "ref"> & RefAttributes<SVGSVGElement>>;
+  smallIcon: FC<Omit<PhosphorIconProps, "ref"> & RefAttributes<SVGSVGElement>>;
   validate?: () => Promise<boolean>;
   validationFailedAction?: () => void;
   showInMenu?: boolean;
