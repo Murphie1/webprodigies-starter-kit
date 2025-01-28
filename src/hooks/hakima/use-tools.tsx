@@ -1,7 +1,7 @@
 import { TavilySearchResults } from "@langchain/community/tools/tavily_search";
 
 import { FC, ReactNode, RefAttributes } from "react";
-import { ModelIcon } from "@/components/model-icon";
+import { ModelIcon } from "@/components/hakima/model-icon";
 import { Browser, Calculator, Globe } from "@phosphor-icons/react";
 import { TApiKeys, TPreferences, usePreferences } from "./use-preferences";
 import axios from "axios";
