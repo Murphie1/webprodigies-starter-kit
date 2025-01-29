@@ -1,8 +1,8 @@
-"use client";
+//"use client";
 
-import Spinner from "@/components/hakima/loading-spinner";
+//import Spinner from "@/components/hakima/loading-spinner";
 //import { useSessionsContext } from "@/context";
-import { Navbar } from "@/components/hakima/layout/navbar";
+//import { Navbar } from "@/components/hakima/layout/navbar";
 //import { useEffect } from "react";
 
 //export const dynamic = 'force-dynamic';
@@ -13,7 +13,7 @@ import { Navbar } from "@/components/hakima/layout/navbar";
 export default function Home() {
   return (
     <main className="flex flex-col gap-2 h-[100dvh] w-screen items-center justify-center">
-      <Navbar />
+      <h2>HI</h2>
     </main>
   );
 }
