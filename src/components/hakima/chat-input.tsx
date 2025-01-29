@@ -256,7 +256,7 @@ export const ChatInput = () => {
 
                 {!isGenerating && renderRecordingControls()}
               </div>
-              <div className="flex flex-row items-center w-full justify-start gap-0 pt-1 pb-2 px-2">
+              <div className="flex flex-row items-center w-full justify-start gap-0 pl-5 md:pl-1 pt-1 pb-2 px-2">
                 <Button
                   variant={"ghost"}
                   onClick={openAssistants}
@@ -276,7 +276,7 @@ export const ChatInput = () => {
                     size="iconSm"
                     rounded="full"
                     variant={!!editor?.getText() ? "default" : "secondary"}
-                    disabled={!editor?.getText()}
+                    disabled={!text}
                     className={cn(
                       !!editor?.getText() &&
                         "bg-zinc-800 dark:bg-emerald-500/20 text-white dark:text-emerald-400 dark:outline-emerald-400"
