@@ -59,7 +59,7 @@ export const HistoryItem = ({
       )}
       onClick={() => {
         if (!isEditing) {
-          router.push(`/chat/${session.id}`);
+          router.push(`/hakima/${session.id}`);
           dismiss();
         }
       }}
@@ -110,7 +110,7 @@ export const HistoryItem = ({
       )}
       {(!isEditing || openDeleteConfirm) && (
         <Flex
-          className={cn("group-hover:flex hidden", openDeleteConfirm && "flex")}
+          className={cn("group-hover:flex md:hidden", openDeleteConfirm && "flex")}
         >
           <Button
             variant="ghost"
