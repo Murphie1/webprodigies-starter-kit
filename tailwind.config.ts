@@ -23,6 +23,19 @@ const config = {
                 sans: ["var(--font-inter)"],
             },
             colors: {
+                zinc: {
+          "50": "hsl(0, 0%, 93.7%, <alpha-value>)",
+          "100": "hsl(0, 0%, 87.8%, <alpha-value>)",
+          "200": "hsl(0, 0%, 77%, <alpha-value>)",
+          "300": "hsl(0, 0%, 66.3%, <alpha-value>)",
+          "400": "hsl(0, 0%, 55.5%, <alpha-value>)",
+          "500": "hsl(0, 0%, 45.1%, <alpha-value>)",
+          "600": "hsl(0, 0%, 34.3%, <alpha-value>)",
+          "700": "hsl(0, 0%, 23.5%, <alpha-value>)",
+          "800": "hsl(0, 0%, 12.7%, <alpha-value>)",
+          "900": "hsl(0, 0%, 5.9%, <alpha-value>)",
+          "950": "hsl(0, 0%, 3.1%, <alpha-value>)",
+        },
                 brand: {
   				'100': '#EA6365',
   				DEFAULT: '#FA7275'
@@ -143,6 +156,17 @@ const config = {
   				'5': 'hsl(var(--chart-5))'
             },
             },
+            fontSize: {
+        xs: "0.75rem",
+        sm: "0.875rem",
+        base: "0.975rem",
+        lg: "1.125rem",
+        xl: "1.25rem",
+        "2xl": "1.563rem",
+        "3xl": "1.953rem",
+        "4xl": "2.441rem",
+        "5xl": "3.052rem",
+      },
             borderRadius: {
                 lg: "var(--radius)",
                 md: "calc(var(--radius) - 2px)",
@@ -170,6 +194,14 @@ const config = {
                     from: { height: "var(--radix-accordion-content-height)" },
                     to: { height: "0" },
                 },
+                marquee: {
+          "0%": { transform: "translateX(0%)" },
+          "100%": { transform: "translateX(-100%)" },
+        },
+        marquee2: {
+          "0%": { transform: "translateX(100%)" },
+          "100%": { transform: "translateX(0%)" },
+        },
             },
             // extend: {
             backgroundImage: {
