@@ -1,4 +1,4 @@
-//"use client";
+"use client";
 
 import Spinner from "@/components/hakima/loading-spinner";
 //import { useSessionsContext } from "@/context";
