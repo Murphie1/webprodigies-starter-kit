@@ -8,7 +8,7 @@ import Link from "next/link"
 export const SideBar = () => {
     return (
         <div className="h-full border-r flex flex-col overflow-y-auto bg-white shadow-sm dark:bg-black">
-            <div className="p-6">
+            <div className="p-6 flex-1 space-x-2">
                 <BookOpen />
                 YouLearn
             </div>
