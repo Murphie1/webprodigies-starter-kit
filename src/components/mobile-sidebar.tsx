@@ -1,4 +1,4 @@
-import { Menu } from "lucide-react"
+import { AlignRight } from "lucide-react"
 import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet"
 import { SideBar } from "./sidebar"
 
@@ -9,7 +9,7 @@ export const MobileSideBar = () => {
                 type="button"
                 className="md:hidden pr-4 hover:opacity-75 transition"
             >
-                <Menu />
+                <AlignRight />
             </SheetTrigger>
             <SheetContent side="left" className="p-0 bg-white dark:bg-black">
                 <SideBar />
