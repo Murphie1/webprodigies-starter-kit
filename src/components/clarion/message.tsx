@@ -69,7 +69,7 @@ export function BotMessage({ message }: { message: string }) {
             />
           )
         },
-        a: Citing
+        a: Citing as React.ElementType
       }}
     >
       {message}
