@@ -43,7 +43,7 @@ export function BotMessage({ message }: { message: string }) {
           if (!children) {
             return;
           }
-          if (children.length) {
+          if (children.number) {
             if (children[0] == '▍') {
               return (
                 <span className="mt-1 cursor-default animate-pulse">▍</span>
