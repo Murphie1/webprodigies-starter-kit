@@ -11,7 +11,7 @@ import { MemoizedReactMarkdown } from './ui/markdown'
 
 export function BotMessage({ message }: { message: string }) {
   // Check if the content contains LaTeX patterns
-  const containsLaTeX = /\\\[([\s\S]*?)\\\]|\\\(([\s\S]*?)\\\)/.test(
+  const containsLaTeX = /\\([\s\S]*?)\\|\\([\s\S]*?)\\/.test(
     message || ''
   )
 
@@ -39,18 +39,18 @@ export function BotMessage({ message }: { message: string }) {
       remarkPlugins={[remarkGfm]}
       className="prose-sm prose-neutral prose-a:text-accent-foreground/50"
       components={{
-        code({ node, className, children, ...props }) {
-          if (!children) {
-            return;
+        code({ node, inline = false, className, children, ...props }) {
+          if (!children || typeof children !== 'string' && !Array.isArray(children)) {
+            return null
           }
-          if (children.number) {
-            if (children[0] == '▍') {
-              return (
-                <span className="mt-1 cursor-default animate-pulse">▍</span>
-              )
-            }
 
-            children[0] = (children[0] as string).replace('`▍`', '▍')
+          // Ensure children is an array and process the first element safely
+          const childrenArray = Array.isArray(children) ? children : [children]
+
+          if (typeof childrenArray[0] === 'string' && childrenArray[0].includes('▍')) {
+            return (
+              <span className="mt-1 cursor-default animate-pulse">▍</span>
+            )
           }
 
           const match = /language-(\w+)/.exec(className || '')
@@ -67,7 +67,7 @@ export function BotMessage({ message }: { message: string }) {
             <CodeBlock
               key={Math.random()}
               language={(match && match[1]) || ''}
-              value={String(children).replace(/\n$/, '')}
+              value={String(childrenArray).replace(/\n$/, '')}
               {...props}
             />
           )
@@ -81,15 +81,14 @@ export function BotMessage({ message }: { message: string }) {
 }
 
 // Preprocess LaTeX equations to be rendered by KaTeX
-// ref: https://github.com/remarkjs/react-markdown/issues/785
 const preprocessLaTeX = (content: string) => {
   const blockProcessedContent = content.replace(
-    /\\\[([\s\S]*?)\\\]/g,
+    /\\([\s\S]*?)\\/g,
     (_, equation) => `$$${equation}$$`
   )
   const inlineProcessedContent = blockProcessedContent.replace(
-    /\\\(([\s\S]*?)\\\)/g,
+    /\\([\s\S]*?)\\/g,
     (_, equation) => `$${equation}$`
   )
   return inlineProcessedContent
-      }
+        }
