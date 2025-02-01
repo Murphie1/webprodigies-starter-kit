@@ -40,6 +40,9 @@ export function BotMessage({ message }: { message: string }) {
       className="prose-sm prose-neutral prose-a:text-accent-foreground/50"
       components={{
         code({ node, className, children, ...props }) {
+          if (!children) {
+            return;
+          }
           if (children.length) {
             if (children[0] == '▍') {
               return (
