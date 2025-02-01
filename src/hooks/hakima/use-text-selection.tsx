@@ -5,12 +5,13 @@ export const useTextSelection = () => {
   const [showPopup, setShowPopup] = useState<boolean>(false);
 
   useEffect(() => {
-    const handleMouseUp = () => {
+    const handleSelection = () => {
       const selection = window.getSelection();
 
-      if (selection && selection?.rangeCount > 0) {
-        var range = selection.getRangeAt(0);
-        var parentDiv = document.getElementById("chat-container");
+      if (selection && selection.rangeCount > 0) {
+        const range = selection.getRangeAt(0);
+        const parentDiv = document.getElementById("chat-container");
+
         if (parentDiv?.contains(range.commonAncestorContainer)) {
           const selectedText = range.toString().trim();
           if (selectedText) {
@@ -25,18 +26,14 @@ export const useTextSelection = () => {
       }
     };
 
-    const chatContainer = document.getElementById("chat-container");
-
-    if (!chatContainer) {
-      return;
-    }
-
-    document.addEventListener("selectionchange", handleMouseUp);
+    document.addEventListener("selectionchange", handleSelection);
+    document.addEventListener("touchend", handleSelection); // Fix for mobile
 
     return () => {
-      chatContainer.removeEventListener("selectionchange", handleMouseUp);
+      document.removeEventListener("selectionchange", handleSelection);
+      document.removeEventListener("touchend", handleSelection);
     };
-  }, [showPopup]);
+  }, []);
 
   const handleClearSelection = () => {
     setShowPopup(false);
