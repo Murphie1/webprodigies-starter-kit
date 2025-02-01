@@ -52,7 +52,7 @@ export function ChatPanel({
 
   const handleNewChat = () => {
     setMessages([])
-    router.push('/')
+    router.push('/clarion')
   }
 
   // if query is not empty, submit the query
