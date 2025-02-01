@@ -39,7 +39,7 @@ export function BotMessage({ message }: { message: string }) {
       remarkPlugins={[remarkGfm]}
       className="prose-sm prose-neutral prose-a:text-accent-foreground/50"
       components={{
-        code({ node, inline, className, children, ...props }) {
+        code({ node, className, children, ...props }) {
           if (children.length) {
             if (children[0] == '▍') {
               return (
