@@ -32,7 +32,7 @@ export function Chat({
       id
     },
     onFinish: () => {
-      window.history.replaceState({}, '', `/search/${id}`)
+      window.history.replaceState({}, '', `/clarion/${id}`)
     },
     onError: error => {
       toast.error(`Error in chat: ${error.message}`)
