@@ -1,7 +1,7 @@
 import { tool } from 'ai'
 import Exa from 'exa-js'
 import { searchSchema } from '@/lib/schema/search'
-import { sanitizeUrl } from '@/lib/utils'
+import { sanitizeUrl } from '@/lib/clarion/utils'
 import {
   SearchResultImage,
   SearchResults,
