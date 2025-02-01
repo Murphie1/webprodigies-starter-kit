@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils'
-import { AnchorHTMLAttributes, DetailedHTMLProps, ReactNode } from 'react'
+import { AnchorHTMLAttributes, DetailedHTMLProps, ReactNode, FC } from 'react'
 
 type CustomLinkProps = Omit<
   DetailedHTMLProps<AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>,
@@ -8,17 +8,17 @@ type CustomLinkProps = Omit<
   children: ReactNode
 }
 
-export function Citing({
+export const Citing: FC<CustomLinkProps> = ({
   href,
   children,
   className,
   ...props
-}: CustomLinkProps) {
+}) => {
   const childrenText = children?.toString() || ''
   const isNumber = /^\d+$/.test(childrenText)
   const linkClasses = cn(
     isNumber
-      ? 'text-[10px] bg-muted text-muted-froreground rounded-full w-4 h-4 px-0.5 inline-flex items-center justify-center hover:bg-muted/50 duration-200 no-underline -translate-y-0.5'
+      ? 'text-[10px] bg-muted text-muted-foreground rounded-full w-4 h-4 px-0.5 inline-flex items-center justify-center hover:bg-muted/50 duration-200 no-underline -translate-y-0.5'
       : 'hover:underline inline-flex items-center gap-1.5',
     className
   )
@@ -34,4 +34,4 @@ export function Citing({
       {children}
     </a>
   )
-}
+  }
