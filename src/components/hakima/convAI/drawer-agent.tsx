@@ -1,5 +1,6 @@
 "use client"
-  
+
+import {BackgroundWave} from "./background-wave";
 import {ConvAI} from "./voice-agent";
 import * as React from "react"
 import { Heart } from "lucide-react"
@@ -47,6 +48,7 @@ export function DrawerAgent() {
                 <ConvAI/>
             </main>
         </div>
+          <BackgroundWave/>
         </DialogContent>
       </Dialog>
     )
@@ -67,6 +69,7 @@ export function DrawerAgent() {
                 <ConvAI/>
             </main>
         </div>
+        <BackgroundWave/>
         <DrawerFooter className="pt-2">
           <DrawerClose asChild>
             <Button variant="outline">Close</Button>
