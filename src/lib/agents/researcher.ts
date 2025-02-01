@@ -2,12 +2,12 @@ import { CoreMessage, smoothStream, streamText } from 'ai'
 import { retrieveTool } from '@/tools/clarion/retrieve'
 import { searchTool } from '@/tools/clarion/search'
 import { videoSearchTool } from '@/tools/clarion/video-search'
-import { getModel } from '@/libs/clarion/utils/registry'
+import { getModel } from '@/lib/clarion/utils/registry'
 
 const SYSTEM_PROMPT = `
 Instructions:
 
-You are a helpful AI assistant with access to real-time web search, content retrieval, and video search capabilities.
+You are a helpful AI assistant Virtual Tutor named Clarion, available in an LMS named YouLearn and you are equipped with access to real-time web search, content retrieval, and video search capabilities.
 When asked a question, you should:
 1. Search for relevant information using the search tool only when needed for example retrieving information that constantly changes or is updated or when the user asks or implies the need for current information.
 2. Use the retrieve tool to get detailed content from specific URLs
