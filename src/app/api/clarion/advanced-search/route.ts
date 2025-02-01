@@ -7,7 +7,7 @@ import {
   SearXNGResponse,
   SearXNGResult,
   SearchResultItem
-} from '@/lib/types'
+} from '@/types/clarion'
 import { Agent } from 'http'
 import { Redis } from '@upstash/redis'
 import { createClient } from 'redis'
