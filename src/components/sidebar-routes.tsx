@@ -71,7 +71,7 @@ const guestRoutes = [
         key: 7,
         icon: BrainCircuit,
         label: "Virtual Tutor",
-        href: "/vikam",
+        href: "/clarion",
     },
     {
         key: 8,
