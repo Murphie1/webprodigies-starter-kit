@@ -39,23 +39,20 @@ export function BotMessage({ message }: { message: string }) {
       remarkPlugins={[remarkGfm]}
       className="prose-sm prose-neutral prose-a:text-accent-foreground/50"
       components={{
-        code({ node, inline = false, className, children, ...props }) {
-          if (!children || typeof children !== 'string' && !Array.isArray(children)) {
+        code({ node, className, children, ...props }) {
+          if (!children || (typeof children !== 'string' && !Array.isArray(children))) {
             return null
           }
 
-          // Ensure children is an array and process the first element safely
-          const childrenArray = Array.isArray(children) ? children : [children]
-
-          if (typeof childrenArray[0] === 'string' && childrenArray[0].includes('▍')) {
-            return (
-              <span className="mt-1 cursor-default animate-pulse">▍</span>
-            )
+          // Handle "▍" special case
+          if (children.length && children[0] === '▍') {
+            return <span className="mt-1 cursor-default animate-pulse">▍</span>
           }
 
           const match = /language-(\w+)/.exec(className || '')
 
-          if (inline) {
+          // If no language class is found, treat it as inline code
+          if (!match) {
             return (
               <code className={className} {...props}>
                 {children}
@@ -66,8 +63,8 @@ export function BotMessage({ message }: { message: string }) {
           return (
             <CodeBlock
               key={Math.random()}
-              language={(match && match[1]) || ''}
-              value={String(childrenArray).replace(/\n$/, '')}
+              language={match[1] || ''}
+              value={String(children).replace(/\n$/, '')}
               {...props}
             />
           )
@@ -81,6 +78,7 @@ export function BotMessage({ message }: { message: string }) {
 }
 
 // Preprocess LaTeX equations to be rendered by KaTeX
+// ref: https://github.com/remarkjs/react-markdown/issues/785
 const preprocessLaTeX = (content: string) => {
   const blockProcessedContent = content.replace(
     /\\([\s\S]*?)\\/g,
@@ -91,4 +89,4 @@ const preprocessLaTeX = (content: string) => {
     (_, equation) => `$${equation}$`
   )
   return inlineProcessedContent
-        }
+                                        }
