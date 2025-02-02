@@ -1,5 +1,6 @@
 import { client } from "@/lib/prisma"
 import GroupBox from "./_components/group-box"
+import Link from "next/link"
 import { onAuthenticatedUser } from "@/actions/auth"
 import { redirect } from "next/navigation"
 import { NavBar } from "@/components/navbar"
@@ -34,18 +35,18 @@ const Orgs = async () => {
             <div className="flex flex-col h-full w-full space-y-8 pt-[75px] md:pl-56">
                 {/* Buttons for "Create" and "Explore" */}
                 <div className="flex justify-center space-x-4 bottom-10">
-                    <a
+                    <Link
                         href="/organizations/create"
                         className="px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700"
                     >
                         Create
-                    </a>
-                    <a
+                    </Link>
+                    <Link
                         href="/organizations/explore"
                         className="px-4 py-2 text-white bg-gray-600 rounded-lg hover:bg-gray-700"
                     >
                         Explore
-                    </a>
+                    </Link>
                 </div>
                 {/* Display groups or a message */}
                 {groups.length > 0 ? (
