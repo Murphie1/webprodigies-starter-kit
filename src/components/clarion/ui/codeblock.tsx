@@ -1,10 +1,8 @@
-// Referenced from Vercel's AI Chatbot and modified to fit the needs of this project
-// https://github.com/vercel/ai-chatbot/blob/c2757f87f986b7f15fdf75c4c89cb2219745c53f/components/ui/codeblock.tsx
-
 'use client'
 
 import { FC, memo } from 'react'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
+import type { SyntaxHighlighterProps } from 'react-syntax-highlighter'
 import { coldarkDark } from 'react-syntax-highlighter/dist/cjs/styles/prism'
 
 import { useCopyToClipboard } from '@/hooks/clarion/use-copy-to-clipboard'
@@ -45,31 +43,26 @@ export const programmingLanguages: languageMap = {
   sql: '.sql',
   html: '.html',
   css: '.css'
-  // add more file extensions here, make sure the key is same as language prop in CodeBlock.tsx component
 }
+
+const SyntaxHighlighterComponent = SyntaxHighlighter as unknown as FC<SyntaxHighlighterProps>
 
 const CodeBlock: FC<Props> = memo(({ language, value }) => {
   const { isCopied, copyToClipboard } = useCopyToClipboard({ timeout: 2000 })
 
   const downloadAsFile = () => {
-    if (typeof window === 'undefined') {
-      return
-    }
+    if (typeof window === 'undefined') return
     const fileExtension = programmingLanguages[language] || '.file'
     const suggestedFileName = `file-${generateId()}${fileExtension}`
     const fileName = window.prompt('Enter file name', suggestedFileName)
 
-    if (!fileName) {
-      // User pressed cancel on prompt.
-      return
-    }
+    if (!fileName) return
 
     const blob = new Blob([value], { type: 'text/plain' })
     const url = URL.createObjectURL(blob)
     const link = document.createElement('a')
     link.download = fileName
     link.href = url
-    link.style.display = 'none'
     document.body.appendChild(link)
     link.click()
     document.body.removeChild(link)
@@ -101,16 +94,12 @@ const CodeBlock: FC<Props> = memo(({ language, value }) => {
             className="text-xs focus-visible:ring-1 focus-visible:ring-offset-0"
             onClick={onCopy}
           >
-            {isCopied ? (
-              <Check className="w-4 h-4" />
-            ) : (
-              <Copy className="w-4 h-4" />
-            )}
+            {isCopied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
             <span className="sr-only">Copy code</span>
           </Button>
         </div>
       </div>
-      <SyntaxHighlighter
+      <SyntaxHighlighterComponent
         language={language}
         style={coldarkDark}
         PreTag="div"
@@ -132,7 +121,7 @@ const CodeBlock: FC<Props> = memo(({ language, value }) => {
         }}
       >
         {value}
-      </SyntaxHighlighter>
+      </SyntaxHighlighterComponent>
     </div>
   )
 })
