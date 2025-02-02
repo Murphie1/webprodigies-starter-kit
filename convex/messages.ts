@@ -42,14 +42,14 @@ export const sendTextMessage = mutation({
 		// TODO => add @gpt check later
 		if (args.content.startsWith("@hakima")) {
 			// Schedule the chat action to run immediately
-			await ctx.scheduler.runAfter(0, api.openaitwo.chat, {
+			await ctx.scheduler.runAfter(0, api.geminichat.chat, {
 				messageBody: args.content,
 				conversation: args.conversation,
 			});
 		}
 
 		if (args.content.startsWith("~vikam")) {
-			await ctx.scheduler.runAfter(0, api.openaitwo.dall_e, {
+			await ctx.scheduler.runAfter(0, api.geminichat.craiyonImage, {
 				messageBody: args.content,
 				conversation: args.conversation,
 			});
