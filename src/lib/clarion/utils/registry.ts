@@ -29,16 +29,16 @@ export const registry = createProviderRegistry({
 })
 
 export function getModel(model: string) {
-   if ollama provider, set simulateStreaming to true
-  if (model.includes('ollama')) {
-   const modelName = model.split(':')[1]
-    const ollama = createOllama({
-      baseURL: `${process.env.OLLAMA_BASE_URL}/api`
-    })
-    return ollama(modelName, {
-     simulateStreaming: true
-    })
-  }
+  //if ollama provider, set simulateStreaming to true
+  //if (model.includes('ollama')) {
+   //const modelName = model.split(':')[1]
+    //const ollama = createOllama({
+    //  baseURL: `${process.env.OLLAMA_BASE_URL}/api`
+   // })
+   // return ollama(modelName, {
+   //  simulateStreaming: true
+   // })
+  //}
 
   return registry.languageModel(model)
 }
@@ -53,8 +53,8 @@ export function isProviderEnabled(providerId: string): boolean {
       return !!process.env.GOOGLE_GENERATIVE_AI_API_KEY
     case 'groq':
       return !!process.env.GROQ_API_KEY
-    case 'ollama':
-      return !!process.env.OLLAMA_BASE_URL
+   // case 'ollama':
+     // return !!process.env.OLLAMA_BASE_URL
     case 'azure':
       return !!process.env.AZURE_API_KEY && !!process.env.AZURE_RESOURCE_NAME
     case 'deepseek':
