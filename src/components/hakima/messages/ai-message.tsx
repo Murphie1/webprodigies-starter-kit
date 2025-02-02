@@ -197,7 +197,7 @@ export const AIMessage = ({ chatMessage, isLast }: TAIMessage) => {
             <Flex gap="sm">
               <Spinner />
               <Type size="sm" textColor="tertiary">
-                {!!rawAI?.length ? "Typing ..." : "Thinking ..."}
+                {!!rawAI?.length ? "Typing ..." : "Reasoning ..."}
               </Type>
             </Flex>
           )}
@@ -218,12 +218,16 @@ export const AIMessage = ({ chatMessage, isLast }: TAIMessage) => {
                 </Button>
               </Tooltip>
 
-              <Tooltip content="Copy">
+              <Tooltip content="Reply">
                 <Button
                   variant={"ghost"}
                   size={"iconSm"}
                   rounded={"lg"}
-                  onClick={handleCopyContent}
+                  onClick={() => {
+                      setContextValue(rawAI!);
+                      editor?.commands.clearContent();
+                      editor?.commands.focus("end");
+                    }}
                 >
                   <Quotes
                     size={18}
