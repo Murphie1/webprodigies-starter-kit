@@ -14,7 +14,7 @@ const duckduckGoTool = (args: TToolArg) => {
     schema: webSearchSchema,
     func: async ({ input }, runManager) => {
       try {
-        const response = await axios.post("/api/search", { query: input });
+        const response = await axios.post("/api/hakima/search", { query: input });
         const result = response.data?.results;
         if (!result) {
           runManager?.handleToolError("Error performing Duckduck go search");
