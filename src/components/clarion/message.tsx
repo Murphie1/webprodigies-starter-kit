@@ -10,10 +10,8 @@ import { CodeBlock } from './ui/codeblock'
 import { MemoizedReactMarkdown } from './ui/markdown'
 
 export function BotMessage({ message }: { message: string }) {
-  // Check if the content contains LaTeX patterns
-  const containsLaTeX = /\\([\s\S]*?)\\|\\([\s\S]*?)\\/.test(
-    message || ''
-  )
+  // Check if the content contains LaTeX patterns (inline: ..., block: ...)
+  const containsLaTeX = /\\([\s\S]*?)\\|\\([\s\S]*?)\\/.test(message || '')
 
   // Modify the content to render LaTeX equations if LaTeX patterns are found
   const processedData = preprocessLaTeX(message || '')
@@ -69,7 +67,7 @@ export function BotMessage({ message }: { message: string }) {
             />
           )
         },
-  a: Citing as unknown as React.ComponentType<React.AnchorHTMLAttributes<HTMLAnchorElement>
+        a: Citing as unknown as React.ComponentType<React.AnchorHTMLAttributes<HTMLAnchorElement>> // ✅ Fixed
       }}
     >
       {message}
@@ -80,13 +78,17 @@ export function BotMessage({ message }: { message: string }) {
 // Preprocess LaTeX equations to be rendered by KaTeX
 // ref: https://github.com/remarkjs/react-markdown/issues/785
 const preprocessLaTeX = (content: string) => {
+  // Convert block LaTeX (e.g., ...) to KaTeX format ($$ ... $$)
   const blockProcessedContent = content.replace(
     /\\([\s\S]*?)\\/g,
     (_, equation) => `$$${equation}$$`
   )
+
+  // Convert inline LaTeX (e.g., ...) to KaTeX format ($ ... $)
   const inlineProcessedContent = blockProcessedContent.replace(
     /\\([\s\S]*?)\\/g,
     (_, equation) => `$${equation}$`
   )
+
   return inlineProcessedContent
-                                        }
+            }
