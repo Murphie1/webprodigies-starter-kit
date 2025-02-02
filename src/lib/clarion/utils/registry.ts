@@ -4,7 +4,7 @@ import { deepseek } from '@ai-sdk/deepseek'
 import { google } from '@ai-sdk/google'
 import { createOpenAI, openai } from '@ai-sdk/openai'
 import { experimental_createProviderRegistry as createProviderRegistry } from 'ai'
-import { createOllama } from 'ollama-ai-provider'
+//import { createOllama } from 'ollama-ai-provider'
 
 export const registry = createProviderRegistry({
   openai,
@@ -14,9 +14,9 @@ export const registry = createProviderRegistry({
     apiKey: process.env.GROQ_API_KEY,
     baseURL: 'https://api.groq.com/openai/v1'
   }),
-  ollama: createOllama({
-    baseURL: `${process.env.OLLAMA_BASE_URL}/api`
-  }),
+  //ollama: createOllama({
+   // baseURL: `${process.env.OLLAMA_BASE_URL}/api`
+ // }),
   azure: createAzure({
     apiKey: process.env.AZURE_API_KEY,
     resourceName: process.env.AZURE_RESOURCE_NAME
@@ -29,14 +29,14 @@ export const registry = createProviderRegistry({
 })
 
 export function getModel(model: string) {
-  // if ollama provider, set simulateStreaming to true
+   if ollama provider, set simulateStreaming to true
   if (model.includes('ollama')) {
-    const modelName = model.split(':')[1]
+   const modelName = model.split(':')[1]
     const ollama = createOllama({
       baseURL: `${process.env.OLLAMA_BASE_URL}/api`
     })
     return ollama(modelName, {
-      simulateStreaming: true
+     simulateStreaming: true
     })
   }
 
