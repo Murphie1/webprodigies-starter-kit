@@ -6,8 +6,6 @@ import axios from "axios"
 // Replace with your Gemini Chat API key
 const geminiApiKey = process.env.CHAT_GEMINI_API_KEY
 
-// Craiyon API endpoint
-const craiyonApiUrl = "https://api.craiyon.com/generate"
 
 export const chat = action({
     args: {
@@ -60,33 +58,32 @@ export const chat = action({
     },
 })
 
+
 export const craiyonImage = action({
-    args: {
-        conversation: v.id("conversations"),
-        messageBody: v.string(),
-    },
-    handler: async (ctx, args) => {
-        try {
-            // Call Craiyon API for image generation
-            const response = await axios.post(craiyonApiUrl, {
-                prompt: args.messageBody,
-            })
+  args: {
+    conversation: v.id("conversations"),
+    messageBody: v.string(),
+  },
+  handler: async (ctx, args) => {
+    const response = await fetch("https://backend.craiyon.com/generate", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ prompt: args.messageBody }),
+    });
 
-            const imageUrl = response.data.images[0] // Assuming the API returns images in an array
+    if (!response.ok) {
+      throw new Error(`Craiyon API request failed with status ${response.status}`);
+    }
 
-            // Send image URL to conversation
-            await ctx.runMutation(api.messages.sendHakimaMessage, {
-                content: imageUrl ?? "/gpt.png",  // Default image if no response
-                conversation: args.conversation,
-                messageType: "image",
-            })
-        } catch (error) {
-            console.error("Craiyon API error:", error)
-            await ctx.runMutation(api.messages.sendHakimaMessage, {
-                content: "/gpt.png", // Fallback image on error
-                conversation: args.conversation,
-                messageType: "image",
-            })
-        }
-    },
-})
+    const data = await response.json();
+    const imageUrl = data.images[0]; // Assuming the first image is the desired one
+
+    await ctx.runMutation(api.messages.sendHakimaMessage, {
+      content: imageUrl ?? "/gpt.png",
+      conversation: args.conversation,
+      messageType: "image",
+    });
+  },
+});
