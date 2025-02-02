@@ -55,4 +55,17 @@ export default defineSchema({
             v.literal("video"),
         ),
     }).index("by_conversation", ["conversation"]),
+
+chats: defineTable({
+    title: v.string(),
+    userId: v.string(),
+    createdAt: v.number(),
+  }).index("by_user", ["userId"]),
+
+ aimessages: defineTable({
+    chatId: v.id("chats"),
+    content: v.string(),
+    role: v.union(v.literal("user"), v.literal("assistant")),
+    createdAt: v.number(),
+  }).index("by_chat", ["chatId"]),
 })
