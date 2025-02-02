@@ -25,13 +25,6 @@ import Spinner from "../loading-spinner";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Type } from "../text";
 import { Tooltip } from "@/components/hakima/tooltip";
-//import {
-  //Copy01Icon,
-  //Delete01Icon,
- // ThumbsDownIcon,
-  //Tick01Icon,
-//} from "@hugeicons/react";
-
 
 export type TAIMessage = {
   chatMessage: TChatMessage;
@@ -144,7 +137,7 @@ export const AIMessage = ({ chatMessage, isLast }: TAIMessage) => {
   };
 
   return (
-    <div className="flex flex-row mt-6 w-full">
+    <div id="chat-container" className="flex flex-row mt-6 w-full">
       <div className="p-2 md:px-3 md:py-2">
         <Tooltip content={inputProps?.assistant.name}>
           {getAssistantIcon(inputProps!.assistant.key)}
@@ -166,9 +159,7 @@ export const AIMessage = ({ chatMessage, isLast }: TAIMessage) => {
                 {renderMarkdown(rawAI, !!isLoading, id)}
               </article>
             </Selection.Trigger>
-            <Selection.Portal
-              container={document?.getElementById("chat-container")}
-            >
+            <Selection.Portal container={messageRef.current}>
               <Selection.Content sticky="always" sideOffset={10}>
                 {selectedText && (
                   <Button
@@ -210,11 +201,7 @@ export const AIMessage = ({ chatMessage, isLast }: TAIMessage) => {
                   rounded="lg"
                   onClick={handleCopyContent}
                 >
-                  {showCopied ? (
-                    <Check size={18} />
-                  ) : (
-                    <Copy size={18} />
-                  )}
+                  {showCopied ? <Check size={18} /> : <Copy size={18} />}
                 </Button>
               </Tooltip>
 
@@ -224,26 +211,19 @@ export const AIMessage = ({ chatMessage, isLast }: TAIMessage) => {
                   size={"iconSm"}
                   rounded={"lg"}
                   onClick={() => {
-                      setContextValue(rawAI!);
-                      editor?.commands.clearContent();
-                      editor?.commands.focus("end");
-                    }}
+                    setContextValue(rawAI!);
+                    editor?.commands.clearContent();
+                    editor?.commands.focus("end");
+                  }}
                 >
-                  <Quotes
-                    size={18}
-                  />
+                  <Quotes size={18} />
                 </Button>
               </Tooltip>
               <Tooltip content="Delete">
-                <Popover
-                  open={openDeleteConfirm}
-                  onOpenChange={setOpenDeleteConfirm}
-                >
+                <Popover open={openDeleteConfirm} onOpenChange={setOpenDeleteConfirm}>
                   <PopoverTrigger asChild>
                     <Button variant="ghost" size="iconSm" rounded="lg">
-                      <TrashSimple
-                        size={18}
-                      />
+                      <TrashSimple size={18} />
                     </Button>
                   </PopoverTrigger>
                   <PopoverContent>
@@ -251,16 +231,10 @@ export const AIMessage = ({ chatMessage, isLast }: TAIMessage) => {
                       Are you sure you want to delete this message?
                     </p>
                     <div className="flex flex-row gap-1">
-                      <Button
-                        variant="destructive"
-                        onClick={() => removeMessage(id)}
-                      >
+                      <Button variant="destructive" onClick={() => removeMessage(id)}>
                         Delete Message
                       </Button>
-                      <Button
-                        variant="ghost"
-                        onClick={() => setOpenDeleteConfirm(false)}
-                      >
+                      <Button variant="ghost" onClick={() => setOpenDeleteConfirm(false)}>
                         Cancel
                       </Button>
                     </div>
@@ -270,27 +244,8 @@ export const AIMessage = ({ chatMessage, isLast }: TAIMessage) => {
             </div>
           )}
           {chatMessage && isLast && (
-            <RegenerateWithModelSelect
-              assistant={inputProps!.assistant}
-              onRegenerate={(assistant: string) => {
-                const props = getAssistantByKey(assistant);
-                if (!props?.assistant) {
-                  return;
-                }
-                handleRunModel({
-                  input: chatMessage.rawHuman,
-                  messageId: chatMessage.id,
-                  assistant: props.assistant,
-                  sessionId: chatMessage.sessionId,
-                });
-              }}
-            />
+            <RegenerateWithModelSelect assistant={inputProps!.assistant} onRegenerate={handleRunModel} />
           )}
-          {/* {!isLoading && !isToolRunning && (
-            <div className="flex flex-row gap-2 items-center text-xs text-zinc-500">
-              {modelForMessage?.name}
-            </div>
-          )} */}
         </Flex>
       </Flex>
     </div>
