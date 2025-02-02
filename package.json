@@ -268,7 +268,10 @@
         "zod": "^3.24.1",
         "zustand": "^5.0.2"
     },
-    "devDependencies": {
+    "resolutions": {
+          "@ai-sdk/provider": "1.0.7"
+    },
+  "devDependencies": {
         "@commitlint/cli": "^19.4.0",
         "@commitlint/config-conventional": "^19.2.2",
         "@types/lodash": "^4.17.13",
@@ -290,4 +293,5 @@
         "node": ">=18.0.0"
     },
     "engineStrict": true
+
 }
