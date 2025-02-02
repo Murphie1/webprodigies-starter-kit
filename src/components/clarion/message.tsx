@@ -69,9 +69,7 @@ export function BotMessage({ message }: { message: string }) {
             />
           )
         },
-       components={{
-  a: Citing as React.ComponentType<React.AnchorHTMLAttributes<HTMLAnchorElement>>
-}}
+  a: Citing as unknown as React.ComponentType<React.AnchorHTMLAttributes<HTMLAnchorElement>
       }}
     >
       {message}
