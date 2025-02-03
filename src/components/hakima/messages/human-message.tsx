@@ -12,7 +12,7 @@ export const HumanMessage = ({ chatMessage }: THumanMessage) => {
       {inputProps?.context && (
         <div className="bg-zinc-50 max-w-[calc(100vw-20px)] text-zinc-600 dark:text-zinc-100 dark:bg-black/25 rounded-2xl p-2 pl-5 ml-16 md:ml-32 text-sm md:text-base flex flex-row gap-2 pr-4 border hover:border-white/5 border-transparent">
           <Quotes size={16} weight="bold" className="flex-shrink-0 mt-2" />
-          <span className="pt-[0.35em] pb-[0.25em] leading-6">
+          <span className="pt-[0.35em] pb-[0.25em] leading-6 max-w-[calc(100vw-20px)] truncate line-clamp-6">
             {inputProps?.context}
           </span>
         </div>
