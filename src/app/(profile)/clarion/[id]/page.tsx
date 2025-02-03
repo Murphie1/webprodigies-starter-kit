@@ -24,9 +24,13 @@ export default async function SearchPage(props: {
   // convertToUIMessages for useChat hook
   const messages = convertToUIMessages(chat?.messages || [])
 
-  if (!chat) {
+  if (!id) {
     redirect('/')
-  }
+}
+  
+  //if (!chat) {
+   // redirect('/')
+  //}
 
   if (chat?.userId !== userId) {
     notFound()
