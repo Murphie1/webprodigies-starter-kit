@@ -1,5 +1,5 @@
 import Grids from "./_components/grids"
-
+import { DrawerAgent } from "@/components/hakima/convAI/drawer-agent"
 
 const Homepage = () => {
 
@@ -16,6 +16,7 @@ const Homepage = () => {
                 <p className="text-2xl text-center">Text</p>
             </div>
             <Grids />
+            <DrawerAgent />
         </div>
     )
 }
