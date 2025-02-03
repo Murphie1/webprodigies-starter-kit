@@ -10,7 +10,7 @@ export const HumanMessage = ({ chatMessage }: THumanMessage) => {
   return (
     <>
       {inputProps?.context && (
-        <div className="bg-zinc-50 text-zinc-600 dark:text-zinc-100 dark:bg-black/30 rounded-2xl p-2 pl-3 ml-16 md:ml-32 text-sm md:text-base flex flex-row gap-2 pr-4 border hover:border-white/5 border-transparent">
+        <div className="bg-zinc-50 text-zinc-600 dark:text-zinc-100 dark:bg-black/25 rounded-2xl p-2 pl-3 ml-16 md:ml-32 text-sm md:text-base flex flex-row gap-2 pr-4 border hover:border-white/5 border-transparent">
           <Quotes size={16} weight="bold" className="flex-shrink-0 mt-2" />
           <span className="pt-[0.35em] pb-[0.25em] leading-6">
             {inputProps?.context}
@@ -27,7 +27,7 @@ export const HumanMessage = ({ chatMessage }: THumanMessage) => {
           height={0}
         />
       )}
-      <div className="bg-black text-white ml-16 md:ml-32 rounded-2xl text-sm md:text-base flex flex-row gap-2 px-3 py-2">
+      <div className="bg-black dark:bg-black/30 text-white ml-16 md:ml-32 rounded-2xl text-sm md:text-base flex flex-row gap-2 px-3 py-2">
         <span className="pt-[0.20em] pb-[0.15em] leading-6 whitespace-pre-wrap">
           {rawHuman}
         </span>
