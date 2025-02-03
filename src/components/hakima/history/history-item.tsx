@@ -57,12 +57,6 @@ export const HistoryItem = ({
           ? "bg-black/10 dark:bg-black/30"
           : ""
       )}
-      onClick={() => {
-        if (!isEditing) {
-          router.push(`/hakima/${session.id}`);
-          dismiss();
-        }
-      }}
     >
       {isEditing ? (
         <Input
@@ -93,6 +87,14 @@ export const HistoryItem = ({
       ) : (
         <>
           {modelProps?.icon?.("sm")}
+          <div
+            onClick={() => {
+        if (!isEditing) {
+          router.push(`/hakima/${session.id}`);
+          dismiss();
+        }
+      }}
+            >
           <Flex direction="col" items="start" className="w-full">
             <Type
               className="line-clamp-1"
@@ -106,6 +108,7 @@ export const HistoryItem = ({
               {moment(session.updatedAt).fromNow()}
             </Type>
           </Flex>
+            </div>
         </>
       )}
       {(!isEditing || openDeleteConfirm) && (
