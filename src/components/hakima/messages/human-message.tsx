@@ -27,7 +27,7 @@ export const HumanMessage = ({ chatMessage }: THumanMessage) => {
           height={0}
         />
       )}
-      <div className="bg-black/30 text-white ml-16 md:ml-32 rounded-2xl text-sm md:text-base flex flex-row gap-2 px-3 py-2">
+      <div className="bg-black text-white ml-16 md:ml-32 rounded-2xl text-sm md:text-base flex flex-row gap-2 px-3 py-2">
         <span className="pt-[0.20em] pb-[0.15em] leading-6 whitespace-pre-wrap">
           {rawHuman}
         </span>
