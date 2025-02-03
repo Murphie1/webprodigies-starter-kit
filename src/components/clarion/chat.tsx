@@ -26,6 +26,7 @@ export function Chat({
     stop,
     append
   } = useChat({
+    api: "/api/clarion/chat",
     initialMessages: savedMessages,
     id: CHAT_ID,
     body: {
