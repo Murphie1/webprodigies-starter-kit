@@ -135,16 +135,8 @@ export const HistoryItem = ({
                   variant={openDeleteConfirm ? "secondary" : "ghost"}
                   size="iconXS"
                   onClick={(e) => {
-                    // setOpenDeleteConfirm(true);
-                    // e.stopPropagation();
-                    removeSessionByIdMutation.mutate(session.id, {
-                      onSuccess: () => {
-                        createSession({
-                          redirect: true,
-                        });
-                      },
-                    });
-                    e.stopPropagation();
+                     setOpenDeleteConfirm(true);
+                     e.stopPropagation();
                   }}
                 >
                   <TrashSimple size={14} />
@@ -169,7 +161,7 @@ export const HistoryItem = ({
                       e.stopPropagation();
                     }}
                   >
-                    Delete Message
+                    Delete Convo
                   </Button>
                   <Button
                     variant="ghost"
