@@ -32,7 +32,7 @@ export default async function SearchPage(props: {
    // redirect('/')
   //}
 
-  if (chat?.userId !== userId) {
+  if (chat && (chat?.userId !== userId)) {
     notFound()
   }
 
