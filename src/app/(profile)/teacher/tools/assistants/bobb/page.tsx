@@ -1,8 +1,8 @@
 //"use client";
 
 import Spinner from "@/components/hakima/loading-spinner";
-import { api } from "@/convex/_generated/api";
-import { getConvexClient } from "@/lib/convex";
+import { api } from "~/convex/_generated/api";
+import { getConvexClient } from "@/lib/bobb/convex";
 import { redirect } from "next/navigation";
 import { auth } from "@clerk/nextjs/server";
 
