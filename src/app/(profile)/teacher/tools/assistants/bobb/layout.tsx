@@ -6,11 +6,11 @@ import { NavigationProvider } from "@/lib/bobb/context/navigation";
 
 import { auth } from "@clerk/nextjs/server";
 
-export default function DashboardLayout({
+const DashboardLayout = async ({
   children,
 }: {
   children: React.ReactNode;
-}) {
+}) => {
   
   const { userId } = await auth();
   if (!userId) {
@@ -29,3 +29,4 @@ export default function DashboardLayout({
     </NavigationProvider>
   );
           }
+export default DashboardLayout;
