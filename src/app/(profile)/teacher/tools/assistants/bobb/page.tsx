@@ -7,8 +7,7 @@ import { redirect } from "next/navigation";
 import { auth } from "@clerk/nextjs/server";
 
 
-
-export default function Page() {
+const Page = async () => {
 
   const { userId } = await auth();
 
@@ -27,3 +26,4 @@ export default function Page() {
   
   return <Spinner />
 }
+export default Page;
