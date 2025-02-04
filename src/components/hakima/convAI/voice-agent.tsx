@@ -18,7 +18,7 @@ async function requestMicrophonePermission() {
 }
 
 async function getSignedUrl(): Promise<string> {
-    const response = await fetch('/api/signed-url')
+    const response = await fetch('/api/hakima/voice-agents/signed-url')
     if (!response.ok) {
         throw Error('Failed to get signed url')
     }
