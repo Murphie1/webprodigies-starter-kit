@@ -43,8 +43,8 @@ export function DrawerAgent() {
             <DialogTitle>Voice Agent</DialogTitle>
           </DialogHeader>
           <div
-            className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-            <main className="flex flex-col gap-8 row-start-2 items-center">
+            className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center p-4">
+            <main className="flex flex-col row-start-2 items-center">
                 <ConvAI/>
             </main>
         </div>
@@ -64,8 +64,8 @@ export function DrawerAgent() {
           <DrawerTitle>Voice Agent</DrawerTitle>
         </DrawerHeader>
         <div
-            className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-            <main className="flex flex-col gap-8 row-start-2 items-center">
+            className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center p-4 pb-2 gap-2">
+            <main className="flex flex-col row-start-2 items-center">
                 <ConvAI/>
             </main>
         </div>
