@@ -48,6 +48,6 @@ export default async function ChatPage({ params }: ChatPageProps) {
     );
   } catch (error) {
     console.error("🔥 Error loading chat:", error);
-    redirect("/dashboard");
+    redirect("/teacher/tools/assistants");
   }
 }
