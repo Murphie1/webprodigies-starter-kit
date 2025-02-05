@@ -84,7 +84,7 @@ export default function Sidebar({ clerkId }: Props) {
 
   const handleNewChat = async () => {
     const chatId = await createChat({ title: "New Chat", clerkId: clerkId, });
-    router.push(`/dashboard/chat/${chatId}`);
+    router.push(`/teacher/tools/assistants/bobb/${chatId}`);
     closeMobileNav();
   };
 
