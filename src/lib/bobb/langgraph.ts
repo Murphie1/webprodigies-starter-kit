@@ -14,7 +14,7 @@ import {
 } from "@langchain/langgraph";
 import { MemorySaver } from "@langchain/langgraph";
 import { ToolNode } from "@langchain/langgraph/prebuilt";
-import wxflows from "@wxflows/sdk/langchain";
+import wxflows from "@wxflows/sdk";
 import {
   ChatPromptTemplate,
   MessagesPlaceholder,
