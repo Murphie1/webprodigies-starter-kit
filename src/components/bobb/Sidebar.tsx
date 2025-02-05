@@ -6,6 +6,7 @@ import { api } from "~/convex/_generated/api";
 import { Button } from "@/components/ui/button";
 import { PlusIcon, TrashIcon } from "@radix-ui/react-icons";
 import TimeAgo from "react-timeago";
+import moment from "moment";
 import { Doc, Id } from "~/convex/_generated/dataModel";
 import { cn } from "@/lib/utils";
 import { useUser } from "@clerk/nextjs";
@@ -67,7 +68,7 @@ function ChatRow({
         </div>
         {lastMessage && (
           <p className="text-xs text-gray-400 mt-1.5 font-medium">
-            <TimeAgo date={lastMessage.createdAt} />
+            {moment(lastMessage.createdAt!).fromNow()} {/*<TimeAgo date={lastMessage.createdAt} />*/}
           </p>
         )}
       </div>
