@@ -8,6 +8,7 @@ import { PlusIcon, TrashIcon } from "@radix-ui/react-icons";
 import TimeAgo from "react-timeago";
 import { Doc, Id } from "~/convex/_generated/dataModel";
 import { cn } from "@/lib/utils";
+import { useUser } from "@clerk/nextjs";
 import { useNavigation } from "@/lib/bobb/context/navigation";
 
 type Props = {
@@ -23,9 +24,13 @@ function ChatRow({
 }) {
   const router = useRouter();
   const { closeMobileNav } = useNavigation();
+  const { user } = useUser();
+  if (!user || !user?.id) {
+    return;
+  }
   const lastMessage = useQuery(api.aimessages.getLastMessage, {
     chatId: chat._id,
-    clerkId: clerkId,
+    clerkId: user?.id,
   });
 
   const handleClick = () => {
