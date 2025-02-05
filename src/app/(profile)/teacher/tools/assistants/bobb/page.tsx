@@ -22,7 +22,7 @@ const Page = async () => {
       clerkId: userId,
     });
   
-  if (chat) redirect(`/teacher/tools/assistants/bobb/${chat._id}`)
+  if (chat) redirect(`/teacher/tools/assistants/bobb/${chat}`)
   
   return <Spinner />
 }
