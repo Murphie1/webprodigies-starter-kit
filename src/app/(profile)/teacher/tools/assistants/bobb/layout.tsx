@@ -3,8 +3,9 @@
 import Sidebar from "@/components/bobb/Sidebar";
 import Header from "@/components/bobb/Header";
 import { NavigationProvider } from "@/lib/bobb/context/navigation";
-
+import { redirect } from "next/navigation";
 import { auth } from "@clerk/nextjs/server";
+
 
 const DashboardLayout = async ({
   children,
