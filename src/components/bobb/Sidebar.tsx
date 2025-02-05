@@ -25,12 +25,10 @@ function ChatRow({
   const router = useRouter();
   const { closeMobileNav } = useNavigation();
   const { user } = useUser();
-  if (!user || !user?.id) {
-    return;
-  }
+  
   const lastMessage = useQuery(api.aimessages.getLastMessage, {
     chatId: chat._id,
-    clerkId: user?.id,
+    clerkId: user?.id!,
   });
 
   const handleClick = () => {
