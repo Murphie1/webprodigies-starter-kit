@@ -1,4 +1,4 @@
-"use client";
+//"use client";
 
 import Sidebar from "@/components/bobb/Sidebar";
 import Header from "@/components/bobb/Header";
