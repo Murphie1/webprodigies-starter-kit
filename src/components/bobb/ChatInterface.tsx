@@ -13,7 +13,7 @@ import { api } from "~/convex/_generated/api";
 
 interface ChatInterfaceProps {
   chatId: Id<"chats">;
-  initialMessages: Doc<"messages">[];
+  initialMessages: Doc<"aimessages">[];
   clerkId: string;
 }
 
@@ -22,7 +22,7 @@ export default function ChatInterface({
   clerkId,
   initialMessages,
 }: ChatInterfaceProps) {
-  const [messages, setMessages] = useState<Doc<"messages">[]>(initialMessages);
+  const [messages, setMessages] = useState<Doc<"aimessages">[]>(initialMessages);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [streamedResponse, setStreamedResponse] = useState("");
@@ -94,13 +94,13 @@ export default function ChatInterface({
     setIsLoading(true);
 
     // Add user's message immediately for better UX
-    const optimisticUserMessage: Doc<"messages"> = {
+    const optimisticUserMessage: Doc<"aimessages"> = {
       _id: `temp_${Date.now()}`,
       chatId,
       content: trimmedInput,
       role: "user",
       createdAt: Date.now(),
-    } as Doc<"messages">;
+    } as Doc<"aimessages">;
 
     setMessages((prev) => [...prev, optimisticUserMessage]);
 
@@ -194,17 +194,17 @@ export default function ChatInterface({
 
             case StreamMessageType.Done:
               // Handle completion of the entire response
-              const assistantMessage: Doc<"messages"> = {
+              const assistantMessage: Doc<"aimessages"> = {
                 _id: `temp_assistant_${Date.now()}`,
                 chatId,
                 content: fullResponse,
                 role: "assistant",
                 createdAt: Date.now(),
-              } as Doc<"messages">;
+              } as Doc<"aimessages">;
 
               // Save the complete message to the database
               const convex = getConvexClient();
-              await convex.mutation(api.messages.store, {
+              await convex.mutation(api.aimessages.store, {
                 chatId,
                 content: fullResponse,
                 role: "assistant",
@@ -242,7 +242,7 @@ export default function ChatInterface({
         <div className="max-w-4xl mx-auto p-4 space-y-3">
           {messages?.length === 0 && <WelcomeMessage />}
 
-          {messages?.map((message: Doc<"messages">) => (
+          {messages?.map((message: Doc<"aimessages">) => (
             <MessageBubble
               key={message._id}
               content={message.content}
