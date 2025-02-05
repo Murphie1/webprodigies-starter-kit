@@ -57,7 +57,7 @@ export async function POST(req: Request) {
         await sendSSEMessage(writer, { type: StreamMessageType.Connected });
 
         // Send user message to Convex
-        await convex.mutation(api.messages.send, {
+        await convex.mutation(api.aimessages.send, {
           chatId,
           content: newMessage,
         });
