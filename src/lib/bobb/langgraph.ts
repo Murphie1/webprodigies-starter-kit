@@ -5,7 +5,7 @@ import {
   SystemMessage,
   trimMessages,
 } from "@langchain/core/messages";
-import { ChatGooglePaLM } from "@langchain/google-genai"; // Google Gemini import
+import { ChatGoogleGenerativeAI } from "@langchain/google-genai"; // Google Gemini import
 // import { ChatOpenAI } from "@langchain/openai"; // Uncomment for OpenAI later
 import {
   END,
