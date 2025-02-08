@@ -14,8 +14,8 @@ import {
 } from "@langchain/langgraph";
 import { MemorySaver } from "@langchain/langgraph";
 import { ToolNode } from "@langchain/langgraph/prebuilt";
-import wxflows from "@wxflows/sdk";
-//import wxflows from "@wxflows/sdk/langchain";
+//import wxflows from "@wxflows/sdk";
+import wxflows from "@wxflows/sdk/langchain";
 import {
   ChatPromptTemplate,
   MessagesPlaceholder,
@@ -39,8 +39,8 @@ const toolClient = new wxflows({
 });
 
 // Retrieve the tools
-//const tools = await toolClient.lcTools;
-const tools = await toolClient.tools;
+const tools = await toolClient.lcTools;
+//const tools = await toolClient.tools;
 const toolNode = new ToolNode(tools);
 
 // Connect to the LLM provider with better tool instructions
