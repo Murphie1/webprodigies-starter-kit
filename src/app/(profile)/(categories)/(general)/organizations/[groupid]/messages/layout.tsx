@@ -7,10 +7,11 @@ import { redirect } from "next/navigation"
 
 type HuddlesLayoutProps = {
     children: React.ReactNode
-    params: { groupid: string }
+    params: Promise<{ groupid: string }>
 }
 
 const HuddlesLayout = async ({ children, params }: HuddlesLayoutProps) => {
+    const { groupid } = await params;
     const user = await onAuthenticatedUser()
     if (!user.id) redirect("/sign-in")
 
@@ -23,7 +24,7 @@ const HuddlesLayout = async ({ children, params }: HuddlesLayoutProps) => {
                         className="md:hidden cursor-pointer"
                     >
                         <SideBar
-                            groupid={params.groupid}
+                            groupid={groupid}
                             userid={user.id}
                             mobile
                         />
@@ -32,13 +33,13 @@ const HuddlesLayout = async ({ children, params }: HuddlesLayoutProps) => {
                         No chat selected
                     </p>
                     <GlassSheet trigger={<Menu />}>
-                        <GroupChatMenu groupid={params.groupid} />
+                        <GroupChatMenu groupid={groupid} />
                     </GlassSheet>
                 </div>
                 {children}
             </div>
             <div className="hidden lg:inline lg:col-span-2 bg-white dark:bg-themeBlack rounded-tl-3xl overflow-auto">
-                <GroupChatMenu groupid={params.groupid} />
+                <GroupChatMenu groupid={groupid} />
             </div>
         </div>
     )
