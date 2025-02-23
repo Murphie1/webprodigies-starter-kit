@@ -27,6 +27,19 @@ export const usersRelations = relations(users, ({ many }) => ({
   videos: many(videos),
 }));
 
+export const notes = pgTable("notes", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  name: text("name").notNull(),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  imageUrl: text("image_url"),
+  userIds: uuidArray("user_ids").notNull().default([]), // Array of UUIDs
+  editorState: text("editor_state"),
+});
+
+
+
+export type NoteType = typeof notes.$inferInsert;
+
 export const categories = pgTable(
   "categories",
   {
