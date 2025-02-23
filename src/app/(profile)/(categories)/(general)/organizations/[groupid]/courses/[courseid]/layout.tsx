@@ -8,19 +8,20 @@ import { CreateCourseModule } from "../_components/create-module"
 import CourseModuleList from "../_components/module-list"
 
 type CourseLayoutProps = {
-    params: {
+    params: Promise<{
         courseid: string
         groupid: string
-    }
+    }>
     children: React.ReactNode
 }
 
 const CourseLayout = async ({ params, children }: CourseLayoutProps) => {
+    const { groupid, courseid } = await params;
     const client = new QueryClient()
 
     await client.prefetchQuery({
         queryKey: ["course-modules"],
-        queryFn: () => onGetCourseModules(params.courseid),
+        queryFn: () => onGetCourseModules(courseid),
     })
 
     return (
@@ -28,12 +29,12 @@ const CourseLayout = async ({ params, children }: CourseLayoutProps) => {
             <div className="grid grid-cols-1 h-full lg:grid-cols-4 overflow-hidden">
                 <div className="bg-white dark:bg-themeBlack p-5 overflow-y-auto">
                     <CreateCourseModule
-                        courseId={params.courseid}
-                        groupid={params.groupid}
+                        courseId={courseid}
+                        groupid={groupid}
                     />
                     <CourseModuleList
-                        groupid={params.groupid}
-                        courseId={params.courseid}
+                        groupid={groupid}
+                        courseId={courseid}
                     />
                 </div>
                 <div className="lg:col-span-3 max-h-full h-full pb-10 overflow-y-auto bg-white dark:bg-[#101011]/90">
