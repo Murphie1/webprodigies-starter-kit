@@ -1,4 +1,4 @@
-"use client";
+{/*"use client";
 
 import EmptyState from "@/components/EmptyState";
 import LoaderSpinner from "@/components/LoaderSpinner";
@@ -48,4 +48,4 @@ const Discover = async ({ searchParams }: DiscoverProps) => {
   );
 };
 
-export default Discover;
+export default Discover;*/}
