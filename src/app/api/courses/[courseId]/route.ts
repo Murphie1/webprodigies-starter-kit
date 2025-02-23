@@ -10,11 +10,11 @@ const { video } = new Mux({
 
 export async function DELETE(
   req: Request,
-  { params }: { params: { courseId: string } }
+  { params }: { params: Promise<{ courseId: string }> }
 ) {
   try {
     const { userId } = auth();
-    const { courseId } = params;
+    const { courseId } = await params;
 
     if (!userId) return new NextResponse("Unauthorized", { status: 401 });
 
@@ -52,7 +52,7 @@ export async function DELETE(
 
 export async function PATCH(
   req: Request,
-  { params }: { params: { courseId: string } }
+  { params }: { params: Promise<{ courseId: string }> }
 ) {
   try {
     const { userId } = auth();
