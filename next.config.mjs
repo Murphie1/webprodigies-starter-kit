@@ -3,30 +3,13 @@ const nextConfig = {
     reactStrictMode: false,
     images: {
         remotePatterns: [
-            {
-                protocol: "https",
-                hostname: "oaidalleapiprodscus.blob.core.windows.net",
-            },
-            {
-                protocol: "https",
-                hostname: "utfs.io",
-            },
-            {
-                protocol: "https",
-                hostname: "ucarecdn.com",
-            },
-            {
-                protocol: "https",
-                hostname: "img.clerk.com",
-            },
-            {
-                protocol: "https",
-                hostname: "lovely-flamingo-139.convex.cloud",
-            },
-            {
-                protocol: "https",
-                hostname: "combative-meerkat-957.convex.cloud",
-            },
+            { protocol: "https", hostname: "oaidalleapiprodscus.blob.core.windows.net" },
+            { protocol: "https", hostname: "utfs.io" },
+            { protocol: "https", hostname: "ucarecdn.com" },
+            { protocol: "https", hostname: "img.clerk.com" },
+            { protocol: "https", hostname: "lovely-flamingo-139.convex.cloud" },
+            { protocol: "https", hostname: "combative-meerkat-957.convex.cloud" },
+            { protocol: "https", hostname: "image.mux.com", },
         ],
         domains: [
             "uploadthing.com",
@@ -35,6 +18,10 @@ const nextConfig = {
             "lh3.googleusercontent.com",
         ],
     },
-}
+    webpack: async (config) => {
+        config.experiments = { ...config.experiments, topLevelAwait: true };
+        return config;
+    },
+};
 
-export default nextConfig
+export default nextConfig;
