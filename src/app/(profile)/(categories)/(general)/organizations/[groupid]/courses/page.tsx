@@ -12,20 +12,19 @@ import SideBar from "@/components/global/sidebar"
 import { onAuthenticatedUser } from "@/actions/auth"
 import { redirect } from "next/navigation"
 
-type Props = {
-    params: {
-        groupid: string
-    }
+type Props = { 
+    params: Promise<{ groupid: string }>
 }
 
 const CoursesPage = async ({ params }: Props) => {
+    const { groupid } = await params;
     const client = new QueryClient()
     const user = await onAuthenticatedUser()
     if (!user.id) redirect("/sign-in")
 
     await client.prefetchQuery({
         queryKey: ["group-courses"],
-        queryFn: () => onGetGroupCourses(params.groupid),
+        queryFn: () => onGetGroupCourses(groupid),
     })
 
     return (
@@ -37,15 +36,15 @@ const CoursesPage = async ({ params }: Props) => {
                         className="md:hidden cursor-pointer"
                     >
                         <SideBar
-                            groupid={params.groupid}
+                            groupid={groupid}
                             userid={user.id}
                             mobile
                         />
                     </GlassSheet>
                 </div>
                 <div className="container grid lg:grid-cols-2 2xl:grid-cols-3 py-10 gap-5">
-                    <CourseCreate groupid={params.groupid} />
-                    <CourseList groupid={params.groupid} />
+                    <CourseCreate groupid={groupid} />
+                    <CourseList groupid={groupid} />
                 </div>
             </div>
         </HydrationBoundary>
