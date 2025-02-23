@@ -1,3 +1,13 @@
+import LoaderSpinner from "@/components/LoaderSpinner";
+
+const Page = () => {
+  return (
+    <LoadingSpinner />
+    );
+};
+
+export default Page;
+
 {/*"use client";
 
 import EmptyState from "@/components/EmptyState";
