@@ -1,10 +1,15 @@
 import { client } from "@/lib/prisma";
 import { redirect } from "next/navigation";
 
-const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
+type Props = {
+  params: Promise<{ courseId: string }>;
+};
+
+const CourseIdPage = async ({ params }: Props) => {
+  const { courseId } = await params;
   const course = await client.course.findUnique({
     where: {
-      id: params.courseId,
+      id: courseId,
     },
     include: {
       chapters: {
