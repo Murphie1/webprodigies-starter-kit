@@ -4,11 +4,11 @@ import { NextResponse } from "next/server";
 
 export async function POST(
   req: Request,
-  { params }: { params: { courseId: string } }
+  { params }: { params: Promise<{ courseId: string }> }
 ) {
   try {
     const { userId } = auth();
-    const { courseId } = params;
+    const { courseId } = await params;
     const { title } = await req.json();
     
     if (!userId) return new NextResponse("Unauthorized", { status: 401 });
