@@ -16,10 +16,11 @@ import CreateNewPost from "./_components/create-post"
 import { PostFeed } from "./_components/post-feed"
 import { Navbar } from "@/app/(profile)/(categories)/(general)/organizations/_components/navbar"
 type Props = {
-    params: { channelid: string; groupid: string }
+    params: Promise<{ channelid: string; groupid: string }>
 }
 
 const GroupChannelPage = async ({ params }: Props) => {
+    const { channelid, groupid } = await params;
     const client = new QueryClient()
     const user = await currentUser()
     const authUser = await onAuthenticatedUser()
@@ -27,32 +28,32 @@ const GroupChannelPage = async ({ params }: Props) => {
 
     await client.prefetchQuery({
         queryKey: ["channel-info"],
-        queryFn: () => onGetChannelInfo(params.channelid),
+        queryFn: () => onGetChannelInfo(channelid),
     })
 
     await client.prefetchQuery({
         queryKey: ["about-group-info"],
-        queryFn: () => onGetGroupInfo(params.groupid),
+        queryFn: () => onGetGroupInfo(groupid),
     })
 
     return (
         <HydrationBoundary state={dehydrate(client)}>
             <div className="flex flex-col space-y-3">
-                <Navbar groupid={params.groupid} userid={authUser.id} />
+                <Navbar groupid={groupid} userid={authUser.id} />
                 <div className="grid lg:grid-cols-4 grid-cols-1 w-full flex-1 h-0 gap-x-5 px-5 s">
                     <div className="col-span-1 lg:inline relative hidden py-5">
-                        <LeaderBoardCard groupId={params.groupid} />
+                        <LeaderBoardCard groupId={groupid} />
                     </div>
                     <div className="lg:col-span-2 flex flex-col gap-y-5 py-5">
-                        <Bar groupId={params.groupid} />
+                        <Bar groupId={groupid} />
                         <CreateNewPost
                             userImage={user?.imageUrl!}
-                            channelid={params.channelid}
+                            channelid={channelid}
                             username={user?.firstName!}
                         />
 
                         <PostFeed
-                            channelid={params.channelid}
+                            channelid={channelid}
                             userid={authUser.id!}
                         />
                     </div>
