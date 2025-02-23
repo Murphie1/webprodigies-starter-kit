@@ -2,7 +2,7 @@ import LoaderSpinner from "@/components/LoaderSpinner";
 
 const Page = () => {
   return (
-    <LoadingSpinner />
+    <LoaderSpinner />
     );
 };
 

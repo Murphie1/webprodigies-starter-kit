@@ -32,7 +32,7 @@ export const notes = pgTable("notes", {
   name: text("name").notNull(),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   imageUrl: text("image_url"),
-  userIds: uuidArray("user_ids").notNull().default([]), // Array of UUIDs
+  //userIds: uuidArray("user_ids").notNull().default([]), // Array of UUIDs
   editorState: text("editor_state"),
 });
 
