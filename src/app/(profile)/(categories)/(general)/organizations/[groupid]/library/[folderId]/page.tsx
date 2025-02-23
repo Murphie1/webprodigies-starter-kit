@@ -17,16 +17,16 @@ import { redirect } from "next/navigation";
 
 
 type Props = {
-  params: {
+  params: Promise<{
     groupid: string;
     folderId: string;
-  };
+  }>;
 };
 
 
 
 const FolderPage = async ({ params }: Props) => {
-
+  const { groupid, folderId } = await params;
   const user = await onAuthenticatedUser();
   if (!user) redirect("/");
   
@@ -34,8 +34,8 @@ const FolderPage = async ({ params }: Props) => {
   if (!current) redirect("/");
   
   const [files, totalSpace] = await Promise.all([
-    getFiles({ types: [], folderId: params.folderId, limit: 10 }),
-    getTotalFolderSpaceUsed({ folderId: params.folderId }),
+    getFiles({ types: [], folderId: folderId, limit: 10 }),
+    getTotalFolderSpaceUsed({ folderId: folderId }),
   ]);
 
   // Get usage summary
@@ -50,7 +50,7 @@ const FolderPage = async ({ params }: Props) => {
         <ul className="dashboard-summary-list">
           {usageSummary.map((summary) => (
             <Link
-              href={`/organizations/${params.groupid}/library/${params.folderId}/${summary.url}`}
+              href={`/organizations/${groupid}/library/${folderId}/${summary.url}`}
               key={summary.title}
               className="dashboard-summary-card"
             >
@@ -119,13 +119,13 @@ const FolderPage = async ({ params }: Props) => {
         <FileUploader
           ownerId={current.$id}
           accountId={current.$accountId}
-          folderId={params.folderId}
+          folderId={folderId}
           clerkId={user.clerkId!}
           />
      <FolderDialog
        ownerId={current.$id}
        clerkId={user.clerkId || ""}
-       folderId={params.folderId}
+       folderId={folderId}
        />
    </div>
     </div>
