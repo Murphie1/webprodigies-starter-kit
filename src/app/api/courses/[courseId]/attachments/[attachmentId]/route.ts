@@ -4,11 +4,11 @@ import { NextResponse } from "next/server";
 
 export async function DELETE(
   req: Request,
-  { params }: { params: { courseId: string; attachmentId: string } }
+  { params }: { params: Promise<{ courseId: string; attachmentId: string }> }
 ) {
   try {
     const { userId } = auth();
-    const { courseId, attachmentId } = params;
+    const { courseId, attachmentId } = await params;
     
     if (!userId) return new NextResponse("Unauthorized", { status: 401 });
     
