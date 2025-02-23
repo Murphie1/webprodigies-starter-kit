@@ -294,11 +294,9 @@
         "zustand": "^5.0.2"
     },
     "resolutions": {
-        "@ai-sdk/provider": "1.0.8",
-        "react": "^19.0.0",
-        "next": "^15.1.7",
-        "react-dom": "^19.0.0"
+        "@ai-sdk/provider": "1.0.8"
     },
+    
     "devDependencies": {
         "@commitlint/cli": "^19.4.0",
         "@commitlint/config-conventional": "^19.2.2",
@@ -322,8 +320,4 @@
         "tsx": "^4.19.3",
         "typescript": "^5"
     },
-    "engines": {
-        "node": ">=18.0.0"
-    },
-    "engineStrict": true
 }
