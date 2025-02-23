@@ -7,10 +7,10 @@ import { v4 as uuidv4 } from "uuid";
 
 export async function POST(
   req: Request,
-  { params }: { params: { channelId: string } }
+  { params }: { params: Promise<{ channelId: string }> }
 ) {
   try {
-    const { channelId } = params;
+    const { channelId } = await params;
     const clerk = await currentUser();
     if (!clerk) {
       return redirect("/sign-in");
