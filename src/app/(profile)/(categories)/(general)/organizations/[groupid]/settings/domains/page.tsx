@@ -8,14 +8,18 @@ import {
     dehydrate,
 } from "@tanstack/react-query"
 
-type Props = { params: { groupid: string } }
+type Props = { 
+    params: Promise<{ groupid: string }>
+}
 
 const DomainConfigPage = async ({ params }: Props) => {
+    const { groupid } = await params;
+    
     const client = new QueryClient()
 
     await client.prefetchQuery({
         queryKey: ["domain-config"],
-        queryFn: () => onGetDomainConfig(params.groupid),
+        queryFn: () => onGetDomainConfig(groupid),
     })
 
     return (
@@ -26,7 +30,7 @@ const DomainConfigPage = async ({ params }: Props) => {
                     <CardDescription className="text-black dark:text-themeTextGray">
                         Create and share an invitations link for your members{" "}
                     </CardDescription>
-                    <CustomDomainForm groupid={params.groupid} />
+                    <CustomDomainForm groupid={groupid} />
                 </Card>
                 <Card className="border-black bg-white dark:border-themeGray dark:bg-[#1A1A1D] p-5">
                     <CardTitle className="text-3xl">Manual Config</CardTitle>
