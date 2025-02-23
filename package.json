@@ -3,7 +3,7 @@
     "version": "0.1.0",
     "private": true,
     "scripts": {
-        "dev": "next dev",
+        "dev": "next dev --turbopack",
         "build": "prisma generate && next build",
         "start": "next start",
         "lint": "next lint",
@@ -320,4 +320,8 @@
         "tsx": "^4.19.3",
         "typescript": "^5"
     },
+    "engines": {
+        "node": ">=18.0.0"
+    },
+    "engineStrict": true
 }
