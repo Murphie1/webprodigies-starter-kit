@@ -8,6 +8,7 @@ import ExplorePageContent from "../_components/explore-content"
 
 type Props = {
     params: Promise<{ category: string }>
+}
 
 const ExploreCategoryPage = async ({
     params,
