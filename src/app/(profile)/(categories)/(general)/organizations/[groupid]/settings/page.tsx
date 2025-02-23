@@ -4,7 +4,7 @@ type Props = {
     params: Promise<{ groupid: string }>
 }
 
-const GroupSettingsPage = ({ params }: Props) => {
+const GroupSettingsPage = async ({ params }: Props) => {
 
     const { groupid } = await params;
     
