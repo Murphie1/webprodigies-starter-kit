@@ -13,12 +13,11 @@ import { FormattedDateTime } from "@/components/library/FormattedDateTime";
 import { FolderDialog } from "./_components/create-folder";
 
 type Props = {
-  params: {
-    groupid: string;
-  };
+  params: Promise<{ groupid: string }>;
 };
 
 const LibraryPage = async ({ params }: Props) => {
+  const { groupid } = await params;
   const user = await onAuthenticatedUser();
   if (!user) redirect("/");
 
@@ -36,8 +35,8 @@ const LibraryPage = async ({ params }: Props) => {
   const current = await getCurrentUser();
   if (!current) redirect("/");
 
-  const folders = await getGroupFolders({ groupId: params.groupid });
-  const files = await getGroupFiles({ types: [], groupId: params.groupid, limit: 10 });
+  const folders = await getGroupFolders({ groupId: groupid });
+  const files = await getGroupFiles({ types: [], groupId: groupid, limit: 10 });
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-10 px-4 sm:px-8 rounded-lg">
@@ -52,7 +51,7 @@ const LibraryPage = async ({ params }: Props) => {
               key={folder.$id}
               className="bg-white dark:bg-gray-800 shadow-md rounded-lg p-6 hover:shadow-lg transition-shadow"
             >
-              <Link href={`/organizations/${params.groupid}/library/${folder.$id}`}>
+              <Link href={`/organizations/${groupid}/library/${folder.$id}`}>
                 <h2 className="text-lg font-medium text-gray-800 dark:text-gray-100">
                   {folder.name}
                 </h2>
@@ -113,7 +112,7 @@ const LibraryPage = async ({ params }: Props) => {
         <FolderDialog
           ownerId={current.$id}
           clerkId={user.clerkId || clerk.id}
-          groupId={params.groupid}
+          groupId={groupid}
         />
       </div>
     </div>
