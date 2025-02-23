@@ -6,11 +6,12 @@ import { redirect } from "next/navigation";
 import { onAuthenticatedUser } from "@/actions/auth";
 
 interface DocumentProps {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }
 
 const Document = async ({ params }: DocumentProps) => {
-  const { id } = params; // params remain unchanged in Next.js 15
+  const { id } = await params; // Await the params promise
+
   const clerkUser = await currentUser();
   if (!clerkUser) redirect("/sign-in");
 
