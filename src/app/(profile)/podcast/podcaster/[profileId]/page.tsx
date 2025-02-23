@@ -1,7 +1,7 @@
 import Body from "./_components/body"
 import LoaderSpinner from "@/components/LoaderSpinner"
 
-const ProfilePage = ({
+const ProfilePage = async ({
     params,
 }: {
     params: Promise<{
