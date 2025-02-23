@@ -6,11 +6,11 @@ import { onAuthenticatedUser } from "@/actions/auth"
 
 export async function PATCH(
   req: Request,
-  { params }: { params: { groupId: string; } }
+  { params }: { params: Promise<{ groupId: string; }> }
 ) {
   try {
     const user = await onAuthenticatedUser();
-    const { groupId } = params;
+    const { groupId } = await params;
     const { ...values } = await req.json();
 
     if (!user || !user.id) return new NextResponse("Unauthorized", { status: 401 });
