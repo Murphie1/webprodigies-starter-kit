@@ -6,10 +6,11 @@ import Stripe from "stripe";
 
 export async function POST(
   req: Request,
-  { params }: { params: { courseId: string } }
+  { params }: { params: Promise<{ courseId: string }> }
 ) {
+  const { courseId } = await params;
   try {
-    if (!params.courseId || typeof params.courseId !== "string") {
+    if (!courseId || typeof courseId !== "string") {
       return new NextResponse("Invalid course ID", { status: 400 });
     }
 
@@ -22,7 +23,7 @@ export async function POST(
 
     const course = await client.course.findFirst({
       where: {
-        id: params.courseId,
+        id: courseId,
         isPublished: true,
       },
     });
@@ -35,7 +36,7 @@ export async function POST(
       where: {
         userId_courseId: {
           userId: user.id,
-          courseId: params.courseId,
+          courseId: courseId,
         },
       },
     });
