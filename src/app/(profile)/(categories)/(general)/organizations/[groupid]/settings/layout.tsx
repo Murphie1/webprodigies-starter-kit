@@ -6,10 +6,11 @@ import { redirect } from "next/navigation"
 
 type SettingsLayoutProps = {
     children: React.ReactNode
-    params: { groupid: string }
+    params: Promise<{ groupid: string }>
 }
 
 const SettingsLayout = async ({ children, params }: SettingsLayoutProps) => {
+    const { groupid } = await params;
     const user = await onAuthenticatedUser()
     if (!user.id) redirect("/sign-in")
 
@@ -20,7 +21,7 @@ const SettingsLayout = async ({ children, params }: SettingsLayoutProps) => {
                     trigger={<Menu />}
                     className="md:hidden cursor-pointer"
                 >
-                    <SideBar groupid={params.groupid} userid={user.id} mobile />
+                    <SideBar groupid={groupid} userid={user.id} mobile />
                 </GlassSheet>
             </div>
             {children}
