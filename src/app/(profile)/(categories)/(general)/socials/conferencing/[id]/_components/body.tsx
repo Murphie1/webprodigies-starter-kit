@@ -16,7 +16,7 @@ type Props = {
   id: string;
 }
 
-const MeetingPage = ({ id }: Props) => {
+const Body = ({ id }: Props) => {
   
   const { isLoaded, user } = useUser();
   const { call, isCallLoading } = useGetCallById(id);
@@ -54,4 +54,4 @@ const MeetingPage = ({ id }: Props) => {
   );
 };
 
-export default MeetingPage;
+export default Body;
