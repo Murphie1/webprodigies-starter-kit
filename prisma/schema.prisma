@@ -24,22 +24,22 @@ model User {
   stripeId  String?
   role      UserRole @default(LEARNER)
 
-  attributes String[]
-  memory     String[]
+  attributes   String[]
+  memory       String[]
   disabilities String[]
-  theme       Theme @default(Normal)
-  mode        String @default(Both)
-  gamified    Boolean @default(false)
-  group      Group[]
-  membership Members[]
-  posts      Post[]
-  likes      Like[]
-  profile    Profile[]
-  comments   Comment[]
-  message    Message[]
-  groupSpace Groupspace[]
-  gsMember   GSMember[]
-  session    Session[]
+  theme        Theme        @default(Normal)
+  mode         String       @default("Both")
+  gamified     Boolean      @default(false)
+  group        Group[]
+  membership   Members[]
+  posts        Post[]
+  likes        Like[]
+  profile      Profile[]
+  comments     Comment[]
+  //discussions  Discussion[]
+  groupSpace   Groupspace[]
+  gsMember     GSMember[]
+  session      Session[]
 }
 
 enum Theme {
@@ -52,7 +52,7 @@ enum Theme {
 }
 
 model Profile {
-  id       String      @id @default(uuid())
+  id       String      @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   clerkId  String
   user     User?       @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId   String      @db.Uuid
@@ -64,17 +64,22 @@ model Profile {
   updatedAt DateTime @updatedAt
   createdAt DateTime @default(now())
 
-  attributes String[]
-  group      Group[]
-  membership Members[]
-  posts      Post[]
-  likes      Like[]
-  profile    Profile[]
-  comments   Comment[]
-  message    Message[]
-  groupSpace Groupspace[]
-  gsMember   GSMember[]
-  session    Session[]
+  attributes   String[]
+  memory       String[]
+  disabilities String[]
+  theme        Theme        @default(Normal)
+  mode         String       @default("Both")
+  gamified     Boolean      @default(false)
+  group        Group[]
+  membership   Members[]
+  posts        Post[]
+  likes        Like[]
+  //profile    Profile[]
+  comments     Comment[]
+  //message    Message[]
+  groupSpace   Groupspace[]
+  gsMember     GSMember[]
+  session      Session[]
 
   @@index([userId, clerkId])
 }
@@ -108,8 +113,8 @@ model Group {
   createdAt       DateTime       @default(now())
   User            User           @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId          String         @db.Uuid
-  profile         Profile?           @relation(fields: [profileId], references: [id], onDelete: Cascade)
-  profileId          String?        @db.Uuid
+  profile         Profile?       @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  profileId       String?        @db.Uuid
   courses         Groupcourse[]
   affiliate       Affiliate?
   domain          String?
@@ -123,8 +128,8 @@ model Groupspace {
   User       User?      @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId     String     @db.Uuid
   clerkId    String
-  profile    Profile?           @relation(fields: [profileId], references: [id], onDelete: Cascade)
-  profileId  String?        @db.Uuid
+  profile    Profile?   @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  profileId  String?    @db.Uuid
   joinCode   String?
   inviteCode String     @db.Text
   imageUrl   String     @db.Text
@@ -141,16 +146,17 @@ model Members {
   id        String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   User      User?      @relation(fields: [userId], references: [id])
   userId    String?    @db.Uuid
-  profile    Profile?           @relation(fields: [profileId], references: [id], onDelete: Cascade)
-  profileId  String?        @db.Uuid
+  profile   Profile?   @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  profileId String?    @db.Uuid
   Group     Group?     @relation(fields: [groupId], references: [id])
   role      MemberRole @default(STUDENT)
   groupId   String?    @db.Uuid
   createdAt DateTime   @default(now())
+  messages  Message[]
 
-  @@index([userId, groupId])
   @@unique([profileId, groupId])
   @@unique([userId, groupId])
+  @@index([userId, groupId])
 }
 
 model Post {
@@ -164,8 +170,8 @@ model Post {
   video       String?
   author      User      @relation(fields: [authorId], references: [id], onDelete: Cascade)
   authorId    String    @db.Uuid
-  profile    Profile?           @relation(fields: [profileId], references: [id], onDelete: Cascade)
-  profileId  String?        @db.Uuid
+  profile     Profile?  @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  profileId   String?   @db.Uuid
   likes       Like[]
   comments    Comment[]
   channel     Channel   @relation(fields: [channelId], references: [id], onDelete: Cascade)
@@ -179,8 +185,8 @@ model Like {
   postId    String   @db.Uuid
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId    String   @db.Uuid
-  profile    Profile?           @relation(fields: [profileId], references: [id], onDelete: Cascade)
-  profileId  String?        @db.Uuid
+  profile   Profile? @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  profileId String?  @db.Uuid
 }
 
 model Comment {
@@ -191,8 +197,8 @@ model Comment {
   postId    String    @db.Uuid
   user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId    String    @db.Uuid
-  profile    Profile?           @relation(fields: [profileId], references: [id], onDelete: Cascade)
-  profileId  String?        @db.Uuid
+  profile   Profile?  @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  profileId String?   @db.Uuid
   replied   Boolean?  @default(false)
   //self relation 1 to many for comments
   reply     Comment[] @relation(name: "CommentToComment")
@@ -256,7 +262,7 @@ model Message {
   id         String   @id @db.Uuid
   message    String
   createdAt  DateTime @default(now())
-  sender     Members?    @relation(fields: [senderid], references: [id], onDelete: Cascade)
+  sender     Members? @relation(fields: [senderid], references: [id], onDelete: Cascade)
   senderid   String?  @db.Uuid
   recieverId String?  @db.Uuid
 }
@@ -280,17 +286,17 @@ model GSMember {
   role         GSMemberRole @default(STUDENT)
   user         User?        @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId       String?      @db.Uuid
-  profile    Profile?           @relation(fields: [profileId], references: [id], onDelete: Cascade)
-  profileId  String?        @db.Uuid
+  profile      Profile?     @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  profileId    String?      @db.Uuid
   clerkId      String
   groupSpace   Groupspace   @relation(fields: [groupSpaceId], references: [id], onDelete: Cascade)
   groupSpaceId String
   updatedAt    DateTime     @updatedAt
   createdAt    DateTime     @default(now())
 
-  @@index([userId, clerkId, groupSpaceId])
   @@unique([profileId, groupSpaceId])
   @@unique([userId, groupSpaceId])
+  @@index([userId, clerkId, groupSpaceId])
 }
 
 enum GROUP_PRIVACY {
@@ -316,8 +322,8 @@ model Session {
   type         SessionType @default(TEXT)
   user         User?       @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId       String?     @db.Uuid
-  profile    Profile?           @relation(fields: [profileId], references: [id], onDelete: Cascade)
-  profileId  String?        @db.Uuid
+  profile      Profile?    @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  profileId    String?     @db.Uuid
   clerkId      String
   groupSpace   Groupspace  @relation(fields: [groupSpaceId], references: [id], onDelete: Cascade)
   groupSpaceId String
@@ -348,7 +354,7 @@ model Course {
   categoryId      String?
   category        Category?        @relation(fields: [categoryId], references: [id])
   chapters        Chapter[]
-  tutors          Strings[]
+  tutors          String[]
   attachments     Attachment[]
   certificates    Certificate[]
   outComes        String?
@@ -466,12 +472,12 @@ model StripeCustomer {
 }
 
 model Discussionbox {
-  id       String @id @default(uuid())
-  courseId String
-  course   Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
-  discussions Discussion[]
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id          String       @id @default(uuid())
+  courseId    String
+  course      Course       @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  //discussions Discussion[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
 }
 
 model Waiver {
@@ -492,13 +498,14 @@ enum ChapterType {
   Text
   Doc
 }
+
 model Discussion {
-  id         String   @id @db.Uuid
+  id         String        @id @db.Uuid
   message    String
-  createdAt  DateTime @default(now())
-  sender     User?    @relation(fields: [senderid], references: [id], onDelete: Cascade)
-  senderid   String?  @db.Uuid
-  recieverId String?  @db.Uuid
-  boxId      String   @db.Uuid
-  box        Discussionbox @relation(fields: [boxId], references: [id], onDelete: Cascade)
+  createdAt  DateTime      @default(now())
+  // sender     User?    @relation(fields: [senderid], references: [id], onDelete: Cascade)
+  senderid   String?       @db.Uuid
+  recieverId String?       @db.Uuid
+  boxId      String        @db.Uuid
+ // box        Discussionbox @relation(fields: [boxId], references: [id], onDelete: Cascade)
 }
