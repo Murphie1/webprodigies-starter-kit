@@ -6,11 +6,13 @@ import { User } from "lucide-react"
 import { redirect } from "next/navigation"
 import Link from "next/link"
 
+interface Props {
+  searchParams: Promise<{ [affiliate: string]: string | undefined }>;
+}
+
 const GroupCreatePage = async ({
     searchParams,
-}: {
-    searchParams: { [affiliate: string]: string }
-}) => {
+}: Props) => {
     const user = await onAuthenticatedUser()
 
     const affiliate = await onGetAffiliateInfo(searchParams.affiliate)
