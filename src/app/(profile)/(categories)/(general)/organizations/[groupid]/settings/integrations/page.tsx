@@ -5,11 +5,13 @@ import { INTEGRATION_LIST_ITEMS } from "@/constants/menus"
 import Image from "next/image"
 import IntegrationTrigger from "./_components/integration-trigger"
 
+type Props = {
+    params: Promise<{ groupid: string }>
+}
 const IntegrationsPage = async ({
     params,
-}: {
-    params: { groupid: string }
-}) => {
+}: Props) => {
+    const { groupid } = await params;
     const payment = await onGetStripeIntegration()
     const connections = {
         stripe: payment ? true : false,
@@ -42,7 +44,7 @@ const IntegrationsPage = async ({
                                 descrioption={item.modalDescription}
                                 logo={item.logo}
                                 name={item.name}
-                                groupid={params.groupid}
+                                groupid={groupid}
                             />
                         </div>
                         <CardDescription>{item.description}</CardDescription>
