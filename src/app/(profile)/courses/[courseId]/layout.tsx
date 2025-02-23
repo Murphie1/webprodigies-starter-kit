@@ -6,13 +6,17 @@ import { redirect } from "next/navigation";
 import CourseSidebar from "./_components/course-sidebar";
 import CourseNavbar from "./_components/course-navbar";
 
+type Props = {
+  children: React.ReactNode;
+  params: Promise<{ courseId: string }>
+};
+
 const CourseLayout = async ({
   children,
   params,
-}: {
-  children: React.ReactNode;
-  params: { courseId: string };
-}) => {
+}: Props) => {
+  const { courseId } = await params;
+  
   const user = await onAuthenticatedUser();
   if (!user || !user.clerkId) redirect("/");
   
@@ -20,7 +24,7 @@ const CourseLayout = async ({
   //if (!userId) return redirect("/");
   const course = await client.course.findUnique({
     where: {
-      id: params.courseId,
+      id: courseId,
     },
     include: {
       chapters: {
