@@ -16,7 +16,7 @@ import { usePathname } from "next/navigation";
 const items = [
   {
     title: "History",
-    url: "/History",
+    url: "/history",
     icon: HistoryIcon,
     auth: true,
   },
