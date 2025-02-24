@@ -36,6 +36,8 @@ export const sidebarLinks = [
     },
 ]
 
+export const DEFAULT_LIMIT = 5;
+
 export const voiceDetails = [
     {
         id: 1,
