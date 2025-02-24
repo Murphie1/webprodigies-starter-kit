@@ -17,7 +17,8 @@ import React from "react"
 
 const Body = ({
   podcastId,
-}: { podcastId: Id<"podcasts"> }
+}: {
+  podcastId: Id<"podcasts">
 }) => {
     const { user } = useUser()
 
