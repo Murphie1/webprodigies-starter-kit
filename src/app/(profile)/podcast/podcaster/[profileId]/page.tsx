@@ -16,5 +16,6 @@ const ProfilePage = async ({
         <section className="mt-9 flex flex-col">
             <Body profileId={profileId} />
         </section>
-
+)
+}
 export default ProfilePage
