@@ -14,14 +14,18 @@ import "./globals.css"
 //import { dark } from "@clerk/themes"
 import Provider from "./Provider"
 import ConvexClerkProvider from "@/providers/ConvexClerkProvider"
+import { TRPCProvider } from "@/trpc/client";
+
 
 //const jakarta = Plus_Jakarta_Sans({ subsets: ["latin"] })
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
+//const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
 //const ibmPlexSerif = IBM_Plex_Serif({
 // subsets: ["latin"],
 //weight: ["400", "700"],
 //variable: "--font-ibm-plex-serif",
 //})
+
+const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
     title: "YouLearn",
@@ -46,7 +50,11 @@ export default function RootLayout({
                     >
                         <ReduxProvider>
                             <ReactQueryProvider>
-                                <Provider>{children}</Provider>
+                                <Provider>
+                                    <TRPCProvider>
+                                    {children}
+                                        </TRPCProvider>
+                                </Provider>
                             </ReactQueryProvider>
                         </ReduxProvider>
                         <Toaster />
