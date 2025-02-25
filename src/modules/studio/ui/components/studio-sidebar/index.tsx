@@ -13,7 +13,7 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { LogOutIcon, VideoIcon } from "lucide-react";
 import { usePathname } from "next/navigation";
-import { StudioSidebarHeader } from "./studio-siderbar-header";
+import { StudioSidebarHeader } from "./studio-sidebar-header";
 
 export const StudioSidebar = () => {
   const pathname = usePathname();
