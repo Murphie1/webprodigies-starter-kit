@@ -22,7 +22,7 @@ model User {
   clerkId   String   @unique
   image     String?
   stripeId  String?
-  tokens    Integer  @default(0)
+  tokens    Decimal  @default(0.0)
   font      String?
   fontSize  String  @default("Normal")
   role      UserRole @default(LEARNER)
@@ -108,7 +108,7 @@ model Group {
   jsonDescription String?
   htmlDescription String?
   icon            String?
-  credits         Integer @default(0)
+  credits         Int @default(0)
   createdFree     Boolean        @default(false)
   groupFree       Boolean        @default(false)
   member          Members[]
@@ -354,7 +354,10 @@ model Session {
   updatedAt DateTime @updatedAt
   createdAt DateTime @default(now())
 
-  @@index([userId, clerkId, groupSpaceId])
+  @@index([userId])
+  @@index([groupSpaceId])
+  @@index([clerkId])
+  @@index([profileId])
 }
 
 enum UserRole {

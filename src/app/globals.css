@@ -1316,3 +1316,12 @@ mark.prompt-highlight {
   background: white;
   border-bottom-right-radius: 10px;
 }
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+    }
+  body {
+    @apply bg-background text-foreground;
+    }
+}
