@@ -10,11 +10,11 @@ import { NextApiResponse } from 'next';
 import { Server as SocketIOServer } from 'socket.io';
 
 export type GroupSpaceWithMembersWithUsers = Groupspace & {
-  members: (GSMember & { user: User })[];
+  gsMembers: (GSMember & { User: User })[];
 };
 
 export type GroupSpaceWithMembersWithProfiles = Groupspace & {
-  members: (GSMember & { profile: Profile })[];
+  gsMembers: (GSMember & { profile: Profile })[];
 };
 
 export type NextApiResponseServerIo = NextApiResponse & {
