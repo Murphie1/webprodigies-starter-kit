@@ -4,6 +4,27 @@ import { Dispatch, SetStateAction } from "react"
 
 import { Id } from "~/convex/_generated/dataModel"
 
+import { GSMember, Profile, User, Groupspace } from '@prisma/client';
+import { Server as NetServer, Socket } from 'net';
+import { NextApiResponse } from 'next';
+import { Server as SocketIOServer } from 'socket.io';
+
+export type GroupSpaceWithMembersWithUsers = Groupspace & {
+  members: (GSMember & { user: User })[];
+};
+
+export type GroupSpaceWithMembersWithProfiles = Groupspace & {
+  members: (GSMember & { profile: Profile })[];
+};
+
+export type NextApiResponseServerIo = NextApiResponse & {
+  socket: Socket & {
+    server: NetServer & {
+      io: SocketIOServer;
+    };
+  };
+};
+
 export interface EmptyStateProps {
     title: string
     search?: boolean
