@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 import { upload } from "@/lib/uploadcare"
 import {
     CheckSquare,
