@@ -24,7 +24,7 @@ model User {
   stripeId  String?
   tokens    Decimal  @default(0.0)
   font      String?
-  fontSize  String  @default("Normal")
+  fontSize  String   @default("Normal")
   role      UserRole @default(LEARNER)
 
   attributes   String[]
@@ -32,7 +32,7 @@ model User {
   disabilities String[]
   theme        Theme        @default(Normal)
   mode         String       @default("Both")
-  gamified     Boolean      @default(false)
+  gamified     Boolean      @default(true)
   group        Group[]
   membership   Members[]
   posts        Post[]
@@ -63,8 +63,8 @@ model Profile {
   email    String
   imageUrl String      @db.Text
   type     ProfileType @default(KIDS)
-  font      String?
-  fontSize  String  @default("Normal")
+  font     String?
+  fontSize String      @default("Normal")
 
   updatedAt DateTime @updatedAt
   createdAt DateTime @default(now())
@@ -108,13 +108,13 @@ model Group {
   jsonDescription String?
   htmlDescription String?
   icon            String?
-  credits         Int @default(0)
+  credits         Int            @default(0)
   createdFree     Boolean        @default(false)
   groupFree       Boolean        @default(false)
   member          Members[]
   groupSpaces     Groupspace[]
   channel         Channel[]
-  assistants      String[]
+  assistants      Assistant[]
   tutorIds        String[]
   privacy         GROUP_PRIVACY  @default(PRIVATE)
   active          Boolean        @default(false)
@@ -136,7 +136,7 @@ model Groupspace {
   User       User?      @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId     String     @db.Uuid
   clerkId    String
-  isPrivate  Boolean        @default(false)
+  isPrivate  Boolean    @default(false)
   profile    Profile?   @relation(fields: [profileId], references: [id], onDelete: Cascade)
   profileId  String?    @db.Uuid
   joinCode   String?
@@ -308,9 +308,8 @@ model GSMember {
 
   directMessages DirectMessage[]
 
-
-  updatedAt    DateTime     @updatedAt
-  createdAt    DateTime     @default(now())
+  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
 
   @@unique([profileId, groupSpaceId])
   @@unique([userId, groupSpaceId])
@@ -349,7 +348,7 @@ model Session {
   groupSpace   Groupspace  @relation(fields: [groupSpaceId], references: [id], onDelete: Cascade)
   groupSpaceId String
 
-  messages     Chat[]
+  messages Chat[]
 
   updatedAt DateTime @updatedAt
   createdAt DateTime @default(now())
@@ -498,12 +497,12 @@ model StripeCustomer {
 }
 
 model Discussionbox {
-  id          String       @id @default(uuid())
-  courseId    String
-  course      Course       @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  id        String   @id @default(uuid())
+  courseId  String
+  course    Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
   //discussions Discussion[]
-  createdAt   DateTime     @default(now())
-  updatedAt   DateTime     @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Waiver {
@@ -527,14 +526,14 @@ enum ChapterType {
 }
 
 model Discussion {
-  id         String        @id @db.Uuid
+  id         String   @id @db.Uuid
   message    String
-  createdAt  DateTime      @default(now())
+  createdAt  DateTime @default(now())
   // sender     User?    @relation(fields: [senderid], references: [id], onDelete: Cascade)
-  senderid   String?       @db.Uuid
-  recieverId String?       @db.Uuid
-  boxId      String        @db.Uuid
- // box        Discussionbox @relation(fields: [boxId], references: [id], onDelete: Cascade)
+  senderid   String?  @db.Uuid
+  recieverId String?  @db.Uuid
+  boxId      String   @db.Uuid
+  // box        Discussionbox @relation(fields: [boxId], references: [id], onDelete: Cascade)
 }
 
 model Chat {
@@ -592,4 +591,15 @@ model DirectMessage {
 
   @@index([conversationId])
   @@index([memberId])
+}
+
+model Assistant {
+  id          String   @id @default(uuid())
+  name        String
+  groupId     String   @db.Uuid
+  fileIds     String[]
+  group       Group    @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  instruction String   @db.Text
+  isMain      Boolean  @default(false)
+  tools       String[]
 }

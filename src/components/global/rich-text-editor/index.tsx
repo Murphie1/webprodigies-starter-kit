@@ -11,7 +11,8 @@ import {
     EditorRoot,
     JSONContent,
 } from "novel"
-import { CharacterCount, handleCommandNavigation } from "novel/extensions"
+import CustomCharacterCount from "./characters"
+//import { handleCommandNavigation } from "novel/extensions"
 import { useState } from "react"
 import { FieldErrors } from "react-hook-form"
 import { HtmlParser } from "../html-parser"
@@ -55,6 +56,30 @@ const BlockTextEditor = ({
     htmlContent,
     setHtmlContent,
 }: Props) => {
+
+    const handleCommandNavigationCustom = (event: KeyboardEvent) => {
+     if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+     event.preventDefault()
+      const items = document.querySelectorAll("[role='option']")
+          let index = Array.from(items).findIndex((el) =>
+              el.classList.contains("aria-selected"),
+                    )
+
+         if (event.key === "ArrowDown") {
+          index = (index + 1) % items.length
+              } else if (event.key === "ArrowUp") {
+                   index = (index - 1 + items.length) % items.length
+                     }
+
+             items.forEach((el, i) => {
+            el.classList.toggle("aria-selected", i === index)
+          })
+
+    items[index]?.scrollIntoView({ block: "nearest" })
+  }
+ 
+
+    }
     const [openNode, setOpenNode] = useState<boolean>(false)
     const [openLink, setOpenLink] = useState<boolean>(false)
     const [openColor, setOpenColor] = useState<boolean>(false)
@@ -80,7 +105,7 @@ const BlockTextEditor = ({
                             editable: () => !disabled as boolean,
                             handleDOMEvents: {
                                 keydown: (_view, event) =>
-                                    handleCommandNavigation(event),
+                                    handleCommandNavigationCustom(event),
                             },
                             attributes: {
                                 class: `prose prose-lg dark:prose-invert focus:outline-none max-w-full [&_h1]:text-4xl [&_h2]:text-3xl [&_h3]:text-2xl text-gray`,
@@ -92,9 +117,7 @@ const BlockTextEditor = ({
                             // @ts-ignore
                             slashCommand,
                             // @ts-ignore
-                            CharacterCount.configure({
-                                limit: max,
-                            }),
+                            CustomCharacterCount.configure({ limit: max }),
                             // @ts-ignore
                             Placeholder.configure({
                                 placeholder:

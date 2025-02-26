@@ -17,6 +17,7 @@
         "@ai-sdk/deepseek": "^0.1.8",
         "@ai-sdk/google": "^1.1.8",
         "@ai-sdk/openai": "^1.1.6",
+        "@ai-sdk/provider": "^1.0.9",
         "@aws-sdk/client-s3": "^3.738.0",
         "@azure/identity": "^4.6.0",
         "@browserbasehq/stagehand": "^1.9.0",
@@ -212,7 +213,7 @@
         "node-appwrite": "^14.1.0",
         "node-html-parser": "^7.0.1",
         "nodemailer": "^6.10.0",
-        "novel": "^0.5.0",
+        "novel": "^1.0.2",
         "ollama-ai-provider": "^1.2.0",
         "open-graph-scraper": "^6.8.3",
         "openai": "^4.78.0",
@@ -250,6 +251,7 @@
         "react-syntax-highlighter": "^15.6.1",
         "react-textarea-autosize": "^8.5.7",
         "react-timeago": "^7.2.0",
+        "react-tweet": "^3.2.2",
         "react-use": "^17.6.0",
         "react-virtualized": "^9.22.6",
         "reactflow": "^11.11.4",
@@ -294,7 +296,7 @@
         "zustand": "^5.0.2"
     },
     "resolutions": {
-        "@ai-sdk/provider": "1.0.8"
+        "@ai-sdk/provider": "1.0.9"
     },
     "devDependencies": {
         "@commitlint/cli": "^19.4.0",
