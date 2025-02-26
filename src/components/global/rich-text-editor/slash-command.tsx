@@ -11,26 +11,21 @@ import {
     ImageIcon,
     List,
     ListOrdered,
-    MessageSquarePlus,
     Text,
     TextQuote,
     Video,
 } from "lucide-react"
-import { Command, createSuggestionItems, renderItems } from "novel/extensions"
+import Suggestion from "@tiptap/suggestion"
+import { Extension } from "@tiptap/core"
 
-export const suggestionItems = createSuggestionItems([
+export const suggestionItems = [
     {
         title: "Text",
         description: "Just start typing with plain text.",
         searchTerms: ["p", "paragraph"],
         icon: <Text size={18} />,
         command: ({ editor, range }) => {
-            editor
-                .chain()
-                .focus()
-                .deleteRange(range)
-                .toggleNode("paragraph", "paragraph")
-                .run()
+            editor.chain().focus().deleteRange(range).setNode("paragraph").run()
         },
     },
     {
@@ -39,7 +34,6 @@ export const suggestionItems = createSuggestionItems([
         searchTerms: ["todo", "task", "list", "check", "checkbox"],
         icon: <CheckSquare size={18} />,
         command: ({ editor, range }) => {
-            //@ts-ignore
             editor.chain().focus().deleteRange(range).toggleTaskList().run()
         },
     },
@@ -49,12 +43,7 @@ export const suggestionItems = createSuggestionItems([
         searchTerms: ["title", "big", "large"],
         icon: <Heading1 size={18} />,
         command: ({ editor, range }) => {
-            editor
-                .chain()
-                .focus()
-                .deleteRange(range)
-                .setNode("heading", { level: 1 })
-                .run()
+            editor.chain().focus().deleteRange(range).setNode("heading", { level: 1 }).run()
         },
     },
     {
@@ -63,12 +52,7 @@ export const suggestionItems = createSuggestionItems([
         searchTerms: ["subtitle", "medium"],
         icon: <Heading2 size={18} />,
         command: ({ editor, range }) => {
-            editor
-                .chain()
-                .focus()
-                .deleteRange(range)
-                .setNode("heading", { level: 2 })
-                .run()
+            editor.chain().focus().deleteRange(range).setNode("heading", { level: 2 }).run()
         },
     },
     {
@@ -77,12 +61,7 @@ export const suggestionItems = createSuggestionItems([
         searchTerms: ["subtitle", "small"],
         icon: <Heading3 size={18} />,
         command: ({ editor, range }) => {
-            editor
-                .chain()
-                .focus()
-                .deleteRange(range)
-                .setNode("heading", { level: 3 })
-                .run()
+            editor.chain().focus().deleteRange(range).setNode("heading", { level: 3 }).run()
         },
     },
     {
@@ -91,7 +70,6 @@ export const suggestionItems = createSuggestionItems([
         searchTerms: ["unordered", "point"],
         icon: <List size={18} />,
         command: ({ editor, range }) => {
-            //@ts-ignore
             editor.chain().focus().deleteRange(range).toggleBulletList().run()
         },
     },
@@ -101,7 +79,6 @@ export const suggestionItems = createSuggestionItems([
         searchTerms: ["ordered"],
         icon: <ListOrdered size={18} />,
         command: ({ editor, range }) => {
-            //@ts-ignore
             editor.chain().focus().deleteRange(range).toggleOrderedList().run()
         },
     },
@@ -110,24 +87,18 @@ export const suggestionItems = createSuggestionItems([
         description: "Capture a quote.",
         searchTerms: ["blockquote"],
         icon: <TextQuote size={18} />,
-        command: ({ editor, range }) =>
-            editor
-                .chain()
-                .focus()
-                .deleteRange(range)
-                .toggleNode("paragraph", "paragraph")
-                // @ts-ignore
-                .toggleBlockquote()
-                .run(),
+        command: ({ editor, range }) => {
+            editor.chain().focus().deleteRange(range).toggleBlockquote().run()
+        },
     },
     {
         title: "Code",
         description: "Capture a code snippet.",
         searchTerms: ["codeblock"],
         icon: <Code size={18} />,
-        command: ({ editor, range }) =>
-            //@ts-ignore
-            editor.chain().focus().deleteRange(range).toggleCodeBlock().run(),
+        command: ({ editor, range }) => {
+            editor.chain().focus().deleteRange(range).toggleCodeBlock().run()
+        },
     },
     {
         title: "Image",
@@ -136,7 +107,6 @@ export const suggestionItems = createSuggestionItems([
         icon: <ImageIcon size={18} />,
         command: ({ editor, range }) => {
             editor.chain().focus().deleteRange(range).run()
-            // upload image
             const input = document.createElement("input")
             input.type = "file"
             input.accept = "image/*"
@@ -144,15 +114,12 @@ export const suggestionItems = createSuggestionItems([
                 if (input.files?.length) {
                     const file = input.files[0]
                     const uploaded = await upload.uploadFile(file)
-                    //This should return a src of the uploaded image
                     const imgsrc = `https://ucarecdn.com/${uploaded.uuid}/`
                     if (imgsrc) {
                         editor.commands.insertContent([
                             {
                                 type: "image",
-                                attrs: {
-                                    src: imgsrc,
-                                },
+                                attrs: { src: imgsrc },
                             },
                         ])
                     }
@@ -172,19 +139,73 @@ export const suggestionItems = createSuggestionItems([
                 editor.commands.insertContent([
                     {
                         type: "video",
-                        attrs: {
-                            src: videoSrc,
-                        },
+                        attrs: { src: videoSrc },
                     },
                 ])
             }
         },
     },
-])
+]
 
-export const slashCommand = Command.configure({
-    suggestion: {
-        items: () => suggestionItems,
-        render: renderItems,
+export const slashCommand = Extension.create({
+    name: "slashCommand",
+
+    addOptions() {
+        return {
+            suggestion: {
+                char: "/",
+                items: ({ query }) => {
+                    return suggestionItems.filter((item) =>
+                        item.searchTerms.some((term) => term.includes(query.toLowerCase()))
+                    )
+                },
+                command: ({ editor, range, item }) => {
+                    item.command({ editor, range })
+                },
+                render: () => {
+                    let component
+                    let popup
+
+                    return {
+                        onStart: (props) => {
+                            component = document.createElement("div")
+                            component.classList.add("slash-command-popup")
+                            popup = document.createElement("ul")
+                            component.appendChild(popup)
+                            document.body.appendChild(component)
+
+                            props.clientRect && (component.style.top = `${props.clientRect().top}px`)
+                        },
+                        onUpdate: (props) => {
+                            popup.innerHTML = ""
+                            props.items.forEach((item) => {
+                                const li = document.createElement("li")
+                                li.textContent = item.title
+                                li.addEventListener("click", () => props.command(item))
+                                popup.appendChild(li)
+                            })
+                        },
+                        onKeyDown: (props) => {
+                            if (props.event.key === "Enter") {
+                                props.command(props.items[0])
+                                return true
+                            }
+                            return false
+                        },
+                        onExit: () => {
+                            if (component) {
+                                component.remove()
+                                component = null
+                                popup = null
+                            }
+                        },
+                    }
+                },
+            },
+        }
+    },
+
+    addProseMirrorPlugins() {
+        return [Suggestion(this.options.suggestion)]
     },
 })
