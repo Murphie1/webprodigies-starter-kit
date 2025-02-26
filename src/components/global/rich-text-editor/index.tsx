@@ -88,13 +88,18 @@ const BlockTextEditor = ({
     const editor = useEditor({
         extensions: [
             StarterKit,
+            //@ts-ignore 
+            slashCommand,
+            //@ts-ignore
             Placeholder.configure({
                 placeholder: "Type '/' here to insert elements...",
             }),
             CharacterCount.configure({ limit: max }),
-            Link,
-            ImageExtension,
-            VideoExtension,
+           // Link,
+            //@ts-ignore
+            Image,
+            //@ts-ignore
+            Video,
         ],
         content,
         editable: !disabled,
