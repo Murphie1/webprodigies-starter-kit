@@ -1,7 +1,7 @@
 "use client"
 import { HtmlParser } from "@/components/global/html-parser"
 import { Loader } from "@/components/global/loader"
-import BlockTextEditor from "@/components/global/rich-text-editor"
+//import BlockTextEditor from "@/components/global/rich-text-editor"
 import { Button } from "@/components/ui/button"
 import { useCourseContent, useCourseSectionInfo } from "@/hooks/courses"
 
@@ -18,7 +18,17 @@ export const CourseContentForm = ({
 }: CourseContentFormProps) => {
     const { data } = useCourseSectionInfo(sectionid)
 
-    const {
+    return (
+        <Button
+                    className="mt-10 self-end bg-white dark:bg-themeBlack border-black dark:border-themeGray"
+                    variant="outline"
+                >
+                    Save Content
+                </Button>
+        )
+}
+
+    {/* const {
         errors,
         onUpdateContent,
         setJsonDescription,
@@ -40,7 +50,7 @@ export const CourseContentForm = ({
             className="p-5 flex flex-col"
             ref={editor}
         >
-            <BlockTextEditor
+            {/*<BlockTextEditor
                 onEdit={onEditDescription}
                 max={10000}
                 inline
@@ -67,4 +77,4 @@ export const CourseContentForm = ({
     ) : (
         <HtmlParser html={data?.section?.htmlContent!} />
     )
-}
+}*/}
