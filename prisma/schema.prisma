@@ -1,0 +1,528 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  firstname String
+  lastname  String?
+  email     String?  @unique
+  createdAt DateTime @default(now())
+  clerkId   String   @unique
+  image     String?
+  stripeId  String?
+  tokens    Decimal  @default(0.0)
+  font      String?
+  fontSize  String   @default("Normal")
+  role      UserRole @default(LEARNER)
+
+  attributes   String[]
+  memory       String[]
+  disabilities String[]
+  theme        Theme        @default(Normal)
+  mode         String       @default("Both")
+  gamified     Boolean      @default(true)
+  group        Group[]
+  membership   Members[]
+  posts        Post[]
+  likes        Like[]
+  profile      Profile[]
+  comments     Comment[]
+  //discussions  Discussion[]
+  groupSpace   Groupspace[]
+  gsMember     GSMember[]
+  session      Session[]
+}
+
+enum Theme {
+  Normal
+  Gray
+  Retro
+  UltraModern
+  Emo
+  Spooky
+}
+
+model Profile {
+  id       String      @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  clerkId  String
+  user     User?       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId   String      @db.Uuid
+  name     String
+  email    String
+  imageUrl String      @db.Text
+  type     ProfileType @default(KIDS)
+  font     String?
+  fontSize String      @default("Normal")
+
+  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+
+  attributes   String[]
+  memory       String[]
+  disabilities String[]
+  theme        Theme        @default(Normal)
+  mode         String       @default("Both")
+  gamified     Boolean      @default(false)
+  group        Group[]
+  membership   Members[]
+  posts        Post[]
+  likes        Like[]
+  //profile    Profile[]
+  comments     Comment[]
+  //message    Message[]
+  groupSpace   Groupspace[]
+  gsMember     GSMember[]
+  session      Session[]
+
+  @@index([userId, clerkId])
+}
+
+model Subscription {
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  createdAt DateTime @default(now())
+  price     Int?
+  active    Boolean  @default(false)
+  Group     Group?   @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  groupId   String?  @db.Uuid
+}
+
+model Group {
+  id              String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name            String         @unique
+  category        String
+  thumbnail       String?
+  description     String?
+  gallery         String[]
+  jsonDescription String?
+  htmlDescription String?
+  icon            String?
+  credits         Int            @default(0)
+  createdFree     Boolean        @default(false)
+  groupFree       Boolean        @default(false)
+  member          Members[]
+  groupSpaces     Groupspace[]
+  channel         Channel[]
+  assistants      String[]
+  tutorIds        String[]
+  privacy         GROUP_PRIVACY  @default(PRIVATE)
+  active          Boolean        @default(false)
+  createdAt       DateTime       @default(now())
+  User            User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId          String         @db.Uuid
+  profile         Profile?       @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  profileId       String?        @db.Uuid
+  courses         Groupcourse[]
+  affiliate       Affiliate?
+  domain          String?
+  subscription    Subscription[]
+}
+
+model Groupspace {
+  id         String     @id @default(uuid())
+  name       String     @unique
+  createdAt  DateTime   @default(now())
+  User       User?      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId     String     @db.Uuid
+  clerkId    String
+  isPrivate  Boolean    @default(false)
+  profile    Profile?   @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  profileId  String?    @db.Uuid
+  joinCode   String?
+  inviteCode String     @db.Text
+  imageUrl   String     @db.Text
+  Group      Group?     @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  groupId    String?    @db.Uuid
+  updatedAt  DateTime   @updatedAt
+  gsMember   GSMember[]
+  session    Session[]
+
+  @@index([userId, clerkId, groupId])
+}
+
+model Members {
+  id        String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  User      User?      @relation(fields: [userId], references: [id])
+  userId    String?    @db.Uuid
+  profile   Profile?   @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  profileId String?    @db.Uuid
+  Group     Group?     @relation(fields: [groupId], references: [id])
+  role      MemberRole @default(STUDENT)
+  groupId   String?    @db.Uuid
+  createdAt DateTime   @default(now())
+  messages  Message[]
+
+  @@unique([profileId, groupId])
+  @@unique([userId, groupId])
+  @@index([userId, groupId])
+}
+
+model Post {
+  id          String    @id @db.Uuid
+  createdAt   DateTime  @default(now())
+  title       String?
+  htmlContent String?
+  jsonContent String?
+  content     String
+  image       String?
+  video       String?
+  author      User      @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  authorId    String    @db.Uuid
+  profile     Profile?  @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  profileId   String?   @db.Uuid
+  likes       Like[]
+  comments    Comment[]
+  channel     Channel   @relation(fields: [channelId], references: [id], onDelete: Cascade)
+  channelId   String    @db.Uuid
+}
+
+model Like {
+  id        String   @id @db.Uuid
+  createdAt DateTime @default(now())
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId    String   @db.Uuid
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String   @db.Uuid
+  profile   Profile? @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  profileId String?  @db.Uuid
+}
+
+model Comment {
+  id        String    @id @db.Uuid
+  createdAt DateTime  @default(now())
+  content   String
+  post      Post      @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId    String    @db.Uuid
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String    @db.Uuid
+  profile   Profile?  @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  profileId String?   @db.Uuid
+  replied   Boolean?  @default(false)
+  //self relation 1 to many for comments
+  reply     Comment[] @relation(name: "CommentToComment")
+  Comment   Comment?  @relation(name: "CommentToComment", fields: [commentId], references: [id])
+  commentId String?   @db.Uuid
+}
+
+model Channel {
+  id        String   @id @db.Uuid
+  name      String
+  icon      String
+  posts     Post[]
+  createdAt DateTime @default(now())
+  Group     Group?   @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  groupId   String?  @db.Uuid
+}
+
+model Groupcourse {
+  id          String   @id @db.Uuid
+  name        String
+  thumbnail   String
+  published   Boolean  @default(false)
+  privacy     String
+  description String
+  createdAt   DateTime @default(now())
+  Group       Group?   @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  groupId     String?  @db.Uuid
+  modules     Module[]
+}
+
+model Module {
+  id        String       @id @db.Uuid
+  Course    Groupcourse? @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  courseId  String?      @db.Uuid
+  title     String
+  section   Section[]
+  createdAt DateTime     @default(now())
+}
+
+model Section {
+  id          String   @id @db.Uuid
+  name        String   @default("New Section")
+  icon        String   @default("doc")
+  complete    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  Module      Module?  @relation(fields: [moduleId], references: [id], onDelete: Cascade)
+  moduleId    String?  @db.Uuid
+  content     String?
+  htmlContent String?
+  JsonContent String?
+}
+
+model Affiliate {
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  Group     Group?   @relation(fields: [groupId], references: [id])
+  groupId   String?  @unique @db.Uuid
+  createdAt DateTime @default(now())
+}
+
+model Message {
+  id         String   @id @db.Uuid
+  message    String
+  createdAt  DateTime @default(now())
+  sender     Members? @relation(fields: [senderid], references: [id], onDelete: Cascade)
+  senderid   String?  @db.Uuid
+  recieverId String?  @db.Uuid
+}
+
+enum GSMemberRole {
+  ADMIN
+  MODERATOR
+  STUDENT
+  GUEST
+}
+
+enum MemberRole {
+  OWNER
+  MODERATOR
+  FINANCE
+  STUDENT
+}
+
+model GSMember {
+  id           String       @id @default(uuid())
+  role         GSMemberRole @default(STUDENT)
+  user         User?        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId       String?      @db.Uuid
+  profile      Profile?     @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  profileId    String?      @db.Uuid
+  clerkId      String
+  groupSpace   Groupspace   @relation(fields: [groupSpaceId], references: [id], onDelete: Cascade)
+  groupSpaceId String
+
+  //messages Chat[]
+
+  //conversationsInitiated Conversation[] @relation("MemberOne")
+  //conversationsReceived  Conversation[] @relation("MemberTwo")
+
+  //directMessages DirectMessage[]
+
+  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+
+  @@unique([profileId, groupSpaceId])
+  @@unique([userId, groupSpaceId])
+  @@index([userId])
+  @@index([profileId])
+  @@index([groupSpaceId])
+  @@index([clerkId])
+}
+
+enum GROUP_PRIVACY {
+  PUBLIC
+  PRIVATE
+}
+
+enum SessionType {
+  TEXT
+  AUDIO
+  VIDEO
+  STREAM
+}
+
+enum ProfileType {
+  KIDS
+  GENERAL
+}
+
+model Session {
+  id           String      @id @default(uuid())
+  name         String
+  type         SessionType @default(TEXT)
+  user         User?       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId       String?     @db.Uuid
+  profile      Profile?    @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  profileId    String?     @db.Uuid
+  clerkId      String
+  groupSpace   Groupspace  @relation(fields: [groupSpaceId], references: [id], onDelete: Cascade)
+  groupSpaceId String
+
+ // messages Chat[]
+
+  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+  @@index([groupSpaceId])
+  @@index([clerkId])
+  @@index([profileId])
+}
+
+enum UserRole {
+  ADMIN
+  MODERATOR
+  SUPPORT
+  LEARNER
+}
+
+model Course {
+  id              String           @id @default(uuid())
+  userId          String
+  title           String           @db.Text
+  description     String?          @db.Text
+  imgUrl          String?          @db.Text
+  price           Float?
+  isFree          Boolean          @default(false)
+  preview         String?
+  isPublished     Boolean          @default(false)
+  categoryId      String?
+  category        Category?        @relation(fields: [categoryId], references: [id])
+  chapters        Chapter[]
+  tutors          String[]
+  attachments     Attachment[]
+  certificates    Certificate[]
+  outComes        String?
+  waivers         Waiver[]
+  discussionboxes Discussionbox[]
+  purchases       Coursepurchase[]
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  // @@fulltext([title])  Remove if not supported in your case
+
+  @@index([categoryId])
+}
+
+model Category {
+  id      String   @id @default(uuid())
+  name    String   @unique
+  courses Course[]
+}
+
+model Attachment {
+  id   String @id @default(uuid())
+  name String
+  url  String @db.Text
+
+  courseId  String?
+  Course    Course?  @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  chapterId String?
+  Chapter   Chapter? @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Certificate {
+  id   String @id @default(uuid())
+  name String
+  url  String @db.Text
+
+  courseId String
+  Course   Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([courseId])
+}
+
+model Chapter {
+  id           String         @id @default(uuid())
+  title        String
+  description  String?        @db.Text
+  videoUrl     String?        @db.Text
+  audioUrl     String?
+  imageUrl     String?
+  fileUrl      String?
+  position     Int
+  content      String?        @db.Text
+  transcript   String?        @db.Text
+  type         ChapterType    @default(Video)
+  isPublished  Boolean        @default(false)
+  isFree       Boolean        @default(false)
+  muxData      MuxData?
+  courseId     String
+  course       Course         @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  userProgress UserProgress[]
+  notes        String?
+  attachments  Attachment[]
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+
+  @@index([courseId])
+}
+
+model MuxData {
+  id         String  @id @default(uuid())
+  assetId    String
+  playbackId String?
+  chapterId  String  @unique
+  chapter    Chapter @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+}
+
+model UserProgress {
+  id          String   @id @default(uuid())
+  userId      String?
+  chapterId   String
+  chapter     Chapter  @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+  isCompleted Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@unique([userId, chapterId])
+  @@index([chapterId])
+}
+
+model Coursepurchase {
+  id     String  @id @default(uuid())
+  userId String?
+
+  courseId String
+  course   Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, courseId])
+  @@index([courseId])
+}
+
+model StripeCustomer {
+  id               String @id @default(uuid())
+  userId           String @unique
+  stripeCustomerId String @unique
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Discussionbox {
+  id        String   @id @default(uuid())
+  courseId  String
+  course    Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  //discussions Discussion[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Waiver {
+  id       String  @id @default(uuid())
+  userId   String  @unique
+  courseId String
+  course   Course  @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  message  String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum ChapterType {
+  Video
+  Audio
+  Image
+  Text
+  Doc
+  ThreeD
+  Quiz
+  Challenge
+}
